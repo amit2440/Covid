@@ -1,4 +1,4 @@
-package com.med.disease.tracking.app.covidapp;
+package com.med.disease.tracking.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
