@@ -1,5 +1,5 @@
 -- create database 
-create databases covid;
+create database covid;
 
 -- select database
 use covid;
