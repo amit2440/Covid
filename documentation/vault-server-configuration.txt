@@ -1,3 +1,56 @@
+-- to check status 
+vault status
+
+-- get vault secret data
+vault kv get secret/hello
+
+-- delete vault secret data
+vault kv delete secret/hello
+
+-- list
+vault secrets list
+
+-- provide config file 
+vault server -config vault.conf
+fileContent : 
+------------------------------------------
+backend "inmem" {
+}
+
+listener "tcp" {
+  address = "0.0.0.0:8200"
+  tls_disable = 1
+}
+
+disable_mlock = true
+------------------------------------------
+
+-- vault setup
+vault init -key-shares=5 -key-threshold=2
+vault operator init
+
+
+Initial root token	
+s.bE7tQPrs9hwmjej5gdK1ic9O
+
+Key 1
+IfwUEQQIwpd/gJi9n5gOhS0s+lfbq0jnKQue5HdobH4v
+
+Key 2
+uG/A7lYmhr+pMFTHwJzX2GJ2jd1/qTocvguLdvxypRwM
+
+Key 3
+LcqWcDT2fX8GlEJlc3VQkljd/sm7UFFr8gsaIhnLq/4N
+
+Key 4
+xrPitLUPvgEPshyaVI+CyLqzpymiLUFVcQuW6EqcvCtS
+
+Key 5
+skIDMn6n6yNhLuNzWoqmSaByiwwvoqLWhQtN06UNjNw/
+
+
+
+
 C:\Users\nil\Downloads\vault_1.4.0_windows_amd64>vault server --dev --dev-root-token-id="00000000-0000-0000-0000-000000000000"
 ==> Vault server configuration:
 

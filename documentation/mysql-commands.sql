@@ -28,10 +28,10 @@ where table_name = 'users';
 
 -- insert 
 insert into users (username, password, enabled) 
-values ('sunil','abc',true);
+values ('sachin','abc',true);
 
 insert into users (username, password, enabled) 
-values ('andrea','abc',true);
+values ('ganesh','abc',true);
 
 insert into authorities(username, authority)
 values ('sunil','USER');
