@@ -35,7 +35,7 @@ public class ErrorUtil {
 			}
 			errorResponse.setErrors(subErrorResponses);
 			errorResponse.setTitle(messageSource.getMessage(Constant.Message.VALIDATION_FAILED, new Object[]{}, Locale.ENGLISH));
-			errorResponse.setDetail(messageSource.getMessage(Constant.Message.VALIDATION_DETAILS, new Object[]{}, Locale.ENGLISH));
+			errorResponse.setDetail(messageSource.getMessage(Constant.Message.VALIDATION_DETAILS, new Object[]{subErrorResponses.size()}, Locale.ENGLISH));
 			throw new CovidAppException(errorResponse);
 		}
 	}
