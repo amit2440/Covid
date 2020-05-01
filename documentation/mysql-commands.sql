@@ -1,54 +1,80 @@
--- create database 
-create database covid;
+CREATE SCHEMA IF NOT EXISTS `covid`;
 
--- select database
-use covid;
+CREATE TABLE IF NOT EXISTS `covid`.`user` (
+    `user_id` INT NOT NULL,
+    `first_name` VARCHAR(20) NOT NULL,
+    `last_name` VARCHAR(20) NOT NULL,
+    `mobile` VARCHAR(10) NOT NULL,
+    `role` VARCHAR(20) NOT NULL,
+    `work_location` VARCHAR(20) NOT NULL,
+    `token` VARCHAR(150) NOT NULL,
+    `is_active` BINARY NOT NULL DEFAULT 1,
+    PRIMARY KEY (`user_id`),
+    UNIQUE INDEX `mobile_UNIQUE` (`mobile` ASC),
+    UNIQUE INDEX `token_UNIQUE` (`token` ASC)
+);
 
--- list all tables
-show tables;
+CREATE TABLE IF NOT EXISTS `covid`.`question` (
+    `question_id` INT NOT NULL,
+    `question` VARCHAR(100) NOT NULL,
+    `control` VARCHAR(20) NOT NULL,
+    `questioncol` VARCHAR(45) NULL,
+    PRIMARY KEY (`question_id`),
+    UNIQUE INDEX `question_UNIQUE` (`question` ASC)
+);
 
--- create table 
-create table users(
-  username varchar(50) not null primary key,
-  password varchar(50) not null,
-  enabled boolean not null);
+CREATE TABLE IF NOT EXISTS `covid`.`option` (
+    `option_id` INT NOT NULL,
+    `field_name` VARCHAR(20) NULL,
+    `display_name` VARCHAR(20) NULL,
+    `type` VARCHAR(20) NOT NULL,
+    `size` INT NOT NULL,
+    `risk` INT NOT NULL DEFAULT 0,
+    PRIMARY KEY (`option_id`)
+);
 
-create table authorities (
-  username varchar(50) not null,
-  authority varchar(50) not null,
-  constraint fk_authorities_users foreign key(username) references users(username));
-  
--- add constraint
-create unique index ix_auth_username on authorities (username,authority);
+CREATE TABLE IF NOT EXISTS `covid`.`question_option` (
+    `question_id` INT NOT NULL,
+    `option_id` INT NOT NULL,
+    INDEX `question_id_idx` (`question_id` ASC),
+    INDEX `option_id_idx` (`option_id` ASC),
+    CONSTRAINT `question_id` FOREIGN KEY (`question_id`)
+        REFERENCES `covid`.`question` (`question_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `option_id` FOREIGN KEY (`option_id`)
+        REFERENCES `covid`.`option` (`option_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+	
+CREATE TABLE IF NOT EXISTS `covid`.`question_set` (
+    `set_id` INT NOT NULL,
+    `created` DATETIME NOT NULL,
+    `description` VARCHAR(50) NULL,
+    `is_active` BIT NULL DEFAULT 1,
+    PRIMARY KEY (`set_id`)
+);
 
--- create table - questions
-create table questions(
-  question_id INT AUTO_INCREMENT PRIMARY KEY,
-  question varchar(150) not null,
-  control varchar(50) not null);
-
--- select questions
-select * from questions;
-
--- insert question
-insert into questions(question, control) values ('Name of your area?','input');
-insert into questions(question, control) values ('which symtoms you have?','input');
-
--- see constraint
-select column_name, constraint_name, referenced_column_name, referenced_table_name
-from information_schema.key_column_usage
-where table_name = 'users';
-
--- insert 
-insert into users (username, password, enabled) 
-values ('sachin','abc',true);
-
-insert into users (username, password, enabled) 
-values ('ganesh','abc',true);
-
-insert into authorities(username, authority)
-values ('sunil','USER');
-
-insert into authorities(username, authority)
-values ('andrea','ADMIN');
+CREATE TABLE IF NOT EXISTS `covid`.`feedback` (
+    `user_id` INT NOT NULL,
+    `set_id` INT NOT NULL,
+    `question_id` INT NOT NULL,
+    `option_id` INT NOT NULL,
+    `value` VARCHAR(20) NOT NULL,
+    INDEX `user_id_idx` (`user_id` ASC),
+    INDEX `set_id_idx` (`set_id` ASC),
+    INDEX `question_id_idx` (`question_id` ASC),
+    INDEX `option_id_idx` (`option_id` ASC),
+    CONSTRAINT `feedback_user_id` FOREIGN KEY (`user_id`)
+        REFERENCES `covid`.`user` (`user_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `feedback_set_id` FOREIGN KEY (`set_id`)
+        REFERENCES `covid`.`question_set` (`set_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `feedback_question_id` FOREIGN KEY (`question_id`)
+        REFERENCES `covid`.`question` (`question_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `feedback_option_id` FOREIGN KEY (`option_id`)
+        REFERENCES `covid`.`option` (`option_id`)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 
