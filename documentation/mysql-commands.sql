@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`option` (
     `field_name` VARCHAR(20) NULL,
     `display_name` VARCHAR(20) NULL,
     `type` VARCHAR(20) NOT NULL,
-    `size` INT NOT NULL,
+    `size` INT NULL,
     `risk` INT NOT NULL DEFAULT 0,
     PRIMARY KEY (`option_id`)
 );
