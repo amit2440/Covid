@@ -64,5 +64,4 @@ public class QuestionSetDTO {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
 }
