@@ -21,6 +21,19 @@ create table authorities (
 -- add constraint
 create unique index ix_auth_username on authorities (username,authority);
 
+-- create table - questions
+create table questions(
+  question_id INT AUTO_INCREMENT PRIMARY KEY,
+  question varchar(150) not null,
+  control varchar(50) not null);
+
+-- select questions
+select * from questions;
+
+-- insert question
+insert into questions(question, control) values ('Name of your area?','input');
+insert into questions(question, control) values ('which symtoms you have?','input');
+
 -- see constraint
 select column_name, constraint_name, referenced_column_name, referenced_table_name
 from information_schema.key_column_usage
@@ -38,3 +51,4 @@ values ('sunil','USER');
 
 insert into authorities(username, authority)
 values ('andrea','ADMIN');
+
