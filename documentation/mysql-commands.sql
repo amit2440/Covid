@@ -18,7 +18,6 @@ CREATE TABLE IF NOT EXISTS `covid`.`question` (
     `question_id` INT NOT NULL,
     `question` VARCHAR(100) NOT NULL,
     `control` VARCHAR(20) NOT NULL,
-    `questioncol` VARCHAR(45) NULL,
     PRIMARY KEY (`question_id`),
     UNIQUE INDEX `question_UNIQUE` (`question` ASC)
 );
