@@ -6,12 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.context.annotation.RequestScope;
 
+import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.QuestionDTO;
 import com.med.disease.tracking.app.dto.QuestionRequestDTO;
 import com.med.disease.tracking.app.service.QuestionaryService;
+import com.med.disease.tracking.app.util.ErrorUtil;
+import com.med.disease.tracking.app.validation.FetchQuestionValidator;
 
 @RequestScope
 @Component
@@ -30,8 +34,9 @@ public class FetchQuestionHandler extends RestControllerHandler {
 
 	@Override
 	protected void validateRequest() {
-		// TODO Auto-generated method stub
-
+		Validator validator = new FetchQuestionValidator();
+		validator.validate(requestDTO, bindingResult);
+		ErrorUtil.processError(bindingResult, Constant.Module.QUESTION_FETCH);
 	}
 
 	@Override
