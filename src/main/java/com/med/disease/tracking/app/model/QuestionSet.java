@@ -60,5 +60,4 @@ public class QuestionSet {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
 }

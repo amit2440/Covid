@@ -4,10 +4,13 @@
 	<typeAliases>
 		<typeAlias alias="Question" type="com.med.disease.tracking.app.model.Question" />
 		<typeAlias alias="QuestionSet" type="com.med.disease.tracking.app.model.QuestionSet" />
+		<typeAlias alias="Feedback" type="com.med.disease.tracking.app.model.Feedback" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sql-mappings/question/Questionaries-ResultMappings.xml" />
 		<mapper resource="sql-mappings/question/Questionaries-SqlQueries.xml" />
 		<mapper resource="sql-mappings/question/Questionaries.xml" />
+		<mapper resource="sql-mappings/feedback/Feedback.xml"/>
+		<mapper resource="sql-mappings/feedback/Feedback-SqlQueries.xml"/>
 	</mappers>
 </configuration>

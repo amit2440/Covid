@@ -8,11 +8,13 @@ public interface Constant {
 	}
 	public interface Module {
 		String QUESTION_FETCH = "Fetch Question";
+		String SUBMIT_FEEDBACK = "Submit Feedback";
 	}
 	public interface Field {
 		String QUESTION_ID = "questionId";
 		String QUESTION_SET_ID = "setId";
 		String DESCRIPTION = "description";
 		String ISACTIVE = "isActive";
+		String USER_ID = "userId";
 	}
 }

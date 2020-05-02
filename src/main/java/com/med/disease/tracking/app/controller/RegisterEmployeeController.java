@@ -109,8 +109,8 @@ public class RegisterEmployeeController {
 		if(!"".equals(csvLine) && csvLine.length()>0) {
 			String[] userArr = csvLine.split(",");
 			user = new User();
-			user.setUserName(userArr[0]!=null?userArr[0]:null);
-			user.setPassword(userArr[0]!=null?userArr[0]:null);
+			//user.setUserName(userArr[0]!=null?userArr[0]:null);
+			//ssuser.setPassword(userArr[0]!=null?userArr[0]:null);
 			user.setActive(userArr[4].equalsIgnoreCase("Y")?true:false);
 			
 		}
