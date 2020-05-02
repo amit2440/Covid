@@ -10,7 +10,7 @@ public class OTPSender {
 		String phone = mobileNumber;
 		String senderId = "QUESTN";
 		
-		String currentBalance = Sms4IndiaProvider.checkBalance(apiKey, secretKey, useType);
+		//String currentBalance = Sms4IndiaProvider.checkBalance(apiKey, secretKey, useType);
 		//JSONObject balanceObj = new JSONObject(currentBalance);
 		//String createSenderResponse = OTPSender.createSenderId(senderId, apiKey, secretKey, useType);
 		
@@ -20,9 +20,11 @@ public class OTPSender {
 		OTPResponse otpResponse = new OTPResponse();
 		otpResponse.Status = campaignResponseObject.get("status").toString();
 		otpResponse.Message = campaignResponseObject.get("message").toString();
-		otpResponse.SmsCost = campaignResponseObject.get("smscost").toString();
-		otpResponse.BalanceAmount = campaignResponseObject.get("balacne").toString();
-		
+		if(otpResponse.IsSuccess())
+		{
+			otpResponse.SmsCost = campaignResponseObject.get("smscost").toString();
+			otpResponse.BalanceAmount = campaignResponseObject.get("balacne").toString();
+		}
 		return otpResponse;
 	}
 }
