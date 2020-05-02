@@ -10,6 +10,7 @@ public class User {
 	private Integer mobile;
 	private String role;
 	private String token;
+	private String workLocation;
 
 	public User(){}
 
@@ -17,14 +18,6 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.isActive = isActive;
-	}
-
-	public Boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean active) {
-		isActive = active;
 	}
 
 	public Integer getMobile() {
@@ -73,5 +66,21 @@ public class User {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public Boolean getActive() {
+		return isActive;
+	}
+
+	public void setActive(Boolean active) {
+		isActive = active;
+	}
+
+	public String getWorkLocation() {
+		return workLocation;
+	}
+
+	public void setWorkLocation(String workLocation) {
+		this.workLocation = workLocation;
 	}
 }

@@ -63,12 +63,4 @@ public class QuestionSetDTO {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
 }

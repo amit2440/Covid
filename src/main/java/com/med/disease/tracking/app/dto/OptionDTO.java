@@ -2,19 +2,19 @@ package com.med.disease.tracking.app.dto;
 
 public class OptionDTO {
 
-    private Integer id;
+    private Integer optionId;
     private String fieldName;
     private String displayName;
     private String fieldType;
     private Integer fieldSize;
     private Integer risk;
 
-    public Integer getId() {
-        return id;
+    public Integer getOptionId() {
+        return optionId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOptionId(Integer optionId) {
+        this.optionId = optionId;
     }
 
     public String getFieldName() {

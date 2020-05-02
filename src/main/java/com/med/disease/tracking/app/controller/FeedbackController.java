@@ -17,7 +17,7 @@ public class FeedbackController {
     @Autowired
     BeanFactory beanFactory;
 
-    @PostMapping(value = "/feedback", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/feedbacks", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> submitFeedback(@RequestBody FeedbackRequestDTO feedbackRequestDTO,
                                          BindingResult bindingResult) throws Exception{
         return (ResponseEntity<?>) beanFactory.getBean(SubmitFeedbackHandler.class)

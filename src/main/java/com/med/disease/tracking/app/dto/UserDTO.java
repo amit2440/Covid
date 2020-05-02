@@ -1,5 +1,8 @@
 package com.med.disease.tracking.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class UserDTO {
 
     private Integer userId;
@@ -9,6 +12,7 @@ public class UserDTO {
     private Integer mobile;
     private String role;
     private String token;
+    private String workLocation;
 
     public Boolean isActive() {
         return isActive;
@@ -64,5 +68,21 @@ public class UserDTO {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public String getWorkLocation() {
+        return workLocation;
+    }
+
+    public void setWorkLocation(String workLocation) {
+        this.workLocation = workLocation;
     }
 }

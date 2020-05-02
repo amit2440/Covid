@@ -15,6 +15,6 @@ public interface Constant {
 		String QUESTION_SET_ID = "setId";
 		String DESCRIPTION = "description";
 		String ISACTIVE = "isActive";
-		String USER_ID = "uid";
+		String USER_ID = "userId";
 	}
 }
