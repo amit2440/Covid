@@ -1,12 +1,16 @@
 package com.med.disease.tracking.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(value = Include.NON_NULL)
 public class QuestionDTO {
 	/** question id */
-	Integer questionId;
+	private Integer questionId;
 	/** question */
-	String question;
+	private String question;
 	/** control */
-	String control;
+	private String control;
 	
 	/**
 	 * @return the questionId

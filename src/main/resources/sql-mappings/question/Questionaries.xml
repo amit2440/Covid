@@ -10,4 +10,26 @@
 		WHERE 
 		QUESTION_ID = #{questionId}
 	</select>
+	
+	<select id="getQuestionSetInfo" parameterType="QuestionSet" resultMap="Questionaries-ResultMappings.ResultForGetQuestionSet">
+		SELECT 
+		<include refid="Questionaries-SqlQueries.SelectForGetQuestionSet" />
+		FROM QUESTION_SET
+		WHERE 
+		SET_ID = #{setId}
+	</select>
+	
+	<insert id="submitQuestionSet" parameterType="QuestionSet">
+		INSERT INTO QUESTION_SET (CREATED, DESCRIPTION, IS_ACTIVE)
+		VALUES(CURRENT_TIMESTAMP, #{description}, 0)
+	</insert>
+	
+	<insert id="updateQuestionSet" parameterType="QuestionSet">
+		UPDATE QUESTION_SET 
+		SET 
+		DESCRIPTION = #{description}, 
+		IS_ACTIVE = #{isActive}
+		WHERE 
+		SET_ID = #{setId}
+	</insert>
 </mapper>

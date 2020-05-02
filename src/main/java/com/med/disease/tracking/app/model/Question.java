@@ -2,11 +2,11 @@ package com.med.disease.tracking.app.model;
 
 public class Question {
 	/** question id */
-	Integer questionId;
+	private Integer questionId;
 	/** question */
-	String question;
+	private String question;
 	/** control */
-	String control;
+	private String control;
 	
 	/**
 	 * @return the questionId

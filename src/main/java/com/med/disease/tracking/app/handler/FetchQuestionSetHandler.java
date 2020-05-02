@@ -6,44 +6,42 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
-import com.med.disease.tracking.app.dto.QuestionDTO;
-import com.med.disease.tracking.app.dto.request.QuestionRequestDTO;
+import com.med.disease.tracking.app.dto.QuestionSetDTO;
+import com.med.disease.tracking.app.dto.request.QuestionSetRequestDTO;
 import com.med.disease.tracking.app.service.QuestionaryService;
 import com.med.disease.tracking.app.util.ErrorUtil;
-import com.med.disease.tracking.app.validation.FetchQuestionValidator;
+import com.med.disease.tracking.app.validation.FetchQuestionSetValidator;
 
 @RequestScope
 @Component
-public class FetchQuestionHandler extends RestControllerHandler {
+public class FetchQuestionSetHandler extends RestControllerHandler {
 
 	@Autowired
 	QuestionaryService questionaryService;
 	
-	private QuestionRequestDTO requestDTO;
+	private QuestionSetRequestDTO requestDTO;
 
 	@Override
 	protected void prepareRequest(Object request, BindingResult result, String... pathParam) {
-		this.requestDTO = (QuestionRequestDTO) request;
+		this.requestDTO = (QuestionSetRequestDTO) request;
 		this.bindingResult = result;
 	}
 
 	@Override
 	protected void validateRequest() {
-		Validator validator = new FetchQuestionValidator();
-		validator.validate(requestDTO, bindingResult);
+		new FetchQuestionSetValidator().validate(requestDTO, bindingResult);
 		ErrorUtil.processError(bindingResult, Constant.Module.QUESTION_FETCH);
 	}
 
 	@Override
 	protected Object processRequest() throws Exception {
-		QuestionDTO questionDTO = questionaryService.getQuestion(requestDTO);
-		return ObjectUtils.isEmpty(questionDTO)
+		QuestionSetDTO setDTO = questionaryService.getQuestionSet(requestDTO);
+		return ObjectUtils.isEmpty(setDTO)
 				? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.OK)
-				: new ResponseEntity<QuestionDTO>(questionDTO, HttpStatus.OK);
+				: new ResponseEntity<QuestionSetDTO>(setDTO, HttpStatus.OK);
 	}
 }
