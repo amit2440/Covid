@@ -3,15 +3,8 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "Feedback">
-	<!--<select id="getQuestionInfo" parameterType="Question" resultMap="Questionaries-ResultMappings.ResultForGetQuestion">
-		SELECT 
-		<include refid="Questionaries-SqlQueries.SelectForGetQuestion" />
-		FROM QUESTIONS
-		WHERE 
-		QUESTION_ID = #{questionId}
-	</select>-->
-	<insert id="insertFeedback" parameterType="feedback">
-		INSERT into feedback(user_id, set_id, question_id, option_id, value)
+	<insert id="insertFeedback" parameterType="Feedback">
+		INSERT into feedback (<include refid="Feedback-SqlQueries.InsertForSubmitFeedback"/>)
 		VALUES(#{user.uid}, #{set.setId}, #{question.questionId}, #{option.id}, #{value})
 	</insert>
 </mapper>

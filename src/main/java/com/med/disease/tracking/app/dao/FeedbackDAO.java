@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class FeedbackDAO extends BaseDAO {
 
@@ -13,7 +15,7 @@ public class FeedbackDAO extends BaseDAO {
 
     public void submitFeedback(Feedback feedback) throws Exception{
         try {
-            getSqlSession().insert("Feedback.submitFeedback", feedback);
+            getSqlSession().insert("Feedback.insertFeedback", feedback);
         } catch(Exception exception){
             LOGGER.error("Database Exception :{}", exception.getMessage());
             throw new DatabaseException(exception.getMessage());
