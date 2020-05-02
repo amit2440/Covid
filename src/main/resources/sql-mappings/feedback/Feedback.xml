@@ -5,6 +5,6 @@
 <mapper namespace = "Feedback">
 	<insert id="insertFeedback" parameterType="Feedback">
 		INSERT into feedback (<include refid="Feedback-SqlQueries.InsertForSubmitFeedback"/>)
-		VALUES(#{user.uid}, #{set.setId}, #{question.questionId}, #{option.id}, #{value})
+		VALUES(#{user.userId}, #{set.setId}, #{question.questionId}, #{option.optionId}, #{value})
 	</insert>
 </mapper>

@@ -47,15 +47,4 @@ public class Feedback {
     public void setValue(String value) {
         this.value = value;
     }
-
-    @Override
-    public String toString() {
-        return "Feedback{" +
-                "user=" + user +
-                ", set=" + set +
-                ", question=" + question +
-                ", option=" + option +
-                ", value='" + value + '\'' +
-                '}';
-    }
 }

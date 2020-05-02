@@ -36,13 +36,13 @@ public class SubmitFeedbackHandler extends RestControllerHandler {
     @Override
     protected void validateRequest() {
         Validator validator = new SubmitFeedbackValidator();
-        validator.validate(this.feedbackRequestDTO, bindingResult);
+        validator.validate(feedbackRequestDTO, bindingResult);
         ErrorUtil.processError(bindingResult, Constant.Module.SUBMIT_FEEDBACK);
     }
 
     @Override
     protected Object processRequest() throws Exception {
         feedbackService.submitFeedback(feedbackRequestDTO);
-        return new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.OK);
+        return new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.CREATED);
     }
 }

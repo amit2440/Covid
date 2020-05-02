@@ -18,7 +18,7 @@ public class SubmitFeedbackMapper extends Mapper {
         Feedback feedback = new Feedback();
         User user = new User();
         QuestionSet questionSet = new QuestionSet();
-        user.setUid(feedbackRequestDTO.getUserId());
+        user.setUserId(feedbackRequestDTO.getUserId());
         questionSet.setSetId(feedbackRequestDTO.getQuestionSetId());
         feedback.setUser(user);
         feedback.setSet(questionSet);
@@ -27,7 +27,7 @@ public class SubmitFeedbackMapper extends Mapper {
             Option option = new Option();
             question.setQuestionId(answer.getQuestionId());
             feedback.setQuestion(question);
-            option.setId(answer.getOptionId());
+            option.setOptionId(answer.getOptionId());
             feedback.setOption(option);
             feedback.setValue(answer.getValue());
             return feedback;

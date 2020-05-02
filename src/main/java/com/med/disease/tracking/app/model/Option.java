@@ -2,20 +2,12 @@ package com.med.disease.tracking.app.model;
 
 public class Option {
 
-    private Integer id;
+    private Integer optionId;
     private String fieldName;
     private String displayName;
     private String fieldType;
     private Integer fieldSize;
     private Integer risk;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFieldName() {
         return fieldName;
@@ -57,15 +49,11 @@ public class Option {
         this.risk = risk;
     }
 
-    @Override
-    public String toString() {
-        return "Option{" +
-                "id=" + id +
-                ", fieldName='" + fieldName + '\'' +
-                ", displayName='" + displayName + '\'' +
-                ", fieldType='" + fieldType + '\'' +
-                ", fieldSize=" + fieldSize +
-                ", risk=" + risk +
-                '}';
+    public Integer getOptionId() {
+        return optionId;
+    }
+
+    public void setOptionId(Integer optionId) {
+        this.optionId = optionId;
     }
 }

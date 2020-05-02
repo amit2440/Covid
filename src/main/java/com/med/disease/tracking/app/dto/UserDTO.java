@@ -2,33 +2,15 @@ package com.med.disease.tracking.app.dto;
 
 public class UserDTO {
 
-    private String userName;
-    private String password;
-    private boolean isActive;
+    private Integer userId;
+    private String firstName;
+    private String lastName;
+    private Boolean isActive;
     private Integer mobile;
     private String role;
     private String token;
-    private Integer uid;
-    private String firstName;
-    private String lastName;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
@@ -60,14 +42,6 @@ public class UserDTO {
         this.token = token;
     }
 
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -82,5 +56,13 @@ public class UserDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

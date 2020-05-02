@@ -13,9 +13,9 @@ public class FeedbackDAO extends BaseDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeedbackDAO.class);
 
-    public void submitFeedback(Feedback feedback) throws Exception{
+    public int submitFeedback(Feedback feedback) throws Exception{
         try {
-            getSqlSession().insert("Feedback.insertFeedback", feedback);
+            return getSqlSession().insert("Feedback.insertFeedback", feedback);
         } catch(Exception exception){
             LOGGER.error("Database Exception :{}", exception.getMessage());
             throw new DatabaseException(exception.getMessage());
