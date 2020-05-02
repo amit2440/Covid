@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="Question" type="com.med.disease.tracking.app.model.Question" />
+		<typeAlias alias="QuestionSet" type="com.med.disease.tracking.app.model.QuestionSet" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sql-mappings/question/Questionaries-ResultMappings.xml" />

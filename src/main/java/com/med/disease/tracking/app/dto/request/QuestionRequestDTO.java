@@ -1,4 +1,4 @@
-package com.med.disease.tracking.app.dto;
+package com.med.disease.tracking.app.dto.request;
 
 public class QuestionRequestDTO {
 	/** questionId */

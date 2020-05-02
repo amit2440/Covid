@@ -8,4 +8,11 @@
 		<result property="question" column="QUESTION"/>
 		<result property="control" column="CONTROL"/>
 	</resultMap>
+	
+	<resultMap id="ResultForGetQuestionSet" type="QuestionSet">
+		<result property="setId" column="SET_ID"/>
+		<result property="created" column="CREATED"/>
+		<result property="description" column="DESCRIPTION"/>
+		<result property="isActive" column="IS_ACTIVE"/>
+	</resultMap>
 </mapper>

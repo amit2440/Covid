@@ -1,7 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS `covid`;
 
 CREATE TABLE IF NOT EXISTS `covid`.`user` (
-    `user_id` INT NOT NULL,
+    `user_id` INT NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(20) NOT NULL,
     `last_name` VARCHAR(20) NOT NULL,
     `mobile` VARCHAR(10) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`user` (
 );
 
 CREATE TABLE IF NOT EXISTS `covid`.`question` (
-    `question_id` INT NOT NULL,
+    `question_id` INT NOT NULL AUTO_INCREMENT,
     `question` VARCHAR(100) NOT NULL,
     `control` VARCHAR(20) NOT NULL,
     PRIMARY KEY (`question_id`),
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`question` (
 );
 
 CREATE TABLE IF NOT EXISTS `covid`.`option` (
-    `option_id` INT NOT NULL,
+    `option_id` INT NOT NULL AUTO_INCREMENT,
     `field_name` VARCHAR(20) NULL,
     `display_name` VARCHAR(20) NULL,
     `type` VARCHAR(20) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`question_option` (
 );
 	
 CREATE TABLE IF NOT EXISTS `covid`.`question_set` (
-    `set_id` INT NOT NULL,
+    `set_id` INT NOT NULL AUTO_INCREMENT,
     `created` DATETIME NOT NULL,
     `description` VARCHAR(50) NULL,
     `is_active` BIT NULL DEFAULT 1,

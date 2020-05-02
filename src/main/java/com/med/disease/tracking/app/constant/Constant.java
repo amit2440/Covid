@@ -11,5 +11,8 @@ public interface Constant {
 	}
 	public interface Field {
 		String QUESTION_ID = "questionId";
+		String QUESTION_SET_ID = "setId";
+		String DESCRIPTION = "description";
+		String ISACTIVE = "isActive";
 	}
 }
