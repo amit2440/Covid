@@ -5,8 +5,8 @@ public class OptionDTO {
     private Integer optionId;
     private String fieldName;
     private String displayName;
-    private String fieldType;
-    private Integer fieldSize;
+    private String type;
+    private Integer size;
     private Integer risk;
 
     public Integer getOptionId() {
@@ -33,20 +33,20 @@ public class OptionDTO {
         this.displayName = displayName;
     }
 
-    public String getFieldType() {
-        return fieldType;
+    public String getType() {
+        return type;
     }
 
-    public void setFieldType(String fieldType) {
-        this.fieldType = fieldType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Integer getFieldSize() {
-        return fieldSize;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setFieldSize(Integer fieldSize) {
-        this.fieldSize = fieldSize;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     public Integer getRisk() {

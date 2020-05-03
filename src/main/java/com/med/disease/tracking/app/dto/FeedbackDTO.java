@@ -1,50 +1,29 @@
 package com.med.disease.tracking.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
+
+import java.util.List;
+
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class FeedbackDTO {
 
-    private UserDTO user;
-    private QuestionSetDTO set;
-    private QuestionDTO question;
-    private OptionDTO option;
-    private String value;
+    private Integer userId;
+    private List<FeedbackResponseDTO> feedbacks;
 
-    public UserDTO getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public QuestionSetDTO getSet() {
-        return set;
+    public List<FeedbackResponseDTO> getFeedbacks() {
+        return feedbacks;
     }
 
-    public void setSet(QuestionSetDTO set) {
-        this.set = set;
-    }
-
-    public QuestionDTO getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(QuestionDTO question) {
-        this.question = question;
-    }
-
-    public OptionDTO getOption() {
-        return option;
-    }
-
-    public void setOption(OptionDTO option) {
-        this.option = option;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setFeedbacks(List<FeedbackResponseDTO> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 }

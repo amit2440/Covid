@@ -7,4 +7,13 @@
 		INSERT into feedback (<include refid="Feedback-SqlQueries.InsertForSubmitFeedback"/>)
 		VALUES(#{user.userId}, #{set.setId}, #{question.questionId}, #{option.optionId}, #{value})
 	</insert>
+	<select id ="selectFeedbacks" parameterType="User" resultMap="Feedback-ResultMappings.ResultForGetFeedback">
+		SELECT f.user_id, f.value, q.question, o.display_name, o.risk, o.type
+		FROM covid.feedback f
+		JOIN covid.question q
+		ON f.question_id = q.question_id
+		JOIN covid.option o
+		ON f.option_id = o.option_id
+		WHERE f.user_id = #{userId}
+	</select>
 </mapper>
