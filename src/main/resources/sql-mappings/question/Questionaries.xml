@@ -13,10 +13,10 @@
 	
 	<select id="getSurveyInfo" parameterType="Survey" resultMap="Questionaries-ResultMappings.ResultForGetSurvey">
 		SELECT 
-		<include refid="Questionaries-SqlQueries.SelectForGetQuestionSurvey" />
+		<include refid="Questionaries-SqlQueries.SelectForGetSurvey" />
 		FROM SURVEY
 		WHERE 
-		SET_ID = #{surveyId}
+		SURVEY_ID = #{surveyId}
 	</select>
 	
 	<insert id="submitSurvey" parameterType="Survey">
