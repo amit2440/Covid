@@ -21,7 +21,7 @@ public interface Constant {
 		String FIRST_NAME = "firstName";
 		String LAST_NAME = "lastName";
 		String ROLE = "role";
-		String MIDDLE_NAME = "midleName";
+		String MIDDLE_NAME = "middleName";
 		String WORK_LOCATION = "workLocation";
 		
 	}
