@@ -1,8 +1,8 @@
-package com.med.disease.tracking.app.model;
+package com.med.disease.tracking.app.dto;
 
 import java.util.Date;
 
-public class User {
+public class UserDTO {
 	private String userName;
 	private String uid;
 	private String password;
@@ -34,10 +34,10 @@ public class User {
 		this.createdDtm = createdDtm;
 	}
 
-	public User() {
+	public UserDTO() {
 	}
 
-	public User(String userName, String password, boolean enabled) {
+	public UserDTO(String userName, String password, boolean enabled) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -114,7 +114,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", uid=" + uid + ", firstName=" + firstName
+		return "UserDTO [userName=" + userName + ", uid=" + uid + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role
 				+ ", workLocation=" + workLocation + "]";
 	}
