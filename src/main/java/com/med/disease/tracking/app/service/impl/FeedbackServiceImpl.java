@@ -6,7 +6,7 @@ import com.med.disease.tracking.app.dto.FeedbackForSetDTO;
 import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
-import com.med.disease.tracking.app.mapper.FetchFeedbackForSurvey;
+import com.med.disease.tracking.app.mapper.FetchFeedbackForSurveyMapper;
 import com.med.disease.tracking.app.mapper.FetchFeedbackMapper;
 import com.med.disease.tracking.app.mapper.SubmitFeedbackMapper;
 import com.med.disease.tracking.app.mapper.MappingTypeEnum;
@@ -37,7 +37,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     private FetchFeedbackMapper fetchFeedbackMapper;
 
     @Autowired
-    private FetchFeedbackForSurvey fetchFeedbackForSurvey;
+    private FetchFeedbackForSurveyMapper fetchFeedbackForSurveyMapper;
 
     @Override
     @Transactional
@@ -63,8 +63,8 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     @Transactional(readOnly = true)
     public FeedbackForSetDTO fetchFeedbacksForSurvey(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception{
-        Feedback feedback = (Feedback) fetchFeedbackForSurvey.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
+        Feedback feedback = (Feedback) fetchFeedbackForSurveyMapper.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
         List<Feedback> feedbackList = feedbackDAO.getFeedbacksForSurvey(feedback);
-        return (FeedbackForSetDTO) fetchFeedbackForSurvey.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
+        return (FeedbackForSetDTO) fetchFeedbackForSurveyMapper.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
     }
 }

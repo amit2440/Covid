@@ -6,6 +6,7 @@
 		<typeAlias alias="Survey" type="com.med.disease.tracking.app.model.Survey" />
 		<typeAlias alias="Feedback" type="com.med.disease.tracking.app.model.Feedback" />
 		<typeAlias alias="User" type="com.med.disease.tracking.app.model.User" />
+		<typeAlias alias="SurveyOption" type="com.med.disease.tracking.app.model.SurveyQuestion" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sql-mappings/question/Questionaries-ResultMappings.xml" />

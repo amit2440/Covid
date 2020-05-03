@@ -13,19 +13,17 @@ public class SubmitFeedbackMapper extends Mapper {
     @Override
     protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {
         FeedbackRequestDTO feedbackRequestDTO = (FeedbackRequestDTO) objectToMap;
-        Feedback feedback = new Feedback();
-        User user = new User();
-        Survey survey = new Survey();
-        SurveyQuestion surveyQuestion = new SurveyQuestion();
-        user.setUserId(feedbackRequestDTO.getUserId());
-        survey.setSurveyId(feedbackRequestDTO.getSurveyId());
-        feedback.setUser(user);
-        surveyQuestion.setSurvey(survey);
-        feedback.setSurveyQuestion(surveyQuestion);
         return feedbackRequestDTO.getAnswers().stream().map(answer -> {
+            Feedback feedback = new Feedback();
+            User user = new User();
+            Survey survey = new Survey();
+            SurveyQuestion surveyQ = new SurveyQuestion();
+            user.setUserId(feedbackRequestDTO.getUserId());
+            survey.setSurveyId(feedbackRequestDTO.getSurveyId());
+            feedback.setUser(user);
+            surveyQ.setSurvey(survey);
             Question question = new Question();
             Option option = new Option();
-            SurveyQuestion surveyQ = new SurveyQuestion();
             question.setQuestionId(answer.getQuestionId());
             surveyQ.setQuestion(question);
             feedback.setSurveyQuestion(surveyQ);

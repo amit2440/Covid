@@ -4,11 +4,15 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "Feedback">
 	<insert id="insertFeedback" parameterType="Feedback">
+		<selectKey keyProperty="surveyQuestion.ssqId" resultType="int" order="BEFORE">
+			SELECT ssq_id FROM survey_question WHERE survey_id=#{surveyQuestion.survey.surveyId} AND question_id=#{surveyQuestion.question.questionId};
+		</selectKey>
 		INSERT into feedback (<include refid="Feedback-SqlQueries.InsertForSubmitFeedback"/>)
-		VALUES(#{user.userId}, #{surveyOption.ssqId}, #{option.optionId}, #{value})
+		VALUES(#{user.userId}, #{surveyQuestion.ssqId}, #{option.optionId}, #{value})
 	</insert>
+
 	<select id ="selectFeedbacksForSurveyAndUser" parameterType="Feedback" resultMap="Feedback-ResultMappings.ResultForGetFeedbackForSurveyAndUser">
-		SELECT f.user_id, f.value, q.question, o.display_name, o.risk, o.type
+		SELECT f.user_id, sa.survey_id, f.value, q.question, o.display_name, o.risk, o.type
 		FROM covid.feedback f
 		JOIN covid.question q
 		ON f.question_id = q.question_id
@@ -18,7 +22,7 @@
 		WHERE f.user_id = #{userId} and u.is_active=1
 	</select>
 	<select id ="selectFeedbacksForSurvey" parameterType="Feedback" resultMap="Feedback-ResultMappings.ResultForGetFeedbackForSurvey">
-		SELECT f.value, q.question, o.display_name, o.risk, o.type, qa.set_id
+		SELECT f.value, sa.survey_id, q.question, o.display_name, o.risk, o.type
 		FROM covid.feedback f
 		JOIN covid.question q
 		ON f.question_id = q.question_id

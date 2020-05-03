@@ -9,6 +9,7 @@ import java.util.List;
 public class FeedbackDTO {
 
     private Integer userId;
+    private Integer surveyId;
     private List<FeedbackResponseDTO> feedbacks;
 
     public Integer getUserId() {
@@ -25,5 +26,13 @@ public class FeedbackDTO {
 
     public void setFeedbacks(List<FeedbackResponseDTO> feedbacks) {
         this.feedbacks = feedbacks;
+    }
+
+    public Integer getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 }

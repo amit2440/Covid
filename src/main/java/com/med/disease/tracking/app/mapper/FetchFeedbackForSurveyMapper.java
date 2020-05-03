@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-public class FetchFeedbackForSurvey extends Mapper {
+public class FetchFeedbackForSurveyMapper extends Mapper {
 
     @Override
     protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {

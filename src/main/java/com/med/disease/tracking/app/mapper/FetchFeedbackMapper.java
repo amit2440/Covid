@@ -37,6 +37,7 @@ public class FetchFeedbackMapper extends Mapper{
         if(!feedbackList.isEmpty()){
             FeedbackDTO feedbackDTO = new FeedbackDTO();
             feedbackDTO.setUserId(feedbackList.stream().findFirst().get().getUser().getUserId());
+            feedbackDTO.setSurveyId(feedbackList.stream().findFirst().get().getSurveyQuestion().getSurvey().getSurveyId());
             feedbackDTO.setFeedbacks(feedbackList.stream().map(feedback -> {
                 FeedbackResponseDTO feedbackResponseDTO = new FeedbackResponseDTO();
                 feedbackResponseDTO.setQuestion(feedback.getSurveyQuestion().getQuestion().getQuestion());

@@ -3,12 +3,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace= "Feedback-ResultMappings">
-	<resultMap id="ResultForGetFeedbackForSurveyAndUser" type="Feedback" extends="ResultForGetFeedback">
+	<resultMap id="ResultForGetFeedbackForSurveyAndUser" type="Feedback" extends="ResultForGetFeedbackForSurvey">
 		<result property="user.userId" column="USER_ID"/>
 	</resultMap>
 
 	<resultMap id="ResultForGetFeedbackForSurvey" type="Feedback" extends="ResultForGetFeedback">
-		<result property="set.surveyId" column="SURVEY_ID"/>
+		<result property="surveyQuestion.survey.surveyId" column="SURVEY_ID"/>
 	</resultMap>
 
 	<resultMap id ="ResultForGetFeedback" type="Feedback">
