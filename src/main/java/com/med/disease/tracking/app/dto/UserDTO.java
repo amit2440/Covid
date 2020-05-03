@@ -1,88 +1,133 @@
 package com.med.disease.tracking.app.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.Date;
 
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class UserDTO {
+	private String userName;
+	private String uid;
+	private String password;
+	private boolean enabled;
+	private String firstName;
+	private String lastName;
+	private String middleName;
+	private String mobile;
+	private String token;
+	private String role;
+	private String workLocation;
 
-    private Integer userId;
-    private String firstName;
-    private String lastName;
-    private Boolean isActive;
-    private Integer mobile;
-    private String role;
-    private String token;
-    private String workLocation;
+	public String getWorkLocation() {
+		return workLocation;
+	}
 
-    public Boolean isActive() {
-        return isActive;
-    }
+	public void setWorkLocation(String workLocation) {
+		this.workLocation = workLocation;
+	}
 
-    public void setActive(boolean active) {
-        isActive = active;
-    }
+	private Date createdDtm;
 
-    public Integer getMobile() {
-        return mobile;
-    }
+	public Date getCreatedDtm() {
+		return createdDtm;
+	}
 
-    public void setMobile(Integer mobile) {
-        this.mobile = mobile;
-    }
+	public void setCreatedDtm(Date createdDtm) {
+		this.createdDtm = createdDtm;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public UserDTO() {
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public UserDTO(String userName, String password, boolean enabled) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.enabled = enabled;
+	}
 
-    public String getToken() {
-        return token;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getUid() {
+		return uid;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public Boolean getActive() {
-        return isActive;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getWorkLocation() {
-        return workLocation;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public void setWorkLocation(String workLocation) {
-        this.workLocation = workLocation;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [userName=" + userName + ", uid=" + uid + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role + ", workLocation="
+				+ workLocation + "]";
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
 }

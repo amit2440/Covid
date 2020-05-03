@@ -1,10 +1,11 @@
 package com.med.disease.tracking.app.service;
 
-import com.med.disease.tracking.app.model.User;
+import com.med.disease.tracking.app.dto.UserDTO;
 
 public interface RegisterEmployeeService {
-	
-	
-	public int registerEmployee(User user) ;
+
+	public int registerEmployee(UserDTO user);
+
+	public int registerEmpFormCSV(String line);
 
 }

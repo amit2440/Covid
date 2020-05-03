@@ -1,26 +1,71 @@
 package com.med.disease.tracking.app.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.med.disease.tracking.app.model.User;
+import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.repository.IUserRepository;
 import com.med.disease.tracking.app.service.RegisterEmployeeService;
+
 
 @Service
 public class RegisterEmployeeServiceImpl implements RegisterEmployeeService {
 
+private static final Logger logger = LoggerFactory.getLogger(RegisterEmployeeServiceImpl.class);
+	
 	@Autowired
 	private IUserRepository userRepository;
-	
-	
+
 	@Override
-	public int registerEmployee(User user) {
+	public int registerEmployee(UserDTO user) {
 		// TODO Auto-generated method stub
-		
+		int res = 0;
 //		Need to add validation here and some more stuff if needed like token generation logic and all
-		int res = userRepository.insert(user);
+		try {
+			res = userRepository.insertEmployee(user);
+		}catch(Exception e) {
+				logger.info(" Error while processing  : "+user+" is ===>"+e.getMessage());
+		}
+	
 		return res;
+	}
+	
+
+	@Override
+	public int registerEmpFormCSV(String line) {
+		// TODO Auto-generated method stub
+		UserDTO user = this.getUSerObject(line);
+		logger.info(line);
+		int res = userRepository.insertEmployee(user);
+		return res;
+	}
+	
+	
+
+	protected UserDTO getUSerObject(String csvLine) {
+
+		UserDTO user = null;
+		if (!"".equals(csvLine) && csvLine.length() > 0) {
+			String[] userArr = csvLine.split(",");
+			user = new UserDTO();
+			user.setUid(userArr[0] != null ? userArr[0] : null);
+			user.setUserName(userArr[1] != null ? userArr[1] : null);
+			user.setFirstName(userArr[2] != null ? userArr[2] : null);
+			user.setMiddleName(userArr[3] != null ? userArr[3] : null);
+			user.setLastName(userArr[4] != null ? userArr[4] : null);
+			user.setMobile(userArr[5] != null ? userArr[5] : null);
+			user.setPassword(null);
+			user.setEnabled(userArr[6].equalsIgnoreCase("Y") ? true : false);
+			user.setToken(null);
+			user.setRole(userArr[7] != null ? userArr[7] : null);
+			user.setWorkLocation(userArr[8] != null ? userArr[8] : null);
+			user.setCreatedDtm(null);
+
+		}
+		return user;
+
 	}
 
 }

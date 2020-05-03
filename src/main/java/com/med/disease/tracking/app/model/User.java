@@ -1,47 +1,62 @@
 package com.med.disease.tracking.app.model;
 
+import java.util.Date;
 
 public class User {
-
+	private String userName;
 	private Integer userId;
+	private String password;
+	private boolean enabled;
 	private String firstName;
 	private String lastName;
-	private Boolean isActive;
-	private Integer mobile;
-	private String role;
+	private String middleName;
+	private String mobile;
 	private String token;
+	private String role;
 	private String workLocation;
 
-	public User(){}
-
-	public User(String firstName, String lastName, Boolean isActive){
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.isActive = isActive;
+	public String getWorkLocation() {
+		return workLocation;
 	}
 
-	public Integer getMobile() {
-		return mobile;
+	public void setWorkLocation(String workLocation) {
+		this.workLocation = workLocation;
 	}
 
-	public void setMobile(Integer mobile) {
-		this.mobile = mobile;
+	private Date createdDtm;
+
+	public Date getCreatedDtm() {
+		return createdDtm;
 	}
 
-	public String getRole() {
-		return role;
+	public void setCreatedDtm(Date createdDtm) {
+		this.createdDtm = createdDtm;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public User() {
 	}
 
-	public String getToken() {
-		return token;
+	public User(String userName, String password, boolean enabled) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.enabled = enabled;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -60,6 +75,44 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 	public Integer getUserId() {
 		return userId;
 	}
@@ -68,19 +121,10 @@ public class User {
 		this.userId = userId;
 	}
 
-	public Boolean getActive() {
-		return isActive;
-	}
-
-	public void setActive(Boolean active) {
-		isActive = active;
-	}
-
-	public String getWorkLocation() {
-		return workLocation;
-	}
-
-	public void setWorkLocation(String workLocation) {
-		this.workLocation = workLocation;
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", userid=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role + ", workLocation="
+				+ workLocation + "]";
 	}
 }
