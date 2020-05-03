@@ -2,7 +2,7 @@ package com.med.disease.tracking.app.service.impl;
 
 import com.med.disease.tracking.app.dao.FeedbackDAO;
 import com.med.disease.tracking.app.dto.FeedbackDTO;
-import com.med.disease.tracking.app.dto.FeedbackForSetDTO;
+import com.med.disease.tracking.app.dto.FeedbackForSurveyDTO;
 import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
@@ -62,9 +62,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     @Transactional(readOnly = true)
-    public FeedbackForSetDTO fetchFeedbacksForSurvey(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception{
+    public FeedbackForSurveyDTO fetchFeedbacksForSurvey(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception{
         Feedback feedback = (Feedback) fetchFeedbackForSurveyMapper.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
         List<Feedback> feedbackList = feedbackDAO.getFeedbacksForSurvey(feedback);
-        return (FeedbackForSetDTO) fetchFeedbackForSurveyMapper.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
+        return (FeedbackForSurveyDTO) fetchFeedbackForSurveyMapper.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
     }
 }

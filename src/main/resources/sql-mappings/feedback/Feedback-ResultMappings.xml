@@ -12,7 +12,7 @@
 	</resultMap>
 
 	<resultMap id ="ResultForGetFeedback" type="Feedback">
-		<result property="question.question" column="QUESTION"/>
+		<result property="surveyQuestion.question.question" column="QUESTION"/>
 		<result property="value" column="VALUE"/>
 		<result property="option.risk" column="RISK"/>
 		<result property="option.type" column="TYPE"/>

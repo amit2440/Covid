@@ -28,7 +28,7 @@ public class FetchFeedbackMapper extends Mapper{
         surveyQuestion.setSurvey(survey);
         feedback.setUser(user);
         feedback.setSurveyQuestion(surveyQuestion);
-        return user;
+        return feedback;
     }
 
     @Override
@@ -48,6 +48,7 @@ public class FetchFeedbackMapper extends Mapper{
                     feedbackResponseDTO.setAnswer(feedback.getOption().getDisplayName());
                 return feedbackResponseDTO;
             }).collect(Collectors.toList()));
+            return feedbackDTO;
         }
         return null;
     }
