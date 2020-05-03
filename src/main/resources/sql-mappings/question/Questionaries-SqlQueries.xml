@@ -9,7 +9,7 @@
 		CONTROL
 	</sql>
 	
-	<sql id="SelectForGetQuestionSurvey">
+	<sql id="SelectForGetSurvey">
 		SURVEY_ID,
 		CREATED,
 		DESCRIPTION,

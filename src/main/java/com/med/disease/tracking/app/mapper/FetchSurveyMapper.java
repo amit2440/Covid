@@ -9,7 +9,7 @@ import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.model.Survey;
 
 @Component
-public class FetchQuestionSetMapper extends Mapper {
+public class FetchSurveyMapper extends Mapper {
 
 	@Override
 	protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {

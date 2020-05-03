@@ -75,11 +75,10 @@ CREATE  TABLE `covid`.`survey_question` (
 );
 
 CREATE  TABLE `covid`.`feedback` (
-  `user_id` INT NOT NULL AUTO_INCREMENT ,
+  `user_id` INT NOT NULL,
   `ssq_id` INT NOT NULL ,
   `option_id` INT NOT NULL ,
-  `value` VARCHAR(20) NOT NULL ,
-  PRIMARY KEY (`user_id`) ,
+  `value` VARCHAR(20) NOT NULL,
   INDEX `feeback_ssq_id_idx` (`ssq_id` ASC) ,
   INDEX `option_id_idx` (`option_id` ASC) ,
   CONSTRAINT `feeback_ssq_id`

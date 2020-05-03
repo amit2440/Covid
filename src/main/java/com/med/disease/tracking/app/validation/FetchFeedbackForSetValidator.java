@@ -15,6 +15,6 @@ public class FetchFeedbackForSetValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ValidationUtil.validateFieldRequired(Constant.Field.QUESTION_SET_ID, ((FetchFeedbackRequestDTO) target).getSurveyId(), errors);
+        ValidationUtil.validateFieldRequired(Constant.Field.SURVEY_ID, ((FetchFeedbackRequestDTO) target).getSurveyId(), errors);
     }
 }

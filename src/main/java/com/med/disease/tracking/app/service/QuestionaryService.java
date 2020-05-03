@@ -10,9 +10,9 @@ public interface QuestionaryService {
 	
 	QuestionDTO getQuestion(QuestionRequestDTO requestDTO) throws Exception;
 	
-	SurveyDTO getQuestionSet(SurveyRequestDTO requestDTO) throws Exception;
+	SurveyDTO getSurvey(SurveyRequestDTO requestDTO) throws Exception;
 	
-	void submitQuestionSet(SurveyRequestDTO requestDTO) throws Exception;
+	void submitSurvey(SurveyRequestDTO requestDTO) throws Exception;
 	
-	void updateQuestionSet(SurveyRequestDTO requestDTO) throws Exception;
+	void updateSurvey(SurveyRequestDTO requestDTO) throws Exception;
 }

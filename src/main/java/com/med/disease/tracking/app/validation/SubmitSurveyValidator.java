@@ -7,7 +7,7 @@ import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.util.ValidationUtil;
 
-public class UpdateQuestionSetValidator implements Validator{
+public class SubmitSurveyValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -17,8 +17,6 @@ public class UpdateQuestionSetValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		SurveyRequestDTO requestDTO = (SurveyRequestDTO) target;
-		ValidationUtil.validateFieldRequired(Constant.Field.QUESTION_SET_ID, requestDTO.getSurveyId(), errors);
-		ValidationUtil.validateFieldRequired(Constant.Field.ISACTIVE, requestDTO.getIsActive(), errors);
 		ValidationUtil.validateFieldRequired(Constant.Field.DESCRIPTION, requestDTO.getDescription(), errors);
 	}
 }

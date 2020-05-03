@@ -24,7 +24,7 @@ public class QuestionaryDAO extends BaseDAO {
 	
 	public Survey getSurvey(Survey survey) throws DatabaseException {
 		try {
-			return getSqlSession().selectOne("Questionaries.getQuestionSetInfo", survey);
+			return getSqlSession().selectOne("Questionaries.getSurveyInfo", survey);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());
@@ -33,7 +33,7 @@ public class QuestionaryDAO extends BaseDAO {
 	
 	public int submitSurvey(Survey survey) throws DatabaseException {
 		try {
-			return getSqlSession().insert("Questionaries.submitQuestionSet", survey);
+			return getSqlSession().insert("Questionaries.submitSurvey", survey);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());
@@ -42,7 +42,7 @@ public class QuestionaryDAO extends BaseDAO {
 	
 	public int updateSurvey(Survey survey) throws DatabaseException {
 		try {
-			return getSqlSession().insert("Questionaries.updateQuestionSet", survey);
+			return getSqlSession().insert("Questionaries.updateSurvey", survey);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());

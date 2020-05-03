@@ -12,11 +12,11 @@ import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.service.QuestionaryService;
 import com.med.disease.tracking.app.util.ErrorUtil;
-import com.med.disease.tracking.app.validation.SubmitQuestionSetValidator;
+import com.med.disease.tracking.app.validation.SubmitSurveyValidator;
 
 @RequestScope
 @Component
-public class SubmitQuestionSetHandler extends RestControllerHandler {
+public class SubmitSurveyHandler extends RestControllerHandler {
 
 	@Autowired
 	QuestionaryService questionaryService;
@@ -31,13 +31,13 @@ public class SubmitQuestionSetHandler extends RestControllerHandler {
 
 	@Override
 	protected void validateRequest() {
-		new SubmitQuestionSetValidator().validate(requestDTO, bindingResult);
+		new SubmitSurveyValidator().validate(requestDTO, bindingResult);
 		ErrorUtil.processError(bindingResult, Constant.Module.QUESTION_FETCH);
 	}
 
 	@Override
 	protected Object processRequest() throws Exception {
-		questionaryService.submitQuestionSet(requestDTO);
+		questionaryService.submitSurvey(requestDTO);
 		return new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.CREATED);
 	}
 }

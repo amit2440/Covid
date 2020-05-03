@@ -11,7 +11,7 @@
 		QUESTION_ID = #{questionId}
 	</select>
 	
-	<select id="getQuestionSurveyInfo" parameterType="Survey" resultMap="Questionaries-ResultMappings.ResultForGetQuestionSurvey">
+	<select id="getSurveyInfo" parameterType="Survey" resultMap="Questionaries-ResultMappings.ResultForGetSurvey">
 		SELECT 
 		<include refid="Questionaries-SqlQueries.SelectForGetQuestionSurvey" />
 		FROM SURVEY
@@ -19,12 +19,12 @@
 		SET_ID = #{surveyId}
 	</select>
 	
-	<insert id="submitQuestionSurvey" parameterType="Survey">
+	<insert id="submitSurvey" parameterType="Survey">
 		INSERT INTO SURVEY (CREATED, DESCRIPTION, IS_ACTIVE)
 		VALUES(CURRENT_TIMESTAMP, #{description}, 0)
 	</insert>
 	
-	<insert id="updateQuestionSet" parameterType="Survey">
+	<insert id="updateSurvey" parameterType="Survey">
 		UPDATE SURVEY
 		SET 
 		DESCRIPTION = #{description}, 
