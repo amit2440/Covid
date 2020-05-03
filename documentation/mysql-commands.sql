@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`user` (
     `role` VARCHAR(20) NOT NULL,
     `work_location` VARCHAR(20) NOT NULL,
     `token` VARCHAR(150) NOT NULL,
-    `is_active` BINARY NOT NULL DEFAULT 1,
+    `is_active` BINARY NOT NULL DEFAULT 0,
     PRIMARY KEY (`user_id`),
     UNIQUE INDEX `mobile_UNIQUE` (`mobile` ASC),
     UNIQUE INDEX `token_UNIQUE` (`token` ASC)
