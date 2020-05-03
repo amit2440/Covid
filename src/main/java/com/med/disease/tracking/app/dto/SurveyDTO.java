@@ -1,13 +1,15 @@
-package com.med.disease.tracking.app.dto.request;
+package com.med.disease.tracking.app.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDate;
 
-public class QuestionSetRequestDTO {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+public class SurveyDTO {
 	/** question set id */
-	private Integer setId;
+	private Integer surveyId;
 	/** description */
 	private String description;
-	
 	/** created */
 	private LocalDate created;
 	/** isActive */
@@ -16,14 +18,26 @@ public class QuestionSetRequestDTO {
 	/**
 	 * @return the setId
 	 */
-	public Integer getSetId() {
-		return setId;
+	public Integer getSurveyId() {
+		return surveyId;
 	}
 	/**
-	 * @param setId the setId to set
+	 * @param surveyId the setId to set
 	 */
-	public void setSetId(Integer setId) {
-		this.setId = setId;
+	public void setSurveyId(Integer surveyId) {
+		this.surveyId = surveyId;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	/**
 	 * @return the created
@@ -48,17 +62,5 @@ public class QuestionSetRequestDTO {
 	 */
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
-	}
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }

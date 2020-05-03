@@ -1,12 +1,9 @@
-package com.med.disease.tracking.app.dto;
+package com.med.disease.tracking.app.dto.request;
 
-import java.util.List;
-
-public class FeedbackRequestDTO {
+public class FetchFeedbackRequestDTO {
 
     private Integer userId;
     private Integer surveyId;
-    private List<AnswerRequestDTO> answers;
 
     public Integer getUserId() {
         return userId;
@@ -22,13 +19,5 @@ public class FeedbackRequestDTO {
 
     public void setSurveyId(Integer surveyId) {
         this.surveyId = surveyId;
-    }
-
-    public List<AnswerRequestDTO> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<AnswerRequestDTO> answers) {
-        this.answers = answers;
     }
 }

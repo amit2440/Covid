@@ -1,12 +1,13 @@
-package com.med.disease.tracking.app.model;
+package com.med.disease.tracking.app.dto.request;
 
 import java.time.LocalDate;
 
-public class QuestionSet {
+public class SurveyRequestDTO {
 	/** question set id */
-	private Integer setId;
+	private Integer surveyId;
 	/** description */
 	private String description;
+	
 	/** created */
 	private LocalDate created;
 	/** isActive */
@@ -15,26 +16,14 @@ public class QuestionSet {
 	/**
 	 * @return the setId
 	 */
-	public Integer getSetId() {
-		return setId;
+	public Integer getSurveyId() {
+		return surveyId;
 	}
 	/**
-	 * @param setId the setId to set
+	 * @param surveyId the setId to set
 	 */
-	public void setSetId(Integer setId) {
-		this.setId = setId;
-	}
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setSurveyId(Integer surveyId) {
+		this.surveyId = surveyId;
 	}
 	/**
 	 * @return the created
@@ -59,5 +48,17 @@ public class QuestionSet {
 	 */
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

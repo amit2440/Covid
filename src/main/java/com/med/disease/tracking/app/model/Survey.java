@@ -1,13 +1,10 @@
-package com.med.disease.tracking.app.dto;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
+package com.med.disease.tracking.app.model;
 
 import java.time.LocalDate;
 
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class QuestionSetDTO {
+public class Survey {
 	/** question set id */
-	private Integer setId;
+	private Integer surveyId;
 	/** description */
 	private String description;
 	/** created */
@@ -18,14 +15,14 @@ public class QuestionSetDTO {
 	/**
 	 * @return the setId
 	 */
-	public Integer getSetId() {
-		return setId;
+	public Integer getSurveyId() {
+		return surveyId;
 	}
 	/**
-	 * @param setId the setId to set
+	 * @param surveyId the setId to set
 	 */
-	public void setSetId(Integer setId) {
-		this.setId = setId;
+	public void setSurveyId(Integer surveyId) {
+		this.surveyId = surveyId;
 	}
 	/**
 	 * @return the description

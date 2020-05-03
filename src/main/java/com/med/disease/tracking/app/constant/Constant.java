@@ -9,6 +9,7 @@ public interface Constant {
 	public interface Module {
 		String QUESTION_FETCH = "Fetch Question";
 		String SUBMIT_FEEDBACK = "Submit Feedback";
+		String FEEDBACK_FETCH = "Fetch Feedback";
 	}
 	public interface Field {
 		String QUESTION_ID = "questionId";

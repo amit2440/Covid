@@ -9,8 +9,8 @@
 		CONTROL
 	</sql>
 	
-	<sql id="SelectForGetQuestionSet">
-		SET_ID,
+	<sql id="SelectForGetQuestionSurvey">
+		SURVEY_ID,
 		CREATED,
 		DESCRIPTION,
 		IS_ACTIVE

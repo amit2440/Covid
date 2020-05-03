@@ -4,8 +4,6 @@ import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
 import com.med.disease.tracking.app.model.*;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -17,16 +15,20 @@ public class SubmitFeedbackMapper extends Mapper {
         FeedbackRequestDTO feedbackRequestDTO = (FeedbackRequestDTO) objectToMap;
         Feedback feedback = new Feedback();
         User user = new User();
-        QuestionSet questionSet = new QuestionSet();
+        Survey survey = new Survey();
+        SurveyQuestion surveyQuestion = new SurveyQuestion();
         user.setUserId(feedbackRequestDTO.getUserId());
-        questionSet.setSetId(feedbackRequestDTO.getQuestionSetId());
+        survey.setSurveyId(feedbackRequestDTO.getSurveyId());
         feedback.setUser(user);
-        feedback.setSet(questionSet);
+        surveyQuestion.setSurvey(survey);
+        feedback.setSurveyQuestion(surveyQuestion);
         return feedbackRequestDTO.getAnswers().stream().map(answer -> {
             Question question = new Question();
             Option option = new Option();
+            SurveyQuestion surveyQ = new SurveyQuestion();
             question.setQuestionId(answer.getQuestionId());
-            feedback.setQuestion(question);
+            surveyQ.setQuestion(question);
+            feedback.setSurveyQuestion(surveyQ);
             option.setOptionId(answer.getOptionId());
             feedback.setOption(option);
             feedback.setValue(answer.getValue());
