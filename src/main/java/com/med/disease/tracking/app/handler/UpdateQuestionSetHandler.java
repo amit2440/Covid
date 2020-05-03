@@ -9,7 +9,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
-import com.med.disease.tracking.app.dto.request.QuestionSetRequestDTO;
+import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.service.QuestionaryService;
 import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.validation.UpdateQuestionSetValidator;
@@ -21,12 +21,12 @@ public class UpdateQuestionSetHandler extends RestControllerHandler {
 	@Autowired
 	QuestionaryService questionaryService;
 
-	private QuestionSetRequestDTO requestDTO;
+	private SurveyRequestDTO requestDTO;
 
 	@Override
 	protected void prepareRequest(Object request, BindingResult result, String... pathParam) {
-		this.requestDTO = (QuestionSetRequestDTO) request;
-		requestDTO.setSetId(Integer.valueOf(pathParam[0]));
+		this.requestDTO = (SurveyRequestDTO) request;
+		requestDTO.setSurveyId(Integer.valueOf(pathParam[0]));
 		this.bindingResult = result;
 	}
 

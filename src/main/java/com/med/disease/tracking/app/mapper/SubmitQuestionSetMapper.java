@@ -2,18 +2,18 @@ package com.med.disease.tracking.app.mapper;
 
 import java.util.Map;
 
+import com.med.disease.tracking.app.model.Survey;
 import org.springframework.stereotype.Component;
 
-import com.med.disease.tracking.app.dto.request.QuestionSetRequestDTO;
-import com.med.disease.tracking.app.model.QuestionSet;
+import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 
 @Component
 public class SubmitQuestionSetMapper extends Mapper {
 
 	@Override
 	protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {
-		QuestionSetRequestDTO requestDTO = (QuestionSetRequestDTO) objectToMap;
-		QuestionSet set = new QuestionSet();
+		SurveyRequestDTO requestDTO = (SurveyRequestDTO) objectToMap;
+		Survey set = new Survey();
 		set.setDescription(requestDTO.getDescription());
 		return set;
 	}

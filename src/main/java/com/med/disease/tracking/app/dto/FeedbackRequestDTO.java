@@ -5,7 +5,7 @@ import java.util.List;
 public class FeedbackRequestDTO {
 
     private Integer userId;
-    private Integer questionSetId;
+    private Integer surveyId;
     private List<AnswerRequestDTO> answers;
 
     public Integer getUserId() {
@@ -16,12 +16,12 @@ public class FeedbackRequestDTO {
         this.userId = userId;
     }
 
-    public Integer getQuestionSetId() {
-        return questionSetId;
+    public Integer getSurveyId() {
+        return surveyId;
     }
 
-    public void setQuestionSetId(Integer questionSetId) {
-        this.questionSetId = questionSetId;
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 
     public List<AnswerRequestDTO> getAnswers() {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.med.disease.tracking.app.dto.request.QuestionRequestDTO;
-import com.med.disease.tracking.app.dto.request.QuestionSetRequestDTO;
+import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.handler.FetchQuestionHandler;
 import com.med.disease.tracking.app.handler.FetchQuestionSetHandler;
 import com.med.disease.tracking.app.handler.SubmitQuestionSetHandler;
@@ -33,25 +33,25 @@ public class QuestionaryController {
 				.handle(requestDTO, bindingResult);
 	}
 	
-	@GetMapping(path = "/admin/questionsets/{setId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> fetchQuestionSet(@ModelAttribute QuestionSetRequestDTO requestDTO, 
+	@GetMapping(path = "/admin/survey/{surveyId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> fetchSurvey(@ModelAttribute SurveyRequestDTO requestDTO,
 			BindingResult bindingResult) throws Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(FetchQuestionSetHandler.class)
 				.handle(requestDTO, bindingResult);
 	}
 	
-	@PostMapping(path = "/admin/questionsets", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> submitQuestionSet(@RequestBody QuestionSetRequestDTO requestDTO, 
+	@PostMapping(path = "/admin/survey", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> submitSurvey(@RequestBody SurveyRequestDTO requestDTO,
 			BindingResult bindingResult) throws Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(SubmitQuestionSetHandler.class)
 				.handle(requestDTO, bindingResult);
 	}
 	
-	@PutMapping(path = "/admin/questionsets/{setId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> updateQuestionSet(@RequestBody QuestionSetRequestDTO requestDTO, 
-			@PathVariable(required = true, name = "setId") String setId , 
+	@PutMapping(path = "/admin/surveys/{surveyId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateSurvey(@RequestBody SurveyRequestDTO requestDTO,
+			@PathVariable(required = true, name = "surveyId") String surveyId ,
 			BindingResult bindingResult) throws Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(UpdateQuestionSetHandler.class)
-				.handle(requestDTO, bindingResult, setId);
+				.handle(requestDTO, bindingResult, surveyId);
 	}
 }

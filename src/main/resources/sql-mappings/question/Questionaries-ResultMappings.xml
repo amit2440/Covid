@@ -9,7 +9,7 @@
 		<result property="control" column="CONTROL"/>
 	</resultMap>
 	
-	<resultMap id="ResultForGetQuestionSet" type="QuestionSet">
+	<resultMap id="ResultForGetQuestionSurvey" type="Survey">
 		<result property="setId" column="SET_ID"/>
 		<result property="created" column="CREATED"/>
 		<result property="description" column="DESCRIPTION"/>

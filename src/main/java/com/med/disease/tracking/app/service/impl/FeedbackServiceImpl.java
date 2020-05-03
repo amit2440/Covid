@@ -2,16 +2,15 @@ package com.med.disease.tracking.app.service.impl;
 
 import com.med.disease.tracking.app.dao.FeedbackDAO;
 import com.med.disease.tracking.app.dto.FeedbackDTO;
+import com.med.disease.tracking.app.dto.FeedbackForSetDTO;
 import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
-import com.med.disease.tracking.app.dto.request.UserRequestDTO;
-import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
+import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
+import com.med.disease.tracking.app.mapper.FetchFeedbackForSurvey;
 import com.med.disease.tracking.app.mapper.FetchFeedbackMapper;
-import com.med.disease.tracking.app.mapper.Mapper;
 import com.med.disease.tracking.app.mapper.SubmitFeedbackMapper;
 import com.med.disease.tracking.app.mapper.MappingTypeEnum;
 import com.med.disease.tracking.app.model.Feedback;
-import com.med.disease.tracking.app.model.User;
 import com.med.disease.tracking.app.service.FeedbackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +36,9 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Autowired
     private FetchFeedbackMapper fetchFeedbackMapper;
 
+    @Autowired
+    private FetchFeedbackForSurvey fetchFeedbackForSurvey;
+
     @Override
     @Transactional
     public void submitFeedback(FeedbackRequestDTO feedbackRequestDTO) throws Exception {
@@ -52,10 +54,17 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     @Transactional(readOnly = true)
-    public FeedbackDTO fetchFeedbacks(UserRequestDTO userRequestDTO) throws Exception {
-        User user = (User) fetchFeedbackMapper.map(userRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
-        List<Feedback> feedbackList = feedbackDAO.getFeedbacks(user);
-        FeedbackDTO feedbackDTO = (FeedbackDTO) fetchFeedbackMapper.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
-        return feedbackDTO;
+    public FeedbackDTO fetchFeedbacks(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception {
+        Feedback feedback = (Feedback) fetchFeedbackMapper.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
+        List<Feedback> feedbackList = feedbackDAO.getFeedbacks(feedback);
+        return (FeedbackDTO) fetchFeedbackMapper.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public FeedbackForSetDTO fetchFeedbacksForSurvey(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception{
+        Feedback feedback = (Feedback) fetchFeedbackForSurvey.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
+        List<Feedback> feedbackList = feedbackDAO.getFeedbacksForSurvey(feedback);
+        return (FeedbackForSetDTO) fetchFeedbackForSurvey.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
     }
 }

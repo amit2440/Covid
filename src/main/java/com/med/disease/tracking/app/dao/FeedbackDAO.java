@@ -23,9 +23,18 @@ public class FeedbackDAO extends BaseDAO {
         }
     }
 
-    public List<Feedback> getFeedbacks(User user) throws Exception {
+    public List<Feedback> getFeedbacks(Feedback feedback) throws Exception {
         try {
-            return getSqlSession().selectList("Feedback.selectFeedbacks", user);
+            return getSqlSession().selectList("Feedback.selectFeedbacksForSurveyAndUser", feedback);
+        } catch (Exception exception){
+            LOGGER.error("Database Exception :{}", exception.getMessage());
+            throw new DatabaseException(exception.getMessage());
+        }
+    }
+
+    public List<Feedback> getFeedbacksForSurvey(Feedback feedback) throws Exception {
+        try{
+            return getSqlSession().selectList("Feedback.selectFeedbacksForSurvey", feedback);
         } catch (Exception exception){
             LOGGER.error("Database Exception :{}", exception.getMessage());
             throw new DatabaseException(exception.getMessage());

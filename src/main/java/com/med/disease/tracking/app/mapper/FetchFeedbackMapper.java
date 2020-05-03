@@ -1,9 +1,11 @@
 package com.med.disease.tracking.app.mapper;
 
 import com.med.disease.tracking.app.dto.FeedbackDTO;
-import com.med.disease.tracking.app.dto.request.UserRequestDTO;
+import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
 import com.med.disease.tracking.app.model.Feedback;
+import com.med.disease.tracking.app.model.Survey;
+import com.med.disease.tracking.app.model.SurveyQuestion;
 import com.med.disease.tracking.app.model.User;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +18,16 @@ public class FetchFeedbackMapper extends Mapper{
 
     @Override
     protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {
-        UserRequestDTO userRequestDTO = (UserRequestDTO)objectToMap;
+        FetchFeedbackRequestDTO fetchFeedbackRequestDTO = (FetchFeedbackRequestDTO)objectToMap;
+        Feedback feedback = new Feedback();
         User user = new User();
-        user.setUserId(userRequestDTO.getUserId());
+        user.setUserId(fetchFeedbackRequestDTO.getUserId());
+        Survey survey = new Survey();
+        survey.setSurveyId(fetchFeedbackRequestDTO.getSurveyId());
+        SurveyQuestion surveyQuestion = new SurveyQuestion();
+        surveyQuestion.setSurvey(survey);
+        feedback.setUser(user);
+        feedback.setSurveyQuestion(surveyQuestion);
         return user;
     }
 
@@ -30,7 +39,7 @@ public class FetchFeedbackMapper extends Mapper{
             feedbackDTO.setUserId(feedbackList.stream().findFirst().get().getUser().getUserId());
             feedbackDTO.setFeedbacks(feedbackList.stream().map(feedback -> {
                 FeedbackResponseDTO feedbackResponseDTO = new FeedbackResponseDTO();
-                feedbackResponseDTO.setQuestion(feedback.getQuestion().getQuestion());
+                feedbackResponseDTO.setQuestion(feedback.getSurveyQuestion().getQuestion().getQuestion());
                 feedbackResponseDTO.setRisk(feedback.getOption().getRisk());
                 if(feedback.getOption().getType().equalsIgnoreCase("text"))
                     feedbackResponseDTO.setAnswer(feedback.getValue());
