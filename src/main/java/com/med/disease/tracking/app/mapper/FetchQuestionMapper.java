@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.med.disease.tracking.app.dto.QuestionDTO;
-import com.med.disease.tracking.app.dto.QuestionRequestDTO;
+import com.med.disease.tracking.app.dto.request.QuestionRequestDTO;
 import com.med.disease.tracking.app.model.Question;
 
 @Component

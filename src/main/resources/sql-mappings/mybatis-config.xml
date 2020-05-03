@@ -3,10 +3,16 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="Question" type="com.med.disease.tracking.app.model.Question" />
+		<typeAlias alias="Survey" type="com.med.disease.tracking.app.model.Survey" />
+		<typeAlias alias="Feedback" type="com.med.disease.tracking.app.model.Feedback" />
+		<typeAlias alias="User" type="com.med.disease.tracking.app.model.User" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sql-mappings/question/Questionaries-ResultMappings.xml" />
 		<mapper resource="sql-mappings/question/Questionaries-SqlQueries.xml" />
 		<mapper resource="sql-mappings/question/Questionaries.xml" />
+		<mapper resource="sql-mappings/feedback/Feedback.xml"/>
+		<mapper resource="sql-mappings/feedback/Feedback-SqlQueries.xml"/>
+		<mapper resource="sql-mappings/feedback/Feedback-ResultMappings.xml"/>
 	</mappers>
 </configuration>

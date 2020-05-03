@@ -25,7 +25,6 @@ public class UserDTO {
 
 	private Date createdDtm;
 
-
 	public Date getCreatedDtm() {
 		return createdDtm;
 	}
@@ -59,8 +58,6 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	
 
 	public String getUid() {
 		return uid;
@@ -110,13 +107,11 @@ public class UserDTO {
 		this.token = token;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "UserDTO [userName=" + userName + ", uid=" + uid + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role
-				+ ", workLocation=" + workLocation + "]";
+		return "UserDTO [userName=" + userName + ", uid=" + uid + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role + ", workLocation="
+				+ workLocation + "]";
 	}
 
 	public boolean isEnabled() {

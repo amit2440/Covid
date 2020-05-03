@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "Feedback">
+	<insert id="insertFeedback" parameterType="Feedback">
+		INSERT into feedback (<include refid="Feedback-SqlQueries.InsertForSubmitFeedback"/>)
+		VALUES(#{user.userId}, #{surveyOption.ssqId}, #{option.optionId}, #{value})
+	</insert>
+	<select id ="selectFeedbacksForSurveyAndUser" parameterType="Feedback" resultMap="Feedback-ResultMappings.ResultForGetFeedbackForSurveyAndUser">
+		SELECT f.user_id, f.value, q.question, o.display_name, o.risk, o.type
+		FROM covid.feedback f
+		JOIN covid.question q
+		ON f.question_id = q.question_id
+		JOIN covid.option o
+		ON f.option_id = o.option_id
+		JOIN covid.user u
+		WHERE f.user_id = #{userId} and u.is_active=1
+	</select>
+	<select id ="selectFeedbacksForSurvey" parameterType="Feedback" resultMap="Feedback-ResultMappings.ResultForGetFeedbackForSurvey">
+		SELECT f.value, q.question, o.display_name, o.risk, o.type, qa.set_id
+		FROM covid.feedback f
+		JOIN covid.question q
+		ON f.question_id = q.question_id
+		JOIN covid.option o
+		ON f.option_id = o.option_id
+		JOIN covid.user u
+		WHERE f.user_id = #{userId} and u.is_active=1
+	</select>
+</mapper>

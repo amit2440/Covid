@@ -1,5 +1,6 @@
 package com.med.disease.tracking.app.dao;
 
+import com.med.disease.tracking.app.model.Survey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,33 @@ public class QuestionaryDAO extends BaseDAO {
 	public Question getQuestion(Question question) throws DatabaseException {
 		try {
 			return getSqlSession().selectOne("Questionaries.getQuestionInfo", question);
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
+		}
+	}
+	
+	public Survey getSurvey(Survey survey) throws DatabaseException {
+		try {
+			return getSqlSession().selectOne("Questionaries.getSurveyInfo", survey);
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
+		}
+	}
+	
+	public int submitSurvey(Survey survey) throws DatabaseException {
+		try {
+			return getSqlSession().insert("Questionaries.submitSurvey", survey);
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
+		}
+	}
+	
+	public int updateSurvey(Survey survey) throws DatabaseException {
+		try {
+			return getSqlSession().insert("Questionaries.updateSurvey", survey);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());

@@ -8,4 +8,11 @@
 		QUESTION,
 		CONTROL
 	</sql>
+	
+	<sql id="SelectForGetSurvey">
+		SURVEY_ID,
+		CREATED,
+		DESCRIPTION,
+		IS_ACTIVE
+	</sql>
 </mapper>

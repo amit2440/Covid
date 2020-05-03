@@ -4,19 +4,19 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.med.disease.tracking.app.constant.Constant;
-import com.med.disease.tracking.app.dto.request.QuestionRequestDTO;
+import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.util.ValidationUtil;
 
-public class FetchQuestionValidator implements Validator{
+public class SubmitSurveyValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return QuestionRequestDTO.class.equals(clazz);
+		return SurveyRequestDTO.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		QuestionRequestDTO requestDTO = (QuestionRequestDTO) target;
-		ValidationUtil.validateFieldRequired(Constant.Field.QUESTION_ID, requestDTO.getQuestionId(), errors);
+		SurveyRequestDTO requestDTO = (SurveyRequestDTO) target;
+		ValidationUtil.validateFieldRequired(Constant.Field.DESCRIPTION, requestDTO.getDescription(), errors);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class User {
 	private String userName;
-	private String uid;
+	private Integer userId;
 	private String password;
 	private boolean enabled;
 	private String firstName;
@@ -24,7 +24,6 @@ public class User {
 	}
 
 	private Date createdDtm;
-
 
 	public Date getCreatedDtm() {
 		return createdDtm;
@@ -58,16 +57,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	
-
-	public String getUid() {
-		return uid;
-	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
 	}
 
 	public String getFirstName() {
@@ -109,16 +98,6 @@ public class User {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-	
-
-	@Override
-	public String toString() {
-		return "User [userName=" + userName + ", uid=" + uid + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role
-				+ ", workLocation=" + workLocation + "]";
-	}
-
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -134,5 +113,18 @@ public class User {
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
+	public Integer getUserId() {
+		return userId;
+	}
 
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", userid=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role + ", workLocation="
+				+ workLocation + "]";
+	}
 }
