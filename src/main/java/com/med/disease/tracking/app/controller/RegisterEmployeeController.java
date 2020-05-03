@@ -1,12 +1,6 @@
 package com.med.disease.tracking.app.controller;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.BeanFactory;
@@ -15,17 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
-import com.med.disease.tracking.app.model.User;
 import com.med.disease.tracking.app.service.impl.RegisterEmployeeServiceImpl;
 
 @RestController
@@ -43,8 +33,9 @@ public class RegisterEmployeeController {
 	@RequestMapping(path = "/reguser/uploadFile", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<?> uploadData(@RequestParam("file") MultipartFile file,BindingResult bindingResult) throws Exception {
-		
+//	public ResponseEntity<?> uploadData(@RequestParam("file") MultipartFile file,BindingResult bindingResult) throws Exception {
+	public ResponseEntity<?> uploadData(@RequestBody MultipartFile file) throws Exception {
+			
 		if (file == null) {
 			String test = "Data Upload Fail. Please select Data file to upload data..";
 			return new ResponseEntity<Object>(test, HttpStatus.OK);
@@ -68,7 +59,7 @@ public class RegisterEmployeeController {
 		}
 		
 		return (ResponseEntity<?>) beanFactory.getBean(UserRegistrationHandler.class)
-				.processCvsRequest(inputStream, bindingResult);
+				.processCvsRequest(inputStream, null);
 		
 	}
 	

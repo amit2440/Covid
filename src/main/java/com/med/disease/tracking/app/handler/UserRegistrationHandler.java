@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.context.annotation.RequestScope;
@@ -72,6 +73,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 	public final Object processCvsRequest(InputStream inputStream, BindingResult bindingResult) throws Exception {
 		String successMsg = "";
 		List<String> failUploadList = null;
+		
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
 			int i = 0;
 			while (reader.ready()) {
@@ -82,7 +84,9 @@ public class UserRegistrationHandler extends RestControllerHandler {
 					if (!"".equals(line)) {
 
 						UserDTO user = this.getUSerObject(line);
-
+						if(bindingResult==null) {
+							bindingResult = new BeanPropertyBindingResult(user, "");
+						}
 						Object object = this.handle(user, bindingResult);
 						if (object == null) {
 							if (failUploadList == null) {
@@ -91,8 +95,8 @@ public class UserRegistrationHandler extends RestControllerHandler {
 							failUploadList.add("Error is data ---> \n" + line);
 						}
 
-						logger.info(line);
-						int res = registerEmployeeService.registerEmployee(user);
+//						logger.info(line);
+//						int res = registerEmployeeService.registerEmployee(user);
 
 					}
 				}
@@ -107,9 +111,8 @@ public class UserRegistrationHandler extends RestControllerHandler {
 			e.printStackTrace();
 		}
 
-		return null;// ObjectUtils.isEmpty(res) ? new ResponseEntity<EmptyResponseDTO>(new
-					// EmptyResponseDTO(), HttpStatus.OK)
-		// : new ResponseEntity<String>(successMsg, HttpStatus.OK);
+		return  ObjectUtils.isEmpty(failUploadList) ?  new ResponseEntity<String>(successMsg, HttpStatus.OK)
+		 :new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.OK);
 	}
 
 	

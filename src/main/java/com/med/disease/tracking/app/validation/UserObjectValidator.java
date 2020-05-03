@@ -41,7 +41,7 @@ public class UserObjectValidator implements Validator {
 		ValidationUtil.validateFieldRequired(Constant.Field.ROLE, userDTO.getRole(), errors);
 		ValidationUtil.simpleStringValidation(Constant.Field.ROLE, userDTO.getRole(), errors);
 		if(!userDTO.getRole().isEmpty()) {
-			if(!userDTO.getRole().equals("USER") && !userDTO.getRole().equals("AdMIN")) {
+			if(!userDTO.getRole().equals("USER") && !userDTO.getRole().equals("ADMIN")) {
 				errors.rejectValue(Constant.Field.ROLE, "role.error", new Object[] { Constant.Field.ROLE }, null);
 			}
 		}
