@@ -13,13 +13,13 @@ public class Survey {
 	private Boolean isActive;
 	
 	/**
-	 * @return the setId
+	 * @return the surveyId
 	 */
 	public Integer getSurveyId() {
 		return surveyId;
 	}
 	/**
-	 * @param surveyId the setId to set
+	 * @param surveyId the surveyId to set
 	 */
 	public void setSurveyId(Integer surveyId) {
 		this.surveyId = surveyId;

@@ -8,7 +8,7 @@
 	</resultMap>
 
 	<resultMap id="ResultForGetFeedbackForSurvey" type="Feedback" extends="ResultForGetFeedback">
-		<result property="set.setId" column="USER_ID"/>
+		<result property="set.surveyId" column="SURVEY_ID"/>
 	</resultMap>
 
 	<resultMap id ="ResultForGetFeedback" type="Feedback">

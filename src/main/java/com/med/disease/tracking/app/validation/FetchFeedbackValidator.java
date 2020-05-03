@@ -1,10 +1,11 @@
 package com.med.disease.tracking.app.validation;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.util.ValidationUtil;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 public class FetchFeedbackValidator implements Validator {
 
@@ -17,6 +18,6 @@ public class FetchFeedbackValidator implements Validator {
     public void validate(Object target, Errors errors) {
         FetchFeedbackRequestDTO fetchFeedbackRequestDTO = (FetchFeedbackRequestDTO) target;
         ValidationUtil.validateFieldRequired(Constant.Field.USER_ID, fetchFeedbackRequestDTO.getUserId(), errors);
-        ValidationUtil.validateFieldRequired(Constant.Field.QUESTION_SET_ID, fetchFeedbackRequestDTO.getSurveyId(), errors);
+        ValidationUtil.validateFieldRequired(Constant.Field.SURVEY_ID, fetchFeedbackRequestDTO.getSurveyId(), errors);
     }
 }

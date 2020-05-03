@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 
 @Component
-public class UpdateQuestionSetMapper extends Mapper {
+public class UpdateSurveyMapper extends Mapper {
 
 	@Override
 	protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {

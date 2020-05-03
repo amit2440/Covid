@@ -9,8 +9,8 @@
 		<result property="control" column="CONTROL"/>
 	</resultMap>
 	
-	<resultMap id="ResultForGetQuestionSurvey" type="Survey">
-		<result property="setId" column="SET_ID"/>
+	<resultMap id="ResultForGetSurvey" type="Survey">
+		<result property="surveyId" column="SURVEY_ID"/>
 		<result property="created" column="CREATED"/>
 		<result property="description" column="DESCRIPTION"/>
 		<result property="isActive" column="IS_ACTIVE"/>
