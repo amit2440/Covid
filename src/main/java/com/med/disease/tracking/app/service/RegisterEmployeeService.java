@@ -7,5 +7,7 @@ public interface RegisterEmployeeService {
 	public int registerEmployee(UserDTO user);
 
 	public int registerEmpFormCSV(String line);
+	
+	public int updateUserOTP(String mobile,String otp);
 
 }

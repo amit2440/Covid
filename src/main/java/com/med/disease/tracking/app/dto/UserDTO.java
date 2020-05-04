@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class UserDTO {
 	private String userName;
-	private String uid;
+//	private String uid;
+	private Integer userId;
 	private String password;
 	private boolean enabled;
 	private String firstName;
@@ -59,13 +60,13 @@ public class UserDTO {
 		this.password = password;
 	}
 
-	public String getUid() {
-		return uid;
-	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
+//	public String getUid() {
+//		return uid;
+//	}
+//
+//	public void setUid(String uid) {
+//		this.uid = uid;
+//	}
 
 	public String getFirstName() {
 		return firstName;
@@ -109,9 +110,17 @@ public class UserDTO {
 
 	@Override
 	public String toString() {
-		return "UserDTO [userName=" + userName + ", uid=" + uid + ", firstName=" + firstName + ", lastName=" + lastName
+		return "UserDTO [userName=" + userName + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role + ", workLocation="
 				+ workLocation + "]";
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public boolean isEnabled() {
