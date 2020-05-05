@@ -2,7 +2,7 @@ package com.med.disease.tracking.app.handler;
 
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
-import com.med.disease.tracking.app.dto.FeedbackForSetDTO;
+import com.med.disease.tracking.app.dto.FeedbackForSurveyDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.service.FeedbackService;
 import com.med.disease.tracking.app.util.ErrorUtil;
@@ -18,7 +18,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 @RequestScope
 @Component
-public class FetchFeedbackForSetHandler extends RestControllerHandler{
+public class FetchSurveyFeedbackHandler extends RestControllerHandler{
 
     private  FetchFeedbackRequestDTO fetchFeedbackRequestDTO;
 
@@ -33,16 +33,16 @@ public class FetchFeedbackForSetHandler extends RestControllerHandler{
 
     @Override
     protected void validateRequest() {
-        Validator validator = new FetchFeedbackForSetValidator();
-        validator.validate(fetchFeedbackRequestDTO, bindingResult);
-        ErrorUtil.processError(bindingResult, Constant.Module.FEEDBACK_FETCH);
+        //Validator validator = new FetchFeedbackForSetValidator();
+       // validator.validate(fetchFeedbackRequestDTO, bindingResult);
+       // ErrorUtil.processError(bindingResult, Constant.Module.FEEDBACK_FETCH);
     }
 
     @Override
     protected Object processRequest() throws Exception {
-        FeedbackForSetDTO feedbackForSetDTO = feedbackService.fetchFeedbacksForSurvey(fetchFeedbackRequestDTO);
-        return ObjectUtils.isEmpty(feedbackForSetDTO) ?
+        FeedbackForSurveyDTO feedbackForSurveyDTO = feedbackService.fetchFeedbacksForSurvey(fetchFeedbackRequestDTO);
+        return ObjectUtils.isEmpty(feedbackForSurveyDTO) ?
                 new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NOT_FOUND):
-                new ResponseEntity<FeedbackForSetDTO>(feedbackForSetDTO, HttpStatus.OK);
+                new ResponseEntity<FeedbackForSurveyDTO>(feedbackForSurveyDTO, HttpStatus.OK);
     }
 }

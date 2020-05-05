@@ -6,7 +6,7 @@ import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
 import java.util.List;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class FeedbackForSetDTO {
+public class FeedbackForSurveyDTO {
 
     private Integer surveyId;
     private List<FeedbackResponseDTO> feedbacks;
