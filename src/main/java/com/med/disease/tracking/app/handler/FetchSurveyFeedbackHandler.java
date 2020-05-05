@@ -18,7 +18,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 @RequestScope
 @Component
-public class FetchFeedbackForSurveyHandler extends RestControllerHandler{
+public class FetchSurveyFeedbackHandler extends RestControllerHandler{
 
     private  FetchFeedbackRequestDTO fetchFeedbackRequestDTO;
 

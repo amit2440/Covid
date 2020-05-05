@@ -2,7 +2,7 @@ package com.med.disease.tracking.app.controller;
 
 import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
-import com.med.disease.tracking.app.handler.FetchFeedbackForSurveyHandler;
+import com.med.disease.tracking.app.handler.FetchSurveyFeedbackHandler;
 import com.med.disease.tracking.app.handler.FetchFeedbackHandler;
 import com.med.disease.tracking.app.handler.SubmitFeedbackHandler;
 import org.springframework.beans.factory.BeanFactory;
@@ -39,7 +39,7 @@ public class FeedbackController {
     @GetMapping(value = "/admin/feedbacks/survey/{surveyId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> fetchAllFeedback(@ModelAttribute FetchFeedbackRequestDTO fetchFeedbackRequestDTO,
                                               BindingResult bindingResult) throws Exception{
-        return (ResponseEntity<?>) beanFactory.getBean(FetchFeedbackForSurveyHandler.class)
+        return (ResponseEntity<?>) beanFactory.getBean(FetchSurveyFeedbackHandler.class)
                 .handle(fetchFeedbackRequestDTO, bindingResult);
     }
 }
