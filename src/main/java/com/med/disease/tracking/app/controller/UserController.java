@@ -113,6 +113,12 @@ public class UserController {
 		logger.info("INSIDE GENERATE OTP METHOD");
 		String resultString ="OTP is sent to given mobile number, Please enter Otp to proceed further";
 		
+		logger.info("Verifying moobile with our repository..... please wait...");
+		
+		if(!registerEmployeeService.verifyMobile(loginRequest.getMobile())) {
+			return ResponseEntity.ok("Not able to send OPT as mobile number is not matching with our records. Please enter valid mobile number !");
+		}
+//		String otpCode = "";
 		String otpCode = OTPUtil.sendOtp(loginRequest.getMobile());
 		logger.info("GENERATED OTO is -----> "+otpCode);
 		
