@@ -17,47 +17,51 @@ import com.med.disease.tracking.app.model.User;
 @Mapper
 public interface IUserRepository {
 	@Results({
-		@Result(property = "uid", column = "uid"),
-		@Result(property = "userName", column = "username"),
-		@Result(property = "password", column = "password"),
-		@Result(property = "enabled" ,column = "enabled"),
+//		@Result(property = "uid", column = "uid"),
+//		@Result(property = "userName", column = "username"),
+		@Result(property = "userId", column = "user_id"),
+//		@Result(property = "password", column = "password"),
+		@Result(property = "enabled" ,column = "is_active"),
 		@Result(property = "firstName", column = "first_name"),
 		@Result(property = "lastName", column = "last_name"),
-		@Result(property = "middleName", column = "middle_name"),
+//		@Result(property = "middleName", column = "middle_name"),
 		@Result(property = "mobile", column = "mobile"),
 		@Result(property = "role", column = "role"),
 		@Result(property = "workLocation", column = "work_location")
       })
-	@Select("select username,uid,password,enabled,first_name,last_name,middle_name,mobile,role,work_location from users")
+//	@Select("select user_id,uid,password,enabled,first_name,last_name,middle_name,mobile,role,work_location from users")
+	@Select("select user_id,is_active,first_name,last_name,mobile,role,work_location from user")
 	public List<UserDTO> findAll();
 
 	@Results({
-		@Result(property = "uid", column = "uid"),
-		@Result(property = "userName", column = "username"),
-		@Result(property = "password", column = "password"),
-		@Result(property = "enabled" ,column = "enabled"),
+//		@Result(property = "uid", column = "uid"),
+//		@Result(property = "userName", column = "username"),
+		@Result(property = "userId", column = "user_id"),
+//		@Result(property = "password", column = "password"),
+		@Result(property = "enabled" ,column = "is_active"),
 		@Result(property = "firstName", column = "first_name"),
 		@Result(property = "lastName", column = "last_name"),
-		@Result(property = "middleName", column = "middle_name"),
+//		@Result(property = "middleName", column = "middle_name"),
 		@Result(property = "mobile", column = "mobile"),
 		@Result(property = "role", column = "role"),
 		@Result(property = "workLocation", column = "work_location")
+     
       })
 	
-	@Select("SELECT  username,uid,password,enabled,first_name,last_name,middle_name,mobile,role,work_location FROM users WHERE username = #{userName}")
+	@Select("select user_id,is_active,first_name,last_name,mobile,token,role,work_location from user WHERE mobile = #{userName}")
 	public Optional<UserDTO> findByUserName(String userName);
 
-	@Delete("DELETE FROM users WHERE username = #{userName}")
+	@Delete("DELETE FROM user WHERE mobile = #{userName}")
 	public int delete(String userName);
 
-	@Insert("INSERT INTO users(username, password, enabled) VALUES (#{userName}, #{password}, #{enabled})")
+	@Insert("INSERT INTO user(mobile,first_name,Last_name) VALUES (#{mobile}, #{firstName}, #{lastName})")
 	public int insert(UserDTO user);
 
-	@Update("Update users set password=#{password}, enabled=#{enabled} where userName=#{userName}")
+	@Update("Update users set token=#{token}, is_active=#{enabled} where mobile=#{mobile}")
 	public int update(UserDTO user);
 
-	@Insert("INSERT INTO users(username,uid,password,enabled,first_name,last_name,middle_name,mobile,token,created_dtm,role,work_location) "
-			+ "VALUES (#{userName},#{uid},#{password},#{enabled},#{firstName},#{lastName},#{middleName},#{mobile},#{token},#{createdDtm},#{role},#{workLocation})")
+	@Insert("INSERT INTO user(is_active,first_name,last_name,mobile,token,role,work_location) "
+			+ "VALUES (#{enabled},#{firstName},#{lastName},#{mobile},#{token},#{role},#{workLocation})")
 	public int insertEmployee(UserDTO user);
 	
 }
