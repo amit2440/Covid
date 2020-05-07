@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.med.disease.tracking.app.config.jwt.JwtUtils;
 import com.med.disease.tracking.app.dto.UserDTO;
+import com.med.disease.tracking.app.handler.UserInfoHandler;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
 import com.med.disease.tracking.app.model.request.LoginRequest;
 import com.med.disease.tracking.app.model.response.JwtResponse;
@@ -63,26 +68,17 @@ public class UserController {
 		return "static page display - welcome";
 	}
 	
-	@GetMapping("/user/{userId}")
-	public String user() {
-		return "welcome user";
+	@GetMapping("/admin/user")
+	public ResponseEntity<?> user(@RequestBody UserDTO userDTO,BindingResult bindingResult) throws BeansException, Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
+				.handle(userDTO, bindingResult,"search");
 	}
 
-	@GetMapping("/admin")
-	public String admin() {
-		return "welcome admin";
+	@PutMapping("/updateUser")
+	public ResponseEntity<?> updateUSer(@RequestBody UserDTO userDTO,BindingResult bindingResult) throws BeansException, Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
+				.handle(userDTO, bindingResult,"update");
 	}
-	
-	@GetMapping("/user")
-	public List<UserDTO> getUsers(){
-		return userRepository.findAll();
-	}
-
-	@PostMapping("/user")
-	public void insertUser(){
-		userRepository.insert(new UserDTO("sunil", "saibol", true));
-	}
-	
 	
 	
 	@PostMapping("/signin")
@@ -122,7 +118,7 @@ public class UserController {
 		String otpCode = OTPUtil.sendOtp(loginRequest.getMobile());
 		logger.info("GENERATED OTO is -----> "+otpCode);
 		
-		if("".equals(otpCode) && !otpCode.equals("0")){
+		if(!"".equals(otpCode) && !otpCode.equals("0")){
 			//save otp to DB
 			int res = registerEmployeeService.updateUserOTP(loginRequest.getMobile(), otpCode);
 			
@@ -178,4 +174,11 @@ public class UserController {
 				null);
 	}
 	
+	
+	
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<?> getUser(@RequestBody  UserDTO userDTO,BindingResult bindingResult) throws Exception{
+		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
+				.handle(userDTO, bindingResult,"userIDSearch");
+	}
 }

@@ -12,6 +12,8 @@ public interface Constant {
 		String REGISTER_USER = "User Registration";
 		String SUBMIT_FEEDBACK = "Submit Feedback";
 		String FEEDBACK_FETCH = "Fetch Feedback";
+		String USER_INFO = "User Information";
+		
 	}
 
 	public interface Field {

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import com.med.disease.tracking.app.dto.UserDTO;
@@ -57,11 +58,27 @@ public interface IUserRepository {
 	@Insert("INSERT INTO user(mobile,first_name,Last_name) VALUES (#{mobile}, #{firstName}, #{lastName})")
 	public int insert(UserDTO user);
 
-	@Update("Update users set token=#{token}, is_active=#{enabled} where mobile=#{mobile}")
+	@Update("Update user set token=#{token}, is_active=#{enabled} where mobile=#{mobile}")
 	public int update(UserDTO user);
 
 	@Insert("INSERT INTO user(is_active,first_name,last_name,mobile,token,role,work_location) "
 			+ "VALUES (#{enabled},#{firstName},#{lastName},#{mobile},#{token},#{role},#{workLocation})")
 	public int insertEmployee(UserDTO user);
 	
+	@Results({
+//		@Result(property = "uid", column = "uid"),
+//		@Result(property = "userName", column = "username"),
+		@Result(property = "userId", column = "user_id"),
+//		@Result(property = "password", column = "password"),
+		@Result(property = "enabled" ,column = "is_active"),
+		@Result(property = "firstName", column = "first_name"),
+		@Result(property = "lastName", column = "last_name"),
+//		@Result(property = "middleName", column = "middle_name"),
+		@Result(property = "mobile", column = "mobile"),
+		@Result(property = "role", column = "role"),
+		@Result(property = "workLocation", column = "work_location")
+     
+      })
+	@SelectProvider(UserSqlProvider.class)
+	public List<UserDTO> getUsersByName(UserDTO userDTO);
 }
