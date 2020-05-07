@@ -51,7 +51,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 		// TODO Auto-generated method stub
 		Validator validator = new UserObjectValidator();
 		validator.validate(userDTO, bindingResult);
-		ErrorUtil.processError(bindingResult, Constant.Module.QUESTION_FETCH);
+		ErrorUtil.processError(bindingResult, Constant.Module.REGISTER_USER);
 	}
 
 	@Override
