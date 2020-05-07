@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "UserInfo">
+	
+	<select id ="searchUser" parameterType="User" resultMap="UserInfo-ResultMappings.ResultForSearchUser">
+		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role
+		FROM user u
+		WHERE 1=1  
+			<if test="mobile != null and mobile != ''">
+				and u.mobile = #{mobile}
+			</if>
+			<if test="firstName != null and firstName != ''">
+			<bind name="pattern" value="'%' + firstName + '%'" />
+				and u.first_name like  #{pattern}
+			</if>
+			<if test="lastName != null and lastName != ''">
+			<bind name="lpattern" value="'%' + lastName + '%'" />
+				and u.last_name like  #{lpattern}
+			</if>
+			ORDER BY u.user_id ASC;
+	</select>
+	
+	<select id ="searchUserByuserId" parameterType="User" resultMap="UserInfo-ResultMappings.ResultForSearchUser">
+		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role
+		FROM user u
+		WHERE u.user_id=#{userId} ;
+			
+	</select>
+	
+	<insert id="updateUser" parameterType="User">
+		UPDATE user
+		SET 
+			user_id = #{userId}
+			<if test="firstName != null and firstName != ''">
+				,first_name = #{firstName}
+			</if>
+			<if test="lastName != null and lastName != ''">
+				,last_name = #{lastName}
+			</if>
+			<if test="workLocation != null and workLocation != ''">
+				,work_location = #{workLocation}
+			</if>
+			<if test="role != null and role != ''">
+				,role = #{role}
+			</if>
+		WHERE 
+		user_id = #{userId}
+	</insert>
+	
+</mapper>

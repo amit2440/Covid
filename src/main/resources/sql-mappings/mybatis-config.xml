@@ -14,5 +14,10 @@
 		<mapper resource="sql-mappings/feedback/Feedback.xml"/>
 		<mapper resource="sql-mappings/feedback/Feedback-SqlQueries.xml"/>
 		<mapper resource="sql-mappings/feedback/Feedback-ResultMappings.xml"/>
+
+	<!-- UserInfo -->
+		<mapper resource="sql-mappings/userInfo/UserInfo.xml"/>
+		<mapper resource="sql-mappings/userInfo/UserInfo-SqlQueries.xml"/>
+		<mapper resource="sql-mappings/userInfo/UserInfo-ResultMappings.xml"/>
 	</mappers>
 </configuration>
