@@ -2,10 +2,10 @@ package com.med.disease.tracking.app.mapper;
 
 import java.util.Map;
 
-import com.med.disease.tracking.app.model.Survey;
 import org.springframework.stereotype.Component;
 
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
+import com.med.disease.tracking.app.model.Survey;
 
 @Component
 public class SubmitSurveyMapper extends Mapper {

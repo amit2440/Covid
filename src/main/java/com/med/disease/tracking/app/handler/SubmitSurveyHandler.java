@@ -10,7 +10,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
-import com.med.disease.tracking.app.service.QuestionaryService;
+import com.med.disease.tracking.app.service.SurveyService;
 import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.validation.SubmitSurveyValidator;
 
@@ -19,7 +19,7 @@ import com.med.disease.tracking.app.validation.SubmitSurveyValidator;
 public class SubmitSurveyHandler extends RestControllerHandler {
 
 	@Autowired
-	QuestionaryService questionaryService;
+	SurveyService surveyService;
 
 	private SurveyRequestDTO requestDTO;
 
@@ -37,7 +37,7 @@ public class SubmitSurveyHandler extends RestControllerHandler {
 
 	@Override
 	protected Object processRequest() throws Exception {
-		questionaryService.submitSurvey(requestDTO);
+		surveyService.submitSurvey(requestDTO);
 		return new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.CREATED);
 	}
 }

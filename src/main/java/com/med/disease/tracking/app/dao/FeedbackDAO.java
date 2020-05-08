@@ -1,13 +1,13 @@
 package com.med.disease.tracking.app.dao;
 
-import com.med.disease.tracking.app.exception.DatabaseException;
-import com.med.disease.tracking.app.model.Feedback;
-import com.med.disease.tracking.app.model.User;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.med.disease.tracking.app.exception.DatabaseException;
+import com.med.disease.tracking.app.model.Feedback;
 
 @Repository
 public class FeedbackDAO extends BaseDAO {

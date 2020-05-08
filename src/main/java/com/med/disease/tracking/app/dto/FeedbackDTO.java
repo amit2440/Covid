@@ -1,9 +1,9 @@
 package com.med.disease.tracking.app.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
-
-import java.util.List;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class FeedbackDTO {

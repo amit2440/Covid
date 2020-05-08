@@ -1,11 +1,17 @@
 package com.med.disease.tracking.app.mapper;
 
-import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
-import com.med.disease.tracking.app.model.*;
-import org.springframework.stereotype.Component;
-
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
+import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
+import com.med.disease.tracking.app.model.Feedback;
+import com.med.disease.tracking.app.model.Option;
+import com.med.disease.tracking.app.model.Question;
+import com.med.disease.tracking.app.model.Survey;
+import com.med.disease.tracking.app.model.SurveyQuestion;
+import com.med.disease.tracking.app.model.User;
 
 @Component
 public class SubmitFeedbackMapper extends Mapper {

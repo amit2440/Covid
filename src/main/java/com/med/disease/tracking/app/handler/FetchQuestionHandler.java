@@ -13,7 +13,7 @@ import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.QuestionDTO;
 import com.med.disease.tracking.app.dto.request.QuestionRequestDTO;
-import com.med.disease.tracking.app.service.QuestionaryService;
+import com.med.disease.tracking.app.service.QuestionService;
 import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.validation.FetchQuestionValidator;
 
@@ -22,7 +22,7 @@ import com.med.disease.tracking.app.validation.FetchQuestionValidator;
 public class FetchQuestionHandler extends RestControllerHandler {
 
 	@Autowired
-	QuestionaryService questionaryService;
+	QuestionService questionService;
 	
 	private QuestionRequestDTO requestDTO;
 
@@ -41,7 +41,7 @@ public class FetchQuestionHandler extends RestControllerHandler {
 
 	@Override
 	protected Object processRequest() throws Exception {
-		QuestionDTO questionDTO = questionaryService.getQuestion(requestDTO);
+		QuestionDTO questionDTO = questionService.getQuestion(requestDTO);
 		return ObjectUtils.isEmpty(questionDTO)
 				? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.OK)
 				: new ResponseEntity<QuestionDTO>(questionDTO, HttpStatus.OK);

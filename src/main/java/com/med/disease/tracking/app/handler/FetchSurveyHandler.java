@@ -12,7 +12,7 @@ import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.SurveyDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
-import com.med.disease.tracking.app.service.QuestionaryService;
+import com.med.disease.tracking.app.service.SurveyService;
 import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.validation.FetchSurveyValidator;
 
@@ -21,7 +21,7 @@ import com.med.disease.tracking.app.validation.FetchSurveyValidator;
 public class FetchSurveyHandler extends RestControllerHandler {
 
 	@Autowired
-	QuestionaryService questionaryService;
+	SurveyService surveyService;
 	
 	private SurveyRequestDTO requestDTO;
 
@@ -39,7 +39,7 @@ public class FetchSurveyHandler extends RestControllerHandler {
 
 	@Override
 	protected Object processRequest() throws Exception {
-		SurveyDTO setDTO = questionaryService.getSurvey(requestDTO);
+		SurveyDTO setDTO = surveyService.getSurvey(requestDTO);
 		return ObjectUtils.isEmpty(setDTO)
 				? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.OK)
 				: new ResponseEntity<SurveyDTO>(setDTO, HttpStatus.OK);

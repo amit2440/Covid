@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.med.disease.tracking.app.dto.UserDTO;
-import com.med.disease.tracking.app.model.User;
 import com.med.disease.tracking.app.repository.IUserRepository;
 
 @Service
