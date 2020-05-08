@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.exception.DatabaseException;
 import com.med.disease.tracking.app.model.User;
 

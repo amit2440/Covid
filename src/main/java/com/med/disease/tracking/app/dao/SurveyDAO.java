@@ -1,48 +1,38 @@
 package com.med.disease.tracking.app.dao;
 
-import com.med.disease.tracking.app.model.Survey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.med.disease.tracking.app.exception.DatabaseException;
-import com.med.disease.tracking.app.model.Question;
+import com.med.disease.tracking.app.model.Survey;
 
 @Repository
-public class QuestionaryDAO extends BaseDAO {
+public class SurveyDAO extends BaseDAO {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(QuestionaryDAO.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SurveyDAO.class);
 
-	public Question getQuestion(Question question) throws DatabaseException {
-		try {
-			return getSqlSession().selectOne("Questionaries.getQuestionInfo", question);
-		} catch (Exception e) {
-			LOGGER.error("DatabaseException : {}", e.getMessage());
-			throw new DatabaseException(e.getMessage());
-		}
-	}
-	
 	public Survey getSurvey(Survey survey) throws DatabaseException {
 		try {
-			return getSqlSession().selectOne("Questionaries.getSurveyInfo", survey);
+			return getSqlSession().selectOne("Survey.getSurveyInfo", survey);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	public int submitSurvey(Survey survey) throws DatabaseException {
 		try {
-			return getSqlSession().insert("Questionaries.submitSurvey", survey);
+			return getSqlSession().insert("Survey.submitSurvey", survey);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	public int updateSurvey(Survey survey) throws DatabaseException {
 		try {
-			return getSqlSession().insert("Questionaries.updateSurvey", survey);
+			return getSqlSession().insert("Survey.updateSurvey", survey);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());

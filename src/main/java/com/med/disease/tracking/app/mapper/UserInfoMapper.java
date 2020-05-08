@@ -3,12 +3,10 @@ package com.med.disease.tracking.app.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
 import com.med.disease.tracking.app.dto.UserDTO;
-import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
 import com.med.disease.tracking.app.model.User;
 
 @Component

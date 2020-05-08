@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.med.disease.tracking.app.dto.UserDTO;
-import com.med.disease.tracking.app.model.User;
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
@@ -30,7 +29,7 @@ public class UserDetailsImpl implements UserDetails {
 	private Collection<? extends GrantedAuthority> authorities;
 
 //	public UserDetailsImpl(String uid, String username, String mobile, String password,]
-	public UserDetailsImpl( String username, String mobile, String password,
+	public UserDetailsImpl(String username, String mobile, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 //		this.uid = uid;
 		this.username = username;
@@ -46,16 +45,12 @@ public class UserDetailsImpl implements UserDetails {
 	public static UserDetailsImpl build(UserDTO user) {
 		Set<String> s = new HashSet<String>();
 		s.add(user.getRole());
-		List<GrantedAuthority> authorities = s.stream()
-				.map(role -> new SimpleGrantedAuthority(role))
+		List<GrantedAuthority> authorities = s.stream().map(role -> new SimpleGrantedAuthority(role))
 				.collect(Collectors.toList());
 
 		return new UserDetailsImpl(
 //				user.getUid(), 
-				user.getUserName(), 
-				user.getMobile(),
-				user.getToken(), 
-				authorities);
+				user.getUserName(), user.getMobile(), user.getToken(), authorities);
 	}
 
 	@Override
@@ -63,13 +58,10 @@ public class UserDetailsImpl implements UserDetails {
 		return authorities;
 	}
 
-	
 	@Override
 	public String getPassword() {
 		return password;
 	}
-
-	
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -109,8 +101,6 @@ public class UserDetailsImpl implements UserDetails {
 		this.uid = uid;
 	}
 
-	
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -127,5 +117,4 @@ public class UserDetailsImpl implements UserDetails {
 		this.password = password;
 	}
 
-	
 }

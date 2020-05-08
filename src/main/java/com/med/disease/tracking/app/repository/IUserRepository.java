@@ -13,7 +13,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import com.med.disease.tracking.app.dto.UserDTO;
-import com.med.disease.tracking.app.model.User;
 
 @Mapper
 public interface IUserRepository {

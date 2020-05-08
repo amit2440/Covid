@@ -2,9 +2,9 @@ package com.med.disease.tracking.app.mapper;
 
 import java.util.Map;
 
-import com.med.disease.tracking.app.dto.SurveyDTO;
 import org.springframework.stereotype.Component;
 
+import com.med.disease.tracking.app.dto.SurveyDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.model.Survey;
 

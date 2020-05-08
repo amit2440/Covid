@@ -2,17 +2,10 @@
 <!DOCTYPE mapper    
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "Questionaries-SqlQueries">
+<mapper namespace="Question-SqlQueries">
 	<sql id="SelectForGetQuestion">
 		QUESTION_ID,
 		QUESTION,
 		CONTROL
-	</sql>
-	
-	<sql id="SelectForGetSurvey">
-		SURVEY_ID,
-		CREATED,
-		DESCRIPTION,
-		IS_ACTIVE
 	</sql>
 </mapper>

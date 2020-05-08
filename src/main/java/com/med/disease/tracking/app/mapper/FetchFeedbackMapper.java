@@ -1,5 +1,11 @@
 package com.med.disease.tracking.app.mapper;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
 import com.med.disease.tracking.app.dto.FeedbackDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
@@ -7,11 +13,6 @@ import com.med.disease.tracking.app.model.Feedback;
 import com.med.disease.tracking.app.model.Survey;
 import com.med.disease.tracking.app.model.SurveyQuestion;
 import com.med.disease.tracking.app.model.User;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class FetchFeedbackMapper extends Mapper{

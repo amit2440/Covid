@@ -16,7 +16,6 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.UserDTO;
-import com.med.disease.tracking.app.service.RegisterEmployeeService;
 import com.med.disease.tracking.app.service.UserInfoService;
 import com.med.disease.tracking.app.service.impl.RegisterEmployeeServiceImpl;
 import com.med.disease.tracking.app.util.ErrorUtil;
