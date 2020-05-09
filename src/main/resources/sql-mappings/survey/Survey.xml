@@ -6,7 +6,7 @@
 	<select id="getSurveyInfo" parameterType="Survey"
 		resultMap="Survey-ResultMappings.ResultForGetSurvey">
 		SELECT
-		<include refid="Question-SqlQueries.SelectForGetSurvey" />
+		<include refid="Survey-SqlQueries.SelectForGetSurvey" />
 		FROM SURVEY
 		WHERE
 		SURVEY_ID = #{surveyId}

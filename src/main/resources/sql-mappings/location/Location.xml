@@ -10,13 +10,13 @@
         WHERE
         user_id = #{userId}
         ORDER BY
-        date_created desc
+        created desc
         LIMIT 1
     </select>
 
     <insert id="insertLocation" parameterType="Location">
         INSERT INTO
-        Location (area, longitude, latitude, user_id, date_created)
-        VALUES(#{area}, #{longitude}, #{latitude}, #{userId}, #{dateCreated})
+        Location (area, longitude, latitude, user_id, created)
+        VALUES(#{area}, #{longitude}, #{latitude}, #{userId}, #{created})
     </insert>
 </mapper>

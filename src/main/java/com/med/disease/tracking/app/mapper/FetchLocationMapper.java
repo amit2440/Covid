@@ -1,7 +1,7 @@
 package com.med.disease.tracking.app.mapper;
 
 import com.med.disease.tracking.app.dto.LocationDTO;
-import com.med.disease.tracking.app.dto.request.FetchLocationRequestDTO;
+import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
 import com.med.disease.tracking.app.model.Location;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -13,9 +13,9 @@ public class FetchLocationMapper extends Mapper{
 
     @Override
     protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {
-        FetchLocationRequestDTO fetchLocationRequestDTO = (FetchLocationRequestDTO) objectToMap;
+        LocationRequestDTO locationRequestDTO = (LocationRequestDTO) objectToMap;
         Location location = new Location();
-        location.setUserId(fetchLocationRequestDTO.getUserId());
+        location.setUserId(locationRequestDTO.getUserId());
         return location;
     }
 
@@ -26,6 +26,8 @@ public class FetchLocationMapper extends Mapper{
         Location location = (Location) objectToMap;
         LocationDTO locationDTO = new LocationDTO();
         locationDTO.setArea(location.getArea());
+        locationDTO.setLatitude(location.getLatitude());
+        locationDTO.setLongitude(location.getLongitude());
         return locationDTO;
     }
 }

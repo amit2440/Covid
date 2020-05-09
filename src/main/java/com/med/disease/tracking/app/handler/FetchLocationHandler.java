@@ -3,8 +3,8 @@ package com.med.disease.tracking.app.handler;
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.LocationDTO;
-import com.med.disease.tracking.app.dto.request.FetchLocationRequestDTO;
-import com.med.disease.tracking.app.service.impl.LocationServiceImpl;
+import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
+import com.med.disease.tracking.app.service.LocationService;
 import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.validation.FetchLocationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +19,26 @@ import org.springframework.web.context.annotation.RequestScope;
 @Component
 public class FetchLocationHandler extends RestControllerHandler {
 
-    private FetchLocationRequestDTO fetchLocationRequestDTO;
+    private LocationRequestDTO locationRequestDTO;
 
     @Autowired
-    private LocationServiceImpl locationServiceImpl;
+    private LocationService locationService;
 
     @Override
     protected void prepareRequest(Object request, BindingResult result, String... pathParam) {
-        fetchLocationRequestDTO = (FetchLocationRequestDTO) request;
+        locationRequestDTO = (LocationRequestDTO) request;
         this.bindingResult = result;
     }
 
     @Override
     protected void validateRequest() {
-        new FetchLocationValidator().validate(fetchLocationRequestDTO, bindingResult);
+        new FetchLocationValidator().validate(locationRequestDTO, bindingResult);
         ErrorUtil.processError(bindingResult, Constant.Module.FETCH_LOCATION);
     }
 
     @Override
     protected Object processRequest() throws Exception {
-        LocationDTO locationDTO = locationServiceImpl.fetchLocationForUser(fetchLocationRequestDTO);
+        LocationDTO locationDTO = locationService.fetchLocation(locationRequestDTO);
         return ObjectUtils.isEmpty(locationDTO)
                 ? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NOT_FOUND)
                 : new ResponseEntity<LocationDTO>(locationDTO, HttpStatus.OK);

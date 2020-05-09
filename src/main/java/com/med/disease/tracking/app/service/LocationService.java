@@ -1,11 +1,10 @@
 package com.med.disease.tracking.app.service;
 
 import com.med.disease.tracking.app.dto.LocationDTO;
-import com.med.disease.tracking.app.dto.request.AddLocationRequestDTO;
-import com.med.disease.tracking.app.dto.request.FetchLocationRequestDTO;
+import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
 
 public interface LocationService {
 
-    LocationDTO fetchLocationForUser(FetchLocationRequestDTO fetchLocationRequestDTO) throws Exception;
-    void addLocationRequestDTO(AddLocationRequestDTO addLocationRequestDTO) throws Exception;
+    LocationDTO fetchLocation(LocationRequestDTO locationRequestDTO) throws Exception;
+    void addLocation(LocationRequestDTO locationRequestDTO) throws Exception;
 }

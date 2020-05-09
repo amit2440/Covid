@@ -2,8 +2,8 @@ package com.med.disease.tracking.app.handler;
 
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
-import com.med.disease.tracking.app.dto.request.AddLocationRequestDTO;
-import com.med.disease.tracking.app.service.impl.LocationServiceImpl;
+import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
+import com.med.disease.tracking.app.service.LocationService;
 import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.validation.AddLocationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +17,26 @@ import org.springframework.web.context.annotation.RequestScope;
 @Component
 public class AddLocationHandler extends RestControllerHandler{
 
-    private AddLocationRequestDTO addLocationRequestDTO;
+    private LocationRequestDTO locationRequestDTO;
 
     @Autowired
-    private LocationServiceImpl locationServiceImpl;
+    private LocationService locationService;
 
     @Override
     protected void prepareRequest(Object request, BindingResult result, String... pathParam) {
-        addLocationRequestDTO = (AddLocationRequestDTO) request;
+        locationRequestDTO = (LocationRequestDTO) request;
         this.bindingResult = result;
     }
 
     @Override
     protected void validateRequest() {
-        new AddLocationValidator().validate(addLocationRequestDTO, bindingResult);
+        new AddLocationValidator().validate(locationRequestDTO, bindingResult);
         ErrorUtil.processError(bindingResult, Constant.Module.ADD_LOCATION);
     }
 
     @Override
     protected Object processRequest() throws Exception {
-        locationServiceImpl.addLocationRequestDTO(addLocationRequestDTO);
+        locationService.addLocation(locationRequestDTO);
         return new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.CREATED);
     }
 }

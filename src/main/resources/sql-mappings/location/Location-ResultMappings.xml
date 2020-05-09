@@ -5,5 +5,7 @@
 <mapper namespace= "Location-ResultMappings">
 	<resultMap id="ResultForGetLocation" type="Location">
 		<result property="area" column="AREA"/>
+		<result property="longitude" column="LONGITUDE"/>
+		<result property="latitude" column="LATITUDE"/>
 	</resultMap>
 </mapper>

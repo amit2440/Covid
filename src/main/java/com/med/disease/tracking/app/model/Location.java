@@ -2,6 +2,7 @@ package com.med.disease.tracking.app.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Location {
 
@@ -10,7 +11,7 @@ public class Location {
     private BigDecimal longitude;
     private BigDecimal latitude;
     private Integer userId;
-    private LocalDate dateCreated;
+    private LocalDateTime created;
 
     public Integer getLocationId() {
         return locationId;
@@ -52,11 +53,11 @@ public class Location {
         this.userId = userId;
     }
 
-    public LocalDate getDateCreated() {
-        return dateCreated;
+    public LocalDateTime getCreated() {
+        return created;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 }

@@ -2,7 +2,7 @@ package com.med.disease.tracking.app.dto.request;
 
 import java.math.BigDecimal;
 
-public class AddLocationRequestDTO {
+public class LocationRequestDTO {
 
     private String area;
     private BigDecimal longitude;
