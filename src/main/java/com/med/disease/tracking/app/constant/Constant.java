@@ -13,7 +13,8 @@ public interface Constant {
 		String SUBMIT_FEEDBACK = "Submit Feedback";
 		String FEEDBACK_FETCH = "Fetch Feedback";
 		String USER_INFO = "User Information";
-		
+		String ADD_LOCATION = "Add Location";
+		String FETCH_LOCATION = "Fetch Location";
 	}
 
 	public interface Field {
@@ -33,5 +34,8 @@ public interface Constant {
 		String DESCRIPTION = "description";
 		String ISACTIVE = "isActive";
 		String USER_ID = "userId";
+		String AREA = "area";
+		String LONGITUDE = "longitude";
+		String LATITUDE = "latitude";
 	}
 }
