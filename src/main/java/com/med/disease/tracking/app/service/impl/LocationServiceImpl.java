@@ -30,7 +30,7 @@ public class LocationServiceImpl implements LocationService {
     private AddLocationMapper addLocationMapper;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public LocationDTO fetchLocation(LocationRequestDTO locationRequestDTO) throws Exception {
         Location location = (Location) fetchLocationMapper.map(locationRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
         Location locationForUser = locationDAO.fetchLocationForUser(location);

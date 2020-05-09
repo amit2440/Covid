@@ -2,23 +2,35 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias alias="Database" type="com.med.disease.tracking.app.model.Database" />
+		<typeAlias alias="Option" type="com.med.disease.tracking.app.model.Option" />
 		<typeAlias alias="Question" type="com.med.disease.tracking.app.model.Question" />
+		<typeAlias alias="QuestionOption" type="com.med.disease.tracking.app.model.QuestionOption" />
 		<typeAlias alias="Survey" type="com.med.disease.tracking.app.model.Survey" />
 		<typeAlias alias="Feedback" type="com.med.disease.tracking.app.model.Feedback" />
 		<typeAlias alias="User" type="com.med.disease.tracking.app.model.User" />
 		<typeAlias alias="Location" type="com.med.disease.tracking.app.model.Location" />
 	</typeAliases>
 	<mappers>
+		<!-- Common -->
+		<mapper resource="sql-mappings/common/Common.xml" />
+		
+		<!-- survey -->
 		<mapper resource="sql-mappings/survey/Survey-ResultMappings.xml" />
 		<mapper resource="sql-mappings/survey/Survey-SqlQueries.xml" />
 		<mapper resource="sql-mappings/survey/Survey.xml" />
+
+		<!-- question -->
 		<mapper resource="sql-mappings/question/Question-ResultMappings.xml" />
 		<mapper resource="sql-mappings/question/Question-SqlQueries.xml" />
 		<mapper resource="sql-mappings/question/Question.xml" />
+
+		<!-- feedback -->
 		<mapper resource="sql-mappings/feedback/Feedback.xml"/>
 		<mapper resource="sql-mappings/feedback/Feedback-SqlQueries.xml"/>
 		<mapper resource="sql-mappings/feedback/Feedback-ResultMappings.xml"/>
-	<!-- UserInfo -->
+
+		<!-- UserInfo -->
 		<mapper resource="sql-mappings/userInfo/UserInfo.xml"/>
 		<mapper resource="sql-mappings/userInfo/UserInfo-SqlQueries.xml"/>
 		<mapper resource="sql-mappings/userInfo/UserInfo-ResultMappings.xml"/>

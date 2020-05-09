@@ -1,18 +1,32 @@
 package com.med.disease.tracking.app.dto.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class SurveyRequestDTO {
 	/** question set id */
 	private Integer surveyId;
 	/** description */
 	private String description;
-	
 	/** created */
 	private LocalDate created;
 	/** isActive */
 	private Boolean isActive;
+	/** questions */
+	private List<Integer> questionIds;
 	
+	/**
+	 * @return the questionIds
+	 */
+	public List<Integer> getQuestionIds() {
+		return questionIds;
+	}
+	/**
+	 * @param questionIds the questionIds to set
+	 */
+	public void setQuestionIds(List<Integer> questionIds) {
+		this.questionIds = questionIds;
+	}
 	/**
 	 * @return the surveyId
 	 */

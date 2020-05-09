@@ -10,4 +10,8 @@ public interface SurveyService {
 	void submitSurvey(SurveyRequestDTO requestDTO) throws Exception;
 
 	void updateSurvey(SurveyRequestDTO requestDTO) throws Exception;
+
+	void submitSurveyQuestions(SurveyRequestDTO requestDTO) throws Exception;
+	
+	SurveyDTO getSurveyQuestions(SurveyRequestDTO requestDTO) throws Exception;
 }

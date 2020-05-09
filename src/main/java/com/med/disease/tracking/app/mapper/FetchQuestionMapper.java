@@ -1,11 +1,15 @@
 package com.med.disease.tracking.app.mapper;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
+import com.med.disease.tracking.app.dto.OptionDTO;
 import com.med.disease.tracking.app.dto.QuestionDTO;
 import com.med.disease.tracking.app.dto.request.QuestionRequestDTO;
+import com.med.disease.tracking.app.model.Option;
 import com.med.disease.tracking.app.model.Question;
 
 @Component
@@ -27,7 +31,25 @@ public class FetchQuestionMapper extends Mapper {
 			questionDTO.setQuestionId(question.getQuestionId());
 			questionDTO.setQuestion(question.getQuestion());
 			questionDTO.setControl(question.getControl());
+			if (!CollectionUtils.isEmpty(question.getOptions())) {
+				questionDTO.setOptions(question.getOptions().stream().map(FetchQuestionMapper::getOptionDTO)
+						.collect(Collectors.toList()));
+			}
 		}
 		return questionDTO;
+	}
+
+	public static OptionDTO getOptionDTO(Option option) {
+		OptionDTO optionDTO = null;
+		if (option != null) {
+			optionDTO = new OptionDTO();
+			optionDTO.setOptionId(option.getOptionId());
+			optionDTO.setFieldName(option.getFieldName());
+			optionDTO.setDisplayName(option.getDisplayName());
+			optionDTO.setType(option.getType());
+			optionDTO.setSize(option.getSize());
+			optionDTO.setRisk(option.getRisk());
+		}
+		return optionDTO;
 	}
 }

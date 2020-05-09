@@ -9,4 +9,21 @@
 		DESCRIPTION,
 		IS_ACTIVE
 	</sql>
+	
+	<sql id="SelectForGetSurveyQuestions">
+		S.SURVEY_ID,
+		S.CREATED,
+		S.DESCRIPTION,
+		S.IS_ACTIVE,
+		Q.QUESTION_ID,
+		Q.QUESTION,
+		Q.CONTROL,
+		O.OPTION_ID,
+		O.FIELD_NAME,
+		O.DISPLAY_NAME,
+		O.TYPE,
+		O.SIZE,
+		O.RISK
+	</sql>
+	
 </mapper>

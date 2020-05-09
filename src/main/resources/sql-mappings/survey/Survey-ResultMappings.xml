@@ -9,4 +9,24 @@
 		<result property="description" column="DESCRIPTION" />
 		<result property="isActive" column="IS_ACTIVE" />
 	</resultMap>
+	
+	<resultMap id="ResultForGetSurveyQuestions" type="Survey">
+		<id property="surveyId" column="SURVEY_ID" />
+		<result property="created" column="CREATED" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="isActive" column="IS_ACTIVE" />
+		<collection property="questions" ofType="Question">
+			<id property="questionId" column="QUESTION_ID" />
+			<result property="question" column="QUESTION" />
+			<result property="control" column="CONTROL" />
+			<collection property="options" ofType="Option">
+				<id property="optionId" column="OPTION_ID" />
+				<result property="fieldName" column="FIELD_NAME" />
+				<result property="displayName" column="DISPLAY_NAME" />
+				<result property="type" column="TYPE" />
+				<result property="size" column="SIZE" />
+				<result property="risk" column="RISK" />
+			</collection>
+		</collection>
+	</resultMap>
 </mapper>
