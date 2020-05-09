@@ -5,7 +5,7 @@
 <mapper namespace = "UserInfo">
 	
 	<select id ="searchUser" parameterType="User" resultMap="UserInfo-ResultMappings.ResultForSearchUser">
-		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role
+		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role,u.work_location
 		FROM user u
 		WHERE 1=1  
 			<if test="mobile != null and mobile != ''">
@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id ="searchUserByuserId" parameterType="User" resultMap="UserInfo-ResultMappings.ResultForSearchUser">
-		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role
+		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role,u.work_location
 		FROM user u
 		WHERE u.user_id=#{userId} ;
 			

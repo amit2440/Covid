@@ -30,7 +30,7 @@ public class UserObjectValidator implements Validator {
 		ValidationUtil.validateFieldRequired(Constant.Field.FIRST_NAME, userDTO.getFirstName(), errors);
 		ValidationUtil.simpleStringValidation(Constant.Field.FIRST_NAME, userDTO.getFirstName(), errors);
 		
-		ValidationUtil.simpleStringValidation(Constant.Field.MIDDLE_NAME, userDTO.getMiddleName(), errors);
+//		ValidationUtil.simpleStringValidation(Constant.Field.MIDDLE_NAME, userDTO.getMiddleName(), errors);
 //		
 		ValidationUtil.validateFieldRequired(Constant.Field.LAST_NAME, userDTO.getLastName(), errors);
 		ValidationUtil.simpleStringValidation(Constant.Field.LAST_NAME, userDTO.getLastName(), errors);
