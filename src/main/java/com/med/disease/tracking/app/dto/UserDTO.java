@@ -4,13 +4,11 @@ import java.util.Date;
 
 public class UserDTO {
 	private String userName;
-//	private String uid;
 	private Integer userId;
 	private String password;
 	private boolean enabled;
 	private String firstName;
 	private String lastName;
-	private String middleName;
 	private String mobile;
 	private String token;
 	private String role;
@@ -111,7 +109,7 @@ public class UserDTO {
 	@Override
 	public String toString() {
 		return "UserDTO [userName=" + userName + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", middleName=" + middleName + ", mobile=" + mobile + ", role=" + role + ", workLocation="
+				+ ",, mobile=" + mobile + ", role=" + role + ", workLocation="
 				+ workLocation + "]";
 	}
 
@@ -131,12 +129,5 @@ public class UserDTO {
 		this.enabled = enabled;
 	}
 
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
 
 }

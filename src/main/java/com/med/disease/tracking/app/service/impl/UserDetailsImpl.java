@@ -22,19 +22,42 @@ public class UserDetailsImpl implements UserDetails {
 	private String username;
 
 	private String mobile;
+	
+	private String firstName;
+	
+	private String lastName;
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
 	@JsonIgnore
 	private String password;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-//	public UserDetailsImpl(String uid, String username, String mobile, String password,]
-	public UserDetailsImpl(String username, String mobile, String password,
+
+	public UserDetailsImpl(String username, String mobile, String password, String firstName, String lastName,
+
 			Collection<? extends GrantedAuthority> authorities) {
 //		this.uid = uid;
-		this.username = username;
+		this.username = firstName;
 		this.mobile = mobile;
 		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.authorities = authorities;
 	}
 
@@ -49,8 +72,9 @@ public class UserDetailsImpl implements UserDetails {
 				.collect(Collectors.toList());
 
 		return new UserDetailsImpl(
-//				user.getUid(), 
-				user.getUserName(), user.getMobile(), user.getToken(), authorities);
+
+				user.getUserName(), user.getMobile(), user.getToken(), user.getFirstName(),user.getLastName(), authorities);
+
 	}
 
 	@Override

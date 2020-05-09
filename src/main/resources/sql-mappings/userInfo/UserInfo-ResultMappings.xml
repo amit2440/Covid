@@ -11,5 +11,6 @@
 		<result property="lastName" column="last_name"/>
 		<result property="role" column="role"/>
 		<result property="mobile" column="mobile"/>
+		<result property="workLocation" column="work_location"/>
 	</resultMap>
 </mapper>

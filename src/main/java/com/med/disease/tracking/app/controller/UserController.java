@@ -66,13 +66,15 @@ public class UserController {
 		return "static page display - welcome";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/admin/user")
 	public ResponseEntity<?> user(@RequestBody UserDTO userDTO,BindingResult bindingResult) throws BeansException, Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
 				.handle(userDTO, bindingResult,"search");
 	}
-
-	@PutMapping("/updateUser")
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@PutMapping("/admin/updateUser")
 	public ResponseEntity<?> updateUSer(@RequestBody UserDTO userDTO,BindingResult bindingResult) throws BeansException, Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
 				.handle(userDTO, bindingResult,"update");
@@ -94,8 +96,9 @@ public class UserController {
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
-												 userDetails.getUid(), 
 												 userDetails.getUsername(), 
+												 userDetails.getFirstName(), 
+												 userDetails.getLastName(),
 												 userDetails.getMobile(), 
 												 roles));
 	}
@@ -124,7 +127,7 @@ public class UserController {
 			resultString = "Not able to generate OTP right now, Please try after some time.";
 		}
 		
-		return ResponseEntity.ok("OTP is sent to given mobile number, Please enter Otp to proceed further. OTP is --"+otpCode);
+		return ResponseEntity.ok("OTP is sent to given mobile number, Please enter Otp to proceed further.");
 	}
 	
 	
@@ -173,8 +176,8 @@ public class UserController {
 	}
 	
 	
-	
-	@GetMapping("/user/{userId}")
+	   
+	@GetMapping("/admin/user/{userId}")
 	public ResponseEntity<?> getUser(@RequestBody  UserDTO userDTO,BindingResult bindingResult) throws Exception{
 		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
 				.handle(userDTO, bindingResult,"userIDSearch");
