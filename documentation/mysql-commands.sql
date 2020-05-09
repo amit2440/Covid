@@ -93,6 +93,19 @@ CREATE  TABLE `covid`.`feedback` (
     ON UPDATE NO ACTION
 );
 
+CREATE TABLE `location` (
+  `location_id` int(11) NOT NULL AUTO_INCREMENT,
+  `area` varchar(100) NOT NULL,
+  `longitude` decimal(9,6) NOT NULL,
+  `latitude` decimal(9,6) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`location_id`),
+  KEY `user_Id_idx` (`user_id`),
+  CONSTRAINT `user_Id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+
 
 
 

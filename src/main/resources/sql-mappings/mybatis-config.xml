@@ -6,6 +6,7 @@
 		<typeAlias alias="Survey" type="com.med.disease.tracking.app.model.Survey" />
 		<typeAlias alias="Feedback" type="com.med.disease.tracking.app.model.Feedback" />
 		<typeAlias alias="User" type="com.med.disease.tracking.app.model.User" />
+		<typeAlias alias="Location" type="com.med.disease.tracking.app.model.Location" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="sql-mappings/survey/Survey-ResultMappings.xml" />
@@ -17,10 +18,12 @@
 		<mapper resource="sql-mappings/feedback/Feedback.xml"/>
 		<mapper resource="sql-mappings/feedback/Feedback-SqlQueries.xml"/>
 		<mapper resource="sql-mappings/feedback/Feedback-ResultMappings.xml"/>
-
 	<!-- UserInfo -->
 		<mapper resource="sql-mappings/userInfo/UserInfo.xml"/>
 		<mapper resource="sql-mappings/userInfo/UserInfo-SqlQueries.xml"/>
 		<mapper resource="sql-mappings/userInfo/UserInfo-ResultMappings.xml"/>
+		<mapper resource="sql-mappings/location/Location.xml"/>
+		<mapper resource="sql-mappings/location/Location-SqlQueries.xml"/>
+		<mapper resource="sql-mappings/location/Location-ResultMappings.xml"/>
 	</mappers>
 </configuration>
