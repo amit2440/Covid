@@ -11,6 +11,18 @@
 		WHERE
 		SURVEY_ID = #{surveyId}
 	</select>
+	
+	<select id="getSurveyQuestions" parameterType="Survey"
+		resultMap="Survey-ResultMappings.ResultForGetSurveyQuestions">
+		SELECT 
+		<include refid="Survey-SqlQueries.SelectForGetSurveyQuestions"></include>
+		FROM SURVEY_QUESTION SQ
+		INNER JOIN SURVEY S ON (SQ.SURVEY_ID = S.SURVEY_ID)
+		INNER JOIN QUESTION_OPTION QO ON (SQ.QUESTION_ID = QO.QUESTION_ID)
+		INNER JOIN QUESTION Q ON QO.QUESTION_ID=Q.QUESTION_ID
+		INNER JOIN `OPTION` O ON QO.OPTION_ID=O.OPTION_ID
+		WHERE SQ.SURVEY_ID = #{surveyId}
+	</select>
 
 	<insert id="submitSurvey" parameterType="Survey">
 		INSERT INTO SURVEY
@@ -27,5 +39,14 @@
 		WHERE
 		SURVEY_ID =
 		#{surveyId}
+	</insert>
+
+	<insert id="submitSurveyQuestions" parameterType="Map">
+		INSERT INTO
+		SURVEY_Question
+		(survey_id, question_id)
+		VALUES(
+		#{surveyId},
+		#{questionId})
 	</insert>
 </mapper>

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.handler.FetchSurveyHandler;
+import com.med.disease.tracking.app.handler.FetchSurveyQuestionHandler;
 import com.med.disease.tracking.app.handler.SubmitSurveyHandler;
+import com.med.disease.tracking.app.handler.SubmitSurveyQuestionHandler;
 import com.med.disease.tracking.app.handler.UpdateSurveyHandler;
 
 @RestController
@@ -42,5 +44,21 @@ public class SurveyController {
 			throws Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(UpdateSurveyHandler.class).handle(requestDTO, bindingResult,
 				surveyId);
+	}
+
+	@PostMapping(path = "/surveys/{surveyId}/questions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> submitSurveyQuestions(@RequestBody SurveyRequestDTO requestDTO, 
+			@PathVariable(required = true, name = "surveyId") String surveyId, 
+			BindingResult bindingResult)
+			throws Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(SubmitSurveyQuestionHandler.class).handle(requestDTO, bindingResult, surveyId);
+	}
+	
+	@GetMapping(path = "/surveys/{surveyId}/questions", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getSurveyQuestions(@ModelAttribute SurveyRequestDTO requestDTO, 
+			@PathVariable(required = true, name = "surveyId") String surveyId, 
+			BindingResult bindingResult)
+			throws Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(FetchSurveyQuestionHandler.class).handle(requestDTO, bindingResult, surveyId);
 	}
 }

@@ -3,12 +3,43 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Question">
-	<select id="getQuestionInfo" parameterType="Question"
+	<select id="getQuestion" parameterType="Question"
 		resultMap="Question-ResultMappings.ResultForGetQuestion">
 		SELECT
-		<include refid="Question-SqlQueries.SelectForGetQuestion" />
-		FROM QUESTIONS
-		WHERE
-		QUESTION_ID = #{questionId}
+		<include refid="Question-SqlQueries.SelectForGetQuestion"></include>
+		FROM QUESTION_OPTION QO
+		INNER JOIN QUESTION Q ON QO.QUESTION_ID=Q.QUESTION_ID
+		INNER JOIN `OPTION` O ON QO.OPTION_ID=O.OPTION_ID
+		WHERE 
+		Q.QUESTION_ID=#{questionId}
 	</select>
+
+	<insert id="addQuestion" parameterType="Question">
+		INSERT into Question
+		(question_id, question, control)
+		VALUES (
+		#{questionId},
+		#{question},
+		#{control})
+	</insert>
+
+	<insert id="addOption" parameterType="Option">
+		INSERT into `Option`
+		(option_id, field_name, display_name, type, size, risk)
+		VALUES (
+		#{optionId},
+		#{fieldName},
+		#{displayName},
+		#{type},
+		#{size},
+		#{risk})
+	</insert>
+
+	<insert id="addQuestionOption" parameterType="QuestionOption">
+		INSERT into
+		question_option (question_id, option_id)
+		VALUES (
+		#{question.questionId},
+		#{option.optionId})
+	</insert>
 </mapper>

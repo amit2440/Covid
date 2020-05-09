@@ -1,5 +1,7 @@
 package com.med.disease.tracking.app.dao;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,15 @@ public class SurveyDAO extends BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
+	
+	public Survey getSurveyQuestions(Survey survey) throws DatabaseException {
+		try {
+			return getSqlSession().selectOne("Survey.getSurveyQuestions", survey);
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
+		}
+	}
 
 	public int submitSurvey(Survey survey) throws DatabaseException {
 		try {
@@ -33,6 +44,15 @@ public class SurveyDAO extends BaseDAO {
 	public int updateSurvey(Survey survey) throws DatabaseException {
 		try {
 			return getSqlSession().insert("Survey.updateSurvey", survey);
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
+		}
+	}
+	
+	public int submitSurveyQuestions(Map<String, Integer> mapper) throws DatabaseException {
+		try {
+			return getSqlSession().insert("Survey.submitSurveyQuestions", mapper);
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());

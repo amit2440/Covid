@@ -1,5 +1,7 @@
 package com.med.disease.tracking.app.model;
 
+import java.util.List;
+
 public class Question {
 	/** question id */
 	private Integer questionId;
@@ -7,6 +9,8 @@ public class Question {
 	private String question;
 	/** control */
 	private String control;
+	/** options */
+	private List<Option> options;
 	
 	/**
 	 * @return the questionId
@@ -43,5 +47,17 @@ public class Question {
 	 */
 	public void setControl(String control) {
 		this.control = control;
+	}
+	/**
+	 * @return the options
+	 */
+	public List<Option> getOptions() {
+		return options;
+	}
+	/**
+	 * @param options the options to set
+	 */
+	public void setOptions(List<Option> options) {
+		this.options = options;
 	}
 }

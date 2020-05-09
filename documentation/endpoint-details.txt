@@ -1,0 +1,115 @@
+-- user add question along with its options 
+
+POST 	/questions
+request: 
+{
+    "question": "what is your gender",
+    "control": "input",
+    "options": [
+        {
+            "fieldName": "male",
+            "displayName": "Male",
+            "type": "radio",
+            "size": null,
+            "risk": 1
+        },
+        {
+            "fieldName": "female",
+            "displayName": "Female",
+            "type": "radio",
+            "size": null,
+            "risk": 2
+        }
+    ]
+}
+
+success response : 201 created
+
+incase of validation : 
+{
+    "title": "Validation Failed",
+    "status": 422,
+    "detail": "The content you sent contains 1 validation error(s)",
+    "errors": [
+        {
+            "field": "question",
+            "message": "question is required"
+        }
+    ]
+}
+
+
+---------------------------------------------------------------------------------------------------------------
+-- user fetch question along with its options based on questionId
+
+GET 	/questions/{questionId}
+response :  
+{
+    "questionId": 1,
+    "question": "what is your gender",
+    "control": "input",
+    "options": [
+        {
+            "optionId": 1,
+            "fieldName": "male",
+            "displayName": "Male",
+            "type": "radio",
+            "size": null,
+            "risk": 1
+        },
+        {
+            "optionId": 2,
+            "fieldName": "female",
+            "displayName": "Female",
+            "type": "radio",
+            "size": null,
+            "risk": 2
+        }
+    ]
+}
+---------------------------------------------------------------------------------------------------------------
+-- add questions under survey
+
+POST 	/surveys/{surveyId}/questions
+request : 
+{
+	"questionIds" : [1,2,3]
+}
+response : 201 created
+---------------------------------------------------------------------------------------------------------------
+-- get questions for given surveyId
+
+GET 	/surveys/{surveyId}/questions
+response : 
+{
+    "surveyId": 1,
+    "description": "a",
+    "created": "2020-05-09",
+    "isActive": false,
+    "questions": [
+        {
+            "questionId": 1,
+            "question": "what is your gender",
+            "control": "input",
+            "options": [
+                {
+                    "optionId": 1,
+                    "fieldName": "male",
+                    "displayName": "Male",
+                    "type": "radio",
+                    "size": null,
+                    "risk": 1
+                },
+                {
+                    "optionId": 2,
+                    "fieldName": "female",
+                    "displayName": "Female",
+                    "type": "radio",
+                    "size": null,
+                    "risk": 2
+                }
+            ]
+        }
+    ]
+}
+---------------------------------------------------------------------------------------------------------------

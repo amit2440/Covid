@@ -19,6 +19,7 @@ public interface Constant {
 
 	public interface Field {
 		String QUESTION_ID = "questionId";
+		String QUESTION_IDS = "questionIds";
 		String USER_NAME = "UserName";
 		String UID = "uid";
 		String ENABLED = "enabled";
@@ -37,5 +38,13 @@ public interface Constant {
 		String AREA = "area";
 		String LONGITUDE = "longitude";
 		String LATITUDE = "latitude";
+		String QUESTION = "question";
+		String CONTROL = "control";
+		String OPTIONS = "options";
+	}
+	public interface Database {
+		String SCHEMA_DEFAULT = "covid";
+		String TABLE_OPTION = "option";
+		String TABLE_QUESTION = "question";
 	}
 }

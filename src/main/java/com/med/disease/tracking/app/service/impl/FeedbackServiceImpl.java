@@ -54,7 +54,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public FeedbackDTO fetchFeedbacks(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception {
         Feedback feedback = (Feedback) fetchFeedbackMapper.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
         List<Feedback> feedbackList = feedbackDAO.getFeedbacks(feedback);
@@ -62,7 +62,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public FeedbackForSurveyDTO fetchFeedbacksForSurvey(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception{
         Feedback feedback = (Feedback) fetchFeedbackForSurveyMapper.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
         List<Feedback> feedbackList = feedbackDAO.getFeedbacksForSurvey(feedback);
