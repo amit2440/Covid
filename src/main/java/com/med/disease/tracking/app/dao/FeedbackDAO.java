@@ -40,4 +40,13 @@ public class FeedbackDAO extends BaseDAO {
             throw new DatabaseException(exception.getMessage());
         }
     }
+
+    public int deleteFeedback(Feedback feedback) throws Exception {
+        try{
+            return getSqlSession().delete("Feedback.deleteFeedback", feedback);
+        } catch (Exception exception){
+            LOGGER.error("Database Exception :{}", exception.getMessage());
+            throw new DatabaseException(exception.getMessage());
+        }
+    }
 }

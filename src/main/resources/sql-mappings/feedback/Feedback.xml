@@ -3,6 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "Feedback">
+	<delete id="deleteFeedback" parameterType="Feedback">
+		DELETE FROM covid.feedback WHERE user_id IN (#{user.userId});
+	</delete>
 	<insert id="insertFeedback" parameterType="Feedback">
 		<selectKey keyProperty="surveyQuestion.ssqId" resultType="int" order="BEFORE">
 			SELECT ssq_id FROM survey_question WHERE survey_id=#{surveyQuestion.survey.surveyId} AND question_id=#{surveyQuestion.question.questionId};
