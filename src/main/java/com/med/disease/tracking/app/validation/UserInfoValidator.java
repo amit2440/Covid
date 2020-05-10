@@ -21,21 +21,21 @@ public class UserInfoValidator implements Validator {
 		// TODO Auto-generated method stub
 		UserDTO userDTO = (UserDTO) target;
 		
-		if("".equals(userDTO.getFirstName()) && userDTO.getFirstName()!=null) {
+		if(!"".equals(userDTO.getFirstName()) && userDTO.getFirstName()!=null) {
 			ValidationUtil.simpleStringValidation(Constant.Field.FIRST_NAME, userDTO.getFirstName(), errors);
 		}
 		
-		if("".equals(userDTO.getLastName()) && userDTO.getLastName()!=null) {
+		if(!"".equals(userDTO.getLastName()) && userDTO.getLastName()!=null) {
 			ValidationUtil.simpleStringValidation(Constant.Field.LAST_NAME, userDTO.getLastName(), errors);
 		}
 		
 		
 //		ValidationUtil.validateFieldRequired(Constant.Field.MOBILE, userDTO.getMobile(), errors);
-		if("".equals(userDTO.getMobile()) && userDTO.getMobile()!=null) {
+		if(!"".equals(userDTO.getMobile()) && userDTO.getMobile()!=null) {
 			ValidationUtil.validateMobileNumber(Constant.Field.MOBILE, userDTO.getMobile(), errors);
 		}
 		
-		if("".equals(userDTO.getRole()) && userDTO.getRole()!=null) {
+		if(!"".equals(userDTO.getRole()) && userDTO.getRole()!=null) {
 			ValidationUtil.simpleStringValidation(Constant.Field.ROLE, userDTO.getRole(), errors);
 			if(!userDTO.getRole().isEmpty()) {
 				if(!userDTO.getRole().equals("USER") && !userDTO.getRole().equals("ADMIN")) {

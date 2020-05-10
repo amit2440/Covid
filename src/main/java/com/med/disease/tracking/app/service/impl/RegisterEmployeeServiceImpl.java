@@ -6,10 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 
+import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.repository.IUserRepository;
 import com.med.disease.tracking.app.service.RegisterEmployeeService;
+import com.med.disease.tracking.app.util.ValidationUtil;
 
 
 @Service
@@ -85,13 +89,22 @@ private static final Logger logger = LoggerFactory.getLogger(RegisterEmployeeSer
 
 
 	@Override
-	public boolean verifyMobile(String mobile) {
+	public BindingResult verifyMobile(String mobile,BindingResult error) {
+		
 		// TODO Auto-generated method stub
+		if(!"".equals(mobile) && mobile!=null) {
+			ValidationUtil.validateMobileNumber(Constant.Field.MOBILE, mobile, error);
+			if(error.hasErrors()) {
+				return error;
+			}
+		}
+		
 		Optional<UserDTO> userDTO = userRepository.findByUserName(mobile);
 		if(userDTO.isEmpty()) {
-			return false;
+			 error.rejectValue(Constant.Field.MOBILE, "mobile.number.notPresent", new Object[] { Constant.Field.MOBILE }, null);
+			 return error;
 		}
-		return true;
+		return error;
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.med.disease.tracking.app.service;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+
 import com.med.disease.tracking.app.dto.UserDTO;
 
 public interface RegisterEmployeeService {
@@ -10,6 +13,6 @@ public interface RegisterEmployeeService {
 	
 	public int updateUserOTP(String mobile,String otp);
 	
-	public boolean verifyMobile(String mobile);
+	public BindingResult verifyMobile(String mobile,BindingResult errors);
 
 }

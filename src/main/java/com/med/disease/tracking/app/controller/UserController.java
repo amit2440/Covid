@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.med.disease.tracking.app.config.jwt.JwtUtils;
+import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.handler.UserInfoHandler;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
@@ -38,6 +40,7 @@ import com.med.disease.tracking.app.model.response.JwtResponse;
 import com.med.disease.tracking.app.repository.IUserRepository;
 import com.med.disease.tracking.app.service.RegisterEmployeeService;
 import com.med.disease.tracking.app.service.impl.UserDetailsImpl;
+import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.util.otp.OTPUtil;
 
 @RestController
@@ -105,16 +108,19 @@ public class UserController {
 	
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> generateOpt(@Valid @RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> generateOpt(@Valid @RequestBody LoginRequest loginRequest,BindingResult bindingResult) {
 	
 		logger.info("INSIDE GENERATE OTP METHOD");
 		String resultString ="OTP is sent to given mobile number, Please enter Otp to proceed further";
 		
 		logger.info("Verifying moobile with our repository..... please wait...");
-		
-		if(!registerEmployeeService.verifyMobile(loginRequest.getMobile())) {
-			return ResponseEntity.ok("Not able to send OPT as mobile number is not matching with our records. Please enter valid mobile number !");
+		BindingResult error  = registerEmployeeService.verifyMobile(loginRequest.getMobile(),bindingResult);
+		if(error.hasErrors()) {
+			ErrorUtil.processError(error, Constant.Module.REGISTER_USER);
 		}
+//		if(!registerEmployeeService.verifyMobile(loginRequest.getMobile(),bindingResult)) {
+//			return ResponseEntity.ok("Not able to send OPT as mobile number is not matching with our records. Please enter valid mobile number !");
+//		}
 //		String otpCode = "";
 		String otpCode = OTPUtil.sendOtp(loginRequest.getMobile());
 		logger.info("GENERATED OTO is -----> "+otpCode);
