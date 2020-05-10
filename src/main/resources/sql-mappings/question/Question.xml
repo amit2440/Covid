@@ -16,11 +16,11 @@
 
 	<insert id="addQuestion" parameterType="Question">
 		INSERT into Question
-		(question_id, question, control)
+		(question_id, question, type)
 		VALUES (
 		#{questionId},
 		#{question},
-		#{control})
+		#{type})
 	</insert>
 
 	<insert id="addOption" parameterType="Option">

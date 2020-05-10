@@ -39,7 +39,7 @@ public interface Constant {
 		String LONGITUDE = "longitude";
 		String LATITUDE = "latitude";
 		String QUESTION = "question";
-		String CONTROL = "control";
+		String TYPE = "type";
 		String OPTIONS = "options";
 	}
 	public interface Database {
