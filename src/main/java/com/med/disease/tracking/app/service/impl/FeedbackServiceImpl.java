@@ -45,10 +45,13 @@ public class FeedbackServiceImpl implements FeedbackService {
     public void submitFeedback(FeedbackRequestDTO feedbackRequestDTO) throws Exception {
         Object object =  submitFeedbackMapper.map(feedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
         List feedbackList = new ArrayList((Collection<?>) object);
-        for(Object feedback : feedbackList){
-            if(feedbackDAO.submitFeedback((Feedback) feedback) <=0){
-                LOGGER.error("Unable to submit Feedback");
-                throw new CovidAppException("Submit feedback failed");
+        if (!feedbackList.isEmpty()) {
+            feedbackDAO.deleteFeedback((Feedback) feedbackList.stream().findFirst().get());
+            for (Object feedback : feedbackList) {
+                if (feedbackDAO.submitFeedback((Feedback) feedback) <= 0) {
+                    LOGGER.error("Unable to submit Feedback");
+                    throw new CovidAppException("Submit feedback failed");
+                }
             }
         }
     }
