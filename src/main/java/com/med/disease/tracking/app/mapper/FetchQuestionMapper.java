@@ -30,7 +30,7 @@ public class FetchQuestionMapper extends Mapper {
 		if (question != null) {
 			questionDTO.setQuestionId(question.getQuestionId());
 			questionDTO.setQuestion(question.getQuestion());
-			questionDTO.setControl(question.getControl());
+			questionDTO.setType(question.getType());
 			if (!CollectionUtils.isEmpty(question.getOptions())) {
 				questionDTO.setOptions(question.getOptions().stream().map(FetchQuestionMapper::getOptionDTO)
 						.collect(Collectors.toList()));

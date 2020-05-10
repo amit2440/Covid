@@ -22,7 +22,7 @@ public class SubmitQuestionMapper extends Mapper {
 
 		if (!ObjectUtils.isEmpty(requestDTO)) {
 			question.setQuestion(requestDTO.getQuestion());
-			question.setControl(requestDTO.getControl());
+			question.setType(requestDTO.getType());
 			if (!CollectionUtils.isEmpty(requestDTO.getOptions())) {
 				question.setOptions(requestDTO.getOptions().stream().map(SubmitQuestionMapper::getOption).collect(Collectors.toList()));
 			}

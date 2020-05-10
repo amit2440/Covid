@@ -47,7 +47,7 @@ public class FetchSurveyMapper extends Mapper {
 			questionDTO = new QuestionDTO();
 			questionDTO.setQuestionId(question.getQuestionId());
 			questionDTO.setQuestion(question.getQuestion());
-			questionDTO.setControl(question.getControl());
+			questionDTO.setType(question.getType());
 
 			if (!CollectionUtils.isEmpty(question.getOptions())) {
 				questionDTO.setOptions(question.getOptions().stream().map(FetchQuestionMapper::getOptionDTO)

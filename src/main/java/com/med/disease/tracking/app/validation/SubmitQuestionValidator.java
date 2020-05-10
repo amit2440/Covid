@@ -18,7 +18,7 @@ public class SubmitQuestionValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		QuestionRequestDTO requestDTO = (QuestionRequestDTO) target;
 		ValidationUtil.validateBlankField(Constant.Field.QUESTION, requestDTO.getQuestion(), errors);
-		ValidationUtil.validateBlankField(Constant.Field.CONTROL, requestDTO.getControl(), errors);
+		ValidationUtil.validateBlankField(Constant.Field.TYPE, requestDTO.getType(), errors);
 		ValidationUtil.validateFieldRequired(Constant.Field.OPTIONS, requestDTO.getOptions(), errors);
 	}
 }

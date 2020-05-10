@@ -13,13 +13,12 @@ CREATE TABLE IF NOT EXISTS `covid`.`user` (
     `is_active` boolean NOT NULL DEFAULT 0,
     PRIMARY KEY (`user_id`),
     UNIQUE INDEX `mobile_UNIQUE` (`mobile` ASC)
-    --,UNIQUE INDEX `token_UNIQUE` (`token` ASC)
 );
 
 CREATE TABLE IF NOT EXISTS `covid`.`question` (
     `question_id` INT NOT NULL AUTO_INCREMENT,
     `question` VARCHAR(100) NOT NULL,
-    `control` VARCHAR(20) NOT NULL,
+    `type` VARCHAR(20) NOT NULL,
     PRIMARY KEY (`question_id`),
     UNIQUE INDEX `question_UNIQUE` (`question` ASC)
 );
@@ -93,7 +92,7 @@ CREATE  TABLE `covid`.`feedback` (
     ON UPDATE NO ACTION
 );
 
-CREATE TABLE `location` (
+CREATE TABLE `covid`.`location` (
   `location_id` int(11) NOT NULL AUTO_INCREMENT,
   `area` varchar(100) NOT NULL,
   `longitude` decimal(9,6) NOT NULL,

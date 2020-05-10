@@ -7,8 +7,22 @@ public class QuestionRequestDTO {
 	private Integer questionId;
 	/** question */
 	private String question;
-	/** question */
-	private String control;
+	/** type */
+	private String type;
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	/** options */
 	private List<OptionRequestDTO> options;
 
@@ -38,20 +52,6 @@ public class QuestionRequestDTO {
 	 */
 	public void setQuestion(String question) {
 		this.question = question;
-	}
-
-	/**
-	 * @return the control
-	 */
-	public String getControl() {
-		return control;
-	}
-
-	/**
-	 * @param control the control to set
-	 */
-	public void setControl(String control) {
-		this.control = control;
 	}
 
 	/**

@@ -1,10 +1,51 @@
+-- get all surveys
+POST /surveys
+
+-- there will be only survey which is enabled - so iterate on above retrieved list and get active surveyId
+
+-- get questions for given surveyId
+
+GET 	/surveys/{surveyId}/questions
+response : 
+{
+    "surveyId": 1,
+    "description": "a",
+    "created": "2020-05-09",
+    "isActive": false,
+    "questions": [
+        {
+            "questionId": 1,
+            "question": "what is your gender",
+            "type": "singleChoice",
+            "options": [
+                {
+                    "optionId": 1,
+                    "fieldName": "male",
+                    "displayName": "Male",
+                    "type": "radio",
+                    "size": null,
+                    "risk": 1
+                },
+                {
+                    "optionId": 2,
+                    "fieldName": "female",
+                    "displayName": "Female",
+                    "type": "radio",
+                    "size": null,
+                    "risk": 2
+                }
+            ]
+        }
+    ]
+}
+---------------------------------------------------------------------------------------------------------------
 -- user add question along with its options 
 
 POST 	/questions
 request: 
 {
     "question": "what is your gender",
-    "control": "input",
+    "type": "singleChoice",
     "options": [
         {
             "fieldName": "male",
@@ -40,6 +81,68 @@ incase of validation :
 
 
 ---------------------------------------------------------------------------------------------------------------
+1. Submit Feedback
+
+URL: localhost:8081/ca/feedbacks
+Method: POST
+Request Body : 
+{
+	"userId":2,
+	"surveyId":1,
+	"answers":[
+		{
+			"questionId":1,
+			"optionId":2,
+			"value":"40"
+		},
+		{
+			"questionId":2,
+			"optionId":2,
+			"value":"Monday"
+		},
+		{
+			"questionId":3,
+			"optionId":4,
+			"value":"Pune"
+		},
+		{
+			"questionId":3,
+			"optionId":5,
+			"value":"Hadapsar"
+		}
+	]
+}
+
+Response :
+Status Code: 201
+Response Body: {}
+
+------------------------------------------------------------------------------
+3. Get Feedbacks for surveyId and userId
+
+URL: localhost:8081/ca/surveys/{surveyId}/feedbacks/{userId}
+Method: GET
+
+Response:
+Status Code: 200
+Response Body:
+{
+    "userId": 1,
+    "surveyId": 2,
+    "feedbacks": [
+        {
+            "question": "Gender",
+            "answer": "Male",
+            "risk": 1
+        },
+        {
+            "question": "Gender",
+            "answer": "Male",
+            "risk": 1
+        }
+    ]
+}
+------------------------------------------------------------------------------
 -- user fetch question along with its options based on questionId
 
 GET 	/questions/{questionId}
@@ -47,7 +150,7 @@ response :
 {
     "questionId": 1,
     "question": "what is your gender",
-    "control": "input",
+    "type": "singleChoice",
     "options": [
         {
             "optionId": 1,
@@ -76,40 +179,4 @@ request :
 	"questionIds" : [1,2,3]
 }
 response : 201 created
----------------------------------------------------------------------------------------------------------------
--- get questions for given surveyId
-
-GET 	/surveys/{surveyId}/questions
-response : 
-{
-    "surveyId": 1,
-    "description": "a",
-    "created": "2020-05-09",
-    "isActive": false,
-    "questions": [
-        {
-            "questionId": 1,
-            "question": "what is your gender",
-            "control": "input",
-            "options": [
-                {
-                    "optionId": 1,
-                    "fieldName": "male",
-                    "displayName": "Male",
-                    "type": "radio",
-                    "size": null,
-                    "risk": 1
-                },
-                {
-                    "optionId": 2,
-                    "fieldName": "female",
-                    "displayName": "Female",
-                    "type": "radio",
-                    "size": null,
-                    "risk": 2
-                }
-            ]
-        }
-    ]
-}
 ---------------------------------------------------------------------------------------------------------------
