@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
+import com.med.disease.tracking.app.handler.FetchAllSurveyHandler;
 import com.med.disease.tracking.app.handler.FetchSurveyHandler;
 import com.med.disease.tracking.app.handler.FetchSurveyQuestionHandler;
 import com.med.disease.tracking.app.handler.SubmitSurveyHandler;
@@ -30,6 +31,12 @@ public class SurveyController {
 	public ResponseEntity<?> fetchSurvey(@ModelAttribute SurveyRequestDTO requestDTO, BindingResult bindingResult)
 			throws Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(FetchSurveyHandler.class).handle(requestDTO, bindingResult);
+	}
+	
+	@GetMapping(path = "/surveys", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> fetchSurveys(@ModelAttribute SurveyRequestDTO requestDTO, BindingResult bindingResult)
+			throws Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(FetchAllSurveyHandler.class).handle(requestDTO, bindingResult);
 	}
 
 	@PostMapping(path = "/surveys", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

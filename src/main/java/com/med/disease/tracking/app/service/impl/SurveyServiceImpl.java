@@ -2,6 +2,7 @@ package com.med.disease.tracking.app.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ import com.med.disease.tracking.app.dao.SurveyDAO;
 import com.med.disease.tracking.app.dto.SurveyDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
+import com.med.disease.tracking.app.mapper.FetchAllSurveyMapper;
 import com.med.disease.tracking.app.mapper.FetchSurveyMapper;
 import com.med.disease.tracking.app.mapper.MappingTypeEnum;
 import com.med.disease.tracking.app.mapper.SubmitSurveyMapper;
@@ -31,6 +33,9 @@ public class SurveyServiceImpl implements SurveyService {
 	@Autowired
 	private FetchSurveyMapper fetchSurveyMapper;
 
+	@Autowired
+	private FetchAllSurveyMapper fetchAllSurveyMapper;
+	
 	@Autowired
 	private SubmitSurveyMapper submitSurveyMapper;
 	
@@ -93,5 +98,12 @@ public class SurveyServiceImpl implements SurveyService {
 	public SurveyDTO getSurveyQuestions(SurveyRequestDTO requestDTO) throws Exception {
 		Survey survey = (Survey) fetchSurveyMapper.map(requestDTO, MappingTypeEnum.MAPTODOMAIN, null);
 		return (SurveyDTO) fetchSurveyMapper.map(surveyDAO.getSurveyQuestions(survey), MappingTypeEnum.MAPTORESPONSE, null);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SurveyDTO> getSurveys(SurveyRequestDTO requestDTO) throws Exception {
+		List<Survey> result = surveyDAO.getSurveys();
+		return (List<SurveyDTO>) fetchAllSurveyMapper.map(result, MappingTypeEnum.MAPTORESPONSE, null);
 	}
 }

@@ -1,5 +1,6 @@
 package com.med.disease.tracking.app.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -17,6 +18,15 @@ public class SurveyDAO extends BaseDAO {
 	public Survey getSurvey(Survey survey) throws DatabaseException {
 		try {
 			return getSqlSession().selectOne("Survey.getSurveyInfo", survey);
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
+		}
+	}
+	
+	public List<Survey> getSurveys() throws DatabaseException {
+		try {
+			return getSqlSession().selectList("Survey.getAllSurveys");
 		} catch (Exception e) {
 			LOGGER.error("DatabaseException : {}", e.getMessage());
 			throw new DatabaseException(e.getMessage());

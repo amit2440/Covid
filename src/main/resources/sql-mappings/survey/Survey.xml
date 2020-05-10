@@ -12,6 +12,13 @@
 		SURVEY_ID = #{surveyId}
 	</select>
 	
+	<select id="getAllSurveys" parameterType="Survey"
+		resultMap="Survey-ResultMappings.ResultForGetSurvey">
+		SELECT
+		<include refid="Survey-SqlQueries.SelectForGetSurvey" />
+		FROM SURVEY
+	</select>
+	
 	<select id="getSurveyQuestions" parameterType="Survey"
 		resultMap="Survey-ResultMappings.ResultForGetSurveyQuestions">
 		SELECT 
