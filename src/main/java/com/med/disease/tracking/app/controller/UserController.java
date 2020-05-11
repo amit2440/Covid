@@ -20,7 +20,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,6 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.med.disease.tracking.app.config.jwt.JwtUtils;
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.UserDTO;
+import com.med.disease.tracking.app.exception.CovidAppException;
+import com.med.disease.tracking.app.exception.ErrorResponse;
 import com.med.disease.tracking.app.handler.UserInfoHandler;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
 import com.med.disease.tracking.app.model.request.LoginRequest;
@@ -85,11 +86,23 @@ public class UserController {
 	
 	
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest,BindingResult bindingResult) {
 		logger.info("111111111111111111");
+		
+		BindingResult error  = registerEmployeeService.verifyMobile(loginRequest.getMobile(),bindingResult);
+		if(error.hasErrors()) {
+			ErrorUtil.processError(error, Constant.Module.REGISTER_USER);
+		}
+		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getMobile(), loginRequest.getPassword()));
 
+		if(!authentication.isAuthenticated()) {
+			error.rejectValue(Constant.Field.MOBILE, "authentication.failed", new Object[] { Constant.Field.MOBILE }, null);
+			ErrorUtil.processError(error, Constant.Module.REGISTER_USER);
+		}
+		
+		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
@@ -128,6 +141,13 @@ public class UserController {
 			
 		}else {
 			resultString = "Not able to generate OTP right now, Please try after some time.";
+			ErrorResponse errorRes = new ErrorResponse();
+			errorRes.setTitle("Mobile Number or OTP is not valid");
+			errorRes.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+			errorRes.setHttpStatusValue(HttpStatus.UNPROCESSABLE_ENTITY);
+//			return new ResponseEntity<ErrorResponse>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
+			
+			throw new CovidAppException(errorRes);
 		}
 		
 		return ResponseEntity.ok("OTP is sent to given mobile number, Please enter Otp to proceed further.");
