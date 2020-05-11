@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`user` (
 
 CREATE TABLE IF NOT EXISTS `covid`.`question` (
     `question_id` INT NOT NULL AUTO_INCREMENT,
-    `question` VARCHAR(100) NOT NULL,
+    `question` VARCHAR(200) NOT NULL,
     `type` VARCHAR(20) NOT NULL,
     PRIMARY KEY (`question_id`),
     UNIQUE INDEX `question_UNIQUE` (`question` ASC)
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `covid`.`question` (
 
 CREATE TABLE IF NOT EXISTS `covid`.`option` (
     `option_id` INT NOT NULL AUTO_INCREMENT,
-    `field_name` VARCHAR(20) NULL,
-    `display_name` VARCHAR(20) NULL,
+    `field_name` VARCHAR(100) NULL,
+    `display_name` VARCHAR(100) NULL,
     `type` VARCHAR(20) NOT NULL,
     `size` INT NULL,
     `risk` INT NOT NULL DEFAULT 0,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`question_option` (
 CREATE TABLE IF NOT EXISTS `covid`.`survey` (
     `survey_id` INT NOT NULL AUTO_INCREMENT,
     `created` DATETIME NOT NULL,
-    `description` VARCHAR(50) NULL,
+    `description` VARCHAR(100) NULL,
     `is_active` BIT NULL DEFAULT 1,
     PRIMARY KEY (`survey_id`)
 );
@@ -77,7 +77,7 @@ CREATE  TABLE `covid`.`feedback` (
   `user_id` INT NOT NULL,
   `ssq_id` INT NOT NULL ,
   `option_id` INT NOT NULL ,
-  `value` VARCHAR(20) NOT NULL,
+  `value` VARCHAR(100) NOT NULL,
   INDEX `feeback_ssq_id_idx` (`ssq_id` ASC) ,
   INDEX `option_id_idx` (`option_id` ASC) ,
   CONSTRAINT `feeback_ssq_id`
@@ -103,8 +103,3 @@ CREATE TABLE `covid`.`location` (
   KEY `user_Id_idx` (`user_id`),
   CONSTRAINT `user_Id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
-
-
-
-
-
