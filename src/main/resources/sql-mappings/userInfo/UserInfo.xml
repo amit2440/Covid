@@ -45,6 +45,13 @@
 			<if test="role != null and role != ''">
 				,role = #{role}
 			</if>
+			<if test="mobile != null and mobile != ''">
+				,mobile = #{mobile}
+			</if>
+			<if test="mgrID != null and mgrID != ''">
+				,mgr_id = #{mgrID}
+			</if>
+			
 		WHERE 
 		user_id = #{userId}
 	</insert>

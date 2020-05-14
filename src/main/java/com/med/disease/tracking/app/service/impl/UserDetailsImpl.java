@@ -17,7 +17,7 @@ import com.med.disease.tracking.app.dto.UserDTO;
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	private String uid;
+	private Integer userId;
 
 	private String username;
 
@@ -61,6 +61,26 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
+	
+	public UserDetailsImpl(Integer userId,String username, String mobile, String password, String firstName, String lastName,
+			Collection<? extends GrantedAuthority> authorities) {
+		this.userId = userId;
+		this.username = firstName;
+		this.mobile = mobile;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.authorities = authorities;
+	}
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -71,8 +91,7 @@ public class UserDetailsImpl implements UserDetails {
 		List<GrantedAuthority> authorities = s.stream().map(role -> new SimpleGrantedAuthority(role))
 				.collect(Collectors.toList());
 
-		return new UserDetailsImpl(
-
+		return new UserDetailsImpl(user.getUserId(),
 				user.getUserName(), user.getMobile(), user.getToken(), user.getFirstName(),user.getLastName(), authorities);
 
 	}
@@ -114,16 +133,10 @@ public class UserDetailsImpl implements UserDetails {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		UserDetailsImpl user = (UserDetailsImpl) o;
-		return Objects.equals(uid, user.uid);
+		return Objects.equals(userId, user.userId);
 	}
 
-	public String getUid() {
-		return uid;
-	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
+	
 
 	public void setUsername(String username) {
 		this.username = username;

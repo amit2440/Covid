@@ -5,20 +5,46 @@ import java.util.List;
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
-	private String lastName;
-	private String firstName;
-	private String username;
+//	private String lastName;
+//	private String firstName;
+//	private String username;
 	private String mobile;
+	private Integer userId;
 	private List<String> roles;
 
-	public JwtResponse(String accessToken, String username, String firstName,String lastName, String mobile, List<String> roles) {
+//	public JwtResponse(String accessToken, String username, String firstName,String lastName, String mobile, List<String> roles) {
+//		this.token = accessToken;
+////		this.uid = id;
+//		this.username = username;
+//		this.mobile = mobile;
+//		this.roles = roles;
+//		this.lastName = lastName;
+//		this.firstName = firstName;
+//	}
+//
+//	public JwtResponse(String accessToken,Integer userId, String username, String firstName,String lastName, String mobile, List<String> roles) {
+//		this.token = accessToken;
+//		this.userId = userId;
+//		this.username = username;
+//		this.mobile = mobile;
+//		this.roles = roles;
+//		this.lastName = lastName;
+//		this.firstName = firstName;
+//	}
+	
+	public JwtResponse(String accessToken,Integer userId,  String mobile, List<String> roles) {
 		this.token = accessToken;
-//		this.uid = id;
-		this.username = username;
 		this.mobile = mobile;
 		this.roles = roles;
-		this.lastName = lastName;
-		this.firstName = firstName;
+		this.userId = userId;
+	}
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getAccessToken() {
@@ -39,21 +65,21 @@ public class JwtResponse {
 
 	
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+//	public String getLastName() {
+//		return lastName;
+//	}
+//
+//	public void setLastName(String lastName) {
+//		this.lastName = lastName;
+//	}
+//
+//	public String getUsername() {
+//		return username;
+//	}
+//
+//	public void setUsername(String username) {
+//		this.username = username;
+//	}
 
 	public String getMobile() {
 		return mobile;
