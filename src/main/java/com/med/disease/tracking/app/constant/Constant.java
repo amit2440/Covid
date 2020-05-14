@@ -15,6 +15,7 @@ public interface Constant {
 		String USER_INFO = "User Information";
 		String ADD_LOCATION = "Add Location";
 		String FETCH_LOCATION = "Fetch Location";
+		String REG_MANAGER = "MANAGER REGISTRATION";
 	}
 
 	public interface Field {
@@ -38,6 +39,7 @@ public interface Constant {
 		String AREA = "area";
 		String LONGITUDE = "longitude";
 		String LATITUDE = "latitude";
+
 		String QUESTION = "question";
 		String TYPE = "type";
 		String OPTIONS = "options";
@@ -46,5 +48,10 @@ public interface Constant {
 		String SCHEMA_DEFAULT = "covid";
 		String TABLE_OPTION = "option";
 		String TABLE_QUESTION = "question";
+
+		String TEAM = "teamName";
+		String MGR_FIRST_NAME="mgrFirstName";
+		String MGR_LAST_NAME="mgrLastName";
+
 	}
 }

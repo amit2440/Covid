@@ -14,6 +14,18 @@ public class User {
 	private String token;
 	private String role;
 	private String workLocation;
+	private Integer mgrID;
+	
+	
+
+	public Integer getMgrID() {
+		return mgrID;
+	}
+
+	public void setMgrID(Integer mgrID) {
+		this.mgrID = mgrID;
+	}
+
 
 	public String getWorkLocation() {
 		return workLocation;
