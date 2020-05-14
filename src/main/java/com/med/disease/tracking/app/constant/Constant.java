@@ -43,15 +43,19 @@ public interface Constant {
 		String QUESTION = "question";
 		String TYPE = "type";
 		String OPTIONS = "options";
+		
+		String TEAM = "teamName";
+		String MGR_FIRST_NAME="mgrFirstName";
+		String MGR_LAST_NAME="mgrLastName";
+
+		
+		
 	}
 	public interface Database {
 		String SCHEMA_DEFAULT = "covid";
 		String TABLE_OPTION = "option";
 		String TABLE_QUESTION = "question";
 
-		String TEAM = "teamName";
-		String MGR_FIRST_NAME="mgrFirstName";
-		String MGR_LAST_NAME="mgrLastName";
 
 	}
 }

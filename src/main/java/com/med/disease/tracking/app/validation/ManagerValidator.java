@@ -28,13 +28,13 @@ public class ManagerValidator implements Validator {
 //		ValidationUtil.validateFieldRequired(Constant.Field.UID, userDTO.getUid(), errors);
 //		ValidationUtil.alphaNumericValidation(Constant.Field.UID, userDTO.getUid(), errors);
 		
-		ValidationUtil.validateFieldRequired(Constant.Field.FIRST_NAME, managerDTO.getMgrFirstName(), errors);
-		ValidationUtil.simpleStringValidation(Constant.Field.FIRST_NAME, managerDTO.getMgrFirstName(), errors);
+		ValidationUtil.validateFieldRequired(Constant.Field.MGR_FIRST_NAME, managerDTO.getMgrFirstName(), errors);
+		ValidationUtil.simpleStringValidation(Constant.Field.MGR_FIRST_NAME, managerDTO.getMgrFirstName(), errors);
 		
 //		ValidationUtil.simpleStringValidation(Constant.Field.MIDDLE_NAME, userDTO.getMiddleName(), errors);
 //		
-		ValidationUtil.validateFieldRequired(Constant.Field.LAST_NAME, managerDTO.getMgrLastName(), errors);
-		ValidationUtil.simpleStringValidation(Constant.Field.LAST_NAME,  managerDTO.getMgrLastName(), errors);
+		ValidationUtil.validateFieldRequired(Constant.Field.MGR_LAST_NAME, managerDTO.getMgrLastName(), errors);
+		ValidationUtil.simpleStringValidation(Constant.Field.MGR_LAST_NAME,  managerDTO.getMgrLastName(), errors);
 		
 		ValidationUtil.validateFieldRequired(Constant.Field.TEAM, managerDTO.getTeamName(), errors);
 		ValidationUtil.relaxedString(Constant.Field.TEAM,  managerDTO.getTeamName(), errors);
