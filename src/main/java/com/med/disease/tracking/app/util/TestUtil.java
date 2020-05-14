@@ -12,13 +12,14 @@ public class TestUtil {
 //		tu.testMobileNumber();
 //		tu.testName();
 //		tu.alphaNumeric();
-		try {
-			tu.testmthodEx("com.med.disease.tracking.app.util.TestUtil", "testMobileNumber");
-		} catch (SecurityException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		tu.relaxedString();
+//		try {
+//			tu.testmthodEx("com.med.disease.tracking.app.util.TestUtil", "testMobileNumber");
+//		} catch (SecurityException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException
+//				| InvocationTargetException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public static void testMobileNumber() {
@@ -88,5 +89,20 @@ public class TestUtil {
 	
 	public void testmethod() {
 		System.out.println("executing test method.....");
+	}
+	
+	
+	public void relaxedString() {
+		String regx = "^[a-zA-Z0-9_\\s]*$";
+		String mobileNumber = "virendra_kumar";
+
+		String ss = "";
+
+		if (mobileNumber.matches(regx)) {
+			ss = "VALID bane NUMBER";
+		} else {
+			ss = "INVALID fasdfdsaf NUMBER";
+		}
+		System.out.println(ss);
 	}
 }

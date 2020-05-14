@@ -54,6 +54,27 @@ CREATE TABLE IF NOT EXISTS `covid`.`survey` (
     PRIMARY KEY (`survey_id`)
 );
 
+
+CREATE TABLE IF NOT EXISTS `covid`.`manager` (
+  `mgrID` int(11) NOT NULL AUTO_INCREMENT,
+  `team_name` varchar(45) DEFAULT NULL,
+  `mgr_first_name` varchar(45) DEFAULT NULL,
+  `mgr_last_name` varchar(45) DEFAULT NULL,
+  `is_active` binary(1) DEFAULT '0',
+  PRIMARY KEY (`mgrID`)
+);
+
+ALTER TABLE `covid`.`user` ADD COLUMN `mgr_id` INT NULL  AFTER `is_active` , 
+  ADD CONSTRAINT `mrg_id`
+  FOREIGN KEY (`mgr_id` )
+  REFERENCES `covid`.`manager` (`mgrID` )
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION
+, ADD INDEX `mrg_id_idx` (`mgr_id` ASC) ;
+
+
+
+
 CREATE  TABLE `covid`.`survey_question` (
   `ssq_id` INT NOT NULL AUTO_INCREMENT ,
   `survey_id` INT NOT NULL ,

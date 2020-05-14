@@ -26,7 +26,7 @@ public class ValidationUtil {
 			}
 		}
 	}
-	
+
 	public static void simpleStringValidation(String errorField, Object value, Errors errors) {
 //		String regx = "^([a-zA-Z]{2,}\\\\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\\\\s?([a-zA-Z]{1,})?)";
 		String regx = "[a-zA-Z]{3,30}";
@@ -37,7 +37,7 @@ public class ValidationUtil {
 			}
 		}
 	}
-	
+
 	public static void alphaNumericValidation(String errorField, Object value, Errors errors) {
 		String regx = "^[a-zA-Z0-9_]*$";
 		if (!ObjectUtils.isEmpty(value)) {
@@ -46,5 +46,19 @@ public class ValidationUtil {
 				errors.rejectValue(errorField, "no.specialCharacter.validation", new Object[] { errorField }, null);
 			}
 		}
+	}
+
+	public static void relaxedString(String errorField, Object value, Errors errors) {
+		String regx = "^[a-zA-Z0-9_\\s]*$";
+		if (!ObjectUtils.isEmpty(value)) {
+			String mobileNumber = (String) value;
+			if (!mobileNumber.matches(regx)) {
+				errors.rejectValue(errorField, "no.specialCharacter.validation", new Object[] { errorField }, null);
+			}
+		}
+	}
+	
+	public static void main(String args[]) {
+		
 	}
 }
