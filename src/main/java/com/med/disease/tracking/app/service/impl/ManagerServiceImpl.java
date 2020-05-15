@@ -26,8 +26,9 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public int insertManager(ManagerDTO managerDTO) throws Exception {
 		// TODO Auto-generated method stub
-		Manager manager = (Manager)managerMapper.map(managerDTO, MappingTypeEnum.MAPTODOMAIN, null);
-		return iManagerRepository.insert(manager);
+//		Manager manager = (Manager)managerMapper.map(managerDTO, MappingTypeEnum.MAPTODOMAIN, null);
+//		return iManagerRepository.insert(manager);
+		return 0;
 	}
 
 	@Override
