@@ -130,6 +130,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 			user.setToken(null);
 			user.setRole(userArr[4] != null ? userArr[4] : null);
 			user.setWorkLocation(userArr[5] != null ? userArr[5] : null);
+			user.setMgrID(userArr[6]!=null ? new Integer(userArr[6]) :null);
 		}
 		return user;
 

@@ -9,5 +9,9 @@ public interface ManagerService {
 	public int insertManager(ManagerDTO managerDTO) throws Exception;
 	
 	public List<ManagerDTO> getManagerList() throws Exception;
+	
+	public int updateUserManager(ManagerDTO managerDTO) throws Exception;
+	
+	public boolean validateData(ManagerDTO managerDTO) throws Exception;
 
 }

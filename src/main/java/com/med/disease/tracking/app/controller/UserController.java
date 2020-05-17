@@ -205,4 +205,6 @@ public class UserController {
 		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
 				.handle(userDTO, bindingResult,"userIDSearch");
 	}
+	
+	
 }

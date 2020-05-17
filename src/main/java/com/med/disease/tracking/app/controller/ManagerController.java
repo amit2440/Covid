@@ -50,5 +50,12 @@ public class ManagerController {
 	public ResponseEntity<?> listManagers() throws BeansException, Exception{
 		return (ResponseEntity<?>) beanFactory.getBean(ManagerHandler.class).getManagerList();
 	}
-	
+
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(path = "/reg/updMgr", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<?> updateUsrManager(@RequestBody ManagerDTO managerDTO,BindingResult bindingResult) throws BeansException, Exception{
+		
+		return (ResponseEntity<?>) beanFactory.getBean(ManagerHandler.class).handleUpdMgrReq(managerDTO, bindingResult);
+	}
 }

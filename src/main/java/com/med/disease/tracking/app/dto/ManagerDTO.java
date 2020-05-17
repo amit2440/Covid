@@ -9,9 +9,16 @@ public class ManagerDTO {
 	public String mgrLastName;
 	public String teamName;
 	public boolean isActive;
+	public Integer newMgrId;
 	
 	
 	
+	public Integer getNewMgrId() {
+		return newMgrId;
+	}
+	public void setNewMgrId(Integer newMgrId) {
+		this.newMgrId = newMgrId;
+	}
 	public boolean isActive() {
 		return isActive;
 	}
