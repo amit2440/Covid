@@ -38,10 +38,7 @@ public class FetchFeedbackForSurveyMapper extends Mapper {
                 FeedbackResponseDTO feedbackResponseDTO = new FeedbackResponseDTO();
                 feedbackResponseDTO.setQuestion(feedback.getSurveyQuestion().getQuestion().getQuestion());
                 feedbackResponseDTO.setRisk(feedback.getOption().getRisk());
-                if(feedback.getOption().getType().equalsIgnoreCase("text"))
-                    feedbackResponseDTO.setAnswer(feedback.getValue());
-                else
-                    feedbackResponseDTO.setAnswer(feedback.getOption().getDisplayName());
+                feedbackResponseDTO.setAnswer(feedback.getValue());
                 return feedbackResponseDTO;
             }).collect(Collectors.toList()));
             return feedbackForSurveyDTO;

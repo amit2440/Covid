@@ -3,17 +3,27 @@ package com.med.disease.tracking.app.dto.request;
 public class OptionRequestDTO {
 	/** optionId */
 	private Integer optionId;
-	/** fieldName */
-	private String fieldName;
 	/** question */
 	private String displayName;
-	/** type */
-	private String type;
 	/** size */
 	private Integer size;
 	/** risk */
 	private Integer risk;
+	/** checked */
+	private Boolean checked;
 	
+	/**
+	 * @return the checked
+	 */
+	public Boolean getChecked() {
+		return checked;
+	}
+	/**
+	 * @param checked the checked to set
+	 */
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
+	}
 	/**
 	 * @return the optionId
 	 */
@@ -27,18 +37,6 @@ public class OptionRequestDTO {
 		this.optionId = optionId;
 	}
 	/**
-	 * @return the fieldName
-	 */
-	public String getFieldName() {
-		return fieldName;
-	}
-	/**
-	 * @param fieldName the fieldName to set
-	 */
-	public void setFieldName(String fieldName) {
-		this.fieldName = fieldName;
-	}
-	/**
 	 * @return the displayName
 	 */
 	public String getDisplayName() {
@@ -49,18 +47,6 @@ public class OptionRequestDTO {
 	 */
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
-	}
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
 	}
 	/**
 	 * @return the size

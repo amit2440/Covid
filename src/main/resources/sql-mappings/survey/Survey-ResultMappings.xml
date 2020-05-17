@@ -21,9 +21,8 @@
 			<result property="type" column="QUESTION_TYPE" />
 			<collection property="options" ofType="Option">
 				<id property="optionId" column="OPTION_ID" />
-				<result property="fieldName" column="FIELD_NAME" />
 				<result property="displayName" column="DISPLAY_NAME" />
-				<result property="type" column="OPTION_TYPE" />
+				<result property="checked" column="CHECKED" />
 				<result property="size" column="SIZE" />
 				<result property="risk" column="RISK" />
 			</collection>

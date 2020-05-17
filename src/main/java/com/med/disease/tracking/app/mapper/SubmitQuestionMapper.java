@@ -34,9 +34,8 @@ public class SubmitQuestionMapper extends Mapper {
 		Option option = null;
 		if (!ObjectUtils.isEmpty(requestDTO)) {
 			option = new Option();
-			option.setFieldName(requestDTO.getFieldName());
 			option.setDisplayName(requestDTO.getDisplayName());
-			option.setType(requestDTO.getType());
+			option.setChecked(requestDTO.getChecked());
 			option.setSize(requestDTO.getSize());
 			option.setRisk(requestDTO.getRisk());
 		}
