@@ -25,12 +25,11 @@
 
 	<insert id="addOption" parameterType="Option">
 		INSERT into `Option`
-		(option_id, field_name, display_name, type, size, risk)
+		(option_id, display_name, checked, size, risk)
 		VALUES (
 		#{optionId},
-		#{fieldName},
 		#{displayName},
-		#{type},
+		#{checked},
 		#{size},
 		#{risk})
 	</insert>

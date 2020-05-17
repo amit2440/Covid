@@ -2,6 +2,7 @@ drop database covid;
 
 CREATE SCHEMA IF NOT EXISTS `covid`;
 
+
 CREATE TABLE IF NOT EXISTS `covid`.`user` (
     `user_id` INT NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(20) NOT NULL,
@@ -11,9 +12,12 @@ CREATE TABLE IF NOT EXISTS `covid`.`user` (
     `work_location` VARCHAR(20) NOT NULL,
     `token` VARCHAR(150) NOT NULL,
     `is_active` boolean NOT NULL DEFAULT 0,
+	`mgr_id` INT NULL,
     PRIMARY KEY (`user_id`),
+	INDEX `mrg_id_idx` (`mgr_id` ASC),
     UNIQUE INDEX `mobile_UNIQUE` (`mobile` ASC)
 );
+
 
 CREATE TABLE IF NOT EXISTS `covid`.`question` (
     `question_id` INT NOT NULL AUTO_INCREMENT,
@@ -25,10 +29,9 @@ CREATE TABLE IF NOT EXISTS `covid`.`question` (
 
 CREATE TABLE IF NOT EXISTS `covid`.`option` (
     `option_id` INT NOT NULL AUTO_INCREMENT,
-    `field_name` VARCHAR(100) NULL,
     `display_name` VARCHAR(100) NULL,
-    `type` VARCHAR(20) NOT NULL,
     `size` INT NULL,
+	`checked` BIT NULL,
     `risk` INT NOT NULL DEFAULT 0,
     PRIMARY KEY (`option_id`)
 );
@@ -53,24 +56,6 @@ CREATE TABLE IF NOT EXISTS `covid`.`survey` (
     `is_active` BIT NULL DEFAULT 1,
     PRIMARY KEY (`survey_id`)
 );
-
--- No need of below manager table --- keeping for reference future if needed.
-/*CREATE TABLE IF NOT EXISTS `covid`.`manager` (
-  `mgrID` int(11) NOT NULL AUTO_INCREMENT,
-  `team_name` varchar(45) DEFAULT NULL,
-  `mgr_first_name` varchar(45) DEFAULT NULL,
-  `mgr_last_name` varchar(45) DEFAULT NULL,
-  `is_active` binary(1) DEFAULT '0',
-  PRIMARY KEY (`mgrID`)
-); */
-
-ALTER TABLE `covid`.`user` ADD COLUMN `mgr_id` INT NULL  AFTER `is_active` , 
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION
-, ADD INDEX `mrg_id_idx` (`mgr_id` ASC) ;
-
-
-
 
 CREATE  TABLE `covid`.`survey_question` (
   `ssq_id` INT NOT NULL AUTO_INCREMENT ,

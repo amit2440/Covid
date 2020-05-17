@@ -15,7 +15,7 @@
 	</insert>
 
 	<select id ="selectFeedbacksForSurveyAndUser" parameterType="Feedback" resultMap="Feedback-ResultMappings.ResultForGetFeedbackForSurveyAndUser">
-		SELECT f.user_id, f.value,sq.survey_id, q.question, o.display_name, o.risk, o.type
+		SELECT f.user_id, f.value,sq.survey_id, q.question, o.risk, o.checked
 		FROM covid.feedback f
 		JOIN covid.user u
 		ON u.user_id = f.user_id
@@ -32,7 +32,7 @@
 		AND s.is_active=1
 	</select>
 	<select id ="selectFeedbacksForSurvey" parameterType="Feedback" resultMap="Feedback-ResultMappings.ResultForGetFeedbackForSurvey">
-		SELECT f.value,sq.survey_id, q.question, o.display_name, o.risk, o.type
+		SELECT f.value,sq.survey_id, q.question, o.risk, o.checked
 		FROM covid.feedback f
 		JOIN covid.survey_question sq
 		ON sq.ssq_Id = f.ssq_id

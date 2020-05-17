@@ -2,58 +2,49 @@ package com.med.disease.tracking.app.dto;
 
 public class OptionDTO {
 
-    private Integer optionId;
-    private String fieldName;
-    private String displayName;
-    private String type;
-    private Integer size;
-    private Integer risk;
+	private Integer optionId;
+	private String displayName;
+	private Boolean checked;
+	private Integer size;
+	private Integer risk;
 
-    public Integer getOptionId() {
-        return optionId;
-    }
+	public Integer getOptionId() {
+		return optionId;
+	}
 
-    public void setOptionId(Integer optionId) {
-        this.optionId = optionId;
-    }
+	public void setOptionId(Integer optionId) {
+		this.optionId = optionId;
+	}
 
-    public String getFieldName() {
-        return fieldName;
-    }
+	public String getDisplayName() {
+		return displayName;
+	}
 
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
-    }
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
-    public String getDisplayName() {
-        return displayName;
-    }
+	public Integer getSize() {
+		return size;
+	}
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
+	public void setSize(Integer size) {
+		this.size = size;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public Integer getRisk() {
+		return risk;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setRisk(Integer risk) {
+		this.risk = risk;
+	}
 
-    public Integer getSize() {
-        return size;
-    }
+	public Boolean getChecked() {
+		return checked;
+	}
 
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public Integer getRisk() {
-        return risk;
-    }
-
-    public void setRisk(Integer risk) {
-        this.risk = risk;
-    }
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
+	}
 }
