@@ -21,7 +21,6 @@
 		O.OPTION_ID,
 		O.DISPLAY_NAME,
 		O.CHECKED,
-		O.SIZE,
 		O.RISK
 	</sql>
 	

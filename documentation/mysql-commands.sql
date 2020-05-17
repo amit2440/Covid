@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `covid`.`question` (
 CREATE TABLE IF NOT EXISTS `covid`.`option` (
     `option_id` INT NOT NULL AUTO_INCREMENT,
     `display_name` VARCHAR(100) NULL,
-    `size` INT NULL,
 	`checked` BIT NULL,
     `risk` INT NOT NULL DEFAULT 0,
     PRIMARY KEY (`option_id`)

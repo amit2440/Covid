@@ -5,7 +5,6 @@ public class Option {
 	private Integer optionId;
 	private String displayName;
 	private Boolean checked;
-	private Integer size;
 	private Integer risk;
 
 	public String getDisplayName() {
@@ -14,14 +13,6 @@ public class Option {
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
-	}
-
-	public Integer getSize() {
-		return size;
-	}
-
-	public void setSize(Integer size) {
-		this.size = size;
 	}
 
 	public Integer getRisk() {

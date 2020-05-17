@@ -46,7 +46,6 @@ public class FetchQuestionMapper extends Mapper {
 			optionDTO.setOptionId(option.getOptionId());
 			optionDTO.setDisplayName(option.getDisplayName());
 			optionDTO.setChecked(option.getChecked());
-			optionDTO.setSize(option.getSize());
 			optionDTO.setRisk(option.getRisk());
 		}
 		return optionDTO;

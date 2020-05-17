@@ -5,7 +5,6 @@ public class OptionDTO {
 	private Integer optionId;
 	private String displayName;
 	private Boolean checked;
-	private Integer size;
 	private Integer risk;
 
 	public Integer getOptionId() {
@@ -22,14 +21,6 @@ public class OptionDTO {
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
-	}
-
-	public Integer getSize() {
-		return size;
-	}
-
-	public void setSize(Integer size) {
-		this.size = size;
 	}
 
 	public Integer getRisk() {

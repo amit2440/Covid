@@ -36,7 +36,6 @@ public class SubmitQuestionMapper extends Mapper {
 			option = new Option();
 			option.setDisplayName(requestDTO.getDisplayName());
 			option.setChecked(requestDTO.getChecked());
-			option.setSize(requestDTO.getSize());
 			option.setRisk(requestDTO.getRisk());
 		}
 		return option;
