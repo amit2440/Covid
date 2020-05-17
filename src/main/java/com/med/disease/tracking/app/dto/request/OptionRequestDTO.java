@@ -5,8 +5,6 @@ public class OptionRequestDTO {
 	private Integer optionId;
 	/** question */
 	private String displayName;
-	/** size */
-	private Integer size;
 	/** risk */
 	private Integer risk;
 	/** checked */
@@ -47,18 +45,6 @@ public class OptionRequestDTO {
 	 */
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
-	}
-	/**
-	 * @return the size
-	 */
-	public Integer getSize() {
-		return size;
-	}
-	/**
-	 * @param size the size to set
-	 */
-	public void setSize(Integer size) {
-		this.size = size;
 	}
 	/**
 	 * @return the risk
