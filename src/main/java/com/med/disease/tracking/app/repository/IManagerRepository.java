@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import com.med.disease.tracking.app.dto.ManagerDTO;
 import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.model.Manager;
 
@@ -27,4 +29,11 @@ public interface IManagerRepository {
 	@Select("SELECT first_name,last_name,user_id from user where is_active <> 0 and role='MANAGER';")
 	public List<Manager> findAll(); 
 	
+	
+	
+	@Update("Update user set mgr_id=#{newMgrId}  where mgr_id=#{mgrId}")
+	public int update(ManagerDTO managerDTO);
+	
+	@Select("SELECT Count(mgr_id) from user where user_id=#{mgrId} AND  role='MANAGER'" )
+	public int validateMgrIDExist(Integer mgrId);
 }

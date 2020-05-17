@@ -37,5 +37,30 @@ public class ManagerServiceImpl implements ManagerService {
 		List<Manager> managerList = iManagerRepository.findAll();
 		return  (List<ManagerDTO>)managerMapper.map(managerList, MappingTypeEnum.MAPTORESPONSE, null);
 	}
+	
+	@Override
+	public int updateUserManager(ManagerDTO managerDTO) throws Exception {
+		return iManagerRepository.update(managerDTO);
+	}
+
+	
+	@Override
+	public boolean validateData(ManagerDTO managerDTO) throws Exception {
+		// TODO Auto-generated method stub
+		int res = 0;
+		res = iManagerRepository.validateMgrIDExist(managerDTO.getMgrId());
+		if(res <= 0) {
+			return false;
+		}
+		
+		res = iManagerRepository.validateMgrIDExist(managerDTO.getNewMgrId());
+		if(res <= 0) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	
 
 }

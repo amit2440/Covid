@@ -75,4 +75,32 @@ public class ManagerHandler extends RestControllerHandler {
 	}
 	
 	
+	public  Object handleUpdMgrReq(Object request, BindingResult result, String... pathParam) throws Exception {
+		ManagerDTO mgrDTO = (ManagerDTO) request;
+		
+		if(!managerService.validateData(mgrDTO)) {
+			ErrorResponse errorRes = new ErrorResponse();
+			errorRes.setTitle("Manager IDs are not valid! Please confirm again.");
+			errorRes.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+			errorRes.setHttpStatusValue(HttpStatus.UNPROCESSABLE_ENTITY);
+			
+			throw new CovidAppException(errorRes);
+		}
+		
+		int res = managerService.updateUserManager(mgrDTO);
+		if(res > 0) {
+			return new ResponseEntity<String>("User Information Update Successfully", HttpStatus.OK);
+		}else {
+			ErrorResponse errorRes = new ErrorResponse();
+			errorRes.setTitle("System ERROR!!!! Please try again");
+			errorRes.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+			errorRes.setHttpStatusValue(HttpStatus.UNPROCESSABLE_ENTITY);
+			
+			throw new CovidAppException(errorRes);
+		}
+	}
+	
+	
+	
+	
 }
