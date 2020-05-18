@@ -44,7 +44,7 @@ public class ManagerController {
 	
 	//MANAGER UPDATE IS Pending, MAnager search list is pending and TESTING IS PENDING
 //	Also once manager is added into system need to add manage id into user object that is also pending.
-	@PreAuthorize("hasAuthority('ADMIN')")
+//	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(path = "/reg/managers", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> listManagers() throws BeansException, Exception{
