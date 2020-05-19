@@ -9,7 +9,7 @@ public class UserDTO {
 	private String userName;
 	private Integer userId;
 	private String password;
-	private boolean enabled;
+	private Boolean enabled;
 	private String firstName;
 	private String lastName;
 	private String mobile;
@@ -56,7 +56,7 @@ public class UserDTO {
 	public UserDTO() {
 	}
 
-	public UserDTO(String userName, String password, boolean enabled) {
+	public UserDTO(String userName, String password, Boolean enabled) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -142,11 +142,11 @@ public class UserDTO {
 		this.userId = userId;
 	}
 
-	public boolean isEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 
