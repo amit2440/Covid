@@ -158,12 +158,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 	@Override
 	public SurveyReportDTO fetchAllSurveyFeedbacks(FetchFeedbackRequestDTO requestDTO) throws Exception {
-		User reqUser = new User();
-		reqUser.setUserId(requestDTO.getUserId());
-		
-		// get admin info
-		User admin = getUserInfo(reqUser);
-		
 		// fetch all managers
 		User searchMgrs = new User();
 		searchMgrs.setRole(Constant.Role.MANAGER);
@@ -187,7 +181,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 			// calculate/apply riskStatus
 			feedbacks.add(caculateRisk(derivedUsers, requestDTO.getSurveyId(), toDTO(manager)));
 		}
-		surveyReportDTO.setAdmin(toDTO(admin));
 		surveyReportDTO.setFeedbacks(feedbacks);
 		return surveyReportDTO;
 	}
