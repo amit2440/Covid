@@ -5,7 +5,7 @@ public class Option {
 	private Integer optionId;
 	private String displayName;
 	private Boolean checked;
-	private Integer risk;
+	private String risk;
 
 	public String getDisplayName() {
 		return displayName;
@@ -15,11 +15,11 @@ public class Option {
 		this.displayName = displayName;
 	}
 
-	public Integer getRisk() {
+	public String getRisk() {
 		return risk;
 	}
 
-	public void setRisk(Integer risk) {
+	public void setRisk(String risk) {
 		this.risk = risk;
 	}
 

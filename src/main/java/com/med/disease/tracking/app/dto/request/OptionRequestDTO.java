@@ -6,7 +6,7 @@ public class OptionRequestDTO {
 	/** question */
 	private String displayName;
 	/** risk */
-	private Integer risk;
+	private String risk;
 	/** checked */
 	private Boolean checked;
 	
@@ -49,13 +49,13 @@ public class OptionRequestDTO {
 	/**
 	 * @return the risk
 	 */
-	public Integer getRisk() {
+	public String getRisk() {
 		return risk;
 	}
 	/**
 	 * @param risk the risk to set
 	 */
-	public void setRisk(Integer risk) {
+	public void setRisk(String risk) {
 		this.risk = risk;
 	}
 }

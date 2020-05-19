@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.med.disease.tracking.app.dto.ManagerDTO;
-import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.mapper.ManagerMapper;
 import com.med.disease.tracking.app.mapper.MappingTypeEnum;
 import com.med.disease.tracking.app.model.Manager;

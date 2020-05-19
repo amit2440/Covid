@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class FeedbackResponseDTO {
     private String question;
     private String answer;
-    private Integer risk;
+    private String risk;
 
     public String getQuestion() {
         return question;
@@ -24,11 +24,11 @@ public class FeedbackResponseDTO {
         this.answer = answer;
     }
 
-    public Integer getRisk() {
+    public String getRisk() {
         return risk;
     }
 
-    public void setRisk(Integer risk) {
+    public void setRisk(String risk) {
         this.risk = risk;
     }
 }

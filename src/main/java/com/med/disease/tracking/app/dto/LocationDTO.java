@@ -1,8 +1,8 @@
 package com.med.disease.tracking.app.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class LocationDTO {

@@ -2,6 +2,9 @@ package com.med.disease.tracking.app.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class UserDTO {
 	private String userName;
 	private Integer userId;
@@ -14,6 +17,15 @@ public class UserDTO {
 	private String role;
 	private String workLocation;
 	private Integer mgrID;
+	private String riskStatus;
+
+	public String getRiskStatus() {
+		return riskStatus;
+	}
+
+	public void setRiskStatus(String riskStatus) {
+		this.riskStatus = riskStatus;
+	}
 
 	public Integer getMgrID() {
 		return mgrID;

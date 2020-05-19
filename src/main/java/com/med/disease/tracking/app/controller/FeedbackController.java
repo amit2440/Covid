@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
+import com.med.disease.tracking.app.handler.FetchDerivedFeedbackHandler;
 import com.med.disease.tracking.app.handler.FetchFeedbackHandler;
 import com.med.disease.tracking.app.handler.FetchSurveyFeedbackHandler;
 import com.med.disease.tracking.app.handler.SubmitFeedbackHandler;
@@ -37,9 +38,16 @@ public class FeedbackController {
                 .handle(fetchFeedbackRequestDTO, bindingResult);
     }
 
-    @GetMapping(value = "/surveys/{surveyId}/feedbacks", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> fetchAllFeedback(@ModelAttribute FetchFeedbackRequestDTO fetchFeedbackRequestDTO,
-                                              BindingResult bindingResult) throws Exception{
+    @GetMapping(value = "/reports/surveys/{surveyId}/feedbacks/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> fetchDerivedFeedback(@ModelAttribute FetchFeedbackRequestDTO fetchFeedbackRequestDTO,
+    		BindingResult bindingResult) throws Exception{
+        return (ResponseEntity<?>) beanFactory.getBean(FetchDerivedFeedbackHandler.class)
+                .handle(fetchFeedbackRequestDTO, bindingResult);
+    }
+    
+    @GetMapping(value = "/reports/surveys/{surveyId}/feedbacks", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> fetchAllFeedbacks(@ModelAttribute FetchFeedbackRequestDTO fetchFeedbackRequestDTO,
+    		BindingResult bindingResult) throws Exception{
         return (ResponseEntity<?>) beanFactory.getBean(FetchSurveyFeedbackHandler.class)
                 .handle(fetchFeedbackRequestDTO, bindingResult);
     }

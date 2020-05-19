@@ -12,12 +12,26 @@ public interface Constant {
 		String REGISTER_USER = "User Registration";
 		String SUBMIT_FEEDBACK = "Submit Feedback";
 		String FEEDBACK_FETCH = "Fetch Feedback";
+		String FEEDBACK_FETCH_MANAGER = "Fetch Feedback Report for manager";
 		String USER_INFO = "User Information";
 		String ADD_LOCATION = "Add Location";
 		String FETCH_LOCATION = "Fetch Location";
 		String REG_MANAGER = "MANAGER REGISTRATION";
 	}
-
+	
+	public interface RiskStatus {
+		String H = "H";
+		String M = "M";
+		String L = "L";
+		String U = "U";
+	}
+	
+	public interface Role {
+		String USER = "USER";
+		String MANAGER = "MANAGER";
+		String ADMIN = "ADMIN";
+	}
+	
 	public interface Field {
 		String QUESTION_ID = "questionId";
 		String QUESTION_IDS = "questionIds";

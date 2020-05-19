@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.med.disease.tracking.app.exception.DatabaseException;
 import com.med.disease.tracking.app.model.Feedback;
+import com.med.disease.tracking.app.model.UserRisk;
 
 @Repository
 public class FeedbackDAO extends BaseDAO {
@@ -25,16 +26,7 @@ public class FeedbackDAO extends BaseDAO {
 
     public List<Feedback> getFeedbacks(Feedback feedback) throws Exception {
         try {
-            return getSqlSession().selectList("Feedback.selectFeedbacksForSurveyAndUser", feedback);
-        } catch (Exception exception){
-            LOGGER.error("Database Exception :{}", exception.getMessage());
-            throw new DatabaseException(exception.getMessage());
-        }
-    }
-
-    public List<Feedback> getFeedbacksForSurvey(Feedback feedback) throws Exception {
-        try{
-            return getSqlSession().selectList("Feedback.selectFeedbacksForSurvey", feedback);
+            return getSqlSession().selectList("Feedback.getUserSurveyFeedback", feedback);
         } catch (Exception exception){
             LOGGER.error("Database Exception :{}", exception.getMessage());
             throw new DatabaseException(exception.getMessage());
@@ -49,4 +41,15 @@ public class FeedbackDAO extends BaseDAO {
             throw new DatabaseException(exception.getMessage());
         }
     }
+    
+    public List<UserRisk> getUserRisks(UserRisk userRisk) throws Exception {
+        try {
+            return getSqlSession().selectList("Feedback.getUserRisks", userRisk);
+        } catch (Exception exception){
+            LOGGER.error("Database Exception :{}", exception.getMessage());
+            throw new DatabaseException(exception.getMessage());
+        }
+    }
+    
+    
 }

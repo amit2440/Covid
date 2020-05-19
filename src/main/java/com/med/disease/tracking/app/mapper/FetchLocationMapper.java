@@ -1,12 +1,13 @@
 package com.med.disease.tracking.app.mapper;
 
-import com.med.disease.tracking.app.dto.LocationDTO;
-import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
-import com.med.disease.tracking.app.model.Location;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
-import java.util.Map;
+import com.med.disease.tracking.app.dto.LocationDTO;
+import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
+import com.med.disease.tracking.app.model.Location;
 
 @Component
 public class FetchLocationMapper extends Mapper{

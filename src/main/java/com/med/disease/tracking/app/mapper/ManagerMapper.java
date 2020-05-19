@@ -7,9 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.med.disease.tracking.app.dto.ManagerDTO;
-import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.model.Manager;
-import com.med.disease.tracking.app.model.User;
 
 @Component
 public class ManagerMapper extends Mapper{

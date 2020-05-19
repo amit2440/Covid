@@ -1,10 +1,11 @@
 package com.med.disease.tracking.app.validation;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
 import com.med.disease.tracking.app.util.ValidationUtil;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 public class FetchLocationValidator implements Validator {
 

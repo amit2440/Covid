@@ -6,19 +6,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
-import com.med.disease.tracking.app.dto.SurveyReportDTO;
+import com.med.disease.tracking.app.dto.SurveyFeedbackDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.service.FeedbackService;
 import com.med.disease.tracking.app.util.ErrorUtil;
-import com.med.disease.tracking.app.validation.FetchAdminFeedbackValidator;
+import com.med.disease.tracking.app.validation.FetchFeedbackValidator;
 
 @RequestScope
 @Component
-public class FetchSurveyFeedbackHandler extends RestControllerHandler {
+public class FetchDerivedFeedbackHandler extends RestControllerHandler {
 
 	private FetchFeedbackRequestDTO fetchFeedbackRequestDTO;
 
@@ -33,15 +34,16 @@ public class FetchSurveyFeedbackHandler extends RestControllerHandler {
 
 	@Override
 	protected void validateRequest() {
-		new FetchAdminFeedbackValidator().validate(fetchFeedbackRequestDTO, bindingResult);
+		Validator fetchFeedbackValidator = new FetchFeedbackValidator();
+		fetchFeedbackValidator.validate(fetchFeedbackRequestDTO, bindingResult);
 		ErrorUtil.processError(bindingResult, Constant.Module.FEEDBACK_FETCH_MANAGER);
 	}
 
 	@Override
 	protected Object processRequest() throws Exception {
-		SurveyReportDTO surveyReportDTO = feedbackService.fetchAllSurveyFeedbacks(fetchFeedbackRequestDTO);
-		return ObjectUtils.isEmpty(surveyReportDTO)
+		SurveyFeedbackDTO surveyFeedbackDTO = feedbackService.fetchSurveyFeedbacks(fetchFeedbackRequestDTO);
+		return ObjectUtils.isEmpty(surveyFeedbackDTO)
 				? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NOT_FOUND)
-				: new ResponseEntity<SurveyReportDTO>(surveyReportDTO, HttpStatus.OK);
+				: new ResponseEntity<SurveyFeedbackDTO>(surveyFeedbackDTO, HttpStatus.OK);
 	}
 }

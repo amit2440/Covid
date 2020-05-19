@@ -3,19 +3,29 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace= "Feedback-ResultMappings">
-	<resultMap id="ResultForGetFeedbackForSurveyAndUser" type="Feedback" extends="ResultForGetFeedbackForSurvey">
+	<resultMap id="ResultGetUserSurveyFeedback" type="Feedback" extends="ResultGetSurveyFeedback">
 		<result property="user.userId" column="USER_ID"/>
+		<result property="user.firstName" column="FIRST_NAME"/>
+		<result property="user.lastName" column="LAST_NAME"/>
+		<result property="user.role" column="ROLE"/>
+		<result property="user.workLocation" column="WORK_LOCATION"/>
 	</resultMap>
 
-	<resultMap id="ResultForGetFeedbackForSurvey" type="Feedback" extends="ResultForGetFeedback">
+	<resultMap id="ResultGetSurveyFeedback" type="Feedback" extends="ResultGetFeedback">
 		<result property="surveyQuestion.survey.surveyId" column="SURVEY_ID"/>
 	</resultMap>
 
-	<resultMap id ="ResultForGetFeedback" type="Feedback">
+	<resultMap id ="ResultGetFeedback" type="Feedback">
 		<result property="surveyQuestion.question.question" column="QUESTION"/>
 		<result property="value" column="VALUE"/>
 		<result property="option.risk" column="RISK"/>
 		<result property="option.type" column="TYPE"/>
 		<result property="option.displayName" column="DISPLAY_NAME"/>
+	</resultMap>
+	
+	<resultMap id ="ResultGetUserRisk" type="UserRisk">
+		<result property="userId" column="USER_ID"/>
+		<result property="surveyId" column="SURVEY_ID"/>
+		<result property="riskStatus" column="RISK"/>
 	</resultMap>
 </mapper>

@@ -1,12 +1,12 @@
 package com.med.disease.tracking.app.mapper;
 
-import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
-import com.med.disease.tracking.app.model.Location;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+import com.med.disease.tracking.app.dto.request.LocationRequestDTO;
+import com.med.disease.tracking.app.model.Location;
 
 @Component
 public class AddLocationMapper extends Mapper{

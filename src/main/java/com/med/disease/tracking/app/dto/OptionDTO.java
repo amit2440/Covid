@@ -5,7 +5,7 @@ public class OptionDTO {
 	private Integer optionId;
 	private String displayName;
 	private Boolean checked;
-	private Integer risk;
+	private String risk;
 
 	public Integer getOptionId() {
 		return optionId;
@@ -23,11 +23,11 @@ public class OptionDTO {
 		this.displayName = displayName;
 	}
 
-	public Integer getRisk() {
+	public String getRisk() {
 		return risk;
 	}
 
-	public void setRisk(Integer risk) {
+	public void setRisk(String risk) {
 		this.risk = risk;
 	}
 

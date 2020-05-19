@@ -9,6 +9,7 @@
 		<typeAlias alias="Survey" type="com.med.disease.tracking.app.model.Survey" />
 		<typeAlias alias="Feedback" type="com.med.disease.tracking.app.model.Feedback" />
 		<typeAlias alias="User" type="com.med.disease.tracking.app.model.User" />
+		<typeAlias alias="UserRisk" type="com.med.disease.tracking.app.model.UserRisk" />
 		<typeAlias alias="Location" type="com.med.disease.tracking.app.model.Location" />
 	</typeAliases>
 	<mappers>
