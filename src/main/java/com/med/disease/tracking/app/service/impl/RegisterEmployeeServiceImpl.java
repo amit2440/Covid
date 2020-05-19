@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.UserDTO;

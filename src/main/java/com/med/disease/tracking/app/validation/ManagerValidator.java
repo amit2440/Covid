@@ -5,7 +5,6 @@ import org.springframework.validation.Validator;
 
 import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dto.ManagerDTO;
-import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.util.ValidationUtil;
 
 

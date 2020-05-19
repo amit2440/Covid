@@ -1,7 +1,6 @@
 package com.med.disease.tracking.app.service;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 
 import com.med.disease.tracking.app.dto.UserDTO;
 

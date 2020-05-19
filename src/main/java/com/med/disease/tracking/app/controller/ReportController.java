@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.med.disease.tracking.app.dto.ReportRequestDTO;
-import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
-import com.med.disease.tracking.app.handler.FetchSurveyHandler;
 import com.med.disease.tracking.app.handler.ReportHandler;
 
 @RestController

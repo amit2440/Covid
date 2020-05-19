@@ -180,3 +180,113 @@ request :
 }
 response : 201 created
 ---------------------------------------------------------------------------------------------------------------
+-- get user with their riskStatus for given manager
+GET {{url}}/ca/reports/surveys/1/feedbacks/13
+response : 
+{
+    "manager": {
+        "userId": 13,
+        "enabled": false,
+        "firstName": "shraddha",
+        "lastName": "joshi",
+        "role": "MANAGER",
+        "workLocation": "pune"
+    },
+    "users": [
+        {
+            "userId": 8,
+            "enabled": false,
+            "firstName": "shweta",
+            "lastName": "xyz",
+            "role": "USER",
+            "workLocation": "pune",
+            "riskStatus": "M"
+        },
+        {
+            "userId": 9,
+            "enabled": false,
+            "firstName": "payal",
+            "lastName": "abc",
+            "role": "USER",
+            "workLocation": "pune",
+            "riskStatus": "U"
+        }
+    ]
+}
+
+------------------------------------------------------------------------------
+-- get user with their riskStatus for admin
+GET {{url}}/ca/reports/surveys/1/feedbacks
+response : 
+{
+    "admin": {
+        "userId": 1,
+        "enabled": false,
+        "firstName": "sunil",
+        "lastName": "saibol",
+        "role": "ADMIN",
+        "workLocation": "pune"
+    },
+    "feedbacks": [
+        {
+            "manager": {
+                "userId": 11,
+                "enabled": false,
+                "firstName": "pradipta",
+                "lastName": "mohanty",
+                "role": "MANAGER",
+                "workLocation": "noida"
+            },
+            "users": [
+                {
+                    "userId": 6,
+                    "enabled": false,
+                    "firstName": "priya",
+                    "lastName": "jaroli",
+                    "role": "USER",
+                    "workLocation": "pune",
+                    "riskStatus": "H"
+                },
+                {
+                    "userId": 7,
+                    "enabled": false,
+                    "firstName": "pritam",
+                    "lastName": "gaikwad",
+                    "role": "USER",
+                    "workLocation": "pune",
+                    "riskStatus": "H"
+                }
+            ]
+        },
+        {
+            "manager": {
+                "userId": 13,
+                "enabled": false,
+                "firstName": "shraddha",
+                "lastName": "joshi",
+                "role": "MANAGER",
+                "workLocation": "pune"
+            },
+            "users": [
+                {
+                    "userId": 8,
+                    "enabled": false,
+                    "firstName": "shweta",
+                    "lastName": "xyz",
+                    "role": "USER",
+                    "workLocation": "pune",
+                    "riskStatus": "M"
+                },
+                {
+                    "userId": 9,
+                    "enabled": false,
+                    "firstName": "sayali",
+                    "lastName": "abc",
+                    "role": "USER",
+                    "workLocation": "pune",
+                    "riskStatus": "U"
+                }
+            ]
+        }
+    ]
+}

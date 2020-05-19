@@ -15,8 +15,6 @@ public class User {
 	private String role;
 	private String workLocation;
 	private Integer mgrID;
-	
-	
 
 	public Integer getMgrID() {
 		return mgrID;
