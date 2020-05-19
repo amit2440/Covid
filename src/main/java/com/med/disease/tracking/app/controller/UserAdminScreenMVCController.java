@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserAdminScreenMVCController {
 
-	@RequestMapping(value="/mvc/showList", method = RequestMethod.GET)
-    public String showLoginPage(ModelMap model){
-        return "userFBReport";
+	@RequestMapping(value="/mvc/showList", method = RequestMethod.POST)
+    public String showAddUserPage(ModelMap model){
+        return "addUser";
     }
 	
+	
+	@RequestMapping(value="/mvc/login", method = RequestMethod.GET)
+    public String showLoginPage(ModelMap model){
+        return "login";
+    }
 }
