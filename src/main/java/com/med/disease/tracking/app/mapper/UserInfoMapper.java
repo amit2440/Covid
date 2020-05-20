@@ -42,6 +42,8 @@ public class UserInfoMapper extends Mapper{
             	userDTO.setWorkLocation(user.getWorkLocation());
             	userDTO.setMobile(user.getMobile());
             	userDTO.setRole(user.getRole());
+            	userDTO.setManagerName(user.getManagerName());
+            	userDTO.setMgrID(user.getMgrID());
             	userDTOList.add(userDTO);
             }
         	

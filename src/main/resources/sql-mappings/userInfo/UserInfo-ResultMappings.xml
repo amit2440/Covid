@@ -12,5 +12,7 @@
 		<result property="role" column="role"/>
 		<result property="mobile" column="mobile"/>
 		<result property="workLocation" column="work_location"/>
+		<result property="mgrID" column="mgr_id"/>
+		<result property="managerName" column="mgrName"/>
 	</resultMap>
 </mapper>

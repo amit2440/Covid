@@ -17,14 +17,24 @@ public class UserDTO {
 	private String role;
 	private String workLocation;
 	private Integer mgrID;
-	private String riskStatus;
 
+	private String riskStatus;
+	private String managerName;
+	
 	public String getRiskStatus() {
 		return riskStatus;
 	}
 
 	public void setRiskStatus(String riskStatus) {
 		this.riskStatus = riskStatus;
+	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
 
 	public Integer getMgrID() {
@@ -129,9 +139,8 @@ public class UserDTO {
 
 	@Override
 	public String toString() {
-		return "UserDTO [userName=" + userName + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ",, mobile=" + mobile + ", role=" + role + ", workLocation="
-				+ workLocation + "]";
+		return "UserDTO [userName=" + userName + ", userId=" + userId + ", firstName=" + firstName + ", lastName="
+				+ lastName + ",, mobile=" + mobile + ", role=" + role + ", workLocation=" + workLocation + "]";
 	}
 
 	public Integer getUserId() {
@@ -149,6 +158,5 @@ public class UserDTO {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-
 
 }

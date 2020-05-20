@@ -94,7 +94,7 @@ a {
   
 </form>
 
-<form action="/ca/mvc/showHomePage" id="homePageForm" method="post">
+<form action="/ca/mvc/showHomePage" id="homePageForm" method="get">
 <input type="hidden" value="" name="token" id="token"/>
 </form>
 </body>
@@ -118,7 +118,6 @@ function loginRequest(){
 // 				alert(this.responseText);
 				
 				var obj = JSON.parse(this.responseText)
-				alert("access TOken ==="+obj.accessToken);
 				document.getElementById("token").value=obj.accessToken;
 				showHomePage();
 				
@@ -138,7 +137,8 @@ function loginRequest(){
 
 
 function showHomePage(){
-	document.forms["homePageForm"].action="/ca/mvc/showList";
+// 	document.forms["homePageForm"].action="/ca/mvc/showList";
+	document.forms["homePageForm"].action="/ca/mvc/home";
 	document.forms["homePageForm"].submit();
 }
 </script>

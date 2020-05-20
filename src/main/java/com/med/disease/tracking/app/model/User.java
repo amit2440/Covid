@@ -16,6 +16,19 @@ public class User {
 	private String workLocation;
 	private Integer mgrID;
 
+	private String managerName;
+	
+	
+
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
 	public Integer getMgrID() {
 		return mgrID;
 	}

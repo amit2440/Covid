@@ -5,7 +5,7 @@
 <mapper namespace = "UserInfo">
 	
 	<select id ="searchUser" parameterType="User" resultMap="UserInfo-ResultMappings.ResultForSearchUser">
-		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role,u.work_location
+		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role,u.work_location,u.mgr_id,(select CONCAT(sa.first_name ," ", sa.last_name) from covid.user sa where sa.user_id=u.mgr_id) as mgrName
 		FROM user u
 		WHERE u.is_active = 1  
 			<if test="mobile != null and mobile != ''">
@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id ="searchUserByuserId" parameterType="User" resultMap="UserInfo-ResultMappings.ResultForSearchUser">
-		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role,u.work_location
+		SELECT u.user_id, u.first_name, u.last_name,u.mobile,u.role,u.work_location,u.mgr_id
 		FROM user u
 		WHERE u.user_id=#{userId} ;
 			
