@@ -96,7 +96,7 @@ a {
 </head>
 <body onload="getListOfManager()">
 
-
+<jsp:include page="header.jsp" /> 
 
 	<form action="/action_page.php">
 	<input type="hidden" value="<%=ss %>" name="token" id="token"/>
@@ -206,9 +206,7 @@ a {
 			if (this.readyState == 4 && this.status == 200) {
 				//	 	      document.getElementById("demo").innerHTML = this.responseText;
 				alert(this.responseText);
-				document.getElementById("firstName").value="";
-				document.getElementById("lastName").value="";
-				 document.getElementById("mobile").value="";
+				showHomePage();
 			}
 		};
 
@@ -219,7 +217,7 @@ a {
 				.setRequestHeader(
 						'Authorization',
 						'Bearer '
-								+ 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5ODYwMjc3OTgxIiwiaWF0IjoxNTg5ODgzODM1LCJleHAiOjE1ODk5NzAyMzUsIlVzZXJJZCI6MTAwMX0.8j4gVvT5hHOtlD5IGHLxDkWkEf5CwahwZiadOV2Ewnck1dMtHgnyh_4v8F4hZR-4eoK_YnC5ZLRllzKaOnIUZw');
+								+ document.getElementById("token").value);
 		xhttp.send(myJSON);
 
 	}
@@ -237,6 +235,14 @@ a {
 // 			"workLocation" : document.getElementById("workLocation").value
 // 		};
 // 	}
+
+function showHomePage(){
+// 	document.forms["homePageForm"].action="/ca/mvc/showList";
+	document.forms["homePageForm"].action="/ca/mvc/home";
+	document.forms["homePageForm"].method="get";
+	document.forms["homePageForm"].submit();
+}
+
 </script>
 
 </html>

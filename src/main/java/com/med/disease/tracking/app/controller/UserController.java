@@ -71,8 +71,8 @@ public class UserController {
 	}
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@GetMapping("/admin/user")
-	public ResponseEntity<?> user(@RequestBody UserDTO userDTO,BindingResult bindingResult) throws BeansException, Exception {
+	@PostMapping("/admin/user")
+	public ResponseEntity<?> user(@RequestBody(required = false) UserDTO userDTO,BindingResult bindingResult) throws BeansException, Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(UserInfoHandler.class)
 				.handle(userDTO, bindingResult,"search");
 	}
