@@ -176,7 +176,7 @@ a {
 				
 			}
 		};
-		xhttp.open("GET", "http://localhost:8081/ca/reg/managers", true);
+		xhttp.open("GET", "/ca/reg/managers", true);
 		xhttp
 		.setRequestHeader(
 				'Authorization',
@@ -211,7 +211,7 @@ a {
 		};
 
 		// 		  xhttp.open("PUT", "http://localhost:8081/ca/admin/updateUser", true);
-		xhttp.open("POST", "http://localhost:8081/ca/reguser/createUser", true);
+		xhttp.open("POST", "/ca/reguser/createUser", true);
 		xhttp.setRequestHeader("Content-type", "application/json");
 		xhttp
 				.setRequestHeader(

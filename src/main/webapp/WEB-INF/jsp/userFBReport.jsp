@@ -29,7 +29,7 @@ var myJSON = JSON.stringify(myObj);
 	    }
 	  };
 	 
-	  xhttp.open("PUT", "http://localhost:8081/ca/admin/updateUser", true);
+	  xhttp.open("PUT", "/ca/admin/updateUser", true);
 	  xhttp.setRequestHeader("Content-type", "application/json");
 	  xhttp.setRequestHeader('Authorization', 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5ODYwMjc3OTgxIiwiaWF0IjoxNTg5ODI2OTY2LCJleHAiOjE1ODk5MTMzNjYsIlVzZXJJZCI6MTAwMX0.irrvkszeMlERH4U1Kx2X1QuinntQPYw-Fv72dPPpMb_BzI9lNJWOI7KYWn_4mVy7OVv5haITlC_EabR4vZ4nYA');
 	  xhttp.send(myJSON);

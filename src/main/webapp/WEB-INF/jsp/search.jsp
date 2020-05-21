@@ -123,7 +123,7 @@ table#t01 th {
 				}
 			}
 		};
-		xhttp.open("POST", "http://localhost:8081/ca/admin/user", true);
+		xhttp.open("POST", "/ca/admin/user", true);
 		xhttp.setRequestHeader("Content-type", "application/json");
 		// 		xhttp.setRequestHeader('Authorization', 'Bearer '
 		// 				+ document.getElementById("token").value);
