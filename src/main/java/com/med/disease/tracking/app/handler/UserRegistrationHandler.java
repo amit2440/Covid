@@ -58,6 +58,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 	protected Object processRequest() throws Exception {
 		// TODO Auto-generated method stub
 		String successMsg = "";
+		userDTO.setEnabled(true);
 		int res = registerEmployeeService.registerEmployee(userDTO);
 		if (res <= 0) {
 			userDTO = null;

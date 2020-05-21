@@ -125,7 +125,7 @@ function loginRequest(){
 		};
 
 		// 		  xhttp.open("PUT", "http://localhost:8081/ca/admin/updateUser", true);
-		xhttp.open("POST", "http://localhost:8081/ca/signin", true);
+		xhttp.open("POST", "/ca/signin", true);
 		xhttp.setRequestHeader("Content-type", "application/json");
 // 		xhttp
 // 				.setRequestHeader(
