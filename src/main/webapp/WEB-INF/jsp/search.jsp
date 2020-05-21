@@ -118,7 +118,11 @@ table#t01 th {
 							+ '</a>';
 					cell1.innerHTML = obj[i].lastName;
 					cell2.innerHTML = obj[i].role;
-					cell3.innerHTML = obj[i].managerName;
+					if(obj[i].managerName=='' || obj[i].managerName=='undefined' || obj[i].managerName==null){
+						cell3.innerHTML="";
+					}else{
+						cell3.innerHTML = obj[i].managerName
+					}
 					cell4.innerHTML = obj[i].mobile;
 				}
 			}
