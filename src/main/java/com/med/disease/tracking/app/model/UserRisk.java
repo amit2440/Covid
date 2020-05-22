@@ -3,6 +3,7 @@ package com.med.disease.tracking.app.model;
 public class UserRisk {
 
 	private Integer userId;
+	private Integer managerId;
 	private String riskStatus;
 	private Integer surveyId;
 	
@@ -41,5 +42,11 @@ public class UserRisk {
 	 */
 	public void setSurveyId(Integer surveyId) {
 		this.surveyId = surveyId;
+	}
+	public Integer getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(Integer managerId) {
+		this.managerId = managerId;
 	}
 }

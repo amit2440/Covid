@@ -61,8 +61,11 @@
 		WHERE  u.is_active = 1 
 			   AND sq.survey_id = #{surveyId}
 			   AND s.is_active = 1
+				<if test="managerId != null">
+					AND u.mgr_id = #{managerId}
+				</if>
 				<if test="userId != null">
-					AND u.mgr_id = #{userId}
+					AND u.user_id = #{userId}
 				</if>
 	</select>
 

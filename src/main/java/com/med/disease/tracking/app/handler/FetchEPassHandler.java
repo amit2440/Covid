@@ -9,39 +9,39 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.med.disease.tracking.app.constant.Constant;
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
+import com.med.disease.tracking.app.dto.EPassDTO;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
-import com.med.disease.tracking.app.dto.SurveyReportDTO;
-import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
-import com.med.disease.tracking.app.service.FeedbackService;
+import com.med.disease.tracking.app.service.EPassService;
 import com.med.disease.tracking.app.util.ErrorUtil;
-import com.med.disease.tracking.app.validation.FetchAdminFeedbackValidator;
+import com.med.disease.tracking.app.validation.FetchEPassValidator;
 
 @RequestScope
 @Component
-public class FetchSurveyFeedbackHandler extends RestControllerHandler {
-
-	private FetchFeedbackRequestDTO fetchFeedbackRequestDTO;
+public class FetchEPassHandler extends RestControllerHandler {
 
 	@Autowired
-	private FeedbackService feedbackService;
+	private EPassService ePassService;
+
+	private EPassRequestDTO requestDTO;
 
 	@Override
 	protected void prepareRequest(Object request, BindingResult result, String... pathParam) {
-		bindingResult = result;
-		fetchFeedbackRequestDTO = (FetchFeedbackRequestDTO) request;
+		this.requestDTO = (EPassRequestDTO) request;
+		this.bindingResult = result;
 	}
 
 	@Override
 	protected void validateRequest() {
-		new FetchAdminFeedbackValidator().validate(fetchFeedbackRequestDTO, bindingResult);
-		ErrorUtil.processError(bindingResult, Constant.Module.FEEDBACK_FETCH_MANAGER);
+		new FetchEPassValidator().validate(requestDTO, bindingResult);
+		ErrorUtil.processError(bindingResult, Constant.Module.SUBMIT_EPASS);
 	}
 
 	@Override
 	protected Object processRequest() throws Exception {
-		SurveyReportDTO surveyReportDTO = feedbackService.fetchAllSurveyFeedbacks(fetchFeedbackRequestDTO);
-		return ObjectUtils.isEmpty(surveyReportDTO)
+		EPassDTO  ePassDTO = ePassService.fetchEPass(requestDTO);
+		return ObjectUtils.isEmpty(ePassDTO)
 				? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NO_CONTENT)
-				: new ResponseEntity<SurveyReportDTO>(surveyReportDTO, HttpStatus.OK);
+				: new ResponseEntity<EPassDTO>(ePassDTO, HttpStatus.OK);
 	}
 }

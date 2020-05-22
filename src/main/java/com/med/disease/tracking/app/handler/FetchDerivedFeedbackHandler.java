@@ -43,7 +43,7 @@ public class FetchDerivedFeedbackHandler extends RestControllerHandler {
 	protected Object processRequest() throws Exception {
 		SurveyFeedbackDTO surveyFeedbackDTO = feedbackService.fetchSurveyFeedbacks(fetchFeedbackRequestDTO);
 		return ObjectUtils.isEmpty(surveyFeedbackDTO)
-				? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NOT_FOUND)
+				? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NO_CONTENT)
 				: new ResponseEntity<SurveyFeedbackDTO>(surveyFeedbackDTO, HttpStatus.OK);
 	}
 }

@@ -11,6 +11,7 @@ public interface Constant {
 		String QUESTION_FETCH = "Fetch Question";
 		String REGISTER_USER = "User Registration";
 		String SUBMIT_FEEDBACK = "Submit Feedback";
+		String SUBMIT_EPASS = "Submit ePass";
 		String FEEDBACK_FETCH = "Fetch Feedback";
 		String FEEDBACK_FETCH_MANAGER = "Fetch Feedback Report for manager";
 		String USER_INFO = "User Information";
@@ -53,7 +54,7 @@ public interface Constant {
 		String AREA = "area";
 		String LONGITUDE = "longitude";
 		String LATITUDE = "latitude";
-
+		String TO_DATE = "toDate";
 		String QUESTION = "question";
 		String TYPE = "type";
 		String OPTIONS = "options";
@@ -71,5 +72,10 @@ public interface Constant {
 		String TABLE_QUESTION = "question";
 
 
+	}
+	
+	public interface Authority {
+		String MANAGER_OR_ADMIN = "hasAnyAuthority('MANAGER, ADMIN')";
+		String USER = "hasAnyAuthority('USER')";
 	}
 }

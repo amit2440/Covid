@@ -7,11 +7,25 @@
 		<typeAlias alias="Question" type="com.med.disease.tracking.app.model.Question" />
 		<typeAlias alias="QuestionOption" type="com.med.disease.tracking.app.model.QuestionOption" />
 		<typeAlias alias="Survey" type="com.med.disease.tracking.app.model.Survey" />
+		<typeAlias alias="EPass" type="com.med.disease.tracking.app.model.EPass" />
 		<typeAlias alias="Feedback" type="com.med.disease.tracking.app.model.Feedback" />
 		<typeAlias alias="User" type="com.med.disease.tracking.app.model.User" />
 		<typeAlias alias="UserRisk" type="com.med.disease.tracking.app.model.UserRisk" />
 		<typeAlias alias="Location" type="com.med.disease.tracking.app.model.Location" />
 	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.InstantTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.LocalTimeTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.OffsetDateTimeTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.OffsetTimeTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.ZonedDateTimeTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.YearTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.MonthTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.YearMonthTypeHandler" />
+		<typeHandler handler="org.apache.ibatis.type.JapaneseDateTypeHandler" />
+	</typeHandlers>
 	<mappers>
 		<!-- Common -->
 		<mapper resource="sql-mappings/common/Common.xml" />
@@ -20,6 +34,11 @@
 		<mapper resource="sql-mappings/survey/Survey-ResultMappings.xml" />
 		<mapper resource="sql-mappings/survey/Survey-SqlQueries.xml" />
 		<mapper resource="sql-mappings/survey/Survey.xml" />
+		
+		<!-- epass -->
+		<mapper resource="sql-mappings/epass/EPass-ResultMappings.xml" />
+		<mapper resource="sql-mappings/epass/EPass-SqlQueries.xml" />
+		<mapper resource="sql-mappings/epass/EPass.xml" />
 
 		<!-- question -->
 		<mapper resource="sql-mappings/question/Question-ResultMappings.xml" />
