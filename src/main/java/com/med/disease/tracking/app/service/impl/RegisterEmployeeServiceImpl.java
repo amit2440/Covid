@@ -62,7 +62,7 @@ private static final Logger logger = LoggerFactory.getLogger(RegisterEmployeeSer
 			user.setLastName(userArr[4] != null ? userArr[4] : null);
 			user.setMobile(userArr[5] != null ? userArr[5] : null);
 //			user.setPassword(null);
-			user.setEnabled(userArr[6].equalsIgnoreCase("Y") ? true : false);
+			user.setIsActive(userArr[6].equalsIgnoreCase("Y") ? true : false);
 			user.setToken(null);
 			user.setRole(userArr[7] != null ? userArr[7] : null);
 			user.setWorkLocation(userArr[8] != null ? userArr[8] : null);
@@ -80,7 +80,7 @@ private static final Logger logger = LoggerFactory.getLogger(RegisterEmployeeSer
 		
 		UserDTO userDTO = new UserDTO();
 		userDTO.setMobile(mobile);
-		userDTO.setEnabled(true);
+		userDTO.setIsActive(true);
 		userDTO.setToken(otp);
 		
 		return userRepository.update(userDTO);

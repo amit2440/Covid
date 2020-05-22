@@ -6,7 +6,7 @@ public class User {
 	private String userName;
 	private Integer userId;
 	private String password;
-	private boolean enabled;
+	private Boolean isActive;
 	private String firstName;
 	private String lastName;
 	private String middleName;
@@ -63,7 +63,7 @@ public class User {
 		super();
 		this.userName = userName;
 		this.password = password;
-		this.enabled = enabled;
+		this.isActive = enabled;
 	}
 
 	public String getUserName() {
@@ -121,12 +121,15 @@ public class User {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public boolean isEnabled() {
-		return enabled;
+	
+
+	
+	public Boolean getIsActive() {
+		return isActive;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public String getMiddleName() {
