@@ -35,12 +35,7 @@ public class UserDTO {
 		this.epass = epass;
 	}
 
-	/**
-	 * @return the enabled
-	 */
-	public Boolean getEnabled() {
-		return enabled;
-	}
+	
 
 	public String getRiskStatus() {
 		return riskStatus;
