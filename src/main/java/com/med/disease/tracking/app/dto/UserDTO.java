@@ -87,11 +87,11 @@ public class UserDTO {
 	public UserDTO() {
 	}
 
-	public UserDTO(String userName, String password, Boolean enabled) {
+	public UserDTO(String userName, String password, Boolean isActive) {
 		super();
 		this.userName = userName;
 		this.password = password;
-		this.isActive = enabled;
+		this.isActive = isActive;
 	}
 
 	public String getUserName() {
