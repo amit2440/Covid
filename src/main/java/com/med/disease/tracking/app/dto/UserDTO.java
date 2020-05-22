@@ -17,10 +17,31 @@ public class UserDTO {
 	private String role;
 	private String workLocation;
 	private Integer mgrID;
-
 	private String riskStatus;
 	private String managerName;
+	private EPassDTO epass;
 	
+	/**
+	 * @return the epass
+	 */
+	public EPassDTO getEpass() {
+		return epass;
+	}
+
+	/**
+	 * @param epass the epass to set
+	 */
+	public void setEpass(EPassDTO epass) {
+		this.epass = epass;
+	}
+
+	/**
+	 * @return the enabled
+	 */
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
 	public String getRiskStatus() {
 		return riskStatus;
 	}

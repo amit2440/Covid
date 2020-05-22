@@ -1,10 +1,16 @@
 package com.med.disease.tracking.app.util;
 
+import java.time.LocalDate;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.Errors;
 
+import com.med.disease.tracking.app.constant.Constant;
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
+
 public class ValidationUtil {
+
 	public static void validateFieldRequired(String errorField, Object value, Errors errors) {
 		if (ObjectUtils.isEmpty(value)) {
 			errors.rejectValue(errorField, "fieldName.required", new Object[] { errorField }, null);
@@ -14,6 +20,33 @@ public class ValidationUtil {
 	public static void validateBlankField(String errorField, Object value, Errors errors) {
 		if (ObjectUtils.isEmpty(value) || StringUtils.isBlank(String.valueOf(value))) {
 			errors.rejectValue(errorField, "fieldName.required", new Object[] { errorField }, null);
+		}
+	}
+	
+	public static void isUserEPassAllowed(String errorField, Object value, Errors errors) {
+		EPassRequestDTO requestDTO = (EPassRequestDTO) value;
+		if (requestDTO.getUserId() == null || requestDTO.getSurveyId() == null)
+			return;
+
+		Boolean isAllowed = null;
+		try {
+			isAllowed = BeanUtil.getBean(CommonUtil.class).isEPassApplicable(requestDTO.getUserId(),
+					requestDTO.getSurveyId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (false == isAllowed) {
+			errors.rejectValue(errorField, "epass.user.notallowed", new Object[] { errorField }, null);
+		}
+	}
+	
+	public static void validateToDate(String errorField, Object value, Errors errors) {
+		if(ObjectUtils.isEmpty(value))
+			return;
+		
+		LocalDate toDate = (LocalDate) value;
+		if (toDate.isBefore(LocalDate.now())) {
+			errors.rejectValue(errorField, "fieldValue.invalid", new Object[] { errorField }, null);
 		}
 	}
 

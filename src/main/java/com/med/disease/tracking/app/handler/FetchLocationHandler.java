@@ -41,7 +41,7 @@ public class FetchLocationHandler extends RestControllerHandler {
     protected Object processRequest() throws Exception {
         LocationDTO locationDTO = locationService.fetchLocation(locationRequestDTO);
         return ObjectUtils.isEmpty(locationDTO)
-                ? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NOT_FOUND)
+                ? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.NO_CONTENT)
                 : new ResponseEntity<LocationDTO>(locationDTO, HttpStatus.OK);
     }
 }

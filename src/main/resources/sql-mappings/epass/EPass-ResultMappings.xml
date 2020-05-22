@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EPass-ResultMappings">
+	<resultMap id="ResultSearchEPass" type="EPass">
+		<result property="user.userId" column="user_id" />
+		<result property="survey.surveyId" column="survey_id" />
+		<result property="isAllowed" column="is_allowed" />
+		<result property="toDate" column="to_date"
+			javaType="java.time.LocalDate" 
+			jdbcType="DATE"
+			typeHandler="org.apache.ibatis.type.LocalDateTypeHandler" />
+		<result property="createdBy.userId" column="created_by" />
+		<result property="createdOn" column="created_on"
+			javaType="java.time.LocalDateTime" 
+			jdbcType="TIMESTAMP"
+			typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+	</resultMap>
+</mapper>

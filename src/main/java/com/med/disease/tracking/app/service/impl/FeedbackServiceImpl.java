@@ -1,11 +1,10 @@
 package com.med.disease.tracking.app.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +15,10 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import com.med.disease.tracking.app.constant.Constant;
+import com.med.disease.tracking.app.dao.EPassDAO;
 import com.med.disease.tracking.app.dao.FeedbackDAO;
 import com.med.disease.tracking.app.dao.UserInfoDAO;
+import com.med.disease.tracking.app.dto.EPassDTO;
 import com.med.disease.tracking.app.dto.FeedbackDTO;
 import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.SurveyFeedbackDTO;
@@ -25,13 +26,18 @@ import com.med.disease.tracking.app.dto.SurveyReportDTO;
 import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
+import com.med.disease.tracking.app.mapper.EPassMapper;
 import com.med.disease.tracking.app.mapper.FetchFeedbackMapper;
 import com.med.disease.tracking.app.mapper.MappingTypeEnum;
 import com.med.disease.tracking.app.mapper.SubmitFeedbackMapper;
+import com.med.disease.tracking.app.mapper.UserMapper;
+import com.med.disease.tracking.app.model.EPass;
 import com.med.disease.tracking.app.model.Feedback;
+import com.med.disease.tracking.app.model.Survey;
 import com.med.disease.tracking.app.model.User;
 import com.med.disease.tracking.app.model.UserRisk;
 import com.med.disease.tracking.app.service.FeedbackService;
+import com.med.disease.tracking.app.util.CommonUtil;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -42,18 +48,30 @@ public class FeedbackServiceImpl implements FeedbackService {
 	private SubmitFeedbackMapper submitFeedbackMapper;
 
 	@Autowired
+	private UserMapper userMapper;
+	
+	@Autowired
+	private EPassMapper ePassMapper;
+	
+	@Autowired
+	private CommonUtil commonUtil;
+	
+	@Autowired
 	private FeedbackDAO feedbackDAO;
 
 	@Autowired
 	UserInfoDAO userDAO;
+	
+	@Autowired
+	EPassDAO ePassDAO;
 
 	@Autowired
 	private FetchFeedbackMapper fetchFeedbackMapper;
 
 	@Override
 	@Transactional
-	public void submitFeedback(FeedbackRequestDTO feedbackRequestDTO) throws Exception {
-		Object object = submitFeedbackMapper.map(feedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
+	public void submitFeedback(FeedbackRequestDTO requestDTO) throws Exception {
+		Object object = submitFeedbackMapper.map(requestDTO, MappingTypeEnum.MAPTODOMAIN, null);
 		List feedbackList = new ArrayList((Collection<?>) object);
 		if (!feedbackList.isEmpty()) {
 			feedbackDAO.deleteFeedback((Feedback) feedbackList.stream().findFirst().get());
@@ -63,6 +81,26 @@ public class FeedbackServiceImpl implements FeedbackService {
 					throw new CovidAppException("Submit feedback failed");
 				}
 			}
+		}
+		
+		if (Constant.RiskStatus.H.equals(commonUtil.getUserRiskStatus(requestDTO.getUserId(), requestDTO.getSurveyId()))
+				&& commonUtil.isCurrentlyEpassAllowed(requestDTO.getUserId(), requestDTO.getSurveyId())) {
+			User user = new User();
+			user.setUserId(requestDTO.getUserId());
+
+			Survey survey = new Survey();
+			survey.setSurveyId(requestDTO.getSurveyId());
+
+			User createdBy = new User();
+			createdBy.setUserId(requestDTO.getUserId());
+
+			EPass ePass = new EPass();
+			ePass.setUser(user);
+			ePass.setSurvey(survey);
+			ePass.setIsAllowed(false);
+			ePass.setToDate(LocalDate.now());
+			ePass.setCreatedBy(createdBy);
+			ePassDAO.submitEPass(ePass);
 		}
 	}
 
@@ -91,7 +129,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 		
 		// calculate/apply riskstatus
 		return (CollectionUtils.isEmpty(derivedUsers)) ? null
-				: caculateRisk(derivedUsers, requestDTO.getSurveyId(), toDTO(manager));
+				: caculateRisk(derivedUsers, requestDTO.getSurveyId(),
+						(UserDTO) userMapper.map(manager, MappingTypeEnum.MAPTORESPONSE, null));
 	}
 	
 	public User getUserInfo(User user) throws Exception{
@@ -117,43 +156,40 @@ public class FeedbackServiceImpl implements FeedbackService {
 		surveyFeedback.setManager(manager);
 		
 		UserRisk userRiskIn = new UserRisk();
-		userRiskIn.setUserId(manager.getUserId());
+		userRiskIn.setManagerId(manager.getUserId());
 		userRiskIn.setSurveyId(surveyId);
 		
 		List<UserRisk> riskStates = feedbackDAO.getUserRisks(userRiskIn);
 		
-		List<UserDTO> userDTOs = derivedUsers.stream().map(usr -> toDTO(usr))
-				.collect(Collectors.toList());
+		// fetch epass detail
+		User userToSearch = new User();
+		userToSearch.setUserId(manager.getMgrID());
 
+		Survey surveyToSearch = new Survey();
+		surveyToSearch.setSurveyId(surveyId);
+
+		EPass ePassToSearch = new EPass();
+		ePassToSearch.setUser(userToSearch);
+		ePassToSearch.setSurvey(surveyToSearch);
+
+		List<EPass> ePassUser = ePassDAO.searchUser(ePassToSearch);
+		
+		List<UserDTO> userDTOs = new ArrayList<>();
+		for (User usr : derivedUsers) {
+			UserDTO usrObj = (UserDTO) userMapper.map(usr, MappingTypeEnum.MAPTORESPONSE, null);
+			if(!ObjectUtils.isEmpty(ePassUser)) {
+				Optional<EPass> ePassOp = ePassUser.stream().filter(x -> x.getUser() != null && x.getUser().getUserId().equals(usr.getUserId())).findAny();
+				if(ePassOp.isPresent()) {
+					usrObj.setEpass((EPassDTO) ePassMapper.map(ePassOp.get(), MappingTypeEnum.MAPTORESPONSE, null));
+				}
+			}
+			userDTOs.add(usrObj);
+		}
 		userDTOs.stream().forEach(usr -> {
-			usr.setRiskStatus(getRiskStatus(riskStates, usr.getUserId()));
+			usr.setRiskStatus(CommonUtil.getRiskStatus(riskStates, usr.getUserId()));
 		});
 		surveyFeedback.setUsers(userDTOs);
 		return surveyFeedback;
-	}
-
-	private String getRiskStatus(List<UserRisk> riskStates, Integer userId) {
-		for (String riskStatus : Arrays.asList(Constant.RiskStatus.H, Constant.RiskStatus.M, Constant.RiskStatus.L)) {
-			Optional<UserRisk> riskOp = riskStates.stream()
-					.filter(state -> userId.equals(state.getUserId()) && riskStatus.equals(state.getRiskStatus()))
-					.findFirst();
-			if (riskOp.isPresent()) {
-				return riskStatus;
-			}
-		}
-		return Constant.RiskStatus.U;
-	}
-
-	private UserDTO toDTO(User user) {
-		UserDTO userDTO = new UserDTO();
-		if (user != null) {
-			userDTO.setUserId(user.getUserId());
-			userDTO.setFirstName(user.getFirstName());
-			userDTO.setLastName(user.getLastName());
-			userDTO.setRole(user.getRole());
-			userDTO.setWorkLocation(user.getWorkLocation());
-		}
-		return userDTO;
 	}
 
 	@Override
@@ -179,7 +215,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 				continue;
 			
 			// calculate/apply riskStatus
-			feedbacks.add(caculateRisk(derivedUsers, requestDTO.getSurveyId(), toDTO(manager)));
+			feedbacks.add(caculateRisk(derivedUsers, requestDTO.getSurveyId(),
+					(UserDTO) userMapper.map(manager, MappingTypeEnum.MAPTORESPONSE, null)));
 		}
 		surveyReportDTO.setFeedbacks(feedbacks);
 		return surveyReportDTO;

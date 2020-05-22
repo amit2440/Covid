@@ -105,3 +105,27 @@ CREATE TABLE `covid`.`location` (
   KEY `user_Id_idx` (`user_id`),
   CONSTRAINT `user_Id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
+CREATE  TABLE `covid`.`epass` (
+  `user_id` INT NOT NULL ,
+  `survey_id` INT NOT NULL ,
+  `is_allowed` BIT NOT NULL ,
+  `to_date` DATE NOT NULL ,
+  `created_by` INT NOT NULL ,
+  `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  INDEX `epass_user_id_idx` (`user_id` ASC),
+  INDEX `epass_survey_id_idx` (`survey_id` ASC),
+  CONSTRAINT `epass_user_id`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `covid`.`user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `epass_survey_id`
+    FOREIGN KEY (`survey_id` )
+    REFERENCES `covid`.`survey` (`survey_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `epass_created_by`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `covid`.`user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
