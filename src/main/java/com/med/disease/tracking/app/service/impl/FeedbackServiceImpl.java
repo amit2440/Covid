@@ -177,12 +177,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 		List<UserDTO> userDTOs = new ArrayList<>();
 		for (User usr : derivedUsers) {
 			UserDTO usrObj = (UserDTO) userMapper.map(usr, MappingTypeEnum.MAPTORESPONSE, null);
-			if(!ObjectUtils.isEmpty(ePassUser)) {
-				Optional<EPass> ePassOp = ePassUser.stream().filter(x -> x.getUser() != null && x.getUser().getUserId().equals(usr.getUserId())).findAny();
-				if(ePassOp.isPresent()) {
-					usrObj.setEpass((EPassDTO) ePassMapper.map(ePassOp.get(), MappingTypeEnum.MAPTORESPONSE, null));
-				}
-			}
+			Optional<EPass> ePassOp = ePassUser.stream().filter(x -> x.getUser() != null && x.getUser().getUserId().equals(usr.getUserId())).findAny();
+			
+			EPass ePass = ePassOp.isPresent() ? ePassOp.get() : null;
+			usrObj.setEpass((EPassDTO) ePassMapper.map(ePass, MappingTypeEnum.MAPTORESPONSE, null));
 			userDTOs.add(usrObj);
 		}
 		userDTOs.stream().forEach(usr -> {

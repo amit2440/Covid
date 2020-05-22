@@ -21,6 +21,7 @@ public class EPassMapper extends Mapper {
 	protected Object mapToResponse(Object objectToMap, Map<String, String> extraField) throws Exception {
 		EPass ePass = (EPass) objectToMap;
 		EPassDTO ePassDTO = new EPassDTO();
+		ePassDTO.setIsAllowed(false);
 		if (ePass != null) {
 			ePassDTO.setIsAllowed(ePass.getIsAllowed());
 			ePassDTO.setToDate(ePass.getToDate());

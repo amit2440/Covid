@@ -205,7 +205,7 @@ response :
                 "createdBy": {
                     "userId": 13
                 },
-                "createdOn": "2020-05-15T16:03:10"
+                "createdOn": "2020-05-15T21:33:10"
             }
         },
         {
@@ -214,14 +214,14 @@ response :
             "lastName": "abc",
             "role": "USER",
             "workLocation": "pune",
-            "riskStatus": "H",
+            "riskStatus": "U",
             "epass": {
-                "isAllowed": false,
-                "toDate": "2020-05-22",
+                "isAllowed": true,
+                "toDate": "2020-05-29",
                 "createdBy": {
-                    "userId": 9
+                    "userId": 13
                 },
-                "createdOn": "2020-05-22T00:59:24"
+                "createdOn": "2020-05-17T21:33:10"
             }
         }
     ]
@@ -248,7 +248,10 @@ response :
                     "lastName": "jaroli",
                     "role": "USER",
                     "workLocation": "pune",
-                    "riskStatus": "H"
+                    "riskStatus": "H",
+                    "epass": {
+                        "isAllowed": false
+                    }
                 },
                 {
                     "userId": 7,
@@ -256,7 +259,10 @@ response :
                     "lastName": "gaikwad",
                     "role": "USER",
                     "workLocation": "pune",
-                    "riskStatus": "H"
+                    "riskStatus": "H",
+                    "epass": {
+                        "isAllowed": false
+                    }
                 }
             ]
         },
@@ -282,7 +288,7 @@ response :
                         "createdBy": {
                             "userId": 13
                         },
-                        "createdOn": "2020-05-15T16:03:10"
+                        "createdOn": "2020-05-15T21:33:10"
                     }
                 },
                 {
@@ -291,14 +297,14 @@ response :
                     "lastName": "abc",
                     "role": "USER",
                     "workLocation": "pune",
-                    "riskStatus": "H",
+                    "riskStatus": "U",
                     "epass": {
-                        "isAllowed": false,
-                        "toDate": "2020-05-22",
+                        "isAllowed": true,
+                        "toDate": "2020-05-29",
                         "createdBy": {
-                            "userId": 9
+                            "userId": 13
                         },
-                        "createdOn": "2020-05-22T00:59:24"
+                        "createdOn": "2020-05-17T21:33:10"
                     }
                 }
             ]
