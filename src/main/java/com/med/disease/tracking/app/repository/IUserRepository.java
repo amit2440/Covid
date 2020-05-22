@@ -21,7 +21,7 @@ public interface IUserRepository {
 //		@Result(property = "userName", column = "username"),
 		@Result(property = "userId", column = "user_id"),
 //		@Result(property = "password", column = "password"),
-		@Result(property = "enabled" ,column = "is_active"),
+		@Result(property = "isActive" ,column = "is_active"),
 		@Result(property = "firstName", column = "first_name"),
 		@Result(property = "lastName", column = "last_name"),
 //		@Result(property = "middleName", column = "middle_name"),
@@ -38,7 +38,7 @@ public interface IUserRepository {
 //		@Result(property = "userName", column = "username"),
 		@Result(property = "userId", column = "user_id"),
 //		@Result(property = "password", column = "password"),
-		@Result(property = "enabled" ,column = "is_active"),
+		@Result(property = "isActive" ,column = "is_active"),
 		@Result(property = "firstName", column = "first_name"),
 		@Result(property = "lastName", column = "last_name"),
 //		@Result(property = "middleName", column = "middle_name"),
@@ -57,7 +57,7 @@ public interface IUserRepository {
 	@Insert("INSERT INTO user(mobile,first_name,Last_name) VALUES (#{mobile}, #{firstName}, #{lastName})")
 	public int insert(UserDTO user);
 
-	@Update("Update user set token=#{token}, is_active=#{enabled} where mobile=#{mobile}")
+	@Update("Update user set token=#{token}, is_active=#{isActive} where mobile=#{mobile}")
 	public int update(UserDTO user);
 
 	@Insert("INSERT INTO user(is_active,first_name,last_name,mobile,token,role,work_location,mgr_id) "
@@ -69,7 +69,7 @@ public interface IUserRepository {
 //		@Result(property = "userName", column = "username"),
 		@Result(property = "userId", column = "user_id"),
 //		@Result(property = "password", column = "password"),
-		@Result(property = "enabled" ,column = "is_active"),
+		@Result(property = "isActive" ,column = "is_active"),
 		@Result(property = "firstName", column = "first_name"),
 		@Result(property = "lastName", column = "last_name"),
 //		@Result(property = "middleName", column = "middle_name"),

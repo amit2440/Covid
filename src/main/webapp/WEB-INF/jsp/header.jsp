@@ -3,6 +3,12 @@
     <%
 		String ss = request.getParameter("token");
     String userId =  request.getParameter("userId");
+    
+    String tt = response.getHeader("Authorization");
+    System.err.println("tt----->"+tt);
+    
+    String ttRe = request.getHeader("Authorization");
+    System.err.println("ttRe----->"+ttRe);
 	%>
 <!DOCTYPE html>
 <html>
@@ -45,13 +51,19 @@ function searchUsers(){
 	document.forms["homePageForm"].submit();
 }
 
+function doFeedBackReport(){
+	document.forms["homePageForm"].action="/ca/mvc/feedBack";
+	document.forms["homePageForm"].method="post";
+	document.forms["homePageForm"].submit();
+}
+
 </script>
 </head>
 <body>
 <ul>
   <li><a class="active" onclick="addUser();">Add User</a></li>
   <li><a onclick="searchUsers();">Search</a></li>
-  <li><a href="#contact">Report</a></li>
+  <li><a onclick="doFeedBackReport()">Report</a></li>
 <!--   <li><a href="#about">About</a></li> -->
 </ul>
 <form action="/ca/mvc/showHomePage" id="homePageForm" method="post">

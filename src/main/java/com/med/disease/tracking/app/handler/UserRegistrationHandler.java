@@ -58,7 +58,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 	protected Object processRequest() throws Exception {
 		// TODO Auto-generated method stub
 		String successMsg = "";
-		userDTO.setEnabled(true);
+		userDTO.setIsActive(true);
 		int res = registerEmployeeService.registerEmployee(userDTO);
 		if (res <= 0) {
 			userDTO = null;
@@ -127,7 +127,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 			user.setFirstName(userArr[0] != null ? userArr[0] : null);
 			user.setLastName(userArr[1] != null ? userArr[1] : null);
 			user.setMobile(userArr[2] != null ? userArr[2] : null);
-			user.setEnabled(userArr[3].equalsIgnoreCase("Y") ? true : false);
+			user.setIsActive(userArr[3].equalsIgnoreCase("Y") ? true : false);
 			user.setToken(null);
 			user.setRole(userArr[4] != null ? userArr[4] : null);
 			user.setWorkLocation(userArr[5] != null ? userArr[5] : null);

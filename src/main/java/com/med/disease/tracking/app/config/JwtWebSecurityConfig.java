@@ -60,7 +60,7 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/signin").permitAll()
 			.antMatchers("/login").permitAll()
-			.antMatchers("/mvc/**").permitAll()
+			.antMatchers("/mvc/login").permitAll()
 //			.antMatchers("/api/test/**").permitAll()
 			.anyRequest().authenticated();
 
