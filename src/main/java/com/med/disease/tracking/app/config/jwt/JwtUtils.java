@@ -1,11 +1,15 @@
 package com.med.disease.tracking.app.config.jwt;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.med.disease.tracking.app.service.impl.UserDetailsImpl;
@@ -31,6 +35,8 @@ public class JwtUtils {
 	public String generateJwtToken(Authentication authentication) {
 
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+		Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		GrantedAuthority ga = new SimpleGrantedAuthority("MANAGER");
 		
 		return Jwts.builder()
 				.setSubject((userPrincipal.getMobile()))
@@ -38,6 +44,7 @@ public class JwtUtils {
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)
 				.claim("UserId", userPrincipal.getUserId())
+				.claim("role", ga)
 				.compact();
 	}
 
