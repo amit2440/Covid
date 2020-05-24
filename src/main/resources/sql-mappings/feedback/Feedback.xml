@@ -11,7 +11,7 @@
 			SELECT ssq_id FROM survey_question WHERE survey_id=#{surveyQuestion.survey.surveyId} AND question_id=#{surveyQuestion.question.questionId};
 		</selectKey>
 		INSERT into feedback (<include refid="Feedback-SqlQueries.InsertForSubmitFeedback"/>)
-		VALUES(#{user.userId}, #{surveyQuestion.ssqId}, #{option.optionId}, #{value})
+		VALUES(#{user.userId}, #{surveyQuestion.ssqId}, #{option.optionId})
 	</insert>
 
 	<select id ="getUserSurveyFeedback" parameterType="Feedback" resultMap="Feedback-ResultMappings.ResultGetUserSurveyFeedback">
@@ -20,11 +20,13 @@
 			 u.last_name,
 			 u.role,
 			 u.work_location,
-		       f.value, 
-		       sq.survey_id, 
+		       sq.survey_id,
 		       q.question, 
 		       o.risk, 
-		       o.checked 
+		       o.checked,
+			   o.display_name,
+		       o.option_id,
+		       o.checked
 		FROM   covid.feedback f 
 		       JOIN covid.USER u 
 		         ON u.user_id = f.user_id 

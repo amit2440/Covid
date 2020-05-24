@@ -1,9 +1,13 @@
 package com.med.disease.tracking.app.mapper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.med.disease.tracking.app.dto.FeedbackRequestDTO;
+import com.med.disease.tracking.app.dto.OptionDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -48,13 +52,30 @@ public class FetchFeedbackMapper extends Mapper {
 			userDTO.setRole(user.getRole());
 			userDTO.setWorkLocation(user.getWorkLocation());
 
-			feedbackDTO.setFeedbacks(feedbackList.stream().map(feedback -> {
-				FeedbackResponseDTO feedbackResponseDTO = new FeedbackResponseDTO();
-				feedbackResponseDTO.setQuestion(feedback.getSurveyQuestion().getQuestion().getQuestion());
-				feedbackResponseDTO.setRisk(feedback.getOption().getRisk());
-				feedbackResponseDTO.setAnswer(feedback.getValue());
-				return feedbackResponseDTO;
-			}).collect(Collectors.toList()));
+				Map<String, List<OptionDTO>> questionAnswers = new HashMap<>();
+
+			feedbackList.forEach(feedback -> {
+					OptionDTO answer = new OptionDTO();
+					answer.setChecked(feedback.getOption().getChecked());
+					answer.setDisplayName(feedback.getOption().getDisplayName());
+					answer.setRisk(feedback.getOption().getRisk());
+					answer.setOptionId(feedback.getOption().getOptionId());
+					if (ObjectUtils.isEmpty(questionAnswers.get(feedback.getSurveyQuestion().getQuestion().getQuestion()))) {
+						List<OptionDTO> ans = new ArrayList<>();
+						ans.add(answer);
+						questionAnswers.put(feedback.getSurveyQuestion().getQuestion().getQuestion(), ans);
+					} else {
+						questionAnswers.get(feedback.getSurveyQuestion().getQuestion().getQuestion()).add(answer);
+					}
+				});
+				List<FeedbackResponseDTO> feedbackResponseDTOList = new ArrayList<>();
+				for(Map.Entry<String, List<OptionDTO>> entry : questionAnswers.entrySet()) {
+					FeedbackResponseDTO feedbackResponseDTO = new FeedbackResponseDTO();
+					feedbackResponseDTO.setQuestion(entry.getKey());
+					feedbackResponseDTO.setAnswers(entry.getValue());
+					feedbackResponseDTOList.add(feedbackResponseDTO);
+				}
+			feedbackDTO.setFeedbacks(feedbackResponseDTOList);
 			return feedbackDTO;
 		}
 		return null;

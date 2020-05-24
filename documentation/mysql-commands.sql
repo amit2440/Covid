@@ -79,7 +79,6 @@ CREATE  TABLE `covid`.`feedback` (
   `user_id` INT NOT NULL,
   `ssq_id` INT NOT NULL ,
   `option_id` INT NOT NULL ,
-  `value` VARCHAR(100) NOT NULL,
   INDEX `feeback_ssq_id_idx` (`ssq_id` ASC) ,
   INDEX `option_id_idx` (`option_id` ASC) ,
   CONSTRAINT `feeback_ssq_id`

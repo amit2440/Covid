@@ -1,10 +1,11 @@
 package com.med.disease.tracking.app.dto;
 
+import java.util.List;
+
 public class AnswerRequestDTO {
 
     private Integer questionId;
-    private Integer optionId;
-    private String value;
+    private List<Integer> optionIds;
 
     public Integer getQuestionId() {
         return questionId;
@@ -14,19 +15,11 @@ public class AnswerRequestDTO {
         this.questionId = questionId;
     }
 
-    public Integer getOptionId() {
-        return optionId;
+    public List<Integer> getOptionIds() {
+        return optionIds;
     }
 
-    public void setOptionId(Integer optionId) {
-        this.optionId = optionId;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setOptionIds(List<Integer> optionIds) {
+        this.optionIds = optionIds;
     }
 }

@@ -5,7 +5,6 @@ public class Feedback {
     private User user;
     private SurveyQuestion surveyQuestion;
     private Option option;
-    private String value;
 
     public User getUser() {
         return user;
@@ -21,14 +20,6 @@ public class Feedback {
 
     public void setOption(Option option) {
         this.option = option;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
     public SurveyQuestion getSurveyQuestion() {
