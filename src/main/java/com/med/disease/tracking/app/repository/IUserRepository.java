@@ -61,7 +61,7 @@ public interface IUserRepository {
 	public int update(UserDTO user);
 
 	@Insert("INSERT INTO user(is_active,first_name,last_name,mobile,token,role,work_location,mgr_id) "
-			+ "VALUES (#{enabled},#{firstName},#{lastName},#{mobile},#{token},#{role},#{workLocation},#{mgrID})")
+			+ "VALUES (#{isActive},#{firstName},#{lastName},#{mobile},#{token},#{role},#{workLocation},#{mgrID})")
 	public int insertEmployee(UserDTO user);
 	
 	@Results({

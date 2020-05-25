@@ -59,6 +59,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 		// TODO Auto-generated method stub
 		String successMsg = "";
 		userDTO.setIsActive(true);
+		userDTO.setToken("0000");
 		int res = registerEmployeeService.registerEmployee(userDTO);
 		if (res <= 0) {
 			userDTO = null;
@@ -112,7 +113,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 			e.printStackTrace();
 		}
 
-		return  ObjectUtils.isEmpty(failUploadList) ?  new ResponseEntity<String>(successMsg, HttpStatus.OK)
+		return  ObjectUtils.isEmpty(failUploadList) ?  new ResponseEntity<String>("User File Loaded SuccessFully", HttpStatus.OK)
 		 :new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.OK);
 	}
 
@@ -128,7 +129,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 			user.setLastName(userArr[1] != null ? userArr[1] : null);
 			user.setMobile(userArr[2] != null ? userArr[2] : null);
 			user.setIsActive(userArr[3].equalsIgnoreCase("Y") ? true : false);
-			user.setToken(null);
+			user.setToken("0000");
 			user.setRole(userArr[4] != null ? userArr[4] : null);
 			user.setWorkLocation(userArr[5] != null ? userArr[5] : null);
 			user.setMgrID(userArr[6]!=null ? new Integer(userArr[6]) :null);
