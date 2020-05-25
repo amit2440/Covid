@@ -57,14 +57,20 @@ function doFeedBackReport(){
 	document.forms["homePageForm"].submit();
 }
 
+function bulkUpload(){
+	document.forms["homePageForm"].action="/ca/mvc/bulkUpload";
+	document.forms["homePageForm"].method="post";
+	document.forms["homePageForm"].submit();
+}
 </script>
 </head>
 <body>
 <ul>
   <li><a class="active" onclick="addUser();">Add User</a></li>
   <li><a onclick="searchUsers();">Search</a></li>
+  <li><a onclick="bulkUpload()">Load User File</a></li>
   <li><a onclick="doFeedBackReport()">Report</a></li>
-<!--   <li><a href="#about">About</a></li> -->
+  
 </ul>
 <form action="/ca/mvc/showHomePage" id="homePageForm" method="post">
 <input type="hidden" value="<%=ss %>" name="token" id="token"/>
