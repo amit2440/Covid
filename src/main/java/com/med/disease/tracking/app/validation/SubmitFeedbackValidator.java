@@ -17,6 +17,8 @@ public class SubmitFeedbackValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         FeedbackRequestDTO feedbackRequestDTO = (FeedbackRequestDTO) target;
-        ValidationUtil.validateFieldRequired(Constant.Field.USER_ID, feedbackRequestDTO.getUserId(), errors);
+        ValidationUtil.validateBlankField(Constant.Field.USER_ID, feedbackRequestDTO.getUserId(), errors);
+        ValidationUtil.validateBlankField(Constant.Field.SURVEY_ID, feedbackRequestDTO.getSurveyId(), errors);
+        ValidationUtil.validateAnswers(Constant.Field.ANSWERS, feedbackRequestDTO.getAnswers(), errors);
     }
 }

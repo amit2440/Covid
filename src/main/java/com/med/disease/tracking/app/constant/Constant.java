@@ -58,6 +58,7 @@ public interface Constant {
 		String QUESTION = "question";
 		String TYPE = "type";
 		String OPTIONS = "options";
+		String ANSWERS = "answers";
 		
 		String TEAM = "teamName";
 		String MGR_FIRST_NAME="mgrFirstName";

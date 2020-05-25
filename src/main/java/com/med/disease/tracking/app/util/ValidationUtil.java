@@ -1,13 +1,14 @@
 package com.med.disease.tracking.app.util;
 
-import java.time.LocalDate;
-
+import com.med.disease.tracking.app.constant.Constant;
+import com.med.disease.tracking.app.dto.AnswerRequestDTO;
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.Errors;
 
-import com.med.disease.tracking.app.constant.Constant;
-import com.med.disease.tracking.app.dto.EPassRequestDTO;
+import java.time.LocalDate;
+import java.util.List;
 
 public class ValidationUtil {
 
@@ -90,7 +91,17 @@ public class ValidationUtil {
 			}
 		}
 	}
-	
+
+	public static void validateAnswers(String errorField, Object value, Errors errors){
+		List<AnswerRequestDTO> answerRequestDTOList = (List<AnswerRequestDTO>) value;
+		for (int i =0; i<answerRequestDTOList.size();i++){
+			String QUESTION_ID = "answers.["+i+"].questionId";
+			validateBlankField(QUESTION_ID, answerRequestDTOList.get(i).getQuestionId(), errors);
+		}
+//		answerRequestDTOList.forEach(answerRequestDTO -> {
+//			validateBlankField(Constant.Field.OPTIONS, answerRequestDTO.getOptionIds(), errors);
+//		});
+	}
 	public static void main(String args[]) {
 		
 	}
