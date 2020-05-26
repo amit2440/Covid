@@ -1,6 +1,8 @@
 package com.med.disease.tracking.app.config.jwt;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +40,8 @@ public class JwtUtils {
 		Set<String> roles = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
 			     .map(r -> r.getAuthority()).collect(Collectors.toSet());
 //		GrantedAuthority ga = new SimpleGrantedAuthority(roles);
+		List<String> list = new ArrayList<String>(roles);
+		list.get(0);
 		
 		return Jwts.builder()
 				.setSubject((userPrincipal.getMobile()))
@@ -47,7 +49,7 @@ public class JwtUtils {
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)
 				.claim("UserId", userPrincipal.getUserId())
-				.claim("role", roles)
+				.claim("role", list.get(0)!=null?list.get(0):null)
 				.compact();
 	}
 
