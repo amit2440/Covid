@@ -1,12 +1,14 @@
 package com.med.disease.tracking.app.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.med.disease.tracking.app.dto.OptionDTO;
+
+import java.util.List;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class FeedbackResponseDTO {
     private String question;
-    private String answer;
-    private String risk;
+    private List<OptionDTO> answers;
 
     public String getQuestion() {
         return question;
@@ -16,19 +18,11 @@ public class FeedbackResponseDTO {
         this.question = question;
     }
 
-    public String getAnswer() {
-        return answer;
+    public List<OptionDTO> getAnswers() {
+        return answers;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public String getRisk() {
-        return risk;
-    }
-
-    public void setRisk(String risk) {
-        this.risk = risk;
+    public void setAnswers(List<OptionDTO> answers) {
+        this.answers = answers;
     }
 }

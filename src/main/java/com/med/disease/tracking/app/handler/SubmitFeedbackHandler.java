@@ -34,6 +34,7 @@ public class SubmitFeedbackHandler extends RestControllerHandler {
     protected void validateRequest() {
         Validator validator = new SubmitFeedbackValidator();
         validator.validate(feedbackRequestDTO, bindingResult);
+       // validator.validate(feedbackRequestDTO.getAnswers(), bindingResult);
         ErrorUtil.processError(bindingResult, Constant.Module.SUBMIT_FEEDBACK);
     }
 

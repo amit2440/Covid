@@ -17,10 +17,11 @@
 
 	<resultMap id ="ResultGetFeedback" type="Feedback">
 		<result property="surveyQuestion.question.question" column="QUESTION"/>
-		<result property="value" column="VALUE"/>
 		<result property="option.risk" column="RISK"/>
 		<result property="option.type" column="TYPE"/>
 		<result property="option.displayName" column="DISPLAY_NAME"/>
+		<result property="option.optionId" column="OPTION_ID"/>
+		<result property="option.checked" column="CHECKED"/>
 	</resultMap>
 	
 	<resultMap id ="ResultGetUserRisk" type="UserRisk">
