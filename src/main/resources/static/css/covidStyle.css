@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+
+.rTable {
+   display: block;
+   width: 100%;
+}
+.rTableHeading, .rTableBody, .rTableFoot, .rTableRow{
+   clear: both;
+}
+.rTableHead, .rTableFoot{
+   background-color: #DDD;
+   font-weight: bold;
+}
+.rTableCell, .rTableHead {
+   border: 1px solid #999999;
+   float: left;
+   height: 30px;
+   overflow: hidden;
+   padding: 3px 1.8%;
+   width: 50%;
+}
+.rTable:after {
+   visibility: hidden;
+   display: block;
+   font-size: 0;
+   content: " ";
+   clear: both;
+   height: 0;
+}
+.rTableCell4by4, .rTableHead4by4 {
+   border: 1px solid #999999;
+   float: left;
+   height: 30px;
+   overflow: hidden;
+   padding: 3px 1.8%;
+   width: 25%;
+}

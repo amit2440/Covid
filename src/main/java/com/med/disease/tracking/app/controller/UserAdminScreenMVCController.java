@@ -20,6 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.med.disease.tracking.app.dto.SurveyDTO;
 import com.med.disease.tracking.app.dto.SurveyFeedbackDTO;
 import com.med.disease.tracking.app.dto.SurveyReportDTO;
+import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
@@ -82,14 +84,15 @@ public class UserAdminScreenMVCController {
 		String logged_in = "";
 		SurveyReportDTO surveyReportDTO = null;
 		SurveyFeedbackDTO surveyFeedbackDTO = null;
+		UserDetailsImpl ud = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 		Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext().getAuthentication()
 				.getAuthorities();
 		GrantedAuthority ga = new SimpleGrantedAuthority("MANAGER");
 		if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(ga)) {
 			System.err.println("11111111111111111111111111111");
 			logged_in = "MANAGER";
-			UserDetailsImpl ud = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
+			
 			List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getSurveys(new SurveyRequestDTO());
 			FetchFeedbackRequestDTO fetchFeedbackRequestDTO = new FetchFeedbackRequestDTO();
 			fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
@@ -99,23 +102,26 @@ public class UserAdminScreenMVCController {
 
 		} else {
 			List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getSurveys(new SurveyRequestDTO());
-
 			FetchFeedbackRequestDTO fetchFeedbackRequestDTO = new FetchFeedbackRequestDTO();
 			fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
 			surveyReportDTO = feedbackService.fetchAllSurveyFeedbacks(fetchFeedbackRequestDTO);
 			logged_in = "ADMIN";
+			surveyReportDTO.setAdmin(new UserDTO());
+			surveyReportDTO.getAdmin().setFirstName(ud.getFirstName());
+			surveyReportDTO.getAdmin().setLastName(ud.getLastName());
 			model.addAttribute("surveyReportDTO", surveyReportDTO);
 		}
 		model.addAttribute("logged_in", logged_in);
+		model.addAttribute("fetchFeedbackRequestDTO", new FetchFeedbackRequestDTO());
 		return "userFeedbackReport";
 	}
 
 	
 	@PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('MANAGER') ")
 	@RequestMapping(value = "/mvc/feedBackRes", method = RequestMethod.POST)
-	public String feedBackRes(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+	public String feedBackRes(@ModelAttribute("fetchFeedbackRequestDTO") FetchFeedbackRequestDTO fetchFeedbackRequestDTO)
 			throws Exception {
-		
+		System.out.println("2222222222222222222222 ----> "+fetchFeedbackRequestDTO.getUserId());
 		return "feedBackResponse";
 		
 	}
@@ -162,4 +168,10 @@ public class UserAdminScreenMVCController {
 		return (ResponseEntity<?>) beanFactory.getBean(UserRegistrationHandler.class).processCvsRequest(inputStream,
 				null);
 	}
+	
+	@RequestMapping(value = "/mvc/testjsp", method = RequestMethod.POST)
+	public String testjsp(ModelMap model) {
+		return "testjspFile";
+	}
+	
 }
