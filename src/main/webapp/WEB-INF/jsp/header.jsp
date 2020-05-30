@@ -4,7 +4,7 @@
 	String ss = request.getParameter("token");
 	String userId = request.getParameter("userId");
 
-	//     String tt = response.getHeader("Authorization");
+	    String tt = response.getHeader("Authorization");
 	//     System.err.println("tt----->"+tt);
 	session.setAttribute("token", tt);
 
