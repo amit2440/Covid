@@ -5,7 +5,7 @@
 	String userId = request.getParameter("userId");
 
 	    String tt = response.getHeader("Authorization");
-	//     System.err.println("tt----->"+tt);
+	    System.err.println("tt----->"+tt);
 	session.setAttribute("token", tt);
 
 	String ttRe = request.getHeader("Authorization");
@@ -68,6 +68,10 @@ li a:hover {
 		document.forms["homePageForm"].method = "post";
 		document.forms["homePageForm"].submit();
 	}
+	
+	
+// 	alert(performance.navigation.type);
+	
 </script>
 </head>
 <body>
