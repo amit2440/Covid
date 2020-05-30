@@ -1,79 +1,127 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- ${surveyReportDTO} --%>
 
 <head>
-<style>
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 70%;
-}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/covidStyle.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	function getResponse(userID) {
+// 		alert(userID);
+		document.getElementById("userId_id").value = userID;
+// 		alert(document.getElementById("userId_id").value);
+		document.getElementById("FetchFeedbackRequestDTO_id").submit();
 
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
+	}
 
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-</style>
+	function doSumitEpass(userId, status,cnt) {
+		//	 alert(document.getElementById("token").value);
+		//	 alert('status --->'+status);
+		var isAllowed = (status == 'true') ? false : true;
+		//	 alert('isAllowed---->'+isAllowed);  
+		var myObj = {
+			"userId" : userId,
+			"isAllowed" : isAllowed,
+			"toDate" : "2020-06-12"
+		};
+		var myJSON = JSON.stringify(myObj);
+		$
+				.ajax({
+					type : "POST",
+					url : "/ca/mvc/surveys/1/epasses",
+					dataType : 'json',
+					contentType : 'application/json',
+					headers : {
+						"Authorization" : "Basic "
+								+ document.getElementById("token")
+					},
+					data : myJSON,
+					success : function(data, status, xhr) {
+						
+						document.getElementById(cnt).innerHTML=isAllowed;
+					},
+					error : function(jqXhr, textStatus, errorMessage) {
+						alert('Error: Issue in assigning ePass! Please contact Admin.!');
+// 						document.getElementById(cnt).innerHTML=isAllowed;
+					}
+				});
+	}
+</script>
 </head>
 
-<!-- iterating manager -->
-<%-- ${surveyReportDTO } --%>
-<%-- <c:forEach var="surveyFeedbackDTO" items="${SurveyFeedbackDTO.feedbacks}"> --%>
 
-	
-	<table>
-		<tr>
-			<th>Manager Name</th>
-			<th>Work Location</th>
-		</tr>
-		<tr>
-			<td>${surveyReportDTO.manager.firstName} &nbsp;&nbsp; ${surveyReportDTO.manager.lastName}</td>
-			<td>${surveyReportDTO.manager.workLocation}</td>
-		</tr>
-	</table> <br>
-	<p>
-		Please click on Risk status to view the response and reason for Risk Status.
-	</p>
-	<table>
-		<tr>
-			<th>User Name</th>
-			<th>Work Location</th>
-			<th>Risk Status</th>
-			<th>ePass Status</th>
-		</tr>
+<!-- iterating manager -->
+<form:form method="POST" id="FetchFeedbackRequestDTO_id" modelAttribute="fetchFeedbackRequestDTO" action="/ca/mvc/feedBackRes">
+	<form:hidden path="userId" id="userId_id" value="" />
+	<form:hidden path="surveyId" id="surveyId_id" value="" />
+</form:form>
+<div class="container">
+	<div class="rTable">
+		<div class="rTableRow">
+			<div class="rTableHead">
+				<strong>Manager Name</strong>
+			</div>
+			<div class="rTableHead">
+				<strong>Work Location</strong>
+			</div>
+		</div>
+		<div class="rTableRow">
+			<div class="rTableCell">${surveyReportDTO.manager.firstName}&nbsp;&nbsp;
+				${surveyReportDTO.manager.lastName}</div>
+			<div class="rTableCell">${surveyReportDTO.manager.workLocation}</div>
+		</div>
+	</div>
+	<p>Please click on Risk status to view the response and reason for
+		Risk Status.</p>
+
+	<div class="rTable">
+		<div class="rTableRow">
+			<div class="rTableHead4by4">
+				<strong>User Name</strong>
+			</div>
+			<div class="rTableHead4by4">
+				<strong>Work Location</strong>
+			</div>
+			<div class="rTableHead4by4">
+				<strong>Risk Status</strong>
+			</div>
+			<div class="rTableHead4by4">
+				<strong>ePass Status</strong>
+			</div>
+		</div><% int cnt = 0; %>
 		<c:forEach var="userList" items="${surveyReportDTO.users}">
-					
 			<c:if test="${userList.riskStatus=='H'}">
 				<c:set var="fontColor" value="style=\"background-color:red;\""></c:set>
 			</c:if>
-					
-			<c:if test="${userList.riskStatus!='H'}">
-				<c:set var="fontColor" value=""></c:set>
+
+			<c:if test="${userList.riskStatus=='M'}">
+				<c:set var="fontColor" value="style=\"background-color:orange;\""></c:set>
 			</c:if>
-			<tr>
-				<td>${userList.firstName} &nbsp;&nbsp;${userList.lastName} </td>
-				<td>${userList.workLocation}</td>
-				<td ${fontColor} ><a href="#" onclick="viewSurveyResponse()" >${userList.riskStatus}</a></td>
-				<td>${userList.epass.isAllowed}</td>
-			</tr>
+			<c:if test="${userList.riskStatus=='L'}">
+				<c:set var="fontColor" value="style=\"background-color:green;\""></c:set>
+			</c:if>
+			<c:if test="${userList.riskStatus=='U'}">
+				<c:set var="fontColor" value="style=\"background-color:gray;\""></c:set>
+			</c:if>
+			<div class="rTableRow">
+				<div class="rTableCell4by4">${userList.firstName}
+					&nbsp;&nbsp;${userList.lastName}</div>
+				<div class="rTableCell4by4">${userList.workLocation}</div>
+				<div class="rTableCell4by4"
+					onclick="getResponse('${userList.userId}')"${fontColor} }>
+					${userList.riskStatus}</div>
+				<div class="rTableCell4by4" id="allowed<%=cnt%>"
+					onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}','allowed<%=cnt%>');">${userList.epass.isAllowed}</div>
+			</div>
+			<%cnt++; %>
 		</c:forEach>
-	</table>
-	<br>
-	
-	<script type="text/javascript">
-// <!--
-function viewSurveyResponse(){
-	document.forms["homePageForm"].action="/ca/mvc/feedBackRes";
-	document.forms["homePageForm"].method="post";
-	document.forms["homePageForm"].submit();
-}
--->
-</script>
-<%-- </c:forEach> --%>
+	</div>
+
+</div>
+
+

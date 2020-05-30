@@ -6,24 +6,7 @@
 <%-- ${surveyReportDTO} --%>
 
 <head>
-<style>
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 70%;
-}
 
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-
-</style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/covidStyle.css">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -32,12 +15,44 @@ tr:nth-child(even) {
   
   <script type="text/javascript">
   function getResponse(userID){
-	  alert(userID);
+// 	  alert(userID);
 	  document.getElementById("userId_id").value=userID;
-	  alert(document.getElementById("userId_id").value);
+// 	  alert(document.getElementById("userId_id").value);
 	  document.getElementById("FetchFeedbackRequestDTO").submit();
 	  
   }
+  
+ function doSumitEpass(userId,status){
+// 	 alert(document.getElementById("token").value);
+// 	 alert('status --->'+status);
+	 var isAllowed = (status=='true')?false:true;
+// 	 alert('isAllowed---->'+isAllowed);  
+	    	var myObj = {
+				"userId" : userId,
+				"isAllowed":isAllowed,
+				"toDate":"2020-06-12"
+			};   
+	    	var myJSON = JSON.stringify(myObj);
+	 $.ajax
+	  ({
+	    type: "POST",
+	    url: "/ca/mvc/surveys/1/epasses",
+	    dataType: 'json',
+	    contentType:'application/json',
+	    headers: {
+	      "Authorization": "Basic " + document.getElementById("token")
+	    },
+	    data:myJSON,
+	    success: function (data,status,xhr){
+	      alert('Thanks for your comment!'); 
+	    },
+		error: function (jqXhr, textStatus, errorMessage) {
+			alert('Error: Issue in assigning ePass! Please contact Admin.!' );
+		}
+	  });
+ } 
+ 
+  
   </script>
 </head>
 
@@ -46,6 +61,9 @@ tr:nth-child(even) {
 	<form:hidden path="userId" id="userId_id" value=""/>
 	<form:hidden path="surveyId" id="surveyId_id"  value=""/>
 </form:form>
+
+
+
 <div class="container">	
 	<div class="rTable">
       	<div class="rTableRow">
@@ -75,7 +93,7 @@ tr:nth-child(even) {
 						</div>
 		        	</div>
 		        	<br>
-		          	<a data-toggle="collapse" href="#collapse<%=i%>">Open/Close</a>
+		          	<a data-toggle="collapse" href="#collapse<%=i%>">View response</a>
 		        </h4>
 		    </div>
 		     <div id="collapse<%=i%>" class="panel-collapse collapse">
@@ -104,7 +122,7 @@ tr:nth-child(even) {
 							<div class="rTableCell4by4">${userList.firstName} &nbsp;&nbsp;${userList.lastName}</div>
 							<div class="rTableCell4by4" >${userList.workLocation}</div>
 							<div class="rTableCell4by4" onclick="getResponse(${userList.userId})" ${fontColor} }> ${userList.riskStatus}</div>
-							<div class="rTableCell4by4" >${userList.epass.isAllowed}</div>
+							<div class="rTableCell4by4" onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}');">${userList.epass.isAllowed}</div>
 						</div>
 						</c:forEach>
 		        </div>

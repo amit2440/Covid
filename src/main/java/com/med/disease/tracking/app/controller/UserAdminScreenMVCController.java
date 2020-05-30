@@ -20,21 +20,29 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.med.disease.tracking.app.constant.Constant.Authority;
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
+import com.med.disease.tracking.app.dto.FeedbackDTO;
 import com.med.disease.tracking.app.dto.SurveyDTO;
 import com.med.disease.tracking.app.dto.SurveyFeedbackDTO;
 import com.med.disease.tracking.app.dto.SurveyReportDTO;
 import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
+import com.med.disease.tracking.app.handler.SubmitEPassHandler;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
 import com.med.disease.tracking.app.service.FeedbackService;
 import com.med.disease.tracking.app.service.SurveyService;
+import com.med.disease.tracking.app.service.UserInfoService;
 import com.med.disease.tracking.app.service.impl.UserDetailsImpl;
 
 @Controller
@@ -48,6 +56,8 @@ public class UserAdminScreenMVCController {
 	@Autowired
 	FeedbackService feedbackService;
 	
+	@Autowired
+	UserInfoService userInfoService;
 
 	@Autowired
 	BeanFactory beanFactory;
@@ -119,9 +129,18 @@ public class UserAdminScreenMVCController {
 	
 	@PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('MANAGER') ")
 	@RequestMapping(value = "/mvc/feedBackRes", method = RequestMethod.POST)
-	public String feedBackRes(@ModelAttribute("fetchFeedbackRequestDTO") FetchFeedbackRequestDTO fetchFeedbackRequestDTO)
+	public String feedBackRes(ModelMap model,@ModelAttribute("fetchFeedbackRequestDTO") FetchFeedbackRequestDTO fetchFeedbackRequestDTO)
 			throws Exception {
 		System.out.println("2222222222222222222222 ----> "+fetchFeedbackRequestDTO.getUserId());
+		List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getSurveys(new SurveyRequestDTO());
+		fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
+		FeedbackDTO feedbackDTO = feedbackService.fetchFeedbacks(fetchFeedbackRequestDTO);
+		
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUserId(fetchFeedbackRequestDTO.getUserId());
+		List<UserDTO> userDTOList = userInfoService.searchUser(userDTO);
+		model.addAttribute("userInfo",userDTOList.get(0));
+		model.addAttribute("feedbackDTO", feedbackDTO);
 		return "feedBackResponse";
 		
 	}
@@ -171,7 +190,16 @@ public class UserAdminScreenMVCController {
 	
 	@RequestMapping(value = "/mvc/testjsp", method = RequestMethod.POST)
 	public String testjsp(ModelMap model) {
+		System.out.println("got into appication");
 		return "testjspFile";
 	}
 	
+	@PreAuthorize(Authority.MANAGER_OR_ADMIN)
+	@PostMapping(value = "/mvc/surveys/{surveyId}/epasses", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> submitepass(@RequestBody EPassRequestDTO requestDTO, 
+			@PathVariable(required = true, name = "surveyId") String surveyId,
+			BindingResult result)
+			throws Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(SubmitEPassHandler.class).handle(requestDTO, result, surveyId);
+	}
 }

@@ -15,9 +15,17 @@
    border: 1px solid #999999;
    float: left;
    height: 30px;
-   overflow: hidden;
+   overflow: auto;
    padding: 3px 1.8%;
    width: 50%;
+}
+.rTableCell100, .rTableHead100 {
+   border: 1px solid #999999;
+   float: left;
+   height: 30px;
+   overflow: auto;
+   padding: 3px 1.8%;
+   width: 100%;
 }
 .rTable:after {
    visibility: hidden;
@@ -31,7 +39,7 @@
    border: 1px solid #999999;
    float: left;
    height: 30px;
-   overflow: hidden;
+   overflow: auto;
    padding: 3px 1.8%;
    width: 25%;
 }
