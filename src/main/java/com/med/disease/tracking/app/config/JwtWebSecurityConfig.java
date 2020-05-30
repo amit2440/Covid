@@ -59,6 +59,7 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/signin").permitAll()
+			.antMatchers("/", "/home", "/js/**", "/css/**").permitAll()
 			.antMatchers("/login").permitAll()
 			.antMatchers("/mvc/login").permitAll()
 //			.antMatchers("/api/test/**").permitAll()

@@ -59,7 +59,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	private String parseJwt(HttpServletRequest request) {
 		String headerAuth = request.getHeader("Authorization");
 		if(request.getRequestURL().toString().contains("mvc")) {
-			headerAuth = "Bearer "+request.getParameter("token");
+			if(request.getSession().getAttribute("token")!=null) {
+				System.err.println("AAAAAAAAAAAAAAA");
+				headerAuth = "Bearer "+request.getSession().getAttribute("token");
+			}else {
+				System.err.println("BBBBBBBBBBBB");
+				headerAuth = "Bearer "+request.getParameter("token");
+			}
 		}
 		if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
 			return headerAuth.substring(7, headerAuth.length());
