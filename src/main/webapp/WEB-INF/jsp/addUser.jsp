@@ -12,7 +12,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add User</title>
-
+  <script src="../js/common.js"></script>
 <style>
 body {
 	font-family: Arial, Helvetica, sans-serif;
@@ -108,14 +108,17 @@ a {
 			<hr>
 
 			<label for="email"><b>First Name</b></label> <input type="text"
-				id="firstName" placeholder="First Name" name="email" required>
+				id="firstName" placeholder="First Name" name="email" required >
+				<p id="fname" style="color:red"></p>
 
 			<label for="psw"><b>Last Name</b></label> <input type="text"
 				placeholder="Enter Last Name" name="lastName" id="lastName" required>
-
+			<p id="lname" style="color:red"></p>
 			<label for="psw-repeat"><b>Mobile Number</b></label> <input
 				type="text" placeholder="Enter Mobile Number" name="mobile"
-				id="mobile" required> <label for="psw-repeat"><b>Work
+				id="mobile" required> 
+				<p id="mob" style="color:red"></p>
+				<label for="psw-repeat"><b>Work
 					Location</b></label> <select id="workLocation" name="workLocation">
 				<option value="Pune">Pune</option>
 				<option value="Noida">Noida</option>
@@ -189,7 +192,11 @@ a {
 	
 
 	function validateAndSbt() {
-
+// 		alert(validateForm());
+		if(!validateForm()){
+			return false;
+		}
+		
 		var myObj = {
 			"firstName" : document.getElementById("firstName").value,
 			"lastName" : document.getElementById("lastName").value,
@@ -207,6 +214,9 @@ a {
 				//	 	      document.getElementById("demo").innerHTML = this.responseText;
 				alert(this.responseText);
 				showHomePage();
+			}else{
+				alert("Error : UNPROCESSABLE_ENTITY");
+// 				break;
 			}
 		};
 
@@ -222,9 +232,46 @@ a {
 
 	}
 
-	// functionValidateForm(){
-
-	// }
+	function validateForm(){
+		document.getElementById("fname").innerHTML="";
+		document.getElementById("lname").innerHTML="";
+		document.getElementById("mob").innerHTML="";
+		var fname = document.getElementById("firstName").value;
+// 		if(fname!=""){
+// // 				alert(allLetter(fname));
+// 			if(!allLetter(fname)){
+// 				document.getElementById("fname").innerHTML="First Name is required and character's only filed.";
+// 				return false;
+// 			}
+			
+// 		}else{
+// 			document.getElementById("fname").innerHTML="First Name is required and character's only filed.";
+// 			return false;
+// 		}
+		
+		var lname = document.getElementById("lastName").value;
+		if(lname!=""){
+			if(!allLetter(lname)){
+				document.getElementById("lname").innerHTML="Last Name is required and character's only filed.";
+				return false;
+			}
+		}else{
+			document.getElementById("lname").innerHTML="Last Name is required and character's only filed.";
+			return false;
+		}
+		
+		var mob = document.getElementById("mobile").value;
+		if(mob!=""){
+			if(!phonenumber(mob)){
+				document.getElementById("mob").innerHTML="Mobile Number is required and 10 digit with no area code or special character.";
+				return false;
+			}
+		}else{
+			document.getElementById("mob").innerHTML="Mobile Number is required and 10 digit with no area code or special character.";
+			return false;
+		}
+		return true;
+	}
 
 // 	function createUserJSON() {
 // 		var jsonReq = {
