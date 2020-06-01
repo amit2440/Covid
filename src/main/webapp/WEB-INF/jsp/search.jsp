@@ -41,6 +41,7 @@ table#t01 th {
 	color: white;
 }
 </style>
+<script src="../js/common.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -83,9 +84,10 @@ table#t01 th {
 </body>
 <script type="text/javascript">
 	function search() {
-		var x = document.getElementById("resultTable").rows.length;
-		;
-		// 		alert(x);
+		if(!validateForm()){
+			return false;
+		}
+		
 		for (res = x; res > 1; res--) {
 			if (res == 1) {
 				break;
@@ -143,6 +145,38 @@ table#t01 th {
 		document.forms["homePageForm"].method="post";
 		document.forms["homePageForm"].submit();
 
+	}
+	
+	function validateForm(){
+		document.getElementById("fname").innerHTML="";
+		document.getElementById("lname").innerHTML="";
+		document.getElementById("mob").innerHTML="";
+		var fname = document.getElementById("firstName").value;
+		if(fname!=""){
+// 				alert(allLetter(fname));
+			if(!allLetter(fname)){
+				document.getElementById("fname").innerHTML="Please enter character's in First Name filed.";
+				return false;
+			}
+			
+		}
+		
+		var lname = document.getElementById("lastName").value;
+		if(lname!=""){
+			if(!allLetter(lname)){
+				document.getElementById("lname").innerHTML="Please enter character's in Last Name filed.";
+				return false;
+			}
+		}
+		
+		var mob = document.getElementById("mobile").value;
+		if(mob!=""){
+			if(!phonenumber(mob)){
+				document.getElementById("mob").innerHTML="Mobile Number is 10 digit with no area code or special character.";
+				return false;
+			}
+		}
+		return true;
 	}
 </script>
 </html>

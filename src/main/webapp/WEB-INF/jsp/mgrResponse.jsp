@@ -42,8 +42,12 @@
 					},
 					data : myJSON,
 					success : function(data, status, xhr) {
+						if(isAllowed==true){
+							document.getElementById(cnt).innerHTML="Allowed";
+						}else{
+							document.getElementById(cnt).innerHTML="Not Allowed";
+						}
 						
-						document.getElementById(cnt).innerHTML=isAllowed;
 					},
 					error : function(jqXhr, textStatus, errorMessage) {
 						alert('Error: Issue in assigning ePass! Please contact Admin.!');

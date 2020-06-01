@@ -22,7 +22,7 @@
 	  
   }
   
- function doSumitEpass(userId,status){
+ function doSumitEpass(userId,status,cnt){
 // 	 alert(document.getElementById("token").value);
 // 	 alert('status --->'+status);
 	 var isAllowed = (status=='true')?false:true;
@@ -44,7 +44,11 @@
 	    },
 	    data:myJSON,
 	    success: function (data,status,xhr){
-	      alert('Thanks for your comment!'); 
+	    	if(isAllowed==true){
+				document.getElementById(cnt).innerHTML="Allowed";
+			}else{
+				document.getElementById(cnt).innerHTML="Not Allowed";
+			} 
 	    },
 		error: function (jqXhr, textStatus, errorMessage) {
 			alert('Error: Issue in assigning ePass! Please contact Admin.!' );
@@ -103,7 +107,7 @@
 							<div class="rTableHead4by4"><strong>Work Location</strong></div>
 							<div class="rTableHead4by4"><strong>Risk Status</strong></div>
 							<div class="rTableHead4by4"><strong>ePass Status</strong></div>
-						</div>
+						</div><% int cnt = 0; %>
 						<c:forEach var="userList" items="${surveyFeedbackDTO.users}">
 						<c:if test="${userList.riskStatus=='H'}">
 							<c:set var="fontColor" value="style=\"background-color:red;\""></c:set>
@@ -122,9 +126,17 @@
 							<div class="rTableCell4by4">${userList.firstName} &nbsp;&nbsp;${userList.lastName}</div>
 							<div class="rTableCell4by4" >${userList.workLocation}</div>
 							<div class="rTableCell4by4" onclick="getResponse(${userList.userId})" ${fontColor} }> ${userList.riskStatus}</div>
-							<div class="rTableCell4by4" onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}');">${userList.epass.isAllowed}</div>
+							<div class="rTableCell4by4" onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}','allowed<%=cnt%>');">
+								<c:if test="${userList.epass.isAllowed==true}">Allowed
+								</c:if>
+							<c:if test="${userList.epass.isAllowed==false}">Not Allowed
+								</c:if>
+							
+							
+							</div>
 						</div>
 						</c:forEach>
+						<%cnt++; %>
 		        </div>
 		        
 		       
