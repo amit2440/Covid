@@ -163,7 +163,7 @@ insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_loc
 insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (20,'Priyanka','Verma',4,'1511','USER','pune','1511',1);
 											 
 insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (11,'Pradipta','Mohanty',14,'123','MANAGER','noida','1503',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (13,'Shraddha','Joshi',14,'910','MANAGER','pune','1510',1);
+insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (13,'Shraddha','Joshi',14,'8550996302','MANAGER','pune','1510',1);
 insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (14,'Philip','Mathew',null,'1112','ADMIN','pune','1507',1);
 
 insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (15,'Anil','Kumar',null,'981179634','ADMIN','pune','1511',1);
