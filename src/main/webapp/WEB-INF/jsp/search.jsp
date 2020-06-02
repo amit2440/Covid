@@ -52,11 +52,14 @@ table#t01 th {
 		<p>
 			<label for="email"><b>First Name</b></label> <input type="text"
 				id="firstName" placeholder="First Name" name="email">
+				<p id="fname" style="color: red"></p>
 			&nbsp;&nbsp;&nbsp;&nbsp; <label for="psw"><b>Last Name</b></label> <input
 				type="text" placeholder="Enter Last Name" name="lastName"
-				id="lastName"> &nbsp;&nbsp;&nbsp;&nbsp; <label
+				id="lastName"> &nbsp;&nbsp;&nbsp;&nbsp;
+				<p id="lname" style="color: red"></p> <label
 				for="psw-repeat"><b>Mobile Number</b></label> <input type="text"
 				placeholder="Enter Mobile Number" name="mobile" id="mobile">
+				<p id="mob" style="color: red"></p>
 			&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" onclick="search()"
 				value="Search" />
 		</p>
