@@ -52,16 +52,17 @@ table#t01 th {
 		<p>
 			<label for="email"><b>First Name</b></label> <input type="text"
 				id="firstName" placeholder="First Name" name="email">
-				<p id="fname" style="color: red"></p>
-			&nbsp;&nbsp;&nbsp;&nbsp; <label for="psw"><b>Last Name</b></label> <input
-				type="text" placeholder="Enter Last Name" name="lastName"
-				id="lastName"> &nbsp;&nbsp;&nbsp;&nbsp;
-				<p id="lname" style="color: red"></p> <label
-				for="psw-repeat"><b>Mobile Number</b></label> <input type="text"
-				placeholder="Enter Mobile Number" name="mobile" id="mobile">
-				<p id="mob" style="color: red"></p>
-			&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" onclick="search()"
-				value="Search" />
+		<p id="fname" style="color: red"></p>
+		&nbsp;&nbsp;&nbsp;&nbsp; <label for="psw"><b>Last Name</b></label> <input
+			type="text" placeholder="Enter Last Name" name="lastName"
+			id="lastName"> &nbsp;&nbsp;&nbsp;&nbsp;
+		<p id="lname" style="color: red"></p>
+		<label for="psw-repeat"><b>Mobile Number</b></label> <input
+			type="text" placeholder="Enter Mobile Number" name="mobile"
+			id="mobile">
+		<p id="mob" style="color: red"></p>
+		&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" onclick="search()"
+			value="Search" />
 		</p>
 
 
@@ -87,10 +88,11 @@ table#t01 th {
 </body>
 <script type="text/javascript">
 	function search() {
-		if(!validateForm()){
+		var x = document.getElementById("resultTable").rows.length;
+		if (!validateForm()) {
 			return false;
 		}
-		
+
 		for (res = x; res > 1; res--) {
 			if (res == 1) {
 				break;
@@ -123,9 +125,11 @@ table#t01 th {
 							+ '</a>';
 					cell1.innerHTML = obj[i].lastName;
 					cell2.innerHTML = obj[i].role;
-					if(obj[i].managerName=='' || obj[i].managerName=='undefined' || obj[i].managerName==null){
-						cell3.innerHTML="";
-					}else{
+					if (obj[i].managerName == ''
+							|| obj[i].managerName == 'undefined'
+							|| obj[i].managerName == null) {
+						cell3.innerHTML = "";
+					} else {
 						cell3.innerHTML = obj[i].managerName
 					}
 					cell4.innerHTML = obj[i].mobile;
@@ -145,37 +149,37 @@ table#t01 th {
 		document.forms["homePageForm"].action = "/ca/mvc/userSearch";
 		document.getElementById("userId").value = userId;
 		// 		alert(document.getElementById("mobileNum").value);
-		document.forms["homePageForm"].method="post";
+		document.forms["homePageForm"].method = "post";
 		document.forms["homePageForm"].submit();
 
 	}
-	
-	function validateForm(){
-		document.getElementById("fname").innerHTML="";
-		document.getElementById("lname").innerHTML="";
-		document.getElementById("mob").innerHTML="";
+
+	function validateForm() {
+		document.getElementById("fname").innerHTML = "";
+		document.getElementById("lname").innerHTML = "";
+		document.getElementById("mob").innerHTML = "";
 		var fname = document.getElementById("firstName").value;
-		if(fname!=""){
-// 				alert(allLetter(fname));
-			if(!allLetter(fname)){
-				document.getElementById("fname").innerHTML="Please enter character's in First Name filed.";
+		if (fname != "") {
+			// 				alert(allLetter(fname));
+			if (!allLetter(fname)) {
+				document.getElementById("fname").innerHTML = "Please enter character's in First Name filed.";
 				return false;
 			}
-			
+
 		}
-		
+
 		var lname = document.getElementById("lastName").value;
-		if(lname!=""){
-			if(!allLetter(lname)){
-				document.getElementById("lname").innerHTML="Please enter character's in Last Name filed.";
+		if (lname != "") {
+			if (!allLetter(lname)) {
+				document.getElementById("lname").innerHTML = "Please enter character's in Last Name filed.";
 				return false;
 			}
 		}
-		
+
 		var mob = document.getElementById("mobile").value;
-		if(mob!=""){
-			if(!phonenumber(mob)){
-				document.getElementById("mob").innerHTML="Mobile Number is 10 digit with no area code or special character.";
+		if (mob != "") {
+			if (!phonenumber(mob)) {
+				document.getElementById("mob").innerHTML = "Mobile Number is 10 digit with no area code or special character.";
 				return false;
 			}
 		}
