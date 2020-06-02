@@ -147,29 +147,6 @@ CREATE  TABLE `covid`.`epass` (
 
 use covid;
 
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (1,'Sunil','Saibol',null,'9822794711','ADMIN','pune','1216',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (2,'Sachin','Bhat',null,'7387802689','ADMIN','pune','6383',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (4,'Ganesh','Khutwad',null,'9763484283','MANAGER','pune','5049',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (5,'Virendra','Bankhede',null,'9860277981','ADMIN','pune','4953',1);
-											
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (6,'Priya','Jaroli',4,'678','USER','pune','1504',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (7,'Pritam','Gaikwad',4,'8910','USER','pune','1501',1);
-
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (8,'Shweta','Rai',13,'89','USER','pune','1508',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (9,'Sayali','Bachhan',13,'1213','USER','pune','1505',1);
-
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (18,'Payal','Kankariya',4,'1500','USER','pune','1500',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (19,'Parul','Sharma',4,'1502','USER','pune','1502',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (20,'Priyanka','Verma',4,'1511','USER','pune','1511',1);
-											 
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (11,'Pradipta','Mohanty',14,'123','MANAGER','noida','1503',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (13,'Shraddha','Joshi',14,'8550996302','MANAGER','pune','1510',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (14,'Philip','Mathew',null,'1112','ADMIN','pune','1507',1);
-
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (15,'Anil','Kumar',null,'981179634','ADMIN','pune','1511',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (16,'Jitendra','Thakur',13,'779888528','ADMIN','pune','1512',1);
-insert into user (user_id, first_name, last_name, mgr_id, mobile, role, work_location,token, is_active) values (17,'Nandkishore','Gawade',13,'9730313021','ADMIN','pune','1241',1);
-
 insert into survey values (1, CURRENT_TIMESTAMP, '1st week of month', 1);
 
 insert into question (question_id, question, `type`) values (1,'Please select your Gender','singleChoice');
