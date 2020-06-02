@@ -80,7 +80,7 @@ li a:hover {
 		<li><a onclick="searchUsers();">Search</a></li>
 		<li><a onclick="bulkUpload()">Load User File</a></li>
 		<li><a onclick="doFeedBackReport()">Report</a></li>
-		<li><a onclick="testjspFile()">test Jsp</a></li>
+<!-- 		<li><a onclick="testjspFile()">test Jsp</a></li> -->
 
 	</ul>
 	<form action="/ca/mvc/showHomePage" id="homePageForm" method="post">
