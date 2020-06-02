@@ -257,5 +257,3 @@ insert into survey_question (ssq_id, survey_id, question_id) values(7,1,7);
 insert into survey_question (ssq_id, survey_id, question_id) values(8,1,8);
 insert into survey_question (ssq_id, survey_id, question_id) values(9,1,9);
 insert into survey_question (ssq_id, survey_id, question_id) values(10,1,10);
-
-
