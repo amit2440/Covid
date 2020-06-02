@@ -126,7 +126,7 @@
 							<div class="rTableCell4by4">${userList.firstName} &nbsp;&nbsp;${userList.lastName}</div>
 							<div class="rTableCell4by4" >${userList.workLocation}</div>
 							<div class="rTableCell4by4" onclick="getResponse(${userList.userId})" ${fontColor} }> ${userList.riskStatus}</div>
-							<div class="rTableCell4by4" onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}','allowed<%=cnt%>');">
+							<div class="rTableCell4by4" id="allowed<%=cnt%>" onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}','allowed<%=cnt%>');">
 								<c:if test="${userList.epass.isAllowed==true}">Allowed
 								</c:if>
 							<c:if test="${userList.epass.isAllowed==false}">Not Allowed
