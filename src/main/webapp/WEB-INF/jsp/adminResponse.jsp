@@ -49,6 +49,7 @@
 			}else{
 				document.getElementById(cnt).innerHTML="Not Allowed";
 			} 
+	    	location.reload();
 	    },
 		error: function (jqXhr, textStatus, errorMessage) {
 			alert('Error: Issue in assigning ePass! Please contact Admin.!' );
@@ -134,9 +135,9 @@
 							
 							
 							</div>
-						</div>
+						</div><%cnt++; %>
 						</c:forEach>
-						<%cnt++; %>
+						
 		        </div>
 		        
 		       
