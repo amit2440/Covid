@@ -115,7 +115,7 @@ a {
 			<p id="lname" style="color: red"></p>
 			<label for="psw-repeat"><b>Mobile Number</b></label> <input
 				type="text" placeholder="Enter Mobile Number" name="mobile"
-				readonly="true" id="mobile" required>
+				 id="mobile" required>
 			<p id="mob" style="color: red"></p>
 			<label for="psw-repeat"><b>Work Location</b></label> <select
 				id="workLocation" name="workLocation">
