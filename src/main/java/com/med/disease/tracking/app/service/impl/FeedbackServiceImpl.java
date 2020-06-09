@@ -1,10 +1,7 @@
 package com.med.disease.tracking.app.service.impl;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -142,13 +139,17 @@ public class FeedbackServiceImpl implements FeedbackService {
 		return inputUser.get(0);
 	}
 	
-	public List<User> getUsers(User user) throws Exception{
-		List<User> inputUser = userDAO.searchUser(user);
-		if (ObjectUtils.isEmpty(inputUser)) {
-			LOGGER.error("Users Not Found");
-			throw new CovidAppException("Users Not Found");
-		}
-		return inputUser;
+	public List<User> getUsers(List<User> users) throws Exception{
+		List<User> allUsers = new ArrayList<>();
+		for(User user : users){
+			List<User> inputUser = userDAO.searchUser(user);
+			if (ObjectUtils.isEmpty(inputUser)) {
+				LOGGER.error("Users Not Found");
+				throw new CovidAppException("Users Not Found");
+			}
+			allUsers.addAll(inputUser);
+		};
+		return allUsers;
 	}
 	
 	public SurveyFeedbackDTO caculateRisk(List<User> derivedUsers, Integer surveyId, UserDTO manager) throws Exception {
@@ -195,8 +196,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 		// fetch all managers
 		User searchMgrs = new User();
 		searchMgrs.setRole(Constant.Role.MANAGER);
-		List<User> managers = getUsers(searchMgrs);
-		
+		User searchAdmins = new User();
+		searchAdmins.setRole(Constant.Role.ADMIN);
+		List<User> managers = getUsers(Arrays.asList(searchAdmins,searchMgrs));
+
 		if(ObjectUtils.isEmpty(managers))
 			return null;
 		
