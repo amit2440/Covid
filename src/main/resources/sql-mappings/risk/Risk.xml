@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "Location">
+    <select id="getRisk" parameterType="Risk">
+        SELECT risk_id, user_id, survey_id, risk_level
+        FROM Risk
+        WHERE
+        user_id = #{userId}
+        AND
+        survey_id = #{surveyId}
+    </select>
+
+    <insert id="insertRisk" parameterType="Risk">
+        INSERT INTO
+        Risk (user_id, survey_id, risk_level)
+        VALUES(#{userId}, #{surveyId}, #{riskLevel})
+    </insert>
+
+    <update id="updateRisk" parameterType="Risk">
+        UPDATE Risk SET
+        risk_level = #{riskLevel}
+        WHERE risk_id = #{riskId}
+    </update>
+
+</mapper>
