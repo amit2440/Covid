@@ -24,7 +24,7 @@ public interface IManagerRepository {
 		@Result(property = "mgrLastName", column = "last_name"),
 //		@Result(property = "teamName", column = "team_name"),
       })
-	@Select("SELECT first_name,last_name,user_id from user where is_active <> 0 and role='MANAGER';")
+	@Select("SELECT first_name,last_name,user_id from user where is_active <> 0 and role in ('MANAGER','ADMIN');")
 	public List<Manager> findAll(); 
 	
 	
@@ -32,6 +32,6 @@ public interface IManagerRepository {
 	@Update("Update user set mgr_id=#{newMgrId}  where mgr_id=#{mgrId}")
 	public int update(ManagerDTO managerDTO);
 	
-	@Select("SELECT Count(mgr_id) from user where user_id=#{mgrId} AND  role='MANAGER'" )
+	@Select("SELECT Count(mgr_id) from user where user_id=#{mgrId} AND  role in ('MANAGER','ADMIN')" )
 	public int validateMgrIDExist(Integer mgrId);
 }
