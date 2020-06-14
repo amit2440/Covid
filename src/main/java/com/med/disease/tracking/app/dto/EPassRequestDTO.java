@@ -8,6 +8,15 @@ public class EPassRequestDTO {
 	private Integer surveyId;
 	private Boolean isAllowed;
 	private LocalDate toDate;
+	private LocalDate fromDate;
+
+	public LocalDate getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(LocalDate fromDate) {
+		this.fromDate = fromDate;
+	}
 
 	public Integer getUserId() {
 		return userId;

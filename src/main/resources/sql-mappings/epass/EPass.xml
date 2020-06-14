@@ -5,10 +5,10 @@
 <mapper namespace="EPass">
 	<insert id="submitEPass" parameterType="EPass">
 		INSERT INTO EPASS
-		(USER_ID, SURVEY_ID, IS_ALLOWED, TO_DATE, CREATED_BY)
+		(USER_ID, SURVEY_ID, IS_ALLOWED, TO_DATE, CREATED_BY,FROM_DATE)
 		VALUES
 		(#{user.userId}, #{survey.surveyId}, #{isAllowed}, #{toDate,
-		javaType=java.time.LocalDate}, #{createdBy.userId});
+		javaType=java.time.LocalDate}, #{createdBy.userId},#{fromDate,	javaType=java.time.LocalDate});
 	</insert>
 	
 	<select id ="searchEPass" parameterType="EPass" resultMap="EPass-ResultMappings.ResultSearchEPass">

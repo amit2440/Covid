@@ -35,6 +35,7 @@ public class SubmitEPassMapper extends Mapper {
 		ePass.setIsAllowed(requestDTO.getIsAllowed());
 		ePass.setToDate(requestDTO.getToDate());
 		ePass.setCreatedBy(createdBy);
+		ePass.setFromDate(requestDTO.getFromDate());
 		return ePass;
 	}
 

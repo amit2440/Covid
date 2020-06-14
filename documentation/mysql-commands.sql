@@ -129,6 +129,9 @@ CREATE  TABLE `covid`.`epass` (
     REFERENCES `covid`.`user` (`user_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+    
+ALTER TABLE `covid`.`epass`
+  ADD COLUMN `from_Date` DATE ;
 
 -- select * from user;
 -- select * from feedback;

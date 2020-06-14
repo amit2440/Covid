@@ -10,6 +10,15 @@ public class EPass {
 	private LocalDate toDate;
 	private User createdBy;
 	private LocalDateTime createdOn;
+	private LocalDate fromDate;
+
+	public LocalDate getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(LocalDate fromDate) {
+		this.fromDate = fromDate;
+	}
 	
 	public User getUser() {
 		return user;
