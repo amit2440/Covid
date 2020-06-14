@@ -92,7 +92,7 @@ table#t01 th {
 		if (!validateForm()) {
 			return false;
 		}
-
+		
 		for (res = x; res > 1; res--) {
 			if (res == 1) {
 				break;
