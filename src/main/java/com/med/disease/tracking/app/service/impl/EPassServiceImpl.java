@@ -5,18 +5,19 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import com.med.disease.tracking.app.dao.EPassDAO;
-import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.dto.EPassDTO;
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
 import com.med.disease.tracking.app.mapper.FetchEPassMapper;
 import com.med.disease.tracking.app.mapper.MappingTypeEnum;
 import com.med.disease.tracking.app.mapper.SubmitEPassMapper;
 import com.med.disease.tracking.app.model.EPass;
+import com.med.disease.tracking.app.model.User;
 import com.med.disease.tracking.app.service.EPassService;
 
 @Service
@@ -37,6 +38,12 @@ public class EPassServiceImpl implements EPassService {
 	@Transactional(readOnly = false)
 	public void submitEPass(EPassRequestDTO requestDTO) throws Exception {
 		EPass ePass = (EPass) submitEPassMapper.map(requestDTO, MappingTypeEnum.MAPTODOMAIN, null);
+		// fetching logged in user
+		UserDetailsImpl ud = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User crUser = new User();
+		crUser.setUserId(ud.getUserId());
+		ePass.setCreatedBy(crUser);
+
 		if (ePassDAO.submitEPass(ePass) <= 0) {
 			LOGGER.error("Unable to insert ePass for userId=" + requestDTO.getUserId());
 			throw new CovidAppException("Insert EPass failed");

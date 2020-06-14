@@ -1,13 +1,14 @@
 package com.med.disease.tracking.app.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
-import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.dto.EPassDTO;
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.model.EPass;
 import com.med.disease.tracking.app.model.Survey;
 import com.med.disease.tracking.app.model.User;
@@ -39,6 +40,13 @@ public class FetchEPassMapper extends Mapper {
 		List<EPass> ePass = (List<EPass>) objectToMap;
 		EPassDTO ePassDTO = new EPassDTO();
 		boolean state = !ObjectUtils.isEmpty(ePass) && true == ePass.get(0).getIsAllowed();
+
+		if (state) {
+			LocalDate toDte = ePass.get(0).getToDate();
+			if (toDte.isBefore(LocalDate.now())) {
+				state = false;
+			}
+		}
 		ePassDTO.setIsAllowed(state);
 		return ePassDTO;
 	}
