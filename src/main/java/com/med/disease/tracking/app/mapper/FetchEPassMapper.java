@@ -47,6 +47,8 @@ public class FetchEPassMapper extends Mapper {
 				state = false;
 			}
 		}
+		ePassDTO.setToDate(ePass.get(0).getToDate());
+		ePassDTO.setFromDate(ePass.get(0).getFromDate());
 		ePassDTO.setIsAllowed(state);
 		return ePassDTO;
 	}

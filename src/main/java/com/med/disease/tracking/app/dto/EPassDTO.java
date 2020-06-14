@@ -13,6 +13,15 @@ public class EPassDTO {
 	private LocalDate toDate;
 	private UserDTO createdBy;
 	private LocalDateTime createdOn;
+	private LocalDate fromDate;
+
+	public LocalDate getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(LocalDate fromDate) {
+		this.fromDate = fromDate;
+	}
 
 	public UserDTO getUser() {
 		return user;

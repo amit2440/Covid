@@ -11,6 +11,10 @@
 			javaType="java.time.LocalDate" 
 			jdbcType="DATE"
 			typeHandler="org.apache.ibatis.type.LocalDateTypeHandler" />
+		<result property="fromDate" column="from_date"
+			javaType="java.time.LocalDate" 
+			jdbcType="DATE"
+			typeHandler="org.apache.ibatis.type.LocalDateTypeHandler" />
 		<result property="createdBy.userId" column="created_by" />
 		<result property="createdOn" column="created_on"
 			javaType="java.time.LocalDateTime" 
