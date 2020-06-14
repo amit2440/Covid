@@ -18,7 +18,8 @@
 			e.is_allowed, 
 			e.to_date, 
 			e.created_by, 
-			e.created_on 
+			e.created_on,
+			e.from_date 
 		FROM epass e 
 		INNER JOIN (
 			SELECT user_id, 
