@@ -12,6 +12,7 @@
 		<typeAlias alias="User" type="com.med.disease.tracking.app.model.User" />
 		<typeAlias alias="UserRisk" type="com.med.disease.tracking.app.model.UserRisk" />
 		<typeAlias alias="Location" type="com.med.disease.tracking.app.model.Location" />
+		<typeAlias alias="Risk" type="com.med.disease.tracking.app.model.Risk" />
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="org.apache.ibatis.type.InstantTypeHandler" />
@@ -57,5 +58,13 @@
 		<mapper resource="sql-mappings/location/Location.xml"/>
 		<mapper resource="sql-mappings/location/Location-SqlQueries.xml"/>
 		<mapper resource="sql-mappings/location/Location-ResultMappings.xml"/>
+
+		<!--Option-->
+		<mapper resource="sql-mappings/option/Option.xml"/>
+
+		<!--Risk-->
+		<mapper resource="sql-mappings/risk/Risk.xml"/>
+		<mapper resource="sql-mappings/risk/Risk-ResultMappings.xml"/>
+
 	</mappers>
 </configuration>

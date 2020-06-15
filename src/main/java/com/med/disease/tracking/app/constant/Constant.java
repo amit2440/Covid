@@ -18,6 +18,8 @@ public interface Constant {
 		String ADD_LOCATION = "Add Location";
 		String FETCH_LOCATION = "Fetch Location";
 		String REG_MANAGER = "MANAGER REGISTRATION";
+		String SUBMIT_RISK = "Submit Risk";
+		String RISK_FETCH_MANAGER = "Fetch Risk Report for manager";
 	}
 	
 	public interface RiskStatus {

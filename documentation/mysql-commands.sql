@@ -133,6 +133,18 @@ CREATE  TABLE `covid`.`epass` (
 ALTER TABLE `covid`.`epass`
   ADD COLUMN `from_Date` DATE ;
 
+CREATE TABLE `risk` (
+  `risk_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
+  `risk_level` varchar(45) NOT NULL,
+  PRIMARY KEY (`risk_id`),
+  KEY `fk_survey_id_idx` (`survey_id`),
+  KEY `fk_user_id_idx` (`user_id`),
+  CONSTRAINT `fkrisk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_survey_id` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+
 -- select * from user;
 -- select * from feedback;
 -- select * from survey_question;
