@@ -15,9 +15,9 @@ public class RiskDAO extends BaseDAO{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RiskDAO.class);
 
-    public Optional<Risk> getRiskStatus(Risk risk) throws DatabaseException {
+    public Optional<Risk> getRisk(Risk risk) throws DatabaseException {
         try{
-            return getSqlSession().selectOne("Risk.getRisk", risk);
+            return Optional.ofNullable(getSqlSession().selectOne("Risk.getRisk", risk));
         } catch (Exception exception){
             LOGGER.error("Database Exception :{}", exception.getMessage());
             throw new DatabaseException(exception.getMessage());
@@ -42,9 +42,9 @@ public class RiskDAO extends BaseDAO{
         }
     }
 
-    public Map<Integer, String> getRiskStatus(List<Risk> risks) {
+    public List<Risk> getRisk(List<Risk> risks) throws DatabaseException {
         try{
-            return getSqlSession().select()//("Risk.getRisk", risks);
+            return getSqlSession().selectList("Risk.getRiskForUsers", risks);
         } catch (Exception exception){
             LOGGER.error("Database Exception :{}", exception.getMessage());
             throw new DatabaseException(exception.getMessage());

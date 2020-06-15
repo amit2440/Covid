@@ -64,6 +64,7 @@
 
 		<!--Risk-->
 		<mapper resource="sql-mappings/risk/Risk.xml"/>
+		<mapper resource="sql-mappings/risk/Risk-ResultMappings.xml"/>
 
 	</mappers>
 </configuration>

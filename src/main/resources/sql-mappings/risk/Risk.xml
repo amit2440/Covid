@@ -2,20 +2,20 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "Location">
-    <select id="getRisk" parameterType="Risk">
+<mapper namespace = "Risk">
+    <select id="getRisk" parameterType="Risk" resultMap="Risk-ResultMappings.ResultForGetRisk">
         SELECT risk_id, user_id, survey_id, risk_level
         FROM Risk
         WHERE
-        user_id = #{userId}
+        user_id = #{user.userId}
         AND
-        survey_id = #{surveyId}
+        survey_id = #{survey.surveyId}
     </select>
 
     <insert id="insertRisk" parameterType="Risk">
         INSERT INTO
         Risk (user_id, survey_id, risk_level)
-        VALUES(#{userId}, #{surveyId}, #{riskLevel})
+        VALUES(#{user.userId}, #{survey.surveyId}, #{riskLevel})
     </insert>
 
     <update id="updateRisk" parameterType="Risk">
@@ -23,5 +23,20 @@
         risk_level = #{riskLevel}
         WHERE risk_id = #{riskId}
     </update>
+
+    <select id="getRiskForUsers" resultMap="Risk-ResultMappings.ResultForGetRisk">
+        SELECT risk_id, user_id, survey_id, risk_level
+        FROM Risk
+        WHERE
+        user_id IN
+        <foreach item="risk" collection="list" open="(" separator="," close=")">
+            #{risk.user.userId}
+        </foreach>
+        AND
+        survey_id IN
+        <foreach item="risk" collection="list" open="(" separator="," close=")">
+            #{risk.survey.surveyId}
+        </foreach>
+    </select>
 
 </mapper>

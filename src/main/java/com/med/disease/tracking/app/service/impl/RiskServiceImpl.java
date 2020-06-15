@@ -9,10 +9,7 @@ import com.med.disease.tracking.app.dto.*;
 import com.med.disease.tracking.app.dto.request.FetchRiskRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
 import com.med.disease.tracking.app.exception.DatabaseException;
-import com.med.disease.tracking.app.mapper.EPassMapper;
-import com.med.disease.tracking.app.mapper.MappingTypeEnum;
-import com.med.disease.tracking.app.mapper.SubmitRiskMapper;
-import com.med.disease.tracking.app.mapper.UserMapper;
+import com.med.disease.tracking.app.mapper.*;
 import com.med.disease.tracking.app.model.EPass;
 import com.med.disease.tracking.app.model.Risk;
 import com.med.disease.tracking.app.model.Survey;
@@ -61,8 +58,8 @@ public class RiskServiceImpl implements RiskService {
 	@Autowired
 	private EPassDAO ePassDAO;
 
-	/*@Autowired
-	private FetchFeedbackMapper fetchFeedbackMapper;*/
+	@Autowired
+	private FetchRiskMapper fetchRiskMapper;
 
 	@Override
 	@Transactional
@@ -72,11 +69,16 @@ public class RiskServiceImpl implements RiskService {
 		List<String> optionRisks = optionDAO.getOptionRisk(allOptionIds);
 		if (optionRisks.stream().anyMatch(riskStatus -> riskStatus.equalsIgnoreCase(Constant.RiskStatus.H)))
 			risk.setRiskLevel(Constant.RiskStatus.H);
-		else
+		else if (optionRisks.stream().anyMatch(riskStatus -> riskStatus.equalsIgnoreCase(Constant.RiskStatus.M)))
 			risk.setRiskLevel(Constant.RiskStatus.M);
-		Optional<Risk> userRisk = riskDAO.getRiskStatus(risk);
+		else if (optionRisks.stream().anyMatch(riskStatus -> riskStatus.equalsIgnoreCase(Constant.RiskStatus.L)))
+			risk.setRiskLevel(Constant.RiskStatus.L);
+		else
+			risk.setRiskLevel(Constant.RiskStatus.U);
+		Optional<Risk> userRisk = riskDAO.getRisk(risk);
 		Consumer<Risk> updateRisk = riskStatus ->{
 			if(!riskStatus.getRiskLevel().equalsIgnoreCase(risk.getRiskLevel())) {
+				riskStatus.setRiskLevel(risk.getRiskLevel());
 				try {
 					if(riskDAO.updateRiskStatus(riskStatus) <= 0) {
 						LOGGER.error("Unable to update risk status");
@@ -119,15 +121,16 @@ public class RiskServiceImpl implements RiskService {
 		}
 	}
 
-	/*@Override
+	@Override
 	@Transactional
-	public FeedbackDTO fetchFeedbacks(FetchFeedbackRequestDTO fetchFeedbackRequestDTO) throws Exception {
-		Feedback feedback = (Feedback) fetchFeedbackMapper.map(fetchFeedbackRequestDTO, MappingTypeEnum.MAPTODOMAIN,
+	public RiskDTO fetchRisk(FetchRiskRequestDTO fetchRiskRequestDTO) throws Exception {
+		Risk risk = (Risk) fetchRiskMapper.map(fetchRiskRequestDTO, MappingTypeEnum.MAPTODOMAIN,
 				null);
-		List<Feedback> feedbackList = feedbackDAO.getFeedbacks(feedback);
-		return (FeedbackDTO) fetchFeedbackMapper.map(feedbackList, MappingTypeEnum.MAPTORESPONSE, null);
+		Optional<Risk> userRisk = riskDAO.getRisk(risk);
+		return userRisk.isEmpty() ? null :
+				(RiskDTO) fetchRiskMapper.map(userRisk.get(), MappingTypeEnum.MAPTORESPONSE, null);
 	}
-*/
+
 	@Override
 	@Transactional
 	public SurveyFeedbackDTO fetchSurveyFeedbacks(FetchRiskRequestDTO requestDTO) throws Exception {
@@ -161,12 +164,12 @@ public class RiskServiceImpl implements RiskService {
 		List<User> allUsers = new ArrayList<>();
 		for(User user : users){
 			List<User> inputUser = userDAO.searchUser(user);
-			if (ObjectUtils.isEmpty(inputUser)) {
-				LOGGER.error("Users Not Found");
-				throw new CovidAppException("Users Not Found");
-			}
 			allUsers.addAll(inputUser);
 		};
+		if (ObjectUtils.isEmpty(allUsers)) {
+			LOGGER.error("Users Not Found");
+			throw new CovidAppException("Users Not Found");
+		}
 		return allUsers;
 	}
 
@@ -174,8 +177,19 @@ public class RiskServiceImpl implements RiskService {
 		SurveyFeedbackDTO surveyFeedback = new SurveyFeedbackDTO();
 		surveyFeedback.setManager(manager);
 
-		List<Integer> derivedUserIds = derivedUsers.stream().map(User::getUserId).collect(Collectors.toList());
-		Map<Integer, String> userRisks = riskDAO.getRiskStatus(derivedUserIds, surveyId);
+		//List<Integer> derivedUserIds = derivedUsers.stream().map(User::getUserId).collect(Collectors.toList());
+		//Map<Integer, String> userRisks = riskDAO.getRisk(derivedUserIds, surveyId);
+
+		List<Risk> derivedUsersForRiskStatus = derivedUsers.stream().map(user ->{
+			Risk userRisk = new Risk();
+			Survey survey = new Survey();
+			survey.setSurveyId(surveyId);
+			userRisk.setSurvey(survey);
+			userRisk.setUser(user);
+			return userRisk;
+		}).collect(Collectors.toList());
+
+		List<Risk> derivedUsersRisks = riskDAO.getRisk(derivedUsersForRiskStatus);
 		/*Risk userRiskIn = new Risk();
 		userRiskIn.setManagerId(manager.getUserId());
 		userRiskIn.setSurveyId(surveyId);
@@ -204,11 +218,9 @@ public class RiskServiceImpl implements RiskService {
 			usrObj.setEpass((EPassDTO) ePassMapper.map(ePass, MappingTypeEnum.MAPTORESPONSE, null));
 			userDTOs.add(usrObj);
 		}
-		userDTOs.stream().forEach(usr -> {
-			if(ObjectUtils.isEmpty(userRisks.get(usr.getUserId())))
-				usr.setRiskStatus(Constant.RiskStatus.U);
-			else
-				usr.setRiskStatus(userRisks.get(usr.getUserId()));
+		userDTOs.forEach(usr -> {
+			Optional<Risk> userRisk = derivedUsersRisks.stream().filter(u -> usr.getUserId().equals(u.getUser().getUserId())).findAny();
+			userRisk.ifPresentOrElse((risk) -> usr.setRiskStatus(risk.getRiskLevel()), () -> usr.setRiskStatus(Constant.RiskStatus.U));
 		});
 		surveyFeedback.setUsers(userDTOs);
 		return surveyFeedback;

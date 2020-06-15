@@ -3,6 +3,7 @@ package com.med.disease.tracking.app.controller;
 import com.med.disease.tracking.app.dto.RiskRequestDTO;
 import com.med.disease.tracking.app.dto.request.FetchRiskRequestDTO;
 import com.med.disease.tracking.app.handler.FetchDerivedRiskHandler;
+import com.med.disease.tracking.app.handler.FetchRiskHandler;
 import com.med.disease.tracking.app.handler.FetchSurveyRiskHandler;
 import com.med.disease.tracking.app.handler.SubmitRiskHandler;
 import org.springframework.beans.factory.BeanFactory;
@@ -25,12 +26,12 @@ public class RiskController {
                 .handle(riskRequestDTO, bindingResult);
     }
 
-    /*@GetMapping(value = "/surveys/{surveyId}/feedbacks/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> fetchFeedback(@ModelAttribute FetchFeedbackRequestDTO fetchFeedbackRequestDTO,
+    @GetMapping(value = "/surveys/{surveyId}/risks/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> fetchFeedback(@ModelAttribute FetchRiskRequestDTO fetchRiskRequestDTO,
                                            BindingResult bindingResult) throws Exception{
-        return (ResponseEntity<?>) beanFactory.getBean(FetchFeedbackHandler.class)
-                .handle(fetchFeedbackRequestDTO, bindingResult);
-    }*/
+        return (ResponseEntity<?>) beanFactory.getBean(FetchRiskHandler.class)
+                .handle(fetchRiskRequestDTO, bindingResult);
+    }
 
     @GetMapping(value = "/reports/surveys/{surveyId}/risks/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> fetchDerivedRisk(@ModelAttribute FetchRiskRequestDTO fetchRiskRequestDTO,
