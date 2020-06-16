@@ -20,8 +20,14 @@ public class ErrorUtil {
 		MessageSource messageSource = BeanUtil.getBean(MessageSource.class);
 		if(bindingResult.hasErrors()) {
 			ErrorResponse errorResponse = new ErrorResponse();
-			errorResponse.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
-			errorResponse.setHttpStatusValue(HttpStatus.UNPROCESSABLE_ENTITY);
+			if(module.equalsIgnoreCase(Constant.Module.REGISTER_USER)){
+				errorResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+				errorResponse.setHttpStatusValue(HttpStatus.UNAUTHORIZED);
+			}else {
+				errorResponse.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+				errorResponse.setHttpStatusValue(HttpStatus.UNPROCESSABLE_ENTITY);
+			}
+			
 			
 			List<SubErrorResponse> subErrorResponses = new ArrayList<>();
 			if(bindingResult != null) {
