@@ -43,7 +43,8 @@ public class FetchEPassMapper extends Mapper {
 
 		if (state) {
 			LocalDate toDte = ePass.get(0).getToDate();
-			if (toDte.isBefore(LocalDate.now())) {
+			LocalDate frmDte = ePass.get(0).getFromDate();
+			if (toDte.isBefore(LocalDate.now()) || frmDte.isAfter(LocalDate.now())) {
 				state = false;
 			}
 		}
