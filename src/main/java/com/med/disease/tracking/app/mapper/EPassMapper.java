@@ -25,6 +25,7 @@ public class EPassMapper extends Mapper {
 		if (ePass != null) {
 			ePassDTO.setIsAllowed(ePass.getIsAllowed());
 			ePassDTO.setToDate(ePass.getToDate());
+			ePassDTO.setFromDate(ePass.getFromDate());
 			UserDTO createdBy = new UserDTO();
 			if (ePass.getCreatedBy() != null) {
 				createdBy.setUserId(ePass.getCreatedBy().getUserId());
