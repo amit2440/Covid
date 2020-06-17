@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import com.med.disease.tracking.app.dao.RiskDAO;
+import com.med.disease.tracking.app.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -13,10 +15,6 @@ import com.med.disease.tracking.app.constant.Constant;
 import com.med.disease.tracking.app.dao.EPassDAO;
 import com.med.disease.tracking.app.dao.FeedbackDAO;
 import com.med.disease.tracking.app.dao.UserInfoDAO;
-import com.med.disease.tracking.app.model.EPass;
-import com.med.disease.tracking.app.model.Survey;
-import com.med.disease.tracking.app.model.User;
-import com.med.disease.tracking.app.model.UserRisk;
 
 @Component
 public class CommonUtil {
@@ -30,9 +28,12 @@ public class CommonUtil {
 	@Autowired
 	FeedbackDAO feedbackDAO;
 
+	@Autowired
+	RiskDAO riskDAO;
+
 	public boolean isEPassApplicable(Integer userId, Integer surveyId) throws Exception {
 		return Arrays.asList(Constant.RiskStatus.L, Constant.RiskStatus.M)
-				.contains(getUserRiskStatus(userId, surveyId));
+				.contains(getUserRisk(userId, surveyId));
 	}
 
 	public String getUserRiskStatus(Integer userId, Integer surveyId) throws Exception {
@@ -74,5 +75,17 @@ public class CommonUtil {
 
 		return !CollectionUtils.isEmpty(ePassUser) && true == ePassUser.get(0).getIsAllowed();
 	}
-	
+
+	public String getUserRisk(Integer userId, Integer surveyId) throws Exception {
+		Risk userRisk = new Risk();
+		User user = new User();
+		user.setUserId(userId);
+		Survey survey = new Survey();
+		survey.setSurveyId(surveyId);
+		userRisk.setUser(user);
+		userRisk.setSurvey(survey);
+
+		Optional<Risk> userRiskStatus = riskDAO.getRisk(userRisk);
+		return userRiskStatus.map(Risk::getRiskLevel).orElse(Constant.RiskStatus.U);
+	}
 }
