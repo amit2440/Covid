@@ -177,9 +177,6 @@ public class RiskServiceImpl implements RiskService {
 		SurveyFeedbackDTO surveyFeedback = new SurveyFeedbackDTO();
 		surveyFeedback.setManager(manager);
 
-		//List<Integer> derivedUserIds = derivedUsers.stream().map(User::getUserId).collect(Collectors.toList());
-		//Map<Integer, String> userRisks = riskDAO.getRisk(derivedUserIds, surveyId);
-
 		List<Risk> derivedUsersForRiskStatus = derivedUsers.stream().map(user ->{
 			Risk userRisk = new Risk();
 			Survey survey = new Survey();
@@ -190,12 +187,7 @@ public class RiskServiceImpl implements RiskService {
 		}).collect(Collectors.toList());
 
 		List<Risk> derivedUsersRisks = riskDAO.getRisk(derivedUsersForRiskStatus);
-		/*Risk userRiskIn = new Risk();
-		userRiskIn.setManagerId(manager.getUserId());
-		userRiskIn.setSurveyId(surveyId);
-		
-		List<UserRisk> riskStates = feedbackDAO.getUserRisks(userRiskIn);*/
-		
+
 		// fetch epass detail
 		User userToSearch = new User();
 		userToSearch.setUserId(manager.getMgrID());

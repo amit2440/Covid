@@ -4,12 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "Risk">
     <select id="getRisk" parameterType="Risk" resultMap="Risk-ResultMappings.ResultForGetRisk">
-        SELECT risk_id, user_id, survey_id, risk_level
-        FROM Risk
-        WHERE
-        user_id = #{user.userId}
-        AND
-        survey_id = #{survey.surveyId}
+        SELECT r.risk_id,
+        r.user_id,
+        r.survey_id,
+        r.risk_level
+        FROM   risk r
+        INNER JOIN user u
+        ON u.user_id = r.user_id
+        INNER JOIN survey s
+        ON r.survey_id = s.survey_id
+        WHERE  s.is_active = 1
+        AND u.is_active = 1
+        AND r.user_id = #{user.userId}
+        AND r.survey_id = #{survey.surveyId}
     </select>
 
     <insert id="insertRisk" parameterType="Risk">
@@ -25,15 +32,21 @@
     </update>
 
     <select id="getRiskForUsers" resultMap="Risk-ResultMappings.ResultForGetRisk">
-        SELECT risk_id, user_id, survey_id, risk_level
-        FROM Risk
-        WHERE
-        user_id IN
+        SELECT r.risk_id, r.user_id, r.survey_id, r.risk_level
+        FROM Risk r
+        INNER JOIN user u
+        ON u.user_id = r.user_id
+        INNER JOIN survey s
+        ON r.survey_id = s.survey_id
+        WHERE  s.is_active = 1
+        AND u.is_active = 1
+        AND
+        r.user_id IN
         <foreach item="risk" collection="list" open="(" separator="," close=")">
             #{risk.user.userId}
         </foreach>
         AND
-        survey_id IN
+        r.survey_id IN
         <foreach item="risk" collection="list" open="(" separator="," close=")">
             #{risk.survey.surveyId}
         </foreach>
