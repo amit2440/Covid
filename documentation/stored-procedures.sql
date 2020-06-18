@@ -1,8 +1,8 @@
 use covid;
 
 /* DROP Unique index on Question Description */
-ALTER TABLE question
-  DROP INDEX question_UNIQUE;
+#ALTER TABLE question
+#  DROP INDEX question_UNIQUE;
 
 /***** ADD NEW SURVEY *****/
 DROP PROCEDURE IF EXISTS CREATE_SURVEY;
