@@ -1,0 +1,5 @@
+use covid;
+source mysql-commands.sql
+source stored-procedures.sql
+source add-survey-data.sql
+source add-root-user-data.sql
