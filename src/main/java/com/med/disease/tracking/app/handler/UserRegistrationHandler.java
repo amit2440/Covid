@@ -59,7 +59,7 @@ public class UserRegistrationHandler extends RestControllerHandler {
 		// TODO Auto-generated method stub
 		String successMsg = "";
 		userDTO.setIsActive(true);
-		userDTO.setToken("0000");
+		userDTO.setToken("1234");
 		int res = registerEmployeeService.registerEmployee(userDTO);
 		if (res <= 0) {
 			userDTO = null;
