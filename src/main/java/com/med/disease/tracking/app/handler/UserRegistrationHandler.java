@@ -125,13 +125,14 @@ public class UserRegistrationHandler extends RestControllerHandler {
 		if (!"".equals(csvLine) && csvLine.length() > 0) {
 			String[] userArr = csvLine.split(",");
 			user = new UserDTO();
-			user.setFirstName(userArr[0] != null ? userArr[0] : null);
-			user.setLastName(userArr[1] != null ? userArr[1] : null);
-			user.setMobile(userArr[2] != null ? userArr[2] : null);
-			user.setIsActive(userArr[3].equalsIgnoreCase("Y") ? true : false);
-			user.setToken("0000");
-			user.setRole(userArr[4] != null ? userArr[4] : null);
-			user.setWorkLocation(userArr[5] != null ? userArr[5] : null);
+			user.setFirstName(userArr[1] != null ? userArr[1] : null);
+			user.setLastName(userArr[2] != null ? userArr[2] : null);
+			user.setMobile(userArr[4] != null ? userArr[4] : null);
+//			user.setIsActive(userArr[3].equalsIgnoreCase("Y") ? true : false);
+			user.setIsActive(true);
+			user.setToken("1234");
+			user.setRole(userArr[7] != null ? (userArr[7]).toUpperCase() : null);
+			user.setWorkLocation(userArr[8] != null ? userArr[8] : null);
 			user.setMgrID(userArr[6]!=null ? new Integer(userArr[6]) :null);
 		}
 		return user;
