@@ -1,6 +1,6 @@
 use covid;
 
-CALL CREATE_SURVEY('11th June Covid Survey');
+CALL CREATE_SURVEY('19th June Covid Survey');
 
 /* Question 1 */
 CALL CREATE_SURVEY_QUESTION('Select the Government Identified Zone for your Current Location', 'singleChoice');
@@ -21,12 +21,13 @@ CALL CREATE_SURVEY_QUESTION_OPTION('Yes',0,'H');
 CALL CREATE_SURVEY_QUESTION_OPTION('No',0,'L');
 
 /* Question 4 */
-CALL CREATE_SURVEY_QUESTION('Do you have any of these pre-existing Health Conditions?:Asthama, Cancer, Chronic Lung Disease (COPD), Diabetes, Hypertension OR Heart Disease','singleChoice');
+CALL CREATE_SURVEY_QUESTION('Do you have any of these pre-existing Health Conditions?:Asthma, Cancer, Chronic Lung Disease (COPD), Diabetes, Hypertension OR Heart Disease','singleChoice');
 CALL CREATE_SURVEY_QUESTION_OPTION('Yes',0,'H');
 CALL CREATE_SURVEY_QUESTION_OPTION('No',0,'L');
 
 /* Question 5 */
 CALL CREATE_SURVEY_QUESTION('Are you experiencing one or more of the following Symptoms?','multiChoice');
+CALL CREATE_SURVEY_QUESTION_OPTION('None',0,'L');
 CALL CREATE_SURVEY_QUESTION_OPTION('Fever',0,'H');
 CALL CREATE_SURVEY_QUESTION_OPTION('Cold',0,'H');
 CALL CREATE_SURVEY_QUESTION_OPTION('Running Nose',0,'H');
@@ -48,7 +49,7 @@ CALL CREATE_SURVEY_QUESTION_OPTION('Yes',0,'H');
 CALL CREATE_SURVEY_QUESTION_OPTION('No',0,'L');
 
 /* Question 8 */
-CALL CREATE_SURVEY_QUESTION('Have you or someone you stay with attended a large gathering or has been in instituional quarantine in the last 14 days?','singleChoice');
+CALL CREATE_SURVEY_QUESTION('Have you or someone you stay with attended a large gathering or has been in institutional quarantine in the last 14 days?','singleChoice');
 CALL CREATE_SURVEY_QUESTION_OPTION('Yes',0,'H');
 CALL CREATE_SURVEY_QUESTION_OPTION('No',0,'L');
 
@@ -61,5 +62,5 @@ CALL CREATE_SURVEY_QUESTION_OPTION('No',0,'L');
 CALL CREATE_SURVEY_QUESTION('Once you resume work from office, how will you Commute to Work?','singleChoice');
 CALL CREATE_SURVEY_QUESTION_OPTION('Self Driven Vehicle - No Car Pooling',0,'L');
 CALL CREATE_SURVEY_QUESTION_OPTION('Shared Vehicle OR Car Pooling',0,'H');
-CALL CREATE_SURVEY_QUESTION_OPTION("Company Provided Transport (Applicable only if working in Shifts)",0,'M');
+CALL CREATE_SURVEY_QUESTION_OPTION("Company Provided Transport (If working in Shifts)",0,'M');
 CALL CREATE_SURVEY_QUESTION_OPTION('Public Transport',0,'H');
