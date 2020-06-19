@@ -1,3 +1,5 @@
+@echo off
+
 REM Local DEV
 mysql --host=localhost --user=root --password=root < script-sequence.txt
 
