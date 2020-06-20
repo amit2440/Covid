@@ -4,13 +4,13 @@ use covid;
 DROP PROCEDURE IF EXISTS InsertUser;
 DELIMITER //
 CREATE PROCEDURE InsertUser(firstname VARCHAR(50), lastname VARCHAR(50), mobile VARCHAR(10), 
-role VARCHAR(10), location VARCHAR(50), otp VARCHAR(10), isactive BIT)
+role VARCHAR(10), location VARCHAR(50), otp VARCHAR(10), isactive BIT, managerid VARCHAR(50))
 BEGIN
     INSERT INTO covid.user(
-        first_name, last_name, mobile, role, work_location, token, is_active
+        first_name, last_name, mobile, role, work_location, token, is_active, mgr_id
     )
     VALUES(
-        firstname, lastname, mobile, role, location, otp, isactive
+        firstname, lastname, mobile, role, location, otp, isactive, managerid
     );
 END //
 DELIMITER ;
@@ -31,12 +31,13 @@ BEGIN
     DECLARE location VARCHAR(50) DEFAULT "Pune";
     DECLARE otp VARCHAR(10) DEFAULT "1234";
     DECLARE isactive BIT DEFAULT 1;
+    DECLARE managerid VARCHAR(50) DEFAULT "1";
 
     WHILE counter <= userCount DO
 		SET lastname = CONCAT("User ", counter);
         SET mobilenumber = 1000000000 + counter;
         SET mobile = CONVERT(mobilenumber, NCHAR(10));
-        CALL InsertUser(firstname, lastname, mobile, role, location, otp, isactive);
+        CALL InsertUser(firstname, lastname, mobile, role, location, otp, isactive, managerid);
         SET counter = counter + 1;
         
     END WHILE;
