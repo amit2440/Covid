@@ -19,7 +19,8 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS LoadTestUsers;
 DELIMITER //
 CREATE PROCEDURE LoadTestUsers(
-    userCount INT
+    userCount INT,
+    managerCount INT
 )
 BEGIN
     DECLARE counter INT DEFAULT 1;
@@ -37,6 +38,8 @@ BEGIN
 		SET lastname = CONCAT("User ", counter);
         SET mobilenumber = 1000000000 + counter;
         SET mobile = CONVERT(mobilenumber, NCHAR(10));
+        SET managerid = CONVERT(counter%managerCount + 1, NCHAR(50));
+
         CALL InsertUser(firstname, lastname, mobile, role, location, otp, isactive, managerid);
         SET counter = counter + 1;
         
@@ -44,5 +47,5 @@ BEGIN
 END //
 DELIMITER ;
 
-# Invoke Load Users for 50,000 records
-CALL LoadTestUsers(50000);
+# Invoke Load Users for 1500 records
+CALL LoadTestUsers(1500, 50);
