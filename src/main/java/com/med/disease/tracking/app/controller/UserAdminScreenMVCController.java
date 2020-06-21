@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.med.disease.tracking.app.constant.Constant.Authority;
+import com.med.disease.tracking.app.dto.EPassDTO;
 import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.dto.FeedbackDTO;
 import com.med.disease.tracking.app.dto.SurveyDTO;
@@ -37,10 +38,13 @@ import com.med.disease.tracking.app.dto.SurveyFeedbackDTO;
 import com.med.disease.tracking.app.dto.SurveyReportDTO;
 import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
+import com.med.disease.tracking.app.dto.request.FetchRiskRequestDTO;
 import com.med.disease.tracking.app.dto.request.SurveyRequestDTO;
 import com.med.disease.tracking.app.handler.SubmitEPassHandler;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
+import com.med.disease.tracking.app.service.EPassService;
 import com.med.disease.tracking.app.service.FeedbackService;
+import com.med.disease.tracking.app.service.RiskService;
 import com.med.disease.tracking.app.service.SurveyService;
 import com.med.disease.tracking.app.service.UserInfoService;
 import com.med.disease.tracking.app.service.impl.UserDetailsImpl;
@@ -58,9 +62,15 @@ public class UserAdminScreenMVCController {
 	
 	@Autowired
 	UserInfoService userInfoService;
+	
+	@Autowired
+	private EPassService ePassService;
 
 	@Autowired
 	BeanFactory beanFactory;
+	
+	@Autowired
+	private RiskService riskService;
 
 	@RequestMapping(value = "/mvc/showList", method = RequestMethod.POST)
 	public String showAddUserPage(ModelMap model) {
@@ -103,18 +113,28 @@ public class UserAdminScreenMVCController {
 			System.err.println("11111111111111111111111111111");
 			logged_in = "MANAGER";
 			
-			List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getSurveys(new SurveyRequestDTO());
-			FetchFeedbackRequestDTO fetchFeedbackRequestDTO = new FetchFeedbackRequestDTO();
-			fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
-			fetchFeedbackRequestDTO.setUserId(ud.getUserId());
-			surveyFeedbackDTO = feedbackService.fetchSurveyFeedbacks(fetchFeedbackRequestDTO);
+			List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getActiveSurveys(new SurveyRequestDTO());
+//			FetchFeedbackRequestDTO fetchFeedbackRequestDTO = new FetchFeedbackRequestDTO();
+//			fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
+//			fetchFeedbackRequestDTO.setUserId(ud.getUserId());
+//			surveyFeedbackDTO = feedbackService.fetchSurveyFeedbacks(fetchFeedbackRequestDTO);
+			
+			FetchRiskRequestDTO fetchRiskRequestDTO = new FetchRiskRequestDTO();
+			fetchRiskRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
+			fetchRiskRequestDTO.setUserId(ud.getUserId());
+			surveyFeedbackDTO = riskService.fetchSurveyFeedbacks(fetchRiskRequestDTO);
+			
 			model.addAttribute("surveyReportDTO", surveyFeedbackDTO);
 
 		} else {
-			List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getSurveys(new SurveyRequestDTO());
-			FetchFeedbackRequestDTO fetchFeedbackRequestDTO = new FetchFeedbackRequestDTO();
-			fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
-			surveyReportDTO = feedbackService.fetchAllSurveyFeedbacks(fetchFeedbackRequestDTO);
+			List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getActiveSurveys(new SurveyRequestDTO());
+//			FetchFeedbackRequestDTO fetchFeedbackRequestDTO = new FetchFeedbackRequestDTO();
+//			fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
+//			surveyReportDTO = feedbackService.fetchAllSurveyFeedbacks(fetchFeedbackRequestDTO);
+			
+			FetchRiskRequestDTO fetchRiskRequestDTO = new FetchRiskRequestDTO();
+			fetchRiskRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
+			surveyReportDTO = riskService.fetchAllSurveyFeedbacks(fetchRiskRequestDTO);
 			logged_in = "ADMIN";
 			surveyReportDTO.setAdmin(new UserDTO());
 			surveyReportDTO.getAdmin().setFirstName(ud.getFirstName());
@@ -132,7 +152,7 @@ public class UserAdminScreenMVCController {
 	public String feedBackRes(ModelMap model,@ModelAttribute("fetchFeedbackRequestDTO") FetchFeedbackRequestDTO fetchFeedbackRequestDTO)
 			throws Exception {
 		System.out.println("2222222222222222222222 ----> "+fetchFeedbackRequestDTO.getUserId());
-		List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getSurveys(new SurveyRequestDTO());
+		List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getActiveSurveys(new SurveyRequestDTO());
 		fetchFeedbackRequestDTO.setSurveyId(surveyList.get(0).getSurveyId());
 		FeedbackDTO feedbackDTO = feedbackService.fetchFeedbacks(fetchFeedbackRequestDTO);
 		
@@ -201,5 +221,27 @@ public class UserAdminScreenMVCController {
 			BindingResult result)
 			throws Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(SubmitEPassHandler.class).handle(requestDTO, result, surveyId);
+	}
+	
+	@RequestMapping(value = "/mvc/epassPage/{userId}", method = RequestMethod.GET)
+	public String epassPage(ModelMap model,@PathVariable(required = true, name = "userId") String userId) throws Exception {
+		System.out.println("got into appication");
+		
+		List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getActiveSurveys(new SurveyRequestDTO());
+		EPassRequestDTO requestDTO = new EPassRequestDTO();
+		requestDTO.setSurveyId(surveyList.get(0).getSurveyId());
+		requestDTO.setUserId(new Integer(userId));
+		
+		UserDTO user = new UserDTO();
+		user.setUserId((new Integer(userId)));
+		EPassDTO  ePassDTO = ePassService.fetchEPass(requestDTO);
+		SurveyDTO survey = new SurveyDTO();
+		survey.setSurveyId(surveyList.get(0).getSurveyId());
+		ePassDTO.setSurvey(survey);
+		ePassDTO.setUser(user);
+		model.addAttribute("ePassDTO", ePassDTO);
+		EPassRequestDTO ePassRequestDTO = new EPassRequestDTO();
+		model.addAttribute("ePassRequestDTO",ePassRequestDTO);
+		return "epassPage";
 	}
 }

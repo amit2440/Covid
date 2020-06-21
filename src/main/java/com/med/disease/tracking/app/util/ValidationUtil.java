@@ -51,6 +51,7 @@ public class ValidationUtil {
 		}
 	}
 
+	
 	public static void validateMobileNumber(String errorField, Object value, Errors errors) {
 		if (!ObjectUtils.isEmpty(value)) {
 			String regx = "(\\+91)?(-)?\\s*?(91)?\\s*?(\\d{3})-?\\s*?(\\d{3})-?\\s*?(\\d{4})";

@@ -33,6 +33,15 @@ public class SurveyDAO extends BaseDAO {
 		}
 	}
 	
+	public List<Survey>  getActiveSurveys()  throws DatabaseException {
+		try {
+			return getSqlSession().selectList("Survey.getActiveSurveys");
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
+		}
+	}
+	
 	public Survey getSurveyQuestions(Survey survey) throws DatabaseException {
 		try {
 			return getSqlSession().selectOne("Survey.getSurveyQuestions", survey);

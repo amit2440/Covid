@@ -18,4 +18,6 @@ public interface SurveyService {
 	void submitSurveyQuestions(SurveyRequestDTO requestDTO) throws Exception;
 	
 	SurveyDTO getSurveyQuestions(SurveyRequestDTO requestDTO) throws Exception;
+	
+	List<SurveyDTO> getActiveSurveys(SurveyRequestDTO requestDTO) throws Exception;
 }

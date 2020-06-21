@@ -57,6 +57,7 @@ public interface Constant {
 		String LONGITUDE = "longitude";
 		String LATITUDE = "latitude";
 		String TO_DATE = "toDate";
+		String FROM_DATE = "fromDate";
 		String QUESTION = "question";
 		String TYPE = "type";
 		String OPTIONS = "options";

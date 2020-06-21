@@ -19,42 +19,46 @@
 
 	}
 
-	function doSumitEpass(userId, status,cnt) {
-		//	 alert(document.getElementById("token").value);
-		//	 alert('status --->'+status);
-		var isAllowed = (status == 'true') ? false : true;
-		//	 alert('isAllowed---->'+isAllowed);  
-		var myObj = {
-			"userId" : userId,
-			"isAllowed" : isAllowed,
-			"toDate" : "2020-06-12"
-		};
-		var myJSON = JSON.stringify(myObj);
-		$
-				.ajax({
-					type : "POST",
-					url : "/ca/mvc/surveys/1/epasses",
-					dataType : 'json',
-					contentType : 'application/json',
-					headers : {
-						"Authorization" : "Basic "
-								+ document.getElementById("token")
-					},
-					data : myJSON,
-					success : function(data, status, xhr) {
-						if(isAllowed==true){
-							document.getElementById(cnt).innerHTML="Allowed";
-						}else{
-							document.getElementById(cnt).innerHTML="Not Allowed";
-						}
-						location.reload();
-					},
-					error : function(jqXhr, textStatus, errorMessage) {
-						alert('Error: Issue in assigning ePass! Please contact Admin.!');
-// 						document.getElementById(cnt).innerHTML=isAllowed;
-					}
-				});
-	}
+// 	function doSumitEpass(userId, status,cnt) {
+// 		//	 alert(document.getElementById("token").value);
+// 		//	 alert('status --->'+status);
+// 		var isAllowed = (status == 'true') ? false : true;
+// 		//	 alert('isAllowed---->'+isAllowed);  
+// 		var myObj = {
+// 			"userId" : userId,
+// 			"isAllowed" : isAllowed,
+// 			"toDate" : "2020-06-12"
+// 		};
+// 		var myJSON = JSON.stringify(myObj);
+// 		$
+// 				.ajax({
+// 					type : "POST",
+// 					url : "/ca/mvc/surveys/1/epasses",
+// 					dataType : 'json',
+// 					contentType : 'application/json',
+// 					headers : {
+// 						"Authorization" : "Basic "
+// 								+ document.getElementById("token")
+// 					},
+// 					data : myJSON,
+// 					success : function(data, status, xhr) {
+// 						if(isAllowed==true){
+// 							document.getElementById(cnt).innerHTML="Allowed";
+// 						}else{
+// 							document.getElementById(cnt).innerHTML="Not Allowed";
+// 						}
+// 						location.reload();
+// 					},
+// 					error : function(jqXhr, textStatus, errorMessage) {
+// 						alert('Error: Issue in assigning ePass! Please contact Admin.!');
+// // 						document.getElementById(cnt).innerHTML=isAllowed;
+// 					}
+// 				});
+// 	}
+function doSumitEpass(userId, status,cnt) {
+// 	alert('1111');
+	 window.open("/ca/mvc/epassPage/"+userId, "_blank", "toolbar=no,scrollbars=no,resizable=yes,top=500,left=500,width=400,height=400");
+}
 </script>
 </head>
 
@@ -119,7 +123,13 @@
 <%-- 				<div class="rTableCell4by4"	onclick="getResponse('${userList.userId}')"${fontColor} }>	${userList.riskStatus}</div> --%>
 				<div class="rTableCell4by4"	${fontColor}>	${userList.riskStatus}</div>
 				<div class="rTableCell4by4" id="allowed<%=cnt%>"
-					onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}','allowed<%=cnt%>');">${userList.epass.isAllowed}</div>
+					onClick="doSumitEpass('${userList.userId}','${userList.epass.isAllowed}','allowed<%=cnt%>');">
+<%-- 					${userList.epass.isAllowed} --%>
+						<c:if test="${userList.epass.isAllowed==true}">Allowed
+								</c:if>
+						<c:if test="${userList.epass.isAllowed==false}">Not Allowed
+								</c:if>
+				</div>
 			</div>
 			<%cnt++; %>
 		</c:forEach>
