@@ -106,4 +106,11 @@ public class SurveyServiceImpl implements SurveyService {
 		List<Survey> result = surveyDAO.getSurveys();
 		return (List<SurveyDTO>) fetchAllSurveyMapper.map(result, MappingTypeEnum.MAPTORESPONSE, null);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SurveyDTO> getActiveSurveys(SurveyRequestDTO requestDTO) throws Exception {
+		List<Survey> result = surveyDAO.getActiveSurveys();
+		return (List<SurveyDTO>) fetchAllSurveyMapper.map(result, MappingTypeEnum.MAPTORESPONSE, null);
+	}
 }
