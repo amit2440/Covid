@@ -33,4 +33,23 @@ public class OTPUtil {
 //		} 
 		return otpCode;
 	}
+	
+	public static String sendOtp(String mobileNumber,String authkey,String templatId,String otpLen) {
+
+		// Generate random integers in range 0 to 9999
+		String otpCode = OTPGenerator.generate();
+		String message = "4 digit OTP for COVID-APP is " + otpCode;
+		OTPResponse otpResponse;
+		try {
+			OTPSender o = new OTPSender();
+			otpResponse = o.sendOtpMsg91(otpCode, mobileNumber,authkey,templatId,otpLen);
+			if (!otpResponse.isSuccess()) {
+				otpCode = "0";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return otpCode;
+	}
 }

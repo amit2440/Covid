@@ -72,6 +72,7 @@ table#t01 th {
 		<div>
 			<table border="1" width="70%" id="resultTable">
 				<tr>
+					<th> User Id</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Role</th>
@@ -120,19 +121,21 @@ table#t01 th {
 					var cell2 = row.insertCell(2);
 					var cell3 = row.insertCell(3);
 					var cell4 = row.insertCell(4);
-					cell0.innerHTML = '<a href="#" onclick="doRefine(\''
+					var cell5 = row.insertCell(5);
+					cell0.innerHTML = obj[i].userId;
+					cell1.innerHTML = '<a href="#" onclick="doRefine(\''
 							+ obj[i].userId + '\')">' + obj[i].firstName
 							+ '</a>';
-					cell1.innerHTML = obj[i].lastName;
-					cell2.innerHTML = obj[i].role;
+					cell2.innerHTML = obj[i].lastName;
+					cell3.innerHTML = obj[i].role;
 					if (obj[i].managerName == ''
 							|| obj[i].managerName == 'undefined'
 							|| obj[i].managerName == null) {
-						cell3.innerHTML = "";
+						cell4.innerHTML = "";
 					} else {
-						cell3.innerHTML = obj[i].managerName
+						cell4.innerHTML = obj[i].managerName
 					}
-					cell4.innerHTML = obj[i].mobile;
+					cell5.innerHTML = obj[i].mobile;
 				}
 			}
 		};

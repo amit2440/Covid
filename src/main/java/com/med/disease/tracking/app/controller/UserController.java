@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +64,19 @@ public class UserController {
 
 	@Autowired
 	JwtUtils jwtUtils;
+	
+	
+	@Value("${covid.app.authkey}")
+	private  String AUTHKEY;
+	
+	@Value("${covid.app.templateId}")
+	private String TEMPLATE_ID;
+	
+	@Value("${covid.app.otpLength}")
+	private String OTP_LENGHT;
+	
+	@Value("${covid.app.enableOTP}")
+	private String enableOtp;
 	
 	
 	@GetMapping("/")
@@ -131,8 +145,12 @@ public class UserController {
 //		if(!registerEmployeeService.verifyMobile(loginRequest.getMobile(),bindingResult)) {
 //			return ResponseEntity.ok("Not able to send OPT as mobile number is not matching with our records. Please enter valid mobile number !");
 //		}
-//		String otpCode = "";
-		String otpCode = OTPUtil.sendOtp(loginRequest.getMobile());
+		String otpCode = "";
+		if(!"".equalsIgnoreCase(enableOtp) && enableOtp.equalsIgnoreCase("Y")) {
+			otpCode = OTPUtil.sendOtp(loginRequest.getMobile(),AUTHKEY,TEMPLATE_ID,OTP_LENGHT);
+		}else {
+			otpCode = OTPUtil.sendOtp(loginRequest.getMobile());
+		}
 		logger.info("GENERATED OTO is -----> "+otpCode);
 		
 		if(!"".equals(otpCode) && !otpCode.equals("0")){
