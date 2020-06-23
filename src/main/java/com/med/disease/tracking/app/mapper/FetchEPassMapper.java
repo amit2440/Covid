@@ -39,18 +39,20 @@ public class FetchEPassMapper extends Mapper {
 	protected Object mapToResponse(Object objectToMap, Map<String, String> extraField) throws Exception {
 		List<EPass> ePass = (List<EPass>) objectToMap;
 		EPassDTO ePassDTO = new EPassDTO();
-		boolean state = !ObjectUtils.isEmpty(ePass) && true == ePass.get(0).getIsAllowed();
-
-		if (state) {
-			LocalDate toDte = ePass.get(0).getToDate();
-			LocalDate frmDte = ePass.get(0).getFromDate();
-			if (toDte.isBefore(LocalDate.now()) || frmDte.isAfter(LocalDate.now())) {
-				state = false;
+		if(!ePass.isEmpty()) {
+			boolean state = !ObjectUtils.isEmpty(ePass) && true == ePass.get(0).getIsAllowed();
+	
+			if (state) {
+				LocalDate toDte = ePass.get(0).getToDate();
+				LocalDate frmDte = ePass.get(0).getFromDate();
+				if (toDte.isBefore(LocalDate.now()) || frmDte.isAfter(LocalDate.now())) {
+					state = false;
+				}
 			}
+			ePassDTO.setToDate(ePass.get(0).getToDate());
+			ePassDTO.setFromDate(ePass.get(0).getFromDate());
+			ePassDTO.setIsAllowed(state);
 		}
-		ePassDTO.setToDate(ePass.get(0).getToDate());
-		ePassDTO.setFromDate(ePass.get(0).getFromDate());
-		ePassDTO.setIsAllowed(state);
 		return ePassDTO;
 	}
 }

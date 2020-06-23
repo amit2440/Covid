@@ -109,7 +109,7 @@ a {
 		
 		<div class="container" width="50%">
 			<h1>Pass Assignment</h1>
-			<p>Please fill in this form to assign ePass.   === ${ePassDTO.survey.surveyId }</p> 
+			<p>Please fill in this form to assign ePass.</p> 
 			<hr>
 			<c:if test="${ePassDTO.isAllowed}">
 				<c:set var="checked" value="checked"></c:set>
