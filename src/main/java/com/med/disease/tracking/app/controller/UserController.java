@@ -1,6 +1,8 @@
 package com.med.disease.tracking.app.controller;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,6 +80,11 @@ public class UserController {
 	@Value("${covid.app.enableOTP}")
 	private String enableOtp;
 	
+	@Value("${covid.app.defaultOTP}")
+	private String defaultOTP;
+	
+	@Value("${covid.app.defaultNumber}")
+	private String defaultNumber;
 	
 	@GetMapping("/")
 	public String main() {
@@ -145,11 +152,31 @@ public class UserController {
 //		if(!registerEmployeeService.verifyMobile(loginRequest.getMobile(),bindingResult)) {
 //			return ResponseEntity.ok("Not able to send OPT as mobile number is not matching with our records. Please enter valid mobile number !");
 //		}
+		List defaultNumberList = new ArrayList();
+		if(!"".equalsIgnoreCase(defaultNumber) && !defaultNumber.isEmpty()) {
+			defaultNumberList = Arrays.asList(defaultNumber.split(","));
+		}
+		 
+		
 		String otpCode = "";
 		if(!"".equalsIgnoreCase(enableOtp) && enableOtp.equalsIgnoreCase("Y")) {
-			otpCode = OTPUtil.sendOtp(loginRequest.getMobile(),AUTHKEY,TEMPLATE_ID,OTP_LENGHT);
+			if(defaultNumberList.contains(loginRequest.getMobile())) {
+				if(!"".equalsIgnoreCase(defaultOTP) && !defaultOTP.isEmpty()) {
+					otpCode = defaultOTP;
+				}else {
+					otpCode="1234";
+				}
+			}else {
+				otpCode = OTPUtil.sendOtp(loginRequest.getMobile(),AUTHKEY,TEMPLATE_ID,OTP_LENGHT);
+			}
+			
 		}else {
-			otpCode = OTPUtil.sendOtp(loginRequest.getMobile());
+			if(!"".equalsIgnoreCase(defaultOTP) && !defaultOTP.isEmpty()) {
+				otpCode = defaultOTP;
+			}else {
+				otpCode="1234";
+			}
+//			otpCode = OTPUtil.sendOtp(loginRequest.getMobile());
 		}
 		logger.info("GENERATED OTO is -----> "+otpCode);
 		
