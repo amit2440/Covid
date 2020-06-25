@@ -168,7 +168,7 @@ public class RiskServiceImpl implements RiskService {
 		};
 		if (ObjectUtils.isEmpty(allUsers)) {
 			LOGGER.error("Users Not Found");
-			throw new CovidAppException("Users Not Found");
+			return null;
 		}
 		return allUsers;
 	}
