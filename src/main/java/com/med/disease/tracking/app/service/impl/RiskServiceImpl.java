@@ -101,6 +101,16 @@ public class RiskServiceImpl implements RiskService {
 		};
 		userRisk.ifPresentOrElse(updateRisk, insertRisk);
 
+		EPass ePassForDelete = new EPass();
+		User userForEpass = new User();
+		Survey surveyForEpass = new Survey();
+		userForEpass.setUserId(requestDTO.getUserId());
+		surveyForEpass.setSurveyId(requestDTO.getSurveyId());
+		ePassForDelete.setUser(userForEpass);
+		ePassForDelete.setSurvey(surveyForEpass);
+
+		ePassDAO.deleteEpasses(ePassForDelete);
+
 		if(risk.getRiskLevel().equalsIgnoreCase(Constant.RiskStatus.H) && commonUtil.isCurrentlyEpassAllowed(risk.getUser().getUserId(), risk.getSurvey().getSurveyId())) {
 			User user = new User();
 			user.setUserId(requestDTO.getUserId());

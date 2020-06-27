@@ -22,13 +22,22 @@ public class EPassDAO extends BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	public List<EPass> searchUser(EPass ePass) throws Exception {
 		try {
 			return getSqlSession().selectList("EPass.searchEPass", ePass);
 		} catch (Exception exception) {
 			LOGGER.error("Database Exception :{}", exception.getMessage());
 			throw new DatabaseException(exception.getMessage());
+		}
+	}
+
+	public int deleteEpasses(EPass ePass) throws DatabaseException {
+		try {
+			return getSqlSession().delete("EPass.deleteEpasses", ePass);
+		} catch (Exception e) {
+			LOGGER.error("DatabaseException : {}", e.getMessage());
+			throw new DatabaseException(e.getMessage());
 		}
 	}
 }
