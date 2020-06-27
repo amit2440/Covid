@@ -99,7 +99,7 @@ public class EPassServiceImpl implements EPassService {
 	private Optional<Risk> getRisk(EPassRequestDTO requestDTO) throws DatabaseException {
 		Risk risk = new Risk();
 		Survey survey = new Survey();
-		survey.setSurveyId(requestDTO.getUserId());
+		survey.setSurveyId(requestDTO.getSurveyId());
 		User user = new User();
 		user.setUserId(requestDTO.getUserId());
 		risk.setUser(user);
