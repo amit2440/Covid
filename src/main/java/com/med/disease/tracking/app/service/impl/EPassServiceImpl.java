@@ -69,7 +69,7 @@ public class EPassServiceImpl implements EPassService {
 		List<EPass> ePassUser = ePassDAO.searchUser(ePass);
 		Optional<Risk> userRisk = getRisk(requestDTO);
 		if(userRisk.isPresent()){
-			if(ePassUser.isEmpty() || ePassUser.get(0).getToDate().isBefore(LocalDate.now())){
+			if(ePassUser.isEmpty() || ePassUser.get(0).getToDate().isBefore(LocalDate.now()) || !ePassUser.get(0).getIsAllowed()){
 				return new EPassDTO(); // Return 200 Blank Response - Awaiting manager Approval
 			}
 		} else return null; // Return 204 No Content - Take self assessment
