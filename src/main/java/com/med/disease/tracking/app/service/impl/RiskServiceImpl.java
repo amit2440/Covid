@@ -212,7 +212,12 @@ public class RiskServiceImpl implements RiskService {
 		}
 		userDTOs.forEach(usr -> {
 			Optional<Risk> userRisk = derivedUsersRisks.stream().filter(u -> usr.getUserId().equals(u.getUser().getUserId())).findAny();
-			userRisk.ifPresentOrElse((risk) -> usr.setRiskStatus(risk.getRiskLevel()), () -> usr.setRiskStatus(Constant.RiskStatus.U));
+			userRisk.ifPresentOrElse((risk) -> {
+				if(!ObjectUtils.isEmpty(usr.getEpass().getToDate()) && usr.getEpass().getToDate().isBefore(LocalDate.now()))
+					usr.setRiskStatus(Constant.RiskStatus.U);
+				else
+					usr.setRiskStatus(risk.getRiskLevel());
+			}, () -> usr.setRiskStatus(Constant.RiskStatus.U));
 		});
 		surveyFeedback.setUsers(userDTOs);
 		return surveyFeedback;
