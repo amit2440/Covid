@@ -68,6 +68,6 @@
 		<mapper resource="sql-mappings/risk/Risk-ResultMappings.xml"/>
 
 		<!--Audit-->
-		<mapper resource="sql-mappings/risk/Audit.xml"/>
+		<mapper resource="sql-mappings/audit/Audit.xml"/>
 	</mappers>
 </configuration>
