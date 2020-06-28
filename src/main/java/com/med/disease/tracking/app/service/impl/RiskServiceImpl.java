@@ -109,7 +109,7 @@ public class RiskServiceImpl implements RiskService {
 		if(!ePassList.isEmpty()){
 			ePassDAO.deleteEpasses(ePassList.get(0));
 			if(!ePassList.get(0).getFromDate().isAfter(LocalDate.now())){
-				Audit audit = getAuditObj(ePass);
+				Audit audit = getAuditObj(ePassList.get(0));
 				auditDAO.submitAudit(audit);
 			}
 		}
