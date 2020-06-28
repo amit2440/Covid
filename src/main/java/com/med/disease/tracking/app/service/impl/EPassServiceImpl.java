@@ -63,13 +63,14 @@ public class EPassServiceImpl implements EPassService {
 			throw new CovidAppException("Insert EPass failed");
 		}
 
-        Audit audit = getAuditObj(ePass);
-        auditDAO.submitAudit(audit);
-
         Risk risk = getRisk(ePass);
         if(!ePass.getIsAllowed()){
             riskDAO.deleteRisk(risk);
             ePassDAO.deleteEpasses(ePass);
+            if(!ePass.getFromDate().isAfter(LocalDate.now())){
+					Audit audit = getAuditObj(ePass);
+					auditDAO.submitAudit(audit);
+            }
         }
 	}
 
