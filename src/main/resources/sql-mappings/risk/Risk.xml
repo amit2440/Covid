@@ -52,4 +52,8 @@
         </foreach>
     </select>
 
+    <insert id="deleteRisk" parameterType="Risk">
+        DELETE FROM COVID.RISK where USER_ID = #{user.userId} and SURVEY_ID= #{survey.surveyId};
+    </insert>
+
 </mapper>

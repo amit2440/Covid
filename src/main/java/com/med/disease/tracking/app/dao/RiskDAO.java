@@ -50,4 +50,13 @@ public class RiskDAO extends BaseDAO{
             throw new DatabaseException(exception.getMessage());
         }
     }
+
+    public void deleteRisk(Risk risk) throws DatabaseException{
+        try{
+            getSqlSession().delete("Risk.deleteRisk", risk);
+        } catch (Exception exception){
+            LOGGER.error("Database Exception :{}", exception.getMessage());
+            throw new DatabaseException(exception.getMessage());
+        }
+    }
 }
