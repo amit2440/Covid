@@ -148,8 +148,8 @@ public class RiskServiceImpl implements RiskService {
 		Audit audit = new Audit();
 		audit.setUser(user);
 		audit.setSurvey(survey);
-		audit.setIsAllowed(ePass.getIsAllowed());
-		audit.setToDate(ePass.getToDate());
+		audit.setIsAllowed(true);
+		audit.setToDate(LocalDate.now());
 		audit.setCreatedBy(createdBy);
 		audit.setFromDate(ePass.getFromDate());
 		return audit;
