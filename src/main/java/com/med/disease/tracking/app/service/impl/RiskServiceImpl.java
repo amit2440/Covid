@@ -1,19 +1,13 @@
 package com.med.disease.tracking.app.service.impl;
 
 import com.med.disease.tracking.app.constant.Constant;
-import com.med.disease.tracking.app.dao.EPassDAO;
-import com.med.disease.tracking.app.dao.OptionDAO;
-import com.med.disease.tracking.app.dao.RiskDAO;
-import com.med.disease.tracking.app.dao.UserInfoDAO;
+import com.med.disease.tracking.app.dao.*;
 import com.med.disease.tracking.app.dto.*;
 import com.med.disease.tracking.app.dto.request.FetchRiskRequestDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
 import com.med.disease.tracking.app.exception.DatabaseException;
 import com.med.disease.tracking.app.mapper.*;
-import com.med.disease.tracking.app.model.EPass;
-import com.med.disease.tracking.app.model.Risk;
-import com.med.disease.tracking.app.model.Survey;
-import com.med.disease.tracking.app.model.User;
+import com.med.disease.tracking.app.model.*;
 import com.med.disease.tracking.app.service.RiskService;
 import com.med.disease.tracking.app.util.CommonUtil;
 import org.slf4j.Logger;
@@ -61,6 +55,9 @@ public class RiskServiceImpl implements RiskService {
 	@Autowired
 	private FetchRiskMapper fetchRiskMapper;
 
+	@Autowired
+	AuditDAO auditDAO;
+
 	@Override
 	@Transactional
 	public void submitRisk(RiskRequestDTO requestDTO) throws Exception {
@@ -101,34 +98,61 @@ public class RiskServiceImpl implements RiskService {
 		};
 		userRisk.ifPresentOrElse(updateRisk, insertRisk);
 
-		EPass ePassForDelete = new EPass();
+		EPass ePass = new EPass();
 		User userForEpass = new User();
 		Survey surveyForEpass = new Survey();
 		userForEpass.setUserId(requestDTO.getUserId());
 		surveyForEpass.setSurveyId(requestDTO.getSurveyId());
-		ePassForDelete.setUser(userForEpass);
-		ePassForDelete.setSurvey(surveyForEpass);
-
-		ePassDAO.deleteEpasses(ePassForDelete);
-
-		if(risk.getRiskLevel().equalsIgnoreCase(Constant.RiskStatus.H) && commonUtil.isCurrentlyEpassAllowed(risk.getUser().getUserId(), risk.getSurvey().getSurveyId())) {
-			User user = new User();
-			user.setUserId(requestDTO.getUserId());
-
-			Survey survey = new Survey();
-			survey.setSurveyId(requestDTO.getSurveyId());
-
-			User createdBy = new User();
-			createdBy.setUserId(requestDTO.getUserId());
-
-			EPass ePass = new EPass();
-			ePass.setUser(user);
-			ePass.setSurvey(survey);
-			ePass.setIsAllowed(false);
-			ePass.setToDate(LocalDate.now());
-			ePass.setCreatedBy(createdBy);
-			ePassDAO.submitEPass(ePass);
+		ePass.setUser(userForEpass);
+		ePass.setSurvey(surveyForEpass);
+		List<EPass> ePassList = ePassDAO.searchUser(ePass);
+		if(!ePassList.isEmpty()){
+			ePassDAO.deleteEpasses(ePassList.get(0));
+			if(!ePassList.get(0).getFromDate().isAfter(LocalDate.now())){
+				Audit audit = getAuditObj(ePass);
+				auditDAO.submitAudit(audit);
+			}
 		}
+
+
+//		if(risk.getRiskLevel().equalsIgnoreCase(Constant.RiskStatus.H) && commonUtil.isCurrentlyEpassAllowed(risk.getUser().getUserId(), risk.getSurvey().getSurveyId())) {
+//			User user = new User();
+//			user.setUserId(requestDTO.getUserId());
+//
+//			Survey survey = new Survey();
+//			survey.setSurveyId(requestDTO.getSurveyId());
+//
+//			User createdBy = new User();
+//			createdBy.setUserId(requestDTO.getUserId());
+//
+//			EPass ePass = new EPass();
+//			ePass.setUser(user);
+//			ePass.setSurvey(survey);
+//			ePass.setIsAllowed(false);
+//			ePass.setToDate(LocalDate.now());
+//			ePass.setCreatedBy(createdBy);
+//			ePassDAO.submitEPass(ePass);
+//		}
+	}
+
+	private Audit getAuditObj(EPass ePass) {
+		User user = new User();
+		user.setUserId(ePass.getUser().getUserId());
+
+		Survey survey = new Survey();
+		survey.setSurveyId(ePass.getSurvey().getSurveyId());
+
+		User createdBy = new User();
+		createdBy.setUserId(ePass.getUser().getUserId());
+
+		Audit audit = new Audit();
+		audit.setUser(user);
+		audit.setSurvey(survey);
+		audit.setIsAllowed(ePass.getIsAllowed());
+		audit.setToDate(ePass.getToDate());
+		audit.setCreatedBy(createdBy);
+		audit.setFromDate(ePass.getFromDate());
+		return audit;
 	}
 
 	@Override
@@ -225,7 +249,7 @@ public class RiskServiceImpl implements RiskService {
 			userRisk.ifPresentOrElse((risk) -> {
 				if (!ObjectUtils.isEmpty(usr.getEpass().getToDate()) && usr.getEpass().getToDate().isBefore(LocalDate.now())) {
 					usr.setRiskStatus(Constant.RiskStatus.U);
-					usr.setIsActive(false);
+					usr.getEpass().setIsAllowed(false);
 					usr.getEpass().setToDate(null);
 					usr.getEpass().setFromDate(null);
 				}
