@@ -158,3 +158,17 @@ CREATE TABLE IF NOT EXISTS `covid`.`risk` (
 -- delete from `option`;
 -- delete from question;
 -- delete from survey;
+CREATE TABLE IF NOT EXISTS `covid`.`audit` (
+  `user_id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
+  `is_allowed` bit(1) NOT NULL,
+  `to_date` date NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `from_Date` date DEFAULT NULL,
+  KEY `audit_user_id_idx` (`user_id`),
+  KEY `audit_survey_id_idx` (`survey_id`),
+  CONSTRAINT `audit_created_by` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `audit_survey_id` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `audit_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
