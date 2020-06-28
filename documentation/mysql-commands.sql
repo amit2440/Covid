@@ -4,11 +4,13 @@ CREATE SCHEMA IF NOT EXISTS `covid`;
 
 CREATE TABLE IF NOT EXISTS `covid`.`user` (
     `user_id` INT NOT NULL AUTO_INCREMENT,
-    `first_name` VARCHAR(20) NOT NULL,
-    `last_name` VARCHAR(20) NOT NULL,
-    `mobile` VARCHAR(10) NOT NULL,
+    `first_name` VARCHAR(60) NOT NULL,
+    `last_name` VARCHAR(60) NOT NULL,
+    `mobile_country_code` VARCHAR(10) NOT NULL,
+    `mobile` VARCHAR(20) NOT NULL,
     `role` VARCHAR(20) NOT NULL,
-    `work_location` VARCHAR(20) NOT NULL,
+    `work_location` VARCHAR(60) NOT NULL,
+    `work_country` VARCHAR(60) NOT NULL,
     `token` VARCHAR(150) NOT NULL,
     `is_active` boolean NOT NULL DEFAULT 0,
 	`mgr_id` INT NULL,
