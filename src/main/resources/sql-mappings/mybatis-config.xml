@@ -13,6 +13,7 @@
 		<typeAlias alias="UserRisk" type="com.med.disease.tracking.app.model.UserRisk" />
 		<typeAlias alias="Location" type="com.med.disease.tracking.app.model.Location" />
 		<typeAlias alias="Risk" type="com.med.disease.tracking.app.model.Risk" />
+		<typeAlias alias="Audit" type="com.med.disease.tracking.app.model.Audit" />
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="org.apache.ibatis.type.InstantTypeHandler" />
@@ -66,5 +67,7 @@
 		<mapper resource="sql-mappings/risk/Risk.xml"/>
 		<mapper resource="sql-mappings/risk/Risk-ResultMappings.xml"/>
 
+		<!--Audit-->
+		<mapper resource="sql-mappings/risk/Audit.xml"/>
 	</mappers>
 </configuration>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Audit">
+	<insert id="submitAudit" parameterType="Audit">
+		INSERT INTO AUDIT
+		(USER_ID, SURVEY_ID, IS_ALLOWED, TO_DATE, CREATED_BY,FROM_DATE)
+		VALUES
+		(#{user.userId}, #{survey.surveyId}, #{isAllowed}, #{toDate,
+		javaType=java.time.LocalDate}, #{createdBy.userId},#{fromDate,	javaType=java.time.LocalDate});
+	</insert>
+</mapper>

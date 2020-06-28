@@ -1,5 +1,6 @@
 package com.med.disease.tracking.app.service.impl;
 
+import com.med.disease.tracking.app.dao.AuditDAO;
 import com.med.disease.tracking.app.dao.EPassDAO;
 import com.med.disease.tracking.app.dao.RiskDAO;
 import com.med.disease.tracking.app.dto.EPassDTO;
@@ -12,10 +13,7 @@ import com.med.disease.tracking.app.exception.DatabaseException;
 import com.med.disease.tracking.app.mapper.FetchEPassMapper;
 import com.med.disease.tracking.app.mapper.MappingTypeEnum;
 import com.med.disease.tracking.app.mapper.SubmitEPassMapper;
-import com.med.disease.tracking.app.model.EPass;
-import com.med.disease.tracking.app.model.Risk;
-import com.med.disease.tracking.app.model.Survey;
-import com.med.disease.tracking.app.model.User;
+import com.med.disease.tracking.app.model.*;
 import com.med.disease.tracking.app.service.EPassService;
 import com.med.disease.tracking.app.service.RiskService;
 import org.slf4j.Logger;
@@ -47,6 +45,9 @@ public class EPassServiceImpl implements EPassService {
 	@Autowired
 	RiskDAO riskDAO;
 
+	@Autowired
+	AuditDAO auditDAO;
+
 	@Override
 	@Transactional(readOnly = false)
 	public void submitEPass(EPassRequestDTO requestDTO) throws Exception {
@@ -61,6 +62,46 @@ public class EPassServiceImpl implements EPassService {
 			LOGGER.error("Unable to insert ePass for userId=" + requestDTO.getUserId());
 			throw new CovidAppException("Insert EPass failed");
 		}
+
+        Audit audit = getAuditObj(ePass);
+        auditDAO.submitAudit(audit);
+
+        Risk risk = getRisk(ePass);
+        if(!ePass.getIsAllowed()){
+            riskDAO.deleteRisk(risk);
+            ePassDAO.deleteEpasses(ePass);
+        }
+	}
+
+	private Risk getRisk(EPass ePass) {
+		Risk risk = new Risk();
+		User user = new User();
+		Survey survey = new Survey();
+		user.setUserId(ePass.getUser().getUserId());
+		survey.setSurveyId(ePass.getSurvey().getSurveyId());
+		risk.setUser(user);
+		risk.setSurvey(survey);
+		return risk;
+	}
+
+	private Audit getAuditObj(EPass ePass) {
+		User user = new User();
+		user.setUserId(ePass.getUser().getUserId());
+
+		Survey survey = new Survey();
+		survey.setSurveyId(ePass.getSurvey().getSurveyId());
+
+		User createdBy = new User();
+		createdBy.setUserId(ePass.getUser().getUserId());
+
+		Audit audit = new Audit();
+		audit.setUser(user);
+		audit.setSurvey(survey);
+		audit.setIsAllowed(ePass.getIsAllowed());
+		audit.setToDate(ePass.getToDate());
+		audit.setCreatedBy(createdBy);
+		audit.setFromDate(ePass.getFromDate());
+		return audit;
 	}
 
 	@Override
@@ -76,9 +117,6 @@ public class EPassServiceImpl implements EPassService {
 				return new EPassDTO(); // Return 200 Blank Response - Awaiting manager Approval
 			}
 		} else return null; // Return 204 No Content - Take self assessment
-//		if(!ePassUser.isEmpty() && ePassUser.get(0).getToDate().isBefore(LocalDate.now())){
-//				return null; // Return 204 No Content - Take self assessment
-//		}
 		checkEpassExpiry(ePassUser);
 		return (EPassDTO) fetchEPassMapper.map(ePassUser, MappingTypeEnum.MAPTORESPONSE, null);
 	}
