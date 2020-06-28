@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`risk` (
   KEY `fk_user_id_idx` (`user_id`),
   CONSTRAINT `fkrisk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_survey_id` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)
+);
 
 -- select * from user;
 -- select * from feedback;
@@ -159,16 +159,26 @@ CREATE TABLE IF NOT EXISTS `covid`.`risk` (
 -- delete from question;
 -- delete from survey;
 CREATE TABLE IF NOT EXISTS `covid`.`audit` (
-  `user_id` int(11) NOT NULL,
-  `survey_id` int(11) NOT NULL,
-  `is_allowed` bit(1) NOT NULL,
-  `to_date` date NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `from_Date` date DEFAULT NULL,
-  KEY `audit_user_id_idx` (`user_id`),
-  KEY `audit_survey_id_idx` (`survey_id`),
-  CONSTRAINT `audit_created_by` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `audit_survey_id` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `audit_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)
+  `user_id` INT NOT NULL ,
+  `survey_id` INT NOT NULL ,
+  `is_allowed` BIT NOT NULL ,
+  `to_date` DATE NOT NULL ,
+  `created_by` INT NOT NULL ,
+  `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  INDEX `audit_user_id_idx` (`user_id` ASC),
+  INDEX `audit_survey_id_idx` (`survey_id` ASC),
+  CONSTRAINT `audit_user_id`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `covid`.`user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `audit_survey_id`
+    FOREIGN KEY (`survey_id` )
+    REFERENCES `covid`.`survey` (`survey_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `audit_created_by`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `covid`.`user` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
