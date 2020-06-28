@@ -166,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`audit` (
   `survey_id` INT NOT NULL ,
   `is_allowed` BIT NOT NULL ,
   `to_date` DATE NOT NULL ,
+  `from_date` DATE NOT NULL ,
   `created_by` INT NOT NULL ,
   `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   INDEX `audit_user_id_idx` (`user_id` ASC),
