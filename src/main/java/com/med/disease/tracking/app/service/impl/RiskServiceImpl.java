@@ -114,25 +114,6 @@ public class RiskServiceImpl implements RiskService {
 			}
 		}
 
-
-//		if(risk.getRiskLevel().equalsIgnoreCase(Constant.RiskStatus.H) && commonUtil.isCurrentlyEpassAllowed(risk.getUser().getUserId(), risk.getSurvey().getSurveyId())) {
-//			User user = new User();
-//			user.setUserId(requestDTO.getUserId());
-//
-//			Survey survey = new Survey();
-//			survey.setSurveyId(requestDTO.getSurveyId());
-//
-//			User createdBy = new User();
-//			createdBy.setUserId(requestDTO.getUserId());
-//
-//			EPass ePass = new EPass();
-//			ePass.setUser(user);
-//			ePass.setSurvey(survey);
-//			ePass.setIsAllowed(false);
-//			ePass.setToDate(LocalDate.now());
-//			ePass.setCreatedBy(createdBy);
-//			ePassDAO.submitEPass(ePass);
-//		}
 	}
 
 	private Audit getAuditObj(EPass ePass) {
@@ -149,7 +130,7 @@ public class RiskServiceImpl implements RiskService {
 		audit.setUser(user);
 		audit.setSurvey(survey);
 		audit.setIsAllowed(true);
-		audit.setToDate(LocalDate.now());
+		audit.setToDate(ePass.getToDate().isBefore(LocalDate.now()) ? ePass.getToDate() : LocalDate.now());
 		audit.setCreatedBy(createdBy);
 		audit.setFromDate(ePass.getFromDate());
 		return audit;
