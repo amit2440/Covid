@@ -99,7 +99,7 @@ public class EPassServiceImpl implements EPassService {
 		audit.setUser(user);
 		audit.setSurvey(survey);
 		audit.setIsAllowed(true);
-		audit.setToDate(LocalDate.now());
+		audit.setToDate(ePass.getToDate().isBefore(LocalDate.now()) ? ePass.getToDate() : LocalDate.now());
 		audit.setCreatedBy(createdBy);
 		audit.setFromDate(ePass.getFromDate());
 		return audit;
