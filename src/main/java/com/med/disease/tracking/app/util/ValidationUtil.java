@@ -84,7 +84,7 @@ public class ValidationUtil {
 	}
 
 	public static void relaxedString(String errorField, Object value, Errors errors) {
-		String regx = "^[a-zA-Z0-9_\\s]*$";
+		String regx = "^[a-zA-Z0-9_\\s\\.]*$";
 		if (!ObjectUtils.isEmpty(value)) {
 			String mobileNumber = (String) value;
 			if (!mobileNumber.matches(regx)) {
