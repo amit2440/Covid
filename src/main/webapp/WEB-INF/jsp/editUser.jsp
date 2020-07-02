@@ -230,10 +230,11 @@ a {
 				//	 	      document.getElementById("demo").innerHTML = this.responseText;
 				alert(this.responseText);
 				showHomePage();
-			}else{
-				alert("Error : UNPROCESSABLE_ENTITY");
-// 				break;
 			}
+// 			else{
+// 				alert("Error : UNPROCESSABLE_ENTITY");
+// // 				break;
+// 			}
 		};
 
 		// 		  xhttp.open("PUT", "http://localhost:8081/ca/admin/updateUser", true);

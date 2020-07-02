@@ -3,10 +3,10 @@
  */
 
 function allLetter(inputtxt) {
- alert('inputtxt ---'+inputtxt);
+// alert('inputtxt ---'+inputtxt);
 	var letters = /^[a-zA-Z0-9_\s\.]*$/;
 	if (!inputtxt.match(letters)) {
- alert('22223323');
+// alert('22223323');
 			return false;
 	}else{
 		return true;
