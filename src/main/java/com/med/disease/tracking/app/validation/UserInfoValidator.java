@@ -22,11 +22,11 @@ public class UserInfoValidator implements Validator {
 		UserDTO userDTO = (UserDTO) target;
 		
 		if(!"".equals(userDTO.getFirstName()) && userDTO.getFirstName()!=null) {
-			ValidationUtil.simpleStringValidation(Constant.Field.FIRST_NAME, userDTO.getFirstName(), errors);
+			ValidationUtil.relaxedString(Constant.Field.FIRST_NAME, userDTO.getFirstName(), errors);
 		}
 		
 		if(!"".equals(userDTO.getLastName()) && userDTO.getLastName()!=null) {
-			ValidationUtil.simpleStringValidation(Constant.Field.LAST_NAME, userDTO.getLastName(), errors);
+			ValidationUtil.relaxedString(Constant.Field.LAST_NAME, userDTO.getLastName(), errors);
 		}
 		
 		
