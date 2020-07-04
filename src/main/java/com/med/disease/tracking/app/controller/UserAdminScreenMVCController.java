@@ -226,7 +226,7 @@ public class UserAdminScreenMVCController {
 	@RequestMapping(value = "/mvc/epassPage/{userId}", method = RequestMethod.GET)
 	public String epassPage(ModelMap model,@PathVariable(required = true, name = "userId") String userId) throws Exception {
 		System.out.println("got into appication");
-		
+		EPassDTO  ePassDTO = null;
 		List<SurveyDTO> surveyList = (List<SurveyDTO>) surveyService.getActiveSurveys(new SurveyRequestDTO());
 		EPassRequestDTO requestDTO = new EPassRequestDTO();
 		requestDTO.setSurveyId(surveyList.get(0).getSurveyId());
@@ -234,8 +234,13 @@ public class UserAdminScreenMVCController {
 		
 		UserDTO user = new UserDTO();
 		user.setUserId((new Integer(userId)));
-		EPassDTO  ePassDTO = ePassService.fetchEPass(requestDTO);
-		SurveyDTO survey = new SurveyDTO();
+		try {
+		  ePassDTO = ePassService.fetchEPass(requestDTO);
+		}catch(Exception e) {
+			ePassDTO = new EPassDTO();
+		}
+		  
+		  SurveyDTO survey = new SurveyDTO();
 		survey.setSurveyId(surveyList.get(0).getSurveyId());
 		ePassDTO.setSurvey(survey);
 		ePassDTO.setUser(user);
