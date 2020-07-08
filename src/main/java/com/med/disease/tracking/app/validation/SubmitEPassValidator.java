@@ -20,7 +20,6 @@ public class SubmitEPassValidator implements Validator {
 		ValidationUtil.validateBlankField(Constant.Field.USER_ID, requestDTO.getUserId(), errors);
 		ValidationUtil.validateBlankField(Constant.Field.SURVEY_ID, requestDTO.getSurveyId(), errors);
 		ValidationUtil.validateToDate(Constant.Field.TO_DATE, requestDTO.getToDate(), errors);
-		ValidationUtil.validateToDate(Constant.Field.FROM_DATE, requestDTO.getFromDate(), errors);
 		ValidationUtil.isUserEPassAllowed(Constant.Field.USER_ID, requestDTO, errors);
 	}
 }
