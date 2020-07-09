@@ -236,6 +236,9 @@ public class UserAdminScreenMVCController {
 		user.setUserId((new Integer(userId)));
 		try {
 		  ePassDTO = ePassService.fetchEPass(requestDTO);
+		  if(ePassDTO==null) {
+			  ePassDTO = new EPassDTO();
+		  }
 		}catch(Exception e) {
 			ePassDTO = new EPassDTO();
 		}
