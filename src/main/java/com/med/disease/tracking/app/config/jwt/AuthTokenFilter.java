@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -51,7 +52,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 		}
 
 		filterChain.doFilter(request, response);
-		if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+		if(!ObjectUtils.isEmpty(SecurityContextHolder.getContext().getAuthentication()) && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
 			response.setHeader("Authorization", jwt);
 		}
 	}
