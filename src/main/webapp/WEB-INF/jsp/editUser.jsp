@@ -93,7 +93,7 @@ a {
 // 	alert(document.getElementById("token").value);
 </script>
 </head>
-<body onload="getListOfManager(),search('<%=userId%>')">
+<body onload="getListOfManager()">
 
 	<jsp:include page="header.jsp" />
 
@@ -159,10 +159,10 @@ a {
 					  option.value=obj[i].mgrId;
 					  x.add(option);
 				}
-				
+				search('<%=userId%>');
 			}
 		};
-		xhttp.open("GET", "/ca/reg/managers", true);
+		xhttp.open("GET", "/ca/reg/managers", false);
 		xhttp
 		.setRequestHeader(
 				'Authorization',
