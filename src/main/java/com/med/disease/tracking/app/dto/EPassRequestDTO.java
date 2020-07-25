@@ -9,6 +9,15 @@ public class EPassRequestDTO {
 	private Boolean isAllowed;
 	private LocalDate toDate;
 	private LocalDate fromDate;
+	private String location;
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	public LocalDate getFromDate() {
 		return fromDate;

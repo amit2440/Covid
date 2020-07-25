@@ -8,17 +8,25 @@
 		<result property="survey.surveyId" column="survey_id" />
 		<result property="isAllowed" column="is_allowed" />
 		<result property="toDate" column="to_date"
-			javaType="java.time.LocalDate" 
-			jdbcType="DATE"
+			javaType="java.time.LocalDate" jdbcType="DATE"
 			typeHandler="org.apache.ibatis.type.LocalDateTypeHandler" />
 		<result property="fromDate" column="from_date"
-			javaType="java.time.LocalDate" 
-			jdbcType="DATE"
+			javaType="java.time.LocalDate" jdbcType="DATE"
 			typeHandler="org.apache.ibatis.type.LocalDateTypeHandler" />
 		<result property="createdBy.userId" column="created_by" />
 		<result property="createdOn" column="created_on"
-			javaType="java.time.LocalDateTime" 
-			jdbcType="TIMESTAMP"
+			javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP"
 			typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
 	</resultMap>
+
+
+	<resultMap id="ResultAllowedEpassReport" type="EPass">
+		<result property="user.userId" column="user_id" />
+		<result property="user.firstName" column="first_name" />
+		<result property="user.lastName" column="last_name" />
+		<result property="user.managerName" column="manager_name" />
+		<result property="isAllowed" column="is_allowed" />
+	</resultMap>
+	
+	
 </mapper>
