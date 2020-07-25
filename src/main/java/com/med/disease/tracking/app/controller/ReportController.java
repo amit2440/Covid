@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.dto.ReportRequestDTO;
+import com.med.disease.tracking.app.handler.EpassReportHandler;
 import com.med.disease.tracking.app.handler.ReportHandler;
 
 @RestController
@@ -24,4 +27,13 @@ public class ReportController {
 			throws Exception {
 		return (ResponseEntity<?>) beanFactory.getBean(ReportHandler.class).handle(requestDTO, bindingResult);
 	}
+	
+	
+	@GetMapping(path = "/reports/userEpassRpt", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> allowedEpassReport(@RequestBody EPassRequestDTO requestDTO, BindingResult bindingResult)
+			throws Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(EpassReportHandler.class).handle(requestDTO, bindingResult);
+	}
+	
+	
 }

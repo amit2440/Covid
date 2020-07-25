@@ -40,4 +40,15 @@ public class EPassDAO extends BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
+	
+	
+	public List<EPass>  allowedEpassReport(EPass ePass) throws Exception {
+		try {
+			return getSqlSession().selectList("EPass.allowedEpassReport", ePass);
+		} catch (Exception exception) {
+			LOGGER.error("Database Exception :{}", exception.getMessage());
+			throw new DatabaseException(exception.getMessage());
+		}
+	}
+
 }

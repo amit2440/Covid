@@ -11,6 +11,17 @@ public class EPass {
 	private User createdBy;
 	private LocalDateTime createdOn;
 	private LocalDate fromDate;
+	private String location;
+
+	
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	public LocalDate getFromDate() {
 		return fromDate;
