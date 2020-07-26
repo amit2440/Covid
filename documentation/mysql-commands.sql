@@ -147,6 +147,8 @@ CREATE TABLE IF NOT EXISTS `covid`.`risk` (
   CONSTRAINT `fk_survey_id` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+ALTER TABLE `covid`.`risk`
+  ADD COLUMN `created_on` DATE ;
 -- select * from user;
 -- select * from feedback;
 -- select * from survey_question;
