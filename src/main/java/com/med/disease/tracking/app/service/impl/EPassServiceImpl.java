@@ -3,6 +3,7 @@ package com.med.disease.tracking.app.service.impl;
 import com.med.disease.tracking.app.dao.AuditDAO;
 import com.med.disease.tracking.app.dao.EPassDAO;
 import com.med.disease.tracking.app.dao.RiskDAO;
+import com.med.disease.tracking.app.dao.UserInfoDAO;
 import com.med.disease.tracking.app.dto.EPassDTO;
 import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.dto.RiskDTO;
@@ -47,6 +48,9 @@ public class EPassServiceImpl implements EPassService {
 
 	@Autowired
 	AuditDAO auditDAO;
+
+	@Autowired
+	UserInfoDAO userInfoDAO;
 
 	@Override
 	@Transactional(readOnly = false)
@@ -119,6 +123,8 @@ public class EPassServiceImpl implements EPassService {
 			}
 		} else return null; // Return 204 No Content - Take self assessment
 		checkEpassExpiry(ePassUser);
+		List<User> user = userInfoDAO.searchUser(ePassUser.get(0).getUser());
+		ePassUser.get(0).setUser(user.get(0));
 		return (EPassDTO) fetchEPassMapper.map(ePassUser, MappingTypeEnum.MAPTORESPONSE, null);
 	}
 

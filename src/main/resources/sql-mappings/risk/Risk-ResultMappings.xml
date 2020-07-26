@@ -8,5 +8,6 @@
 		<result property="riskId" column="RISK_ID" />
 		<result property="user.userId" column="USER_ID" />
 		<result property="riskLevel" column="RISK_LEVEL" />
+		<result property="createdOn" column="created_on" />
 	</resultMap>
 </mapper>

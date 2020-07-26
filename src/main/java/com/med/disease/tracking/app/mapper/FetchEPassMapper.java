@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import com.med.disease.tracking.app.dto.UserDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -42,6 +43,10 @@ public class FetchEPassMapper extends Mapper {
 		ePassDTO.setToDate(ePass.get(0).getToDate());
 		ePassDTO.setFromDate(ePass.get(0).getFromDate());
 		ePassDTO.setIsAllowed(ePass.get(0).getIsAllowed());
+		UserDTO userDTO = new UserDTO();
+		userDTO.setFirstName(ePass.get(0).getUser().getFirstName());
+		userDTO.setLastName(ePass.get(0).getUser().getLastName());
+		ePassDTO.setUser(userDTO);
 		return ePassDTO;
 	}
 }

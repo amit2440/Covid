@@ -21,18 +21,19 @@
 
     <insert id="insertRisk" parameterType="Risk">
         INSERT INTO
-        Risk (user_id, survey_id, risk_level)
-        VALUES(#{user.userId}, #{survey.surveyId}, #{riskLevel})
+        Risk (user_id, survey_id, risk_level, created_on)
+        VALUES(#{user.userId}, #{survey.surveyId}, #{riskLevel}, #{createdOn})
     </insert>
 
     <update id="updateRisk" parameterType="Risk">
         UPDATE Risk SET
-        risk_level = #{riskLevel}
+        risk_level = #{riskLevel},
+        created_on = #{createdOn}
         WHERE risk_id = #{riskId}
     </update>
 
     <select id="getRiskForUsers" resultMap="Risk-ResultMappings.ResultForGetRisk">
-        SELECT r.risk_id, r.user_id, r.survey_id, r.risk_level
+        SELECT r.risk_id, r.user_id, r.survey_id, r.risk_level, r.created_on
         FROM Risk r
         INNER JOIN user u
         ON u.user_id = r.user_id
