@@ -22,7 +22,7 @@ CALL CREATE_SURVEY_QUESTION_OPTION('No',0,'L');
 
 /* Question 4 */
 CALL CREATE_SURVEY_QUESTION('Do you have any of these pre-existing Health Conditions?:Asthma, Cancer, Chronic Lung Disease (COPD), Diabetes, Hypertension OR Heart Disease','singleChoice');
-CALL CREATE_SURVEY_QUESTION_OPTION('Yes',0,'H');
+CALL CREATE_SURVEY_QUESTION_OPTION('Yes',0,'M');
 CALL CREATE_SURVEY_QUESTION_OPTION('No',0,'L');
 
 /* Question 5 */
