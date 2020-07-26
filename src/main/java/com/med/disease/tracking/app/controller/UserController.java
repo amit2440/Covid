@@ -34,9 +34,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.med.disease.tracking.app.config.jwt.JwtUtils;
 import com.med.disease.tracking.app.constant.Constant;
+import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.dto.UserDTO;
 import com.med.disease.tracking.app.exception.CovidAppException;
 import com.med.disease.tracking.app.exception.ErrorResponse;
+import com.med.disease.tracking.app.handler.EpassReportHandler;
 import com.med.disease.tracking.app.handler.UserInfoHandler;
 import com.med.disease.tracking.app.handler.UserRegistrationHandler;
 import com.med.disease.tracking.app.model.request.LoginRequest;
@@ -251,5 +253,9 @@ public class UserController {
 				.handle(userDTO, bindingResult,"userIDSearch");
 	}
 	
-	
+	@PostMapping(path = "/admin/userEpassRpt", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> allowedEpassReport(@RequestBody EPassRequestDTO requestDTO, BindingResult bindingResult)
+			throws Exception {
+		return (ResponseEntity<?>) beanFactory.getBean(EpassReportHandler.class).handle(requestDTO, bindingResult);
+	}
 }

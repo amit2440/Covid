@@ -44,7 +44,7 @@
 
 	<select id="allowedEpassReport" parameterType="EPass" resultMap="EPass-ResultMappings.ResultAllowedEpassReport">
 	
-		select u.first_name,
+		select DISTINCT u.first_name,
 			u.last_name ,
 			(select CONCAT(u2.first_name ," ", u2.last_name) from covid.user u2 where u2.user_id=u.mgr_id) as manager_name,
 			e.is_allowed

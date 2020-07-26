@@ -252,4 +252,12 @@ public class UserAdminScreenMVCController {
 		model.addAttribute("ePassRequestDTO",ePassRequestDTO);
 		return "epassPage";
 	}
+	
+	@RequestMapping(value = "/mvc/passAllowedRpt", method = RequestMethod.POST)
+	public String passAllowedRpt(ModelMap model) {
+		System.out.println("got into appication");
+		return "ePassAllowedRpt";
+	}
+	
+	
 }
