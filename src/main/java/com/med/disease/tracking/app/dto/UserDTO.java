@@ -1,8 +1,9 @@
 package com.med.disease.tracking.app.dto;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class UserDTO {
@@ -19,6 +20,7 @@ public class UserDTO {
 	private Integer mgrID;
 	private String riskStatus;
 	private String managerName;
+	private LocalDate surveySubmittedOn;
 	private EPassDTO epass;
 	
 	/**
@@ -175,6 +177,11 @@ public class UserDTO {
 		this.isActive = isActive;
 	}
 
-	
+	public LocalDate getSurveySubmittedOn() {
+		return surveySubmittedOn;
+	}
 
+	public void setSurveySubmittedOn(LocalDate surveySubmittedOn) {
+		this.surveySubmittedOn = surveySubmittedOn;
+	}
 }

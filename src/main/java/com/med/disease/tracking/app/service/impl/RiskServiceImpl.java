@@ -234,8 +234,10 @@ public class RiskServiceImpl implements RiskService {
 					usr.getEpass().setToDate(null);
 					usr.getEpass().setFromDate(null);
 				}
-				else
+				else {
 					usr.setRiskStatus(risk.getRiskLevel());
+				}
+				usr.setSurveySubmittedOn(risk.getCreatedOn());
 			}, () -> usr.setRiskStatus(Constant.RiskStatus.U));
 		});
 		surveyFeedback.setUsers(userDTOs);
