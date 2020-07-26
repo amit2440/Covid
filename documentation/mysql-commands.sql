@@ -1,4 +1,4 @@
-drop database covid;
+--drop database covid;
 
 CREATE SCHEMA IF NOT EXISTS `covid`;
 
