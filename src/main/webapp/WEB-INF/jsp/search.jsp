@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>User Search</title>
+<title>Epass Allowed for Day Report</title>
 
 <style>
 table {

@@ -69,6 +69,11 @@ li a:hover {
 		document.forms["homePageForm"].submit();
 	}
 	
+	function doEPassAllowedRpt() {
+		document.forms["homePageForm"].action = "/ca/mvc/passAllowedRpt";
+		document.forms["homePageForm"].method = "post";
+		document.forms["homePageForm"].submit();
+	}
 	
 // 	alert(performance.navigation.type);
 	
@@ -80,6 +85,7 @@ li a:hover {
 		<li><a onclick="searchUsers();">Search</a></li>
 		<li><a onclick="bulkUpload()">Load User File</a></li>
 		<li><a onclick="doFeedBackReport()">Report</a></li>
+		<li><a onclick="doEPassAllowedRpt()">E-Pass Allowed Report</a></li>
 <!-- 		<li><a onclick="testjspFile()">test Jsp</a></li> -->
 
 	</ul>
