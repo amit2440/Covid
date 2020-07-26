@@ -1,4 +1,4 @@
-drop database covid;
+#drop database covid;
 
 CREATE SCHEMA IF NOT EXISTS `covid`;
 
@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`epass` (
   `user_id` INT NOT NULL ,
   `survey_id` INT NOT NULL ,
   `is_allowed` BIT NOT NULL ,
+  `from_Date` DATE NOT NULL ,
   `to_date` DATE NOT NULL ,
   `created_by` INT NOT NULL ,
   `created_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -132,9 +133,6 @@ CREATE TABLE IF NOT EXISTS `covid`.`epass` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
     
-ALTER TABLE `covid`.`epass`
-  ADD COLUMN `from_Date` DATE ;
-
 CREATE TABLE IF NOT EXISTS `covid`.`risk` (
   `risk_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
