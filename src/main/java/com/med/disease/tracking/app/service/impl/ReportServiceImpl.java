@@ -37,4 +37,10 @@ public class ReportServiceImpl implements ReportService{
 		 return (List<UserDTO>) ePpassReportMapper.map(epassList, MappingTypeEnum.MAPTORESPONSE, null);
 	}
 
+	public Integer countAllowedEpass(EPassRequestDTO reportRequestDTO) throws Exception {
+		
+		EPass epass = (EPass) ePpassReportMapper.map(reportRequestDTO, MappingTypeEnum.MAPTODOMAIN, null);
+		Integer count  = epassDAO.countAllowedEPass(epass);
+		return count;
+	}
 }

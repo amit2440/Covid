@@ -54,7 +54,24 @@
 			and e.from_date <![CDATA[ <= ]]> #{toDate} 
 			and e.to_date <![CDATA[  >= ]]> #{toDate}
 			and u.work_location= #{location}
+			 and e.is_allowed=true
 	</select>
 
+	<select id="countAllowedEPass"  parameterType="EPass" resultType="java.lang.Integer">
+		select Count(*) from ( 
+				select DISTINCT u.first_name,
+					u.last_name ,
+					(select CONCAT(u2.first_name ," ", u2.last_name) from covid.user u2 where u2.user_id=u.mgr_id) as manager_name,
+					e.is_allowed
+				from covid.epass e, covid.user u
+				where 
+					e.user_id=u.user_id 
+					and e.from_date <![CDATA[ <= ]]> #{toDate} 
+					and e.to_date <![CDATA[  >= ]]> #{toDate}
+					and u.work_location= #{location}
+					  and e.is_allowed=true		
+		) as rpt
+
+	</select>
 	
 </mapper>

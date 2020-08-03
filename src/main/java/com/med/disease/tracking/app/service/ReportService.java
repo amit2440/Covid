@@ -9,4 +9,6 @@ public interface ReportService {
 	
 	public Object allowedEpassReport(EPassRequestDTO reportRequestDTO) throws Exception;
 	
+	public Integer countAllowedEpass(EPassRequestDTO reportRequestDTO) throws Exception;
+	
 }

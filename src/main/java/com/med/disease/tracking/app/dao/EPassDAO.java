@@ -50,5 +50,15 @@ public class EPassDAO extends BaseDAO {
 			throw new DatabaseException(exception.getMessage());
 		}
 	}
+	
+	public Integer countAllowedEPass(EPass ePass) throws Exception {
+		
+		try {
+			return getSqlSession().selectOne("EPass.countAllowedEPass", ePass);
+		} catch (Exception exception) {
+			LOGGER.error("Database Exception :{}", exception.getMessage());
+			throw new DatabaseException(exception.getMessage());
+		}
+	}
 
 }
