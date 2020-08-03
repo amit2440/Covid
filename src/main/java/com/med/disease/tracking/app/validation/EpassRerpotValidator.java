@@ -16,6 +16,6 @@ public class EpassRerpotValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		EPassRequestDTO requestDTO = (EPassRequestDTO) target;
-		ValidationUtil.validateToDate(Constant.Field.TO_DATE, requestDTO.getToDate(), errors);
+//		ValidationUtil.validateToDate(Constant.Field.TO_DATE, requestDTO.getToDate(), errors);
 	}
 }

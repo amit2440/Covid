@@ -67,7 +67,8 @@ table#t01 th {
 			<input type="button" value="search" onclick="search();">
 			<hr>
 			
-			<div>Search Results :</div> 
+			<div>Search Results :</div> </br>
+			<b><div id="countDiv" style="Color:Red"> </div></b> </br> 
 			<div> 
 			<table border="1" width="70%" id="resultTable">
 				<tr>
@@ -108,19 +109,21 @@ table#t01 th {
 			if (this.readyState == 4 && this.status == 200) {
 // 								alert(this.responseText);
 				var obj = JSON.parse(this.responseText);
+// 				alert(document.getElementById("countDiv").innerHTML);
 				var table = document.getElementById("resultTable");
 // 				alert("length--"+obj.length);
-				if(obj.length>0){
-					for (i in obj) {
+				if(obj.epassDTOList.length>0){
+					document.getElementById("countDiv").innerHTML = "Record Count : "+obj.count;
+					for (i in obj.epassDTOList) {
 						var row = table.insertRow(1);
 						var cell0 = row.insertCell(0);
 						var cell1 = row.insertCell(1);
 						var cell2 = row.insertCell(2);
 //	 					var cell3 = row.insertCell(3);
 						
-						cell0.innerHTML = obj[i].user.firstName;
-						cell1.innerHTML = obj[i].user.lastName;
-						cell2.innerHTML = obj[i].user.managerName;
+						cell0.innerHTML = obj.epassDTOList[i].user.firstName;
+						cell1.innerHTML = obj.epassDTOList[i].user.lastName;
+						cell2.innerHTML = obj.epassDTOList[i].user.managerName;
 //	 					if (obj[i].managerName == ''
 //	 							|| obj[i].managerName == 'undefined'
 //	 							|| obj[i].managerName == null) {

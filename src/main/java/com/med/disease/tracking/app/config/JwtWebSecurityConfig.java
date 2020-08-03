@@ -65,6 +65,8 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.antMatchers("/api/test/**").permitAll()
 			.anyRequest().authenticated();
 
+		http.headers().httpStrictTransportSecurity().disable();
+		
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 	

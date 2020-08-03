@@ -16,6 +16,7 @@ import com.med.disease.tracking.app.dto.EPassDTO;
 import com.med.disease.tracking.app.dto.EPassRequestDTO;
 import com.med.disease.tracking.app.dto.EmptyResponseDTO;
 import com.med.disease.tracking.app.dto.ReportRequestDTO;
+import com.med.disease.tracking.app.dto.ReportResponseDTO;
 import com.med.disease.tracking.app.service.ReportService;
 import com.med.disease.tracking.app.util.ErrorUtil;
 import com.med.disease.tracking.app.validation.EpassRerpotValidator;
@@ -45,15 +46,20 @@ public class EpassReportHandler  extends RestControllerHandler {
 		// TODO Auto-generated method stub
 		Validator validator = new EpassRerpotValidator();
 		validator.validate(reportRequestDTO, bindingResult);
-		ErrorUtil.processError(bindingResult, Constant.Module.QUESTION_FETCH);
+//		ErrorUtil.processError(bindingResult, Constant.Module.QUESTION_FETCH);
 	}
 
 	@Override
 	protected Object processRequest() throws Exception {
 		// TODO Auto-generated method stub
+		ReportResponseDTO reportResponseDTO  =  new ReportResponseDTO();
 		List<EPassDTO> epassDTOList = (List<EPassDTO>) reportService.allowedEpassReport(reportRequestDTO);
+		Integer count =(Integer) reportService.countAllowedEpass(reportRequestDTO);
+		reportResponseDTO.setEpassDTOList(epassDTOList);
+		reportResponseDTO.setCount(count);
+		
 		return  ObjectUtils.isEmpty(epassDTOList) ? new ResponseEntity<EmptyResponseDTO>(new EmptyResponseDTO(), HttpStatus.OK)
-				: new ResponseEntity<List>(epassDTOList, HttpStatus.OK);
+				: new ResponseEntity(reportResponseDTO, HttpStatus.OK);
 	}
 
 }
