@@ -50,6 +50,7 @@ public class JwtUtils {
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)
 				.claim("UserId", userPrincipal.getUserId())
 				.claim("role", list.get(0)!=null?list.get(0):null)
+				.claim("UserName", userPrincipal.getFirstName()+" "+userPrincipal.getLastName())
 				.compact();
 	}
 
