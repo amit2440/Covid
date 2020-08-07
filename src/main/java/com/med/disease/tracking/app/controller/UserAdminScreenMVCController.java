@@ -223,6 +223,7 @@ public class UserAdminScreenMVCController {
 		return (ResponseEntity<?>) beanFactory.getBean(SubmitEPassHandler.class).handle(requestDTO, result, surveyId);
 	}
 	
+	@PreAuthorize(Authority.MANAGER_OR_ADMIN)
 	@RequestMapping(value = "/mvc/epassPage/{userId}", method = RequestMethod.GET)
 	public String epassPage(ModelMap model,@PathVariable(required = true, name = "userId") String userId) throws Exception {
 		System.out.println("got into appication");
