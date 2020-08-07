@@ -6,6 +6,7 @@ public class OTPResponse {
 	public String SmsCost;
 	public String BalanceAmount;
 
+	
 	public Boolean isSuccess() {
 		return this.Status.contentEquals("success");
 	}

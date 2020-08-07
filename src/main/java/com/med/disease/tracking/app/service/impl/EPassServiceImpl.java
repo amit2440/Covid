@@ -17,9 +17,12 @@ import com.med.disease.tracking.app.mapper.SubmitEPassMapper;
 import com.med.disease.tracking.app.model.*;
 import com.med.disease.tracking.app.service.EPassService;
 import com.med.disease.tracking.app.service.RiskService;
+import com.med.disease.tracking.app.util.otp.OTPUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +51,33 @@ public class EPassServiceImpl implements EPassService {
 
 	@Autowired
 	AuditDAO auditDAO;
+	
+	@Autowired
+	UserInfoDAO userInfoDao;
+	
+	@Value("${covid.app.authkey}")
+	private  String AUTHKEY;
+	
+	@Value("${covid.app.templateId}")
+	private String TEMPLATE_ID;
+	
+	@Value("${covid.app.otpLength}")
+	private String OTP_LENGHT;
+	
+	@Value("${covid.app.enableOTP}")
+	private String enableOtp;
+	
+	@Value("${covid.app.defaultOTP}")
+	private String defaultOTP;
+	
+	@Value("${covid.app.defaultNumber}")
+	private String defaultNumber;
+	
+	@Value("${covid.app.flowId}")
+	private String FLOW_ID;
+	
+	@Value("${covid.app.smsSender}")
+	private String SENDER;
 
 	@Autowired
 	UserInfoDAO userInfoDAO;
@@ -65,6 +95,21 @@ public class EPassServiceImpl implements EPassService {
 		if (ePassDAO.submitEPass(ePass) <= 0) {
 			LOGGER.error("Unable to insert ePass for userId=" + requestDTO.getUserId());
 			throw new CovidAppException("Insert EPass failed");
+		}else {
+			if(ePass.getIsAllowed()) {
+				User user = new User();
+				user.setUserId(ePass.getUser().getUserId());
+				List<User> userList =    userInfoDao.searchUserByuserId(user);
+//				OTPUtil.allowEpassMg(userList.get(0).getMobile(), AUTHKEY, TEMPLATE_ID, OTP_LENGHT);
+				
+				String mmDD = ((""+ePass.getFromDate().getMonthValue()).length()==1?("0"+ePass.getFromDate().getMonthValue()):(""+ePass.getFromDate().getMonthValue()))+
+						"/"+((""+ePass.getFromDate().getDayOfMonth()).length()==1?("0"+ePass.getFromDate().getDayOfMonth()):(""+ePass.getFromDate().getDayOfMonth()));
+				String mmDDTO = ((""+ePass.getToDate().getMonthValue()).length()==1?("0"+ePass.getToDate().getMonthValue()):(""+ePass.getToDate().getMonthValue()))+
+						"/"+((""+ePass.getToDate().getDayOfMonth()).length()==1?("0"+ePass.getToDate().getDayOfMonth()):(""+ePass.getToDate().getDayOfMonth()));
+						
+				
+				OTPUtil.sendSMSMsg91(AUTHKEY, FLOW_ID,userList.get(0).getMobile(), mmDD,mmDDTO, SENDER);
+			}
 		}
 
         Risk risk = getRisk(ePass);

@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -99,5 +101,59 @@ public class OTPSender {
 //		return true;
 	}
 	
+public static void sendSMSMsg91(String authkey,String flow_id,String mobileNumber,String fromDate, String toDate,String sender) throws Exception {
+		
+		JSONObject urlParameters = new JSONObject();
+		urlParameters.put("authkey", authkey);
+		urlParameters.put("flow_id", flow_id);
+		urlParameters.put("sender", sender);
+		
+		
+		JSONObject array = new JSONObject();
+		ArrayList<JSONObject> sList = new ArrayList<JSONObject>();
+		array.put("mobiles",mobileNumber);
+		array.put("fromdate",fromDate);
+			array.put("todate",toDate);
+		sList.add(array);
+			
+	      urlParameters.put("recipients",sList);
+		URL obj = new URL("https://api.msg91.com/api/v5/flow");
+		HttpURLConnection httpConnection = (HttpURLConnection) obj.openConnection();
+		httpConnection.setDoOutput(true);
+		httpConnection.setRequestMethod("POST");
+		httpConnection.setRequestProperty("Content-Type", "application/json");
+		httpConnection.setRequestProperty("authkey", authkey);
+		DataOutputStream wr = new DataOutputStream(httpConnection.getOutputStream());
+		System.out.println(urlParameters.toString());
+		wr.write(urlParameters.toString().getBytes());
+////		 get the response
+		BufferedReader bufferedReader = null;
+		if (httpConnection.getResponseCode() == 200) {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream()));
+		} else {
+			bufferedReader = new BufferedReader(new InputStreamReader(httpConnection.getErrorStream()));
+		}
+		StringBuilder content = new StringBuilder();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			content.append(line).append("\n");
+		}
+		bufferedReader.close();
+//		
+		JSONObject campaignResponseObject = new JSONObject(content.toString());
+
+		OTPResponse otpResponse = new OTPResponse();
+		otpResponse.Status = campaignResponseObject.get("type").toString();
+		otpResponse.Message = campaignResponseObject.get("message").toString();
+		System.out.println("otpResponse.Status===>"+otpResponse.Status +"    "+"otpResponse.Message --->"+otpResponse.Message);
+//		if (otpResponse.isSuccess()) {
+//			otpResponse.SmsCost = campaignResponseObject.get("smscost").toString();
+////			otpResponse.BalanceAmount = campaignResponseObject.get("balacne").toString();
+//		}
+//		return otpResponse;
+		
+//		return content.toString();
+//		return true;
+	}
 	
 }
