@@ -10,6 +10,7 @@ public class RiskDTO {
 	private Integer userId;
 	private Integer surveyId;
 	private String riskLevel;
+	private Boolean disableSelfAssessment = false;
 
 	public Integer getUserId() {
 		return userId;
@@ -33,5 +34,13 @@ public class RiskDTO {
 
 	public void setRiskLevel(String riskLevel) {
 		this.riskLevel = riskLevel;
+	}
+
+	public Boolean getDisableSelfAssessment() {
+		return disableSelfAssessment;
+	}
+
+	public void setDisableSelfAssessment(Boolean disableSelfAssessment) {
+		this.disableSelfAssessment = disableSelfAssessment;
 	}
 }

@@ -147,6 +147,9 @@ CREATE TABLE IF NOT EXISTS `covid`.`risk` (
 
 ALTER TABLE `covid`.`risk`
   ADD COLUMN `created_on` DATE ;
+
+ALTER TABLE `covid`.`risk`
+  MODIFY COLUMN `created_on` DATETIME;
 -- select * from user;
 -- select * from feedback;
 -- select * from survey_question;

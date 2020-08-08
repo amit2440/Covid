@@ -6,6 +6,7 @@ import com.med.disease.tracking.app.model.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class SubmitRiskMapper extends Mapper {
         survey.setSurveyId(riskRequestDTO.getSurveyId());
         risk.setUser(user);
         risk.setSurvey(survey);
-        risk.setCreatedOn(LocalDate.now());
+        risk.setCreatedOn(LocalDateTime.now());
         return risk;
     }
 

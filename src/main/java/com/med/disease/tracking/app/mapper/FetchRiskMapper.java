@@ -8,9 +8,13 @@ import com.med.disease.tracking.app.dto.request.FetchFeedbackRequestDTO;
 import com.med.disease.tracking.app.dto.request.FetchRiskRequestDTO;
 import com.med.disease.tracking.app.dto.response.FeedbackResponseDTO;
 import com.med.disease.tracking.app.model.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +22,9 @@ import java.util.Map;
 
 @Component
 public class FetchRiskMapper extends Mapper {
+
+	@Value("${covid.app.disableSelfAssessment}")
+	private Long disableSelfAssessment;
 
 	@Override
 	protected Object mapToObject(Object objectToMap, Map<String, String> extraField) throws Exception {
@@ -39,6 +46,8 @@ public class FetchRiskMapper extends Mapper {
 		riskDTO.setUserId(risk.getUser().getUserId());
 		riskDTO.setSurveyId(risk.getSurvey().getSurveyId());
 		riskDTO.setRiskLevel(risk.getRiskLevel());
+		if(Duration.between( risk.getCreatedOn(), LocalDateTime.now()).getSeconds() < disableSelfAssessment.longValue())
+			riskDTO.setDisableSelfAssessment(true);
 		return riskDTO;
 	}
 }
