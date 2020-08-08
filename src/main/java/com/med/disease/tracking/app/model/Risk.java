@@ -1,6 +1,6 @@
 package com.med.disease.tracking.app.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Risk {
 
@@ -8,7 +8,7 @@ public class Risk {
     private User user;
     private Survey survey;
     private String riskLevel;
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 
     public Integer getRiskId() {
         return riskId;
@@ -42,11 +42,11 @@ public class Risk {
         this.riskLevel = riskLevel;
     }
 
-    public LocalDate getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(LocalDate createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
     }
 }

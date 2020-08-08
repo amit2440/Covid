@@ -7,7 +7,8 @@
         SELECT r.risk_id,
         r.user_id,
         r.survey_id,
-        r.risk_level
+        r.risk_level,
+        r.created_on
         FROM   risk r
         INNER JOIN user u
         ON u.user_id = r.user_id

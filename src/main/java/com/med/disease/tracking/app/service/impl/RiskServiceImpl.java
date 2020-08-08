@@ -74,7 +74,8 @@ public class RiskServiceImpl implements RiskService {
 			risk.setRiskLevel(Constant.RiskStatus.U);
 		Optional<Risk> userRisk = riskDAO.getRisk(risk);
 		Consumer<Risk> updateRisk = riskStatus ->{
-			if(!riskStatus.getRiskLevel().equalsIgnoreCase(risk.getRiskLevel())) {
+		//	if(!riskStatus.getRiskLevel().equalsIgnoreCase(risk.getRiskLevel())) {
+				riskStatus.setCreatedOn(risk.getCreatedOn());
 				riskStatus.setRiskLevel(risk.getRiskLevel());
 				try {
 					if(riskDAO.updateRiskStatus(riskStatus) <= 0) {
@@ -84,7 +85,7 @@ public class RiskServiceImpl implements RiskService {
 				} catch (DatabaseException exception) {
 					throw new CovidAppException(exception.getMessage());
 				}
-			}
+		//	}
 		};
 		Runnable insertRisk = () -> {
 			try {
@@ -191,7 +192,6 @@ public class RiskServiceImpl implements RiskService {
 	public SurveyFeedbackDTO caculateRisk(List<User> derivedUsers, Integer surveyId, UserDTO manager) throws Exception {
 		SurveyFeedbackDTO surveyFeedback = new SurveyFeedbackDTO();
 		surveyFeedback.setManager(manager);
-
 		List<Risk> derivedUsersForRiskStatus = derivedUsers.stream().map(user ->{
 			Risk userRisk = new Risk();
 			Survey survey = new Survey();
@@ -237,9 +237,12 @@ public class RiskServiceImpl implements RiskService {
 				else {
 					usr.setRiskStatus(risk.getRiskLevel());
 				}
-				usr.setSurveySubmittedOn(risk.getCreatedOn());
+				usr.setSurveySubmittedOn(risk.getCreatedOn().toLocalDate());
 			}, () -> usr.setRiskStatus(Constant.RiskStatus.U));
 		});
+		surveyFeedback.setAllowedEpassCount(userDTOs.stream().filter(usr -> usr.getEpass().getIsAllowed()
+																				&& !usr.getEpass().getToDate().isBefore(LocalDate.now())
+																					&& !usr.getEpass().getFromDate().isAfter(LocalDate.now())).count());
 		surveyFeedback.setUsers(userDTOs);
 		return surveyFeedback;
 	}

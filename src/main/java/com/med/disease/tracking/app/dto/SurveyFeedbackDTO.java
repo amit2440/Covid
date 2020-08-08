@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class SurveyFeedbackDTO {
 	private UserDTO manager;
+	private Long allowedEpassCount;
 	private List<UserDTO> users;
 
 	public List<UserDTO> getUsers() {
@@ -23,5 +24,13 @@ public class SurveyFeedbackDTO {
 
 	public void setManager(UserDTO manager) {
 		this.manager = manager;
+	}
+
+	public Long getAllowedEpassCount() {
+		return allowedEpassCount;
+	}
+
+	public void setAllowedEpassCount(Long allowedEpassCount) {
+		this.allowedEpassCount = allowedEpassCount;
 	}
 }
