@@ -3,6 +3,7 @@ package com.med.disease.tracking.app.controller;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -253,9 +256,18 @@ public class UserController {
 				.handle(userDTO, bindingResult,"userIDSearch");
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN') OR hasAuthority('MANAGER') ")
 	@PostMapping(path = "/admin/userEpassRpt", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> allowedEpassReport(@RequestBody EPassRequestDTO requestDTO, BindingResult bindingResult)
 			throws Exception {
+		UserDetailsImpl ud = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		Collection<? extends GrantedAuthority> roles = SecurityContextHolder.getContext().getAuthentication()
+				.getAuthorities();
+		GrantedAuthority ga = new SimpleGrantedAuthority("MANAGER");
+		if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(ga)) {
+			requestDTO.setMgrId(ud.getUserId());
+		}
 		return (ResponseEntity<?>) beanFactory.getBean(EpassReportHandler.class).handle(requestDTO, bindingResult);
 	}
 }
