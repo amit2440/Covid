@@ -87,6 +87,7 @@ table#t01 th {
 <script type="text/javascript">
 	function search() {
 		var x = document.getElementById("resultTable").rows.length;
+		document.getElementById("countDiv").innerHTML = "Record Count : 0";
 		if (!validateForm()) {
 			return false;
 		}
@@ -111,8 +112,8 @@ table#t01 th {
 				var obj = JSON.parse(this.responseText);
 // 				alert(document.getElementById("countDiv").innerHTML);
 				var table = document.getElementById("resultTable");
-// 				alert("length--"+obj.length);
-				if(obj.epassDTOList.length>0){
+// 				alert("length--"+obj.epassDTOList);
+				if(typeof obj.epassDTOList !='undefined' && obj.epassDTOList.length>0){
 					document.getElementById("countDiv").innerHTML = "Record Count : "+obj.count;
 					for (i in obj.epassDTOList) {
 						var row = table.insertRow(1);
@@ -134,6 +135,7 @@ table#t01 th {
 //	 					cell5.innerHTML = obj[i].mobile;
 					}
 				}else{
+// 					alert('12');
 					var row = table.insertRow(1);
 					var cell0 = row.insertCell(0);
 					cell0.id="mCell";
