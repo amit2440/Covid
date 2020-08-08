@@ -55,6 +55,9 @@
 			and e.to_date <![CDATA[  >= ]]> #{toDate}
 			and u.work_location= #{location}
 			 and e.is_allowed=true
+			 <if test="mgrId != null">
+				AND  u.mgr_id= #{mgrId}
+			 </if>
 	</select>
 
 	<select id="countAllowedEPass"  parameterType="EPass" resultType="java.lang.Integer">
@@ -69,7 +72,10 @@
 					and e.from_date <![CDATA[ <= ]]> #{toDate} 
 					and e.to_date <![CDATA[  >= ]]> #{toDate}
 					and u.work_location= #{location}
-					  and e.is_allowed=true		
+					  and e.is_allowed=true	
+					  <if test="mgrId != null">
+						AND  u.mgr_id= #{mgrId}
+					 </if>	
 		) as rpt
 
 	</select>

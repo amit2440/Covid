@@ -12,8 +12,17 @@ public class EPass {
 	private LocalDateTime createdOn;
 	private LocalDate fromDate;
 	private String location;
+	private Integer mgrId;
 
 	
+
+	public Integer getMgrId() {
+		return mgrId;
+	}
+
+	public void setMgrId(Integer mgrId) {
+		this.mgrId = mgrId;
+	}
 
 	public String getLocation() {
 		return location;

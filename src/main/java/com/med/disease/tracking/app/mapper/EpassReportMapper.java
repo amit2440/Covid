@@ -20,6 +20,7 @@ public class EpassReportMapper extends Mapper {
 		EPass epass = new EPass();
 		epass.setToDate(epassDTO.getToDate());
 		epass.setLocation(epassDTO.getLocation());
+		epass.setMgrId(epassDTO.getMgrId());
 		return epass;
 	}
 
