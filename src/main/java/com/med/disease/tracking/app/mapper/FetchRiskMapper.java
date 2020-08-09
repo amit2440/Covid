@@ -46,7 +46,7 @@ public class FetchRiskMapper extends Mapper {
 		riskDTO.setUserId(risk.getUser().getUserId());
 		riskDTO.setSurveyId(risk.getSurvey().getSurveyId());
 		riskDTO.setRiskLevel(risk.getRiskLevel());
-		if(Duration.between( risk.getCreatedOn(), LocalDateTime.now()).getSeconds() < disableSelfAssessment.longValue())
+		if(risk.getCreatedOn()!=null && Duration.between( risk.getCreatedOn(), LocalDateTime.now()).getSeconds() < disableSelfAssessment.longValue())
 			riskDTO.setDisableSelfAssessment(true);
 		return riskDTO;
 	}
