@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`risk` (
 );
 
 -- Change made earlier on QA
---ALTER TABLE `covid`.`risk`
+-- ALTER TABLE `covid`.`risk`
 --  ADD COLUMN `created_on` DATE;
 
 -- Change made now on QA
@@ -154,7 +154,7 @@ ALTER TABLE `covid`.`risk`
   MODIFY COLUMN `created_on` DATETIME;
 
 -- To be made on PROD
---ALTER TABLE `covid`.`risk`
+-- ALTER TABLE `covid`.`risk`
 --  ADD COLUMN `created_on` DATETIME;
 
 -- select * from user;
