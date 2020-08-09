@@ -237,7 +237,8 @@ public class RiskServiceImpl implements RiskService {
 				else {
 					usr.setRiskStatus(risk.getRiskLevel());
 				}
-				usr.setSurveySubmittedOn(risk.getCreatedOn().toLocalDate());
+				if(risk.getCreatedOn()!=null)
+					usr.setSurveySubmittedOn(risk.getCreatedOn().toLocalDate());
 			}, () -> usr.setRiskStatus(Constant.RiskStatus.U));
 		});
 		surveyFeedback.setAllowedEpassCount(userDTOs.stream().filter(usr -> usr.getEpass().getIsAllowed()
