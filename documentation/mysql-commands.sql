@@ -145,11 +145,18 @@ CREATE TABLE IF NOT EXISTS `covid`.`risk` (
   CONSTRAINT `fk_survey_id` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`survey_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-ALTER TABLE `covid`.`risk`
-  ADD COLUMN `created_on` DATE ;
+-- Change made earlier on QA
+--ALTER TABLE `covid`.`risk`
+--  ADD COLUMN `created_on` DATE;
 
+-- Change made now on QA
 ALTER TABLE `covid`.`risk`
   MODIFY COLUMN `created_on` DATETIME;
+
+-- To be made on PROD
+--ALTER TABLE `covid`.`risk`
+--  ADD COLUMN `created_on` DATETIME;
+
 -- select * from user;
 -- select * from feedback;
 -- select * from survey_question;
